@@ -34,7 +34,6 @@ body {
 
 nav {
     display: flex;
-    width: 1310px;
     justify-content: space-between;
     align-items: center;
     margin-left: auto;
