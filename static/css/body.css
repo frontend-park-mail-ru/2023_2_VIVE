@@ -3,6 +3,11 @@
     src: url('/static/fonts/Acumin\ Variable\ Concept.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Roboto';
+    src: url('/static/fonts/Roboto.ttf') format('truetype');
+}
+
 .dodger-blue {
     font-family: 'Acumin', sans-serif;
     font-weight: bolder;
@@ -16,6 +21,14 @@
     color: #2E382E;
 }
 
+.reg-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px;
+}
+
 .footer-text {
     margin-top: 4px;
     margin-bottom: 4px;
@@ -25,26 +38,60 @@
 }
 
 .logo {
+    font-weight: 800;
     font-size: xx-large;
+}
+
+.infoblock {
+    display: flex;
+    width: 400px;
+    gap: 20px;
 }
 
 body {
     background-color: #F7F7F7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100hv;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 7%;
+    margin-right: 7%;
+}
+
+main {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    display: flex;
+    justify-content: center;
+}
+
+.reg-form {
+    display: inline-flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    border-radius: 30px;
+    background: var(--main-grey-blue, rgba(210, 224, 234, 0.37));
+    margin-top: 3vh;
+    margin-bottom: 3vh;
 }
 
 footer {
     background-color: #2E382E;
     color: #FBFBFB;
-    padding: 20px 0;
+    padding: 20px;
     justify-content: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
 .top-footer {
@@ -64,7 +111,7 @@ footer {
     margin-right: 10px;
     font-family: 'Acumin', sans-serif;
     font-weight: bold;
-    background-color: #F7F7F7;
+    background-color: transparent;
     color:#0496FF;
     border: 2px solid #0496FF;
     padding: 10px 10px;
@@ -82,7 +129,7 @@ footer {
 }
 
 .transparent-button:active {
-    background-color: white;
+    background-color: transparent;
     color: #0496FF;
 }
 
@@ -103,7 +150,7 @@ footer {
 }
 
 .fully-button:hover {
-    background-color: #F7F7F7;
+    background-color: transparent;
     color: #0496FF;
 }
 
@@ -139,4 +186,80 @@ footer {
 .footer-divider {
     border-top: 1px solid #F7F7F7;
     margin: 5px 0;
+}
+
+.input {
+    display: flex;
+    width: 400px;
+    align-items: flex-start;
+}
+
+.input-in {
+    display: flex;
+    height: 25px;
+    padding: 5px 10px 5px 10px;
+    align-items: center;
+    flex: 1 0 0;
+    border-radius: 12px;
+    border: 0px;
+    background: var(--main-background-grey, #F7F7F7);
+}
+
+.remember-label {
+    display: flex;
+    gap: 7px;
+}
+
+.remember-checkbox {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.ms-10 {
+    margin-left: 10px;
+}
+
+.me-10 {
+    margin-right: 10px;
+}
+
+.form-actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.elipse-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #0496FF;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    position: relative;
+    width: 40px;
+    height: 23px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    margin-left: 2px;
+    margin-right: 2px;
+    background-color: #F7F7F7;
+    border-radius: 50%;
 }

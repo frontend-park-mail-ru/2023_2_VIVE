@@ -10,25 +10,48 @@
 <body>
     <nav>
         <div>
-            <p class="dodger-blue logo">H&H</p>
+            <h1 class="dodger-blue logo">H&H</h1>
+        </div>
+        <div class="infoblock">
+            <div class="ms-10 me-10">
+                <p class="default-text">О нас</p>
+            </div>
+            <div class="ms-10 me-10">
+                <p class="default-text">Как это работает</p>
+            </div>
+            <div class="ms-10 me-10">
+                <p class="default-text">Вакансии</p>
+            </div>
         </div>
         <div>
-            <p class="default-text">О нас</p>
-        </div>
-        <div>
-            <p class="default-text">Как это работает</p>
-        </div>
-        <div>
-            <p class="default-text">Вакансии</p>
-        </div>
-        <div>
-            <button class="transparent-button">Уже есть аккаунт</button>
-            <button class="fully-button">Зарегистрироваться</button>    
+            <a href="#" class="transparent-button">Уже есть аккаунт</a>
+            <a href="#" class="fully-button">Зарегистрироваться</a>
         </div>
     </nav>
-    <div>
-
-    </div>
+    <main>
+        <div class="reg-form">
+            <span class="default-text" style="font-size: x-large;">Регистрация</span>
+            <div style="display: flex;">
+                <span class="reg-text me-10">Найти работу</span>
+                <a href="/templates/employer_reg.html" class="elipse-button">
+                    <div class="circle"></div>
+                </a>
+                <span class="reg-text ms-10">Найти сотрудников</span>
+            </div>  
+            <div class="input"><input type="text" class="input-in" placeholder="Имя"></div>
+            <div class="input"><input type="text" class="input-in" placeholder="Фамилия"></div>
+            <div class="input"><input type="text" class="input-in" placeholder="Электронная почта"></div>
+            <div class="input"><input type="password" class="input-in" placeholder="Придумайте ароль"></div>
+            <div class="input"><input type="text" class="input-in" placeholder="Повторите пароль"></div>
+            <label for="rememberPassword" class="remember-label">
+                <input type="checkbox" id="rememberPassword" class="remember-checkbox"> <span class="reg-text" style="font-size: 14px;">Запомнить пароль</span>
+            </label>
+            <div class="form-actions">
+                <a href="#" class="fully-button" style="margin-left: 0; margin-right: 0;">Зарегистрироваться</a>
+                <a href="/templates/applicant_sign_in.html" class="transparent-button" style="margin-left: 0; margin-right: 0;">Уже есть аккаунт</a>
+            </div>
+        </div>
+    </main>
     <footer>
         <div class="footer-content">
             <div class="top-footer">
