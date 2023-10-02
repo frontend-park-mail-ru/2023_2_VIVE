@@ -1,5 +1,7 @@
 'use strict';
 
+import HTTPError from "./HTTPError.js";
+
 const REQUEST_METHODS = {
   GET: 'GET',
   POST: 'POST',
@@ -20,10 +22,11 @@ const REQUEST_HEADERS = {
 export default {
   /**
    * Makes HTTP GET-request to url.
-   * Returns Response if HTTP status is 200-299.
+   * Returns Response if HTTP status is 200-299 and without network problems.
    *
    * @param {string} url A string to set request's url.
-   * @throws Will throw an error if HTTP status is not 200-299.
+   * @throws Will throw an error if HTTP status is not 200-299
+   * or when network error occurs.
    * @returns {Response} A response from HTTP GET-request.
    */
   async get(url) {
@@ -32,11 +35,12 @@ export default {
 
   /**
    * Makes HTTP POST-request to url.
-   * Returns Response if HTTP status is 200-299.
-   * 
+   * Returns Response if HTTP status is 200-299 and without network problems.
+   *
    * @param {string} url A string to set request's url.
    * @param {object} data An object to set request's body.
-   * @throws Will throw an error if HTTP status is not 200-299.
+   * @throws Will throw an error if HTTP status is not 200-299
+   * or when network error occurs.
    * @returns {Response} A response from HTTP POST-request.
    */
   async post(url, data) {
@@ -45,11 +49,12 @@ export default {
 
   /**
    * Makes HTTP PUT-request to url.
-   * Returns Response if HTTP status is 200-299.
-   * 
+   * Returns Response if HTTP status is 200-299 and without network problems.
+   *
    * @param {string} url A string to set request's url.
    * @param {object} data An object to set request's body.
-   * @throws Will throw an error if HTTP status is not 200-299.
+   * @throws Will throw an error if HTTP status is not 200-299
+   * or when network error occurs.
    * @returns {Response} A response from HTTP PUT-request.
    */
   async put(url, data) {
@@ -58,24 +63,25 @@ export default {
 
   /**
    * Makes HTTP PATCH-request to url.
-   * Returns Response if HTTP status is 200-299.
-   * 
+   * Returns Response if HTTP status is 200-299 and without network problems.
+   *
    * @param {string} url A string to set request's url.
    * @param {object} data An object to set request's body.
-   * @throws Will throw an error if HTTP status is not 200-299.
+   * @throws Will throw an error if HTTP status is not 200-299
+   * or when network error occurs.
    * @returns {Response} A response from HTTP PUT-request.
    */
   async patch(url, data) {
     return this._sendRequest(url, REQUEST_METHODS.PATCH, JSON.stringify(data));
   },
 
-
   /**
    * Makes HTTP DELETE-request to url.
-   * Returns Response if HTTP status is 200-299.
-   * 
+   * Returns Response if HTTP status is 200-299 and without network problems.
+   *
    * @param {string} url A string to set request's url.
-   * @throws Will throw an error if HTTP status is not 200-299.
+   * @throws Will throw an error if HTTP status is not 200-299
+   * or when network error occurs.
    * @returns {Response} A response from HTTP PUT-request.
    */
   async delete(url) {
@@ -84,26 +90,32 @@ export default {
 
   /**
    * Makes HTTP request to url.
-   * Returns Response if HTTP status is 200-299.
+   * Returns Response if HTTP status is 200-299 and without network problems.
    * Throws an error otherwise.
    *
    * @param {string} url A string to set request's url.
    * @param {REQUEST_METHODS} [method=REQUEST_METHODS.GET] A string to set request's method.
    * @param {string} [body=null] A stringfied json to set request's body.
-   * @throws Will throw an error if HTTP status is not 200-299.
+   * @throws Will throw an error if HTTP status is not 200-299 
+   * or when network error occurs.
    * @returns {Response} A response from HTTP request.
    */
   async _sendRequest(url, method = REQUEST_METHODS.GET, body = null) {
-    let response = await fetch(url, {
-      method: method,
-      headers: REQUEST_HEADERS,
-      body: body,
-    });
-
-    if (response.ok) {
-      return response;
-    } else {
-      throw new Error('Server error: ' + response.status);
+    let response;
+    try {
+      response = await fetch(url, {
+        method: method,
+        headers: REQUEST_HEADERS,
+        body: body,
+      });
+    } catch (error) {
+      throw new Error(`network error: ${error.message}`);
     }
+
+    if (!response.ok) {
+      throw new HTTPError(response.status)
+    }
+
+    return response;
   },
 };
