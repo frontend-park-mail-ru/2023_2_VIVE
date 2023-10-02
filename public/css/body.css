@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Acumin';
-    src: url('/static/fonts/Acumin\ Variable\ Concept.ttf') format('truetype');
+    src: url('/fonts/Acumin\ Variable\ Concept.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Roboto';
-    src: url('/static/fonts/Roboto.ttf') format('truetype');
+    src: url('/fonts/Roboto.ttf') format('truetype');
 }
 
 :root {
