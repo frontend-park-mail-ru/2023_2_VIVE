@@ -20,4 +20,8 @@ export default class appAuthView {
   removeEventListeners() {
 
   }
+
+  remove() {
+    
+  }
 }

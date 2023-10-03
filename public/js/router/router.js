@@ -14,10 +14,13 @@ export default class Router {
             empAuth: new empAuthView(),
             menu: new menuView(),
         };
+
+        this.lastUrl = '';
     };
 
     goToLink(url) {
         if (url in this.routes) {
+            this.lastUrl ? this.objs[this.routes[url]].remove() : this.lastUrl = url;
             this.objs[this.routes[url]].render();
         } else {
             console.error(`Такого адреса не существует: ${url}`);

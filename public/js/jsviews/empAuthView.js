@@ -16,4 +16,8 @@ export default class empAuthView {
       objs['appAuth'].render();
     }, { once: true })
   }
+
+  remove() {
+    
+  }
 }
