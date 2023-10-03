@@ -1,16 +1,5 @@
 'use strict';
 
-/**
- * Returns object with default options combined with user's.
- *
- * @param {object} options Object with user's options.
- * @param {object} defaults Object with default options.
- * @returns {object} New object with combined options.
- */
-const setDefaults = (options, defaults) => {
-  return { ...defaults, ...options };
-};
-
 const DEFAULT_ALLOWED_SYMBOLS = `~!?@#$%^&*_-+()[]{}></\|"'.,:;`;
 
 /**
@@ -47,17 +36,11 @@ class Validator {
    *
    * @param {string} str A string to check.
    * @param {string} substr A substring to search in str.
-   * @param {object} [options] Optional object wich defaults to { `ignoreCase`: false }.
-   * `ignoreCase`: Ignores case while comparing, default false.
+   * @param {boolean} [ignoreCase=false] Ignores case while comparing.
    * @returns {boolean} True if substring is in string, false otherwise.
    */
-  contains(str, substr, options) {
-    let defaults = {
-      ignoreCase: false,
-    };
-    options = setDefaults(options, defaults);
-
-    if (options.ignoreCase) {
+  contains(str, substr, ignoreCase = false) {
+    if (ignoreCase) {
       str = str.toLocaleLowerCase();
       substr = substr.toLocaleLowerCase();
     }
@@ -167,42 +150,41 @@ class Validator {
    */
   checkPassword(
     password,
-    minLength = 8,
-    maxLength = 128,
-    includeUpperCase = true,
-    includeDigits = true,
-    includeSpecialSymbols = DEFAULT_ALLOWED_SYMBOLS
+    {
+      minLength = 8,
+      maxLength = 128,
+      includeUpperCase = true,
+      includeDigits = true,
+      includeSpecialSymbols = DEFAULT_ALLOWED_SYMBOLS,
+    }
   ) {
-    let res;
+    let isLengthValid =
+      this.checkMinLength(password, minLength) &&
+      this.checkMaxLength(password, maxLength);
 
-    res = this.checkMinLength(password, minLength);
-    res &&= this.checkMaxLength(password, maxLength);
+    let hasUpperCase = includeUpperCase
+      ? password.split('').some((sym) => this.isUpperCase(sym))
+      : true;
 
-    let containUpperCase = false;
-    let containDigits = false;
-    let containSpecialSymbols = false;
-    for (let sym of password.split('')) {
-      res &&= this.checkPasswordSymbol(sym, includeSpecialSymbols);
-      if (!containUpperCase) {
-        containUpperCase = this.isUpperCase(sym);
-      }
-      if (!containDigits) {
-        containDigits = this.isDigit(sym);
-      }
-      if (!containSpecialSymbols) {
-        containSpecialSymbols = this.contains(includeSpecialSymbols, sym);
-      }
-    }
+    let hasDigits = includeDigits
+      ? password.split('').some((sym) => this.isDigit(sym))
+      : true;
 
-    if (includeUpperCase) {
-      res &&= containUpperCase;
-    }
-    if (includeDigits) {
-      res &&= containDigits;
-    }
-    res &&= containSpecialSymbols;
+    let hasSpecialSymbols = password
+      .split('')
+      .some((sym) => this.contains(includeSpecialSymbols, sym));
 
-    return res;
+    let areSymbolsValid = password
+      .split('')
+      .every((sym) => this.checkPasswordSymbol(sym, includeSpecialSymbols));
+
+    return (
+      isLengthValid &&
+      hasUpperCase &&
+      hasDigits &&
+      hasSpecialSymbols &&
+      areSymbolsValid
+    );
   }
 }
 
