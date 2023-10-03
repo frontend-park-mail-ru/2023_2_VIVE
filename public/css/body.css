@@ -1,292 +1,296 @@
 @font-face {
-    font-family: 'Acumin';
-    src: url('/static/fonts/Acumin\ Variable\ Concept.ttf') format('truetype');
+  font-family: "Acumin";
+  src: url("../fonts/Acumin\ Variable\ Concept.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: 'Roboto';
-    src: url('/static/fonts/Roboto.ttf') format('truetype');
+  font-family: "Roboto";
+  src: url("../fonts/Roboto.ttf") format("truetype");
 }
 
 :root {
-    --main-background-grey: #F7F7F7;
-    --button-color-primary-default: #0496FF;
-    --default-text-prussian-blue: #042439;
-    --footer-button-xanthous-orange: #FFBC42;
+  --main-background-grey: #f7f7f7;
+  --button-color-primary-default: #0496ff;
+  --default-text-prussian-blue: #042439;
+  --footer-button-xanthous-orange: #ffbc42;
 }
 
 .dodger-blue {
-    font-family: 'Acumin', sans-serif;
-    font-weight: bolder;
-    font-style: italic;
-    color: var(--button-color-primary-default);
+  font-family: "Acumin", sans-serif;
+  font-weight: bolder;
+  font-style: italic;
+  color: var(--button-color-primary-default);
 }
 
 .default-text {
-    font-family: 'Acumin', sans-serif;
-    font-weight: bold;
-    color: var(--default-text-prussian-blue);
+  font-family: "Acumin", sans-serif;
+  font-weight: bold;
+  color: var(--default-text-prussian-blue);
 }
 
 .reg-text {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 25px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px;
 }
 
 .footer-text {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    font-family: 'Acumin', sans-serif;
-    font-weight: bold;
-    color: var(--main-background-grey);
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-family: "Acumin", sans-serif;
+  font-weight: bold;
+  color: var(--main-background-grey);
 }
 
 .logo {
-    font-weight: 800;
-    font-size: xx-large;
+  font-weight: 800;
+  font-size: xx-large;
 }
 
 .infoblock {
-    display: flex;
-    width: 400px;
-    gap: 20px;
+  display: flex;
+  width: 400px;
+  gap: 20px;
 }
 
 body {
-    background-color: var(--main-background-grey);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100hv;
+  background-color: var(--main-background-grey);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100hv;
 }
 
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 15%;
-    margin-right: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 15%;
+  margin-right: 10%;
 }
 
 main {
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-    display: flex;
-    justify-content: center;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  display: flex;
+  justify-content: center;
 }
 
 .reg-form {
-    display: inline-flex;
-    padding: 20px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    border-radius: 30px;
-    background: var(--main-grey-blue, rgba(210, 224, 234, 0.37));
-    margin-top: 3vh;
-    margin-bottom: 3vh;
+  display: inline-flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  border-radius: 30px;
+  background: var(--main-grey-blue, rgba(210, 224, 234, 0.37));
+  margin-top: 3vh;
+  margin-bottom: 3vh;
 }
 
 footer {
-    background-color: var(--default-text-prussian-blue);
-    padding: 20px;
-    justify-content: center;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+  background-color: var(--default-text-prussian-blue);
+  padding: 20px;
+  justify-content: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-content {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: left;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .top-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .transparent-button {
-    margin-left: 10px;
-    margin-right: 10px;
-    font-family: 'Acumin', sans-serif;
-    font-weight: bold;
-    background-color: transparent;
-    color:var(--button-color-primary-default);
-    border: 2px solid var(--button-color-primary-default);
-    padding: 10px 10px;
-    border-radius: 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: "Acumin", sans-serif;
+  font-weight: bold;
+  background-color: transparent;
+  color: var(--button-color-primary-default);
+  border: 2px solid var(--button-color-primary-default);
+  padding: 10px 10px;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .transparent-button:hover {
-    background-color: var(--button-color-primary-default);
-    color: var(--main-background-grey);
+  background-color: var(--button-color-primary-default);
+  color: var(--main-background-grey);
 }
 
 .transparent-button:active {
-    background-color: transparent;
-    color: var(--button-color-primary-default);
+  background-color: transparent;
+  color: var(--button-color-primary-default);
 }
 
 .fully-button {
-    margin-left: 10px;
-    margin-right: 10px;
-    font-family: 'Acumin', sans-serif;
-    font-weight: bold;
-    background-color: var(--button-color-primary-default);
-    color: var(--main-background-grey);
-    border: 2px solid var(--button-color-primary-default);
-    padding: 10px 10px;
-    border-radius: 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: "Acumin", sans-serif;
+  font-weight: bold;
+  background-color: var(--button-color-primary-default);
+  color: var(--main-background-grey);
+  border: 2px solid var(--button-color-primary-default);
+  padding: 10px 10px;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .fully-button:hover {
-    background-color: transparent;
-    color: var(--button-color-primary-default);
+  background-color: transparent;
+  color: var(--button-color-primary-default);
 }
 
 .fully-button:active {
-    background-color: var(--button-color-primary-default);
-    color: var(--main-background-grey);
+  background-color: var(--button-color-primary-default);
+  color: var(--main-background-grey);
 }
 
 .footer-button {
-    font-family: 'Acumin', sans-serif;
-    font-weight: bold;
-    background-color: var(--footer-button-xanthous-orange);
-    color: var(--default-text-prussian-blue);
-    border: 2px solid var(--footer-button-xanthous-orange);
-    padding: 10px 10px;
-    border-radius: 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
+  font-family: "Acumin", sans-serif;
+  font-weight: bold;
+  background-color: var(--footer-button-xanthous-orange);
+  color: var(--default-text-prussian-blue);
+  border: 2px solid var(--footer-button-xanthous-orange);
+  padding: 10px 10px;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .footer-button:hover {
-    background-color: #fea705;
-    border-color: #fea705;
+  background-color: #fea705;
+  border-color: #fea705;
 }
 
 .footer-button:active {
-    background-color: #f8cd7e;
-    border-color: #f8cd7e;
+  background-color: #f8cd7e;
+  border-color: #f8cd7e;
 }
 
 .footer-divider {
-    border-top: 1px solid var(--main-background-grey);
-    margin: 5px 0;
+  border-top: 1px solid var(--main-background-grey);
+  margin: 5px 0;
 }
 
 .input {
-    display: flex;
-    width: 400px;
-    align-items: flex-start;
+  display: flex;
+  width: 400px;
+  align-items: flex-start;
 }
 
 .input-in {
-    display: flex;
-    height: 25px;
-    padding: 5px 10px 5px 10px;
-    align-items: center;
-    flex: 1 0 0;
-    border-radius: 12px;
-    border: 0;
-    background: var(--main-background-grey);
+  display: flex;
+  height: 25px;
+  padding: 5px 10px 5px 10px;
+  align-items: center;
+  flex: 1 0 0;
+  border-radius: 12px;
+  border: 0;
+  background: var(--main-background-grey);
 }
 
 .remember-label {
-    display: flex;
-    gap: 7px;
+  display: flex;
+  gap: 7px;
 }
 
 .remember-checkbox {
-    display: flex;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+  display: flex;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .mt-10 {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .mb-10 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .ms-10 {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .me-10 {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .form-actions {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .elipse-button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: var(--button-color-primary-default);
-    border: none;
-    cursor: pointer;
-    outline: none;
-    padding: 0;
-    position: relative;
-    width: 40px;
-    height: 24px;
-    border-radius: 25px;
-    overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--button-color-primary-default);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  position: relative;
+  width: 40px;
+  height: 24px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.elipse-button-right {
+  justify-content: flex-end;
 }
 
 .circle {
-    width: 20px;
-    height: 20px;
-    margin-left: 2px;
-    margin-right: 2px;
-    background-color: var(--main-background-grey);
-    border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-color: var(--main-background-grey);
+  border-radius: 50%;
 }
 
 .x-large-font {
-    font-size: x-large;
+  font-size: x-large;
 }
 
 .d-flex {
-    display: flex;
+  display: flex;
 }
 
 .small-font {
-    font-size: small
+  font-size: small;
 }
 
 .side-m-0 {
-    margin-left: 0;
-    margin-right: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .font-weight-100 {
-    font-weight: 100;
+  font-weight: 100;
 }
+

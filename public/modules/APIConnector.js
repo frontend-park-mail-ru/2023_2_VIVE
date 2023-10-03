@@ -137,6 +137,7 @@ export default {
     headers = REQUEST_HEADERS,
     body = null,
     mode = MODES.CORS,
+    credentials = 'include',
   }) {
     let response;
     try {
@@ -145,6 +146,7 @@ export default {
         headers: headers,
         body: body,
         mode: mode,
+        credentials: credentials,
       });
     } catch (error) {
       throw new Error(`network error: ${error.message}`);

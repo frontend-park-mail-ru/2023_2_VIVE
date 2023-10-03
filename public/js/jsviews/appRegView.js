@@ -1,4 +1,9 @@
+import APIConnector from "../../modules/APIConnector.js";
 import { router } from "../router/router.js";
+
+const config = {
+  ip: 'http://212.233.90.231:8081'
+}
 
 export default class appRegView {
   render() {
@@ -22,7 +27,6 @@ export default class appRegView {
     let form = document.querySelector(".reg-form");
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      console.log(this);
       let formData = new FormData(form);
 
       let formObject = {};
@@ -30,7 +34,15 @@ export default class appRegView {
         formObject[key] = value;
       });
 
+      formObject['role'] = 'applicant';
+      delete formObject['repeat_password'];
+      delete formObject['remember_password'];
       console.log(formObject);
+      APIConnector.post(config.ip + '/users', formObject).then((resp) => {
+        console.log(resp.status);
+      }).catch(err => {
+        console.error(err);
+      })
     });
   }
 
