@@ -1,11 +1,11 @@
 import { router } from "../router/router.js";
 
 
-export default class empAuthView {
+export default class empRegView {
 
   render() {
-    console.log('rendering empAuth')
-    const template = Handlebars.templates['emp_login.hbs'];
+    console.log('rendering empReg')
+    const template = Handlebars.templates['emp_reg.hbs'];
     document.querySelector('main').innerHTML = template();
     this.addEventListeners();
   }
@@ -14,8 +14,12 @@ export default class empAuthView {
     let elipse_btn = document.querySelector('.elipse-button');
     elipse_btn.addEventListener('click', function(e) {
       e.preventDefault();
-      router.goToLink('/app_login')
+      router.goToLink('/app_reg')
     }, { once: true })
+  }
+
+  removeEventListeners() {
+
   }
 
   remove() {
