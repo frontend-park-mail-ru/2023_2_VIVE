@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2"
+  },
+  "scripts": {
+    "prestart": "npm run compile:templates",
+    "start": "nodemon server/server.js",
+    "compile:templates": "handlebars views/layouts/*.hbs views/pages/*.hbs views/partials/*.hbs -f views/templates.precompiled.js"
+  }
+}
+
