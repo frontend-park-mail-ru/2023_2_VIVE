@@ -8,7 +8,9 @@ async function loadContent(url='/templates/employer_reg.html') {
             const response = await fetch(url);
             loadedContent[url] = await response.text();
         }
-        document.getElementById('main-content').innerHTML = loadedContent[url];
+        document.open();
+        document.write(loadedContent[url]);
+        document.close();
     } catch (error) {
         console.error('Ошибка загрузки содержимого:', error);
     }
