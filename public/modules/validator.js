@@ -15,8 +15,8 @@ class Validator {
    * @returns {boolean} True if given string is a valid email, false otherwise.
    */
   isEmail(str) {
-    let emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
-    let res = str.match(emailRegExp) || [];
+    const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
+    const res = str.match(emailRegExp) || [];
     return res.length == 1;
   }
 
@@ -80,7 +80,7 @@ class Validator {
     if (sym.length != 1) {
       throw new Error('wrong number of symbols: should be only one');
     }
-    let res = sym.match(/^[a-zA-Z0-9]$/) || [];
+    const res = sym.match(/^[a-zA-Z0-9]$/) || [];
     return res.length == 1;
   }
 
@@ -95,7 +95,7 @@ class Validator {
     if (sym.length != 1) {
       throw new Error('wrong number of symbols: should be only one');
     }
-    let res = sym.match(/^[0-9]$/) || [];
+    const res = sym.match(/^[0-9]$/) || [];
     return res.length == 1;
   }
 
@@ -110,7 +110,7 @@ class Validator {
     if (sym.length != 1) {
       throw new Error('wrong number of symbols: should be only one');
     }
-    let res = sym.match(/^[A-Z]$/) || [];
+    const res = sym.match(/^[A-Z]$/) || [];
     return res.length == 1;
   }
 
@@ -139,7 +139,7 @@ class Validator {
   }
 
   /**
-   * Returns an object with boolean properties of all the requirements for the password.
+   * Check if the password is valid.
    *
    * @param {string} password A string with the given password.
    * @param {number} [minLength=8] Minimal legth of a password, default 8.
@@ -147,6 +147,7 @@ class Validator {
    * @param {boolean} [includeUpperCase=true] Check for upper case letters, default true.
    * @param {boolean} [includeDigits=true] Check for digits, default true.
    * @param {string} [includeSpecialSymbols=DEFAULT_ALLOWED_SYMBOLS] String of remaining allowed symbols, default DEFAULT_ALLOWED_SYMBOLS.
+   * @returns {boolean} True if the password is valid, false otherwise.
    */
   checkPassword(
     password,
@@ -158,23 +159,23 @@ class Validator {
       includeSpecialSymbols = DEFAULT_ALLOWED_SYMBOLS,
     }
   ) {
-    let isLengthValid =
+    const isLengthValid =
       this.checkMinLength(password, minLength) &&
       this.checkMaxLength(password, maxLength);
 
-    let hasUpperCase = includeUpperCase
+    const hasUpperCase = includeUpperCase
       ? password.split('').some((sym) => this.isUpperCase(sym))
       : true;
 
-    let hasDigits = includeDigits
+    const hasDigits = includeDigits
       ? password.split('').some((sym) => this.isDigit(sym))
       : true;
 
-    let hasSpecialSymbols = password
+    const hasSpecialSymbols = password
       .split('')
       .some((sym) => this.contains(includeSpecialSymbols, sym));
 
-    let areSymbolsValid = password
+    const areSymbolsValid = password
       .split('')
       .every((sym) => this.checkPasswordSymbol(sym, includeSpecialSymbols));
 
