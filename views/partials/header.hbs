@@ -11,28 +11,61 @@
         </a>
       </div>
       <div class="navbar-items-left">
+        {{#if is_user_login}}
+        {{#with user_type}}
+        {{#if app }}
+        <div class="navbar-item">
+          <a href="#">Мои резюме</a>
+        </div>
+        <div class="navbar-item">
+          <a href="#">Отклики</a>
+        </div>
+        <div class="navbar-item navbar-item-active">
+          <a href="/">Вакансии</a>
+        </div>
+        {{else}}
+        <div class="navbar-item">
+          <a href="#">Вакансии</a>
+        </div>
+        <div class="navbar-item">
+          <a href="#">Кандидаты</a>
+        </div>
+        <div class="navbar-item navbar-item-active">
+          <a href="/">Прайс-лист</a>
+        </div>
+        {{/if}}
+        {{/with}}
+        {{else}}
         <div class="navbar-item">
           <a href="#">О нас</a>
         </div>
         <div class="navbar-item">
           <a href="#">Как это работает</a>
         </div>
-        <div class="navbar-item">
-          <a href="#">Вакансии</a>
+        <div class="navbar-item navbar-item-active">
+          <a href="/">Вакансии</a>
         </div>
+        {{/if}}
       </div>
       <div class="navbar-items-right">
+        {{#if is_user_login}}
+        {{#with user_type}}
+        {{#if app }}
         <div class="navbar-item">
-          <a href="#" class="navbar-btn btn">
-            Уже есть аккаунт
+          <a href="/app_login" class="navbar-btn btn" data-type="res_create">
+            Создать резюме
           </a>
         </div>
+        {{else}}
         <div class="navbar-item">
-          <a href="#" class="navbar-btn btn-filled">
-            Зарегистрироваться
+          <a href="/app_login" class="navbar-btn btn" data-type="vac_create">
+            Создать вакансию
           </a>
         </div>
-        <div class="navbar-item">
+        {{/if}}
+        {{/with}}
+
+        <div class="navbar-item .navbar-item-active">
           <a href="#" class="navbar-btn-svg">
             <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -56,6 +89,9 @@
             </svg>
           </a>
         </div>
+
+        {{#with user_type}}
+        {{#if app }}
         <div class="navbar-item">
           <a href="#" class="navbar-btn-svg">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,10 +105,39 @@
                   fill="#0496FF" />
               </g>
             </svg>
-
           </a>
         </div>
+        {{else}}
+        <div class="navbar-item">
+          <a href="#" class="navbar-btn-svg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <mask id="mask0_807_1373" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+                height="24">
+                <rect width="24" height="24" fill="#D9D9D9" />
+              </mask>
+              <g mask="url(#mask0_807_1373)">
+                <path
+                  d="M4 6V4H20V6H4ZM4 20V14H3V12L4 7H20L21 12V14H20V20H18V14H14V20H4ZM6 18H12V14H6V18ZM5.05 12H18.95L18.35 9H5.65L5.05 12Z"
+                  fill="#0496FF" />
+              </g>
+            </svg>
+          </a>
+        </div>
+        {{/if}}
+        {{/with}}
 
+        {{else}}
+        <div class="navbar-item">
+          <a href="/app_login" class="navbar-btn btn" data-type="reg">
+            Уже есть аккаунт
+          </a>
+        </div>
+        <div class="navbar-item">
+          <a href="/app_reg" class="navbar-btn btn-filled" data-type="login">
+            Зарегистрироваться
+          </a>
+        </div>
+        {{/if}}
       </div>
     </div>
   </div>
