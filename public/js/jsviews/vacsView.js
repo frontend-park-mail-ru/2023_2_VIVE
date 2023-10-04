@@ -13,12 +13,15 @@ export default class vacsView {
   }
 
   async getVacancies() {
-    try {
-      const resp = await APIConnector.get(BACKEND_SERVER_URL + "/vacancies");
-      return await resp.json();
-    } catch (err) {
-      console.error(err);
-    }
+    return await APIConnector.get(BACKEND_SERVER_URL + "/vacancies")
+      .then(async (resp) => {
+        const data = await response.json();
+        return data;
+      })
+      .catch((err) => {
+        console.error(err);
+        return undefined;
+      });
   }
 
   addEventListeners() {

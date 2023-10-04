@@ -116,6 +116,9 @@
             </div>
           </div>
           <ul class="vacs-list">
+            {{#unless data}}
+            Ошибка!
+            {{/unless}}
             {{#each data_array}}
             <li class="vac">
               <div class="vac-desc-main">
