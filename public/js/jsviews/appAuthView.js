@@ -12,7 +12,7 @@ export default class appAuthView {
     this.addEventListeners();
   }
 
-  addEventListeners() {
+  async addEventListeners() {
     let elipse_link = document.querySelector(".elipse-button");
     elipse_link.addEventListener(
       "click",
