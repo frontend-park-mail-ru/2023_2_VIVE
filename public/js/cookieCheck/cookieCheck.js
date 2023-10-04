@@ -21,7 +21,7 @@ export default class CookieCheck {
     }
 
     async hasCookie() {
-        return APIConnector.get(BACKEND_SERVER_URL + "/session")
+        return await APIConnector.get(BACKEND_SERVER_URL + "/session")
             .then((resp) => {
                 return resp.status === 200;
             })
