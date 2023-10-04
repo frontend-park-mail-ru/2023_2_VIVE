@@ -45,7 +45,7 @@ export default class menuView {
     };
   }
 
-  addEventListeners() {
+  async addEventListeners() {
     let links = document.querySelectorAll(".navbar-item a");
     links.forEach((link, i) => {
       this.addEventListenerWrapper(link, "click", (e) => {
@@ -54,13 +54,15 @@ export default class menuView {
       });
     });
 
-    let logout_btn = document.querySelector(".logout-btn");
-    logout_btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      APIConnector.delete(BACKEND_SERVER_URL + '/session')
-      .then(()=>router.goToLink('/'))
-      .catch(err => console.error(err));
-    });
+    if (await cookie.hasCookie()) {
+      let logout_btn = document.querySelector(".logout-btn");
+      logout_btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        APIConnector.delete(BACKEND_SERVER_URL + "/session")
+          .then(() => router.goToLink("/"))
+          .catch((err) => console.error(err));
+      });
+    }
   }
 
   remove() {
@@ -68,7 +70,5 @@ export default class menuView {
     // console.log(this.eventListeners);
   }
 
-  remove() {
-    
-  }
+  remove() {}
 }
