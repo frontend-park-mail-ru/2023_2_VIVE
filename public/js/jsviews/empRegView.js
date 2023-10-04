@@ -1,4 +1,5 @@
 import { router } from "../router/router.js";
+import { getHrefFromA } from "../utils.js";
 
 
 export default class empRegView {
@@ -11,10 +12,10 @@ export default class empRegView {
   }
 
   addEventListeners() {
-    let elipse_btn = document.querySelector('.elipse-button');
-    elipse_btn.addEventListener('click', function(e) {
+    let elipse_link = document.querySelector('.elipse-button');
+    elipse_link.addEventListener('click', function(e) {
       e.preventDefault();
-      router.goToLink('/app_reg')
+      router.goToLink(getHrefFromA(elipse_link))
     }, { once: true })
   }
 

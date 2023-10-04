@@ -10,18 +10,16 @@
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      {{> header}}
-    </header>
-    <main>
-      {{{ body }}}
-    </main>
-    <footer>
-      {{> footer}}
-    </footer>
-  </div>
-  
+  <header>
+    {{> header}}
+  </header>
+  <main>
+    {{{ body }}}
+  </main>
+  <footer>
+    {{> footer}}
+  </footer>
+
   <script src="../../node_modules/handlebars/dist/handlebars.runtime.js"></script>
   <script src="../../views/templates.precompiled.js"></script>
   <script src="../../public/js/index.js" type="module"></script>

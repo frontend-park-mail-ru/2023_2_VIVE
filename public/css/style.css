@@ -18,17 +18,9 @@ body {
   box-sizing: border-box;
 }
 
-.container {
-  background-color: #f8f8f8;
-}
-
 .column-wrapper {
   padding-left: 5%;
   padding-right: 5%;
-}
-
-section {
-  padding: 10px;
 }
 
 a {

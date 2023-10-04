@@ -1,4 +1,5 @@
 import { router } from "../router/router.js";
+import { getHrefFromA } from "../utils.js";
 
 export default class appAuthView {
   render() {
@@ -9,12 +10,12 @@ export default class appAuthView {
   }
 
   addEventListeners() {
-    let elipse_btn = document.querySelector(".elipse-button");
-    elipse_btn.addEventListener(
+    let elipse_link = document.querySelector(".elipse-button");
+    elipse_link.addEventListener(
       "click",
       function (e) {
         e.preventDefault();
-        router.goToLink("/emp_login");
+        router.goToLink(getHrefFromA(elipse_link));
       },
       { once: true }
     );

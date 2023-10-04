@@ -1,3 +1,6 @@
+import { router } from "../router/router.js";
+import { getHrefFromA } from "../utils.js";
+
 export default class menuView {
   constructor() {
     this.eventListeners = {
@@ -39,10 +42,11 @@ export default class menuView {
   }
 
   addEventListeners() {
-    let btns = document.querySelectorAll(".navbar-btn");
-    btns.forEach((elem, i) => {
-      this.addEventListenerWrapper(elem, "click", (e) => {
+    let links = document.querySelectorAll(".navbar-item a");
+    links.forEach((link, i) => {
+      this.addEventListenerWrapper(link, "click", (e) => {
         e.preventDefault();
+        router.goToLink(getHrefFromA(link));
       });
     });
   }

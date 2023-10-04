@@ -1,9 +1,10 @@
 import APIConnector from "../../modules/APIConnector.js";
 import { router } from "../router/router.js";
+import { getHrefFromA } from "../utils.js";
 
 const config = {
-  ip: 'http://212.233.90.231:8081'
-}
+  ip: "http://212.233.90.231:8081"
+};
 
 export default class appRegView {
   render() {
@@ -14,36 +15,51 @@ export default class appRegView {
   }
 
   addEventListeners() {
-    let elipse_btn = document.querySelector(".elipse-button");
-    elipse_btn.addEventListener(
+    let elipse_link = document.querySelector(".elipse-button");
+    elipse_link.addEventListener(
       "click",
       function (e) {
         e.preventDefault();
-        router.goToLink("/emp_reg");
+        router.goToLink(getHrefFromA(elipse_link));
       },
       { once: true }
     );
 
     let form = document.querySelector(".reg-form");
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", (e)=> {
       e.preventDefault();
-      let formData = new FormData(form);
+      let formData = this.getFormObject(new FormData(form));
 
-      let formObject = {};
-      formData.forEach(function (value, key) {
-        formObject[key] = value;
-      });
-
-      formObject['role'] = 'applicant';
-      delete formObject['repeat_password'];
-      delete formObject['remember_password'];
-      console.log(formObject);
-      APIConnector.post(config.ip + '/users', formObject).then((resp) => {
-        console.log(resp.status);
-      }).catch(err => {
-        console.error(err);
-      })
+      if (this.formIsValid(formData)) {
+        this.sendForm(formData);
+      }
     });
+  }
+
+  getFormObject(formData) {
+    let formObject = {};
+    formData.forEach(function (value, key) {
+      formObject[key] = value;
+    });
+    return formObject;
+  }
+
+  sendForm(formData) {
+    formData["role"] = "applicant";
+    delete formData["repeat_password"];
+    delete formData["remember_password"];
+    console.log(formData);
+    APIConnector.post(config.ip + "/users", formData)
+      .then((resp) => {
+        console.log(resp.status);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  formIsValid(data) {
+    return true;
   }
 
   removeEventListeners() {}
