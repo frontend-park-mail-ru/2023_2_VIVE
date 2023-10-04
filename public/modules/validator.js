@@ -15,7 +15,7 @@ class Validator {
    * @returns {boolean} True if given string is a valid email, false otherwise.
    */
   isEmail(str) {
-    const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
+    const emailRegExp = /.+@.+\..+$/g;
     const res = str.match(emailRegExp) || [];
     return res.length == 1;
   }
@@ -150,8 +150,8 @@ class Validator {
    * @returns {boolean} True if the password is valid, false otherwise.
    */
   checkPassword(
-    password,
     {
+      password,
       minLength = 8,
       maxLength = 128,
       includeUpperCase = true,
@@ -186,6 +186,51 @@ class Validator {
       hasSpecialSymbols &&
       areSymbolsValid
     );
+  }
+
+  validateField(data, errorMessage) {
+    if (!data || !data.trim() === '') {
+      return errorMessage;
+    }
+  }
+
+  /**
+   * Check if registration form is valid.
+   *
+   * @param {object} data Object with all the input data from registration form.
+   * @returns {object} Object of errors.
+   */
+  validateRegistrationForm(data) {
+    let errors = {};
+
+    for (let key in data) {
+      errors[key] = this.validateField(
+        data[key],
+        'Обязательное поле для заполнения'
+      );
+    }
+
+    // Email
+    if (!errors.email && !this.isEmail(data.email.trim())) {
+      errors.email = 'Некорректная электронная почта';
+    }
+
+    // Password
+    if (!errors.password && !this.checkPassword({password: data.password})) {
+      errors.password =
+        'Пароль должен быть от 8 до 128 символов, иметь заглавные буквы, цифры и прочие символы';
+    }
+
+    // Repeat password
+    if (
+      !errors.password &&
+      !errors.repeat_password &&
+      !this.equals(data.password, data.repeat_password)
+    ) {
+      errors.repeat_password = 'Пароли не совпадают';
+    }
+
+    return errors;
   }
 }
 
