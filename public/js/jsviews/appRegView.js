@@ -29,9 +29,8 @@ export default class appRegView {
       let formData = this.getFormObject(new FormData(form));
 
       if (formIsValid(formData, {is_reg: true})) {
-        if (this.sendForm(formData)) {
+        this.sendForm(formData)
           router.goToLink('/');
-        }
       }
     });
   }
