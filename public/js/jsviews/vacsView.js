@@ -7,19 +7,18 @@ export default class vacsView {
     console.log("rendering vacs");
     const template = Handlebars.templates["vacs.hbs"];
     let data = this.getVacancies();
-    console.log(data.json());
-    document.querySelector("main").innerHTML = template(data.json());
+    console.log(data);
+    document.querySelector("main").innerHTML = template(data);
     this.addEventListeners();
   }
 
-  getVacancies() {
-    return APIConnector.get(BACKEND_SERVER_URL + '/vacancies')
-    .then(resp => resp.json())
-    .then(json => {
-      console.log(json);
-      return json;
-    })
-    .catch(error => console.error(error));
+  async getVacancies() {
+    try {
+      const resp = await APIConnector.get(BACKEND_SERVER_URL + "/vacancies");
+      return resp.json();
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   addEventListeners() {
