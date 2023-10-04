@@ -6,9 +6,9 @@ export default class CookieCheck {
     constructor() {
         this.urlWithoutCookie = {
             app_reg: '/app_reg',
-            app_in: '/app_in',
+            app_login: '/app_login',
             emp_reg: '/emp_reg',
-            emp_in: '/emp_in',
+            emp_login: '/emp_login',
         }
     }
 
