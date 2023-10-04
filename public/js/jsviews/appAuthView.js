@@ -29,7 +29,7 @@ export default class appAuthView {
       let formData = this.getFormObject(new FormData(form));
 
       if (formIsValid(formData, { is_login: true })) {
-        if (this.sendForm(formData)) {
+        if (await(this.sendForm(formData))) {
           router.goToLink("/");
         }
       }
