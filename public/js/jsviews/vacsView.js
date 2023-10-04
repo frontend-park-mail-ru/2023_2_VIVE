@@ -7,8 +7,8 @@ export default class vacsView {
     console.log("rendering vacs");
     const template = Handlebars.templates["vacs.hbs"];
     let data = this.getVacancies();
-    console.log(data);
-    document.querySelector("main").innerHTML = template(data);
+    console.log(data.json());
+    document.querySelector("main").innerHTML = template(data.json());
     this.addEventListeners();
   }
 
