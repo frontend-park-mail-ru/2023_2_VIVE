@@ -21,7 +21,7 @@
           <a href="#">Отклики</a>
         </div>
         <div class="navbar-item">
-          <a href="/">Вакансии</a>
+          <a href="#">Вакансии</a>
         </div>
         {{else}}
         <div class="navbar-item">
@@ -31,7 +31,7 @@
           <a href="#">Кандидаты</a>
         </div>
         <div class="navbar-item">
-          <a href="/">Прайс-лист</a>
+          <a href="#">Прайс-лист</a>
         </div>
         {{/if}}
         {{/with}}
@@ -52,13 +52,13 @@
         {{#with user_type}}
         {{#if app }}
         <div class="navbar-item">
-          <a href="/app_login" class="navbar-btn btn" data-type="res_create">
+          <a href="#" class="navbar-btn btn" data-type="res_create">
             Создать резюме
           </a>
         </div>
         {{else}}
         <div class="navbar-item">
-          <a href="/app_login" class="navbar-btn btn" data-type="vac_create">
+          <a href="#" class="navbar-btn btn" data-type="vac_create">
             Создать вакансию
           </a>
         </div>
