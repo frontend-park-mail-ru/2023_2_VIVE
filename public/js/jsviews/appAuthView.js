@@ -44,10 +44,10 @@ export default class appAuthView {
     return formObject;
   }
 
-  sendForm(formData) {
+  async sendForm(formData) {
     delete formData["remember_password"];
     console.log(formData);
-    return APIConnector.post(BACKEND_SERVER_URL + "/session", formData)
+    return await APIConnector.post(BACKEND_SERVER_URL + "/session", formData)
       .then((resp) => {
         console.log(resp.status);
         return true;
