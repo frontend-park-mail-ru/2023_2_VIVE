@@ -25,9 +25,6 @@ export default class CookieCheck {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + "/session");
             return resp.status === 200;
         } catch(err) {
-            if (err.response.status !== 401) {
-                console.log(err);
-            }
             return false;
         }
     }
