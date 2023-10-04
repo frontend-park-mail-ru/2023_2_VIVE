@@ -16,10 +16,10 @@ export default class menuView {
     };
   }
 
-  render() {
+  async render() {
     const template = Handlebars.templates["header.hbs"];
     let ctx = {
-      is_user_login: cookie.hasCookie(),
+      is_user_login: await cookie.hasCookie(),
       // is_user_login: true,
       user_type: {
         app: true

@@ -27,7 +27,7 @@ export default class Router {
     this.lastUrl = "";
   }
 
-  goToLink(url) {
+  async goToLink(url) {
     if (url == this.lastUrl) {
       return;
     }
@@ -35,7 +35,7 @@ export default class Router {
       if (this.lastUrl) {
         this.objs[this.routes[url]].remove()
       }
-      this.objs[this.routes[url]].render();
+      await this.objs[this.routes[url]].render();
       this.objs["menu"].render();
     } else {
       console.error(`Такого адреса не существует: ${url}`);
