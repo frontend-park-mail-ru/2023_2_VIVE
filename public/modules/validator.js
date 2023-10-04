@@ -15,7 +15,7 @@ class Validator {
    * @returns {boolean} True if given string is a valid email, false otherwise.
    */
   isEmail(str) {
-    const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g;
+    const emailRegExp = /.+@.+\..+$/g;
     const res = str.match(emailRegExp) || [];
     return res.length == 1;
   }
@@ -149,16 +149,14 @@ class Validator {
    * @param {string} [includeSpecialSymbols=DEFAULT_ALLOWED_SYMBOLS] String of remaining allowed symbols, default DEFAULT_ALLOWED_SYMBOLS.
    * @returns {boolean} True if the password is valid, false otherwise.
    */
-  checkPassword(
+  checkPassword({
     password,
-    {
-      minLength = 8,
-      maxLength = 128,
-      includeUpperCase = true,
-      includeDigits = true,
-      includeSpecialSymbols = DEFAULT_ALLOWED_SYMBOLS,
-    }
-  ) {
+    minLength = 8,
+    maxLength = 128,
+    includeUpperCase = true,
+    includeDigits = true,
+    includeSpecialSymbols = DEFAULT_ALLOWED_SYMBOLS,
+  }) {
     const isLengthValid =
       this.checkMinLength(password, minLength) &&
       this.checkMaxLength(password, maxLength);
@@ -186,6 +184,90 @@ class Validator {
       hasSpecialSymbols &&
       areSymbolsValid
     );
+  }
+
+  validateField(data, errorMessage) {
+    if (!data || !data.trim() === '') {
+      return errorMessage;
+    }
+  }
+
+  /**
+   * Check if registration form is valid. Returns object with errors if any.
+   * Throws error if there are no required fields in `data`.
+   *
+   * @param {object} data Object with all the input data from registration form.
+   * Must contain following fields: `email`, `password`, `repeat_password`.
+   * @returns {object} Object of errors.
+   * @throws Will throw an error if there are no required fields in `data`.
+   */
+  validateRegistrationForm(data) {
+    if (!'email' in data || !'password' in data || !'repeat_password' in data) {
+      throw new Error("data doesn't contain required fields");
+    }
+
+    let errors = {};
+
+    for (let key in data) {
+      errors[key] = this.validateField(
+        data[key],
+        'Обязательное поле для заполнения'
+      );
+    }
+
+    // Email
+    if (!errors.email && !this.isEmail(data.email.trim())) {
+      errors.email = 'Некорректная электронная почта';
+    }
+
+    // Password
+    if (!errors.password && !this.checkPassword({ password: data.password })) {
+      errors.password =
+        'Пароль должен быть от 8 до 128 символов, иметь заглавные буквы, цифры и прочие символы';
+    }
+
+    // Repeat password
+    if (
+      !errors.password &&
+      !errors.repeat_password &&
+      !this.equals(data.password, data.repeat_password)
+    ) {
+      errors.password = 'Пароли не совпадают';
+      errors.repeat_password = 'Пароли не совпадают';
+    }
+
+    return errors;
+  }
+
+  /**
+   * Check if authorization form is valid. Returns object with errors if any.
+   * Throws error if there are no required fields in `data`.
+   *
+   * @param {object} data Object with all the input data from registration form.
+   * Must contain following fields: `email`, `password`.
+   * @returns {object} Object of errors.
+   * @throws Will throw an error if there are no required fields in `data`.
+   */
+  validateAuthForm(data) {
+    if (!'email' in data || !'password' in data) {
+      throw new Error("data doesn't contain required fields");
+    }
+
+    let errors = {};
+
+    for (let key in data) {
+      errors[key] = this.validateField(
+        data[key],
+        'Обязательное поле для заполнения'
+      );
+    }
+
+    // Email
+    if (!errors.email && !this.isEmail(data.email.trim())) {
+      errors.email = 'Некорректная электронная почта';
+    }
+
+    return errors;
   }
 }
 

@@ -1,16 +1,16 @@
-import APIConnector from "../../modules/APIConnector.js";
-import { router } from "../router/router.js";
+import APIConnector from '../../modules/APIConnector.js';
+import { router } from '../router/router.js';
+import Validator from '../../modules/validator.js';
+import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import { getHrefFromA } from "../utils.js";
 
-const config = {
-  ip: "http://212.233.90.231:8081"
-};
+const validator = new Validator();
 
 export default class appRegView {
   render() {
-    console.log("rendering appReg");
-    const template = Handlebars.templates["app_reg.hbs"];
-    document.querySelector("main").innerHTML = template();
+    console.log('rendering appReg');
+    const template = Handlebars.templates['app_reg.hbs'];
+    document.querySelector('main').innerHTML = template();
     this.addEventListeners();
   }
 
