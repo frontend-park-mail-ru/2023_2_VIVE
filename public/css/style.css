@@ -275,6 +275,7 @@ a {
   border-radius: 10px;
   box-shadow: 0px 0px 40px -30px gray;
   background-color: #eaeff2;
+  margin-bottom: 40px;
 }
 
 .vac-desc-main {
@@ -305,11 +306,6 @@ a {
 
 .vac-desc-text-prev {
   margin-bottom: 35px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
 }
 
 .vac-btns {

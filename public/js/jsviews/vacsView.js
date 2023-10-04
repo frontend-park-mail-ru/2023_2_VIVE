@@ -6,7 +6,21 @@ export default class vacsView {
   async render() {
     console.log("rendering vacs");
     const template = Handlebars.templates["vacs.hbs"];
-    const data = await this.getVacancies();
+    // const data = await this.getVacancies();
+    const data = [{
+      'name': 'dsfaf',
+      'company_name': 'fdsa',
+      'description': 'regggerg',
+      'salary': 100,
+
+    }, 
+    {
+      'name': 'dsfaf',
+      'company_name': 'fdsa',
+      'description': 'sdffas',
+      'salary': 100,
+
+    }]
     console.log(data);
     document.querySelector("main").innerHTML = template({
       'data': data,
