@@ -1,3 +1,5 @@
+import { BACKEND_SERVER_URL } from "../../../config/config.js";
+import APIConnector from "../../modules/APIConnector.js";
 import { cookie } from "../cookieCheck/cookieCheck.js";
 import { router } from "../router/router.js";
 import { getHrefFromA } from "../utils.js";
@@ -18,6 +20,7 @@ export default class menuView {
     const template = Handlebars.templates["header.hbs"];
     let ctx = {
       is_user_login: await cookie.hasCookie(),
+      // is_user_login: true,
       user_type: {
         app: true
       }
@@ -54,7 +57,9 @@ export default class menuView {
     let logout_btn = document.querySelector(".logout-btn");
     logout_btn.addEventListener('click', function(e) {
       e.preventDefault();
-      console.log("click!");
+      APIConnector.delete(BACKEND_SERVER_URL + '/session')
+      .then(()=>router.goToLink('/'))
+      .catch(err => console.error(err));
     });
   }
 

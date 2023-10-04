@@ -324,3 +324,12 @@ a {
   padding: 10px 10px 6px 10px;
   background-color: transparent;
 }
+
+/* --------------------- */
+
+.logout-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
