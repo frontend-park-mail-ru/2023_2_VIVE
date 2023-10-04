@@ -3,10 +3,10 @@ import APIConnector from "../../modules/APIConnector.js";
 import { router } from "../router/router.js";
 
 export default class vacsView {
-  render() {
+  async render() {
     console.log("rendering vacs");
     const template = Handlebars.templates["vacs.hbs"];
-    const data = this.getVacancies();
+    const data = await this.getVacancies();
     console.log(data);
     document.querySelector("main").innerHTML = template(data);
     this.addEventListeners();
@@ -15,7 +15,8 @@ export default class vacsView {
   async getVacancies() {
     return await APIConnector.get(BACKEND_SERVER_URL + "/vacancies")
       .then(async (resp) => {
-        const data = await response.json();
+        return await response.json();
+      }).then(data => {
         return data;
       })
       .catch((err) => {
