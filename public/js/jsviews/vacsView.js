@@ -15,7 +15,10 @@ export default class vacsView {
   getVacancies() {
     return APIConnector.get(BACKEND_SERVER_URL + '/vacancies')
     .then(resp => resp.json())
-    // .then(json => json)
+    .then(json => {
+      console.log(json);
+      return json;
+    })
     .catch(error => console.error(error));
   }
 
