@@ -25,6 +25,8 @@ export function formIsValid(data, { is_login, is_reg }) {
         input.parentNode.appendChild(errorNode);
 
         input.classList.add("input-in-error");
+      } else {
+        existErrorNode.textContent = errors[input.name];
       }
     } else {
       if (existErrorNode) {
