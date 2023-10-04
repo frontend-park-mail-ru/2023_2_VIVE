@@ -1,4 +1,4 @@
-import {router} from "./router/router.js";
+import { cookie } from "./cookieCheck/cookieCheck.js";
 
 let cur_path = window.location.pathname;
-router.goToLink(cur_path);
+cookie.checkPathForNoCookie(cur_path);
