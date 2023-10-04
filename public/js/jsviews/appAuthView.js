@@ -12,7 +12,7 @@ export default class appAuthView {
     this.addEventListeners();
   }
 
-  addEventListeners() {
+  async addEventListeners() {
     let elipse_link = document.querySelector(".elipse-button");
     elipse_link.addEventListener(
       "click",
@@ -29,9 +29,12 @@ export default class appAuthView {
       let formData = this.getFormObject(new FormData(form));
 
       if (formIsValid(formData, { is_login: true })) {
-        if (this.sendForm(formData)) {
-          router.goToLink("/");
-        }
+        this.sendForm(formData).then((success) => {
+          if (success) {
+            router.goToLink("/").then(() => {
+            });
+          }
+        });
       }
     });
   }
