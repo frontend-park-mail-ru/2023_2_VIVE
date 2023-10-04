@@ -1,6 +1,7 @@
 import APIConnector from "../../modules/APIConnector.js";
 import { router } from "../router/router.js";
 import { BACKEND_SERVER_URL } from "../../../config/config.js";
+import { response } from "express";
 
 export default class CookieCheck {
     constructor() {
@@ -25,7 +26,9 @@ export default class CookieCheck {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + "/session");
             return resp.status === 200;
         } catch(err) {
-            console.error(err);
+            if (err.response.status !== 401) {
+                console.log(err);
+            }
             return false;
         }
     }
