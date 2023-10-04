@@ -5,10 +5,10 @@ import { BACKEND_SERVER_URL } from "../../../config/config.js";
 export default class CookieCheck {
     constructor() {
         this.urlWithoutCookie = {
-            app_reg: '/app_reg',
-            app_login: '/app_login',
-            emp_reg: '/emp_reg',
-            emp_login: '/emp_login',
+            "/app_reg": "/app_reg",
+            "/app_login": "/app_login",
+            "/emp_reg": "/emp_reg",
+            "/emp_login": "/emp_login",
         }
     }
 
