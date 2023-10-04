@@ -3,7 +3,7 @@
 Добро пожаловать в проект HeadHunter!
 
 ## Дизайн в Figma
-[![Figma](https://avatars.mds.yandex.net/i?id=e2235a8ed31cf061106af98f00d2a94c_sr-8553021-images-thumbs&n=13)](https://www.figma.com/file/tQXPQ7GbdjeQAo5sSza093/VIVE-Design?node-id=0%3A1&mode=dev)
+ - [Figma](https://www.figma.com/file/tQXPQ7GbdjeQAo5sSza093/VIVE-Design?node-id=0%3A1&mode=dev)
 
 ## Команда
 
