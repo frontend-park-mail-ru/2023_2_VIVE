@@ -6,7 +6,7 @@ export default class vacsView {
   render() {
     console.log("rendering vacs");
     const template = Handlebars.templates["vacs.hbs"];
-    let data = this.getVacancies();
+    const data = this.getVacancies();
     console.log(data);
     document.querySelector("main").innerHTML = template(data);
     this.addEventListeners();
@@ -15,7 +15,7 @@ export default class vacsView {
   async getVacancies() {
     try {
       const resp = await APIConnector.get(BACKEND_SERVER_URL + "/vacancies");
-      return resp.json();
+      return await resp.json();
     } catch (err) {
       console.error(err);
     }
