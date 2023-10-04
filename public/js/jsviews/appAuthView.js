@@ -12,7 +12,7 @@ export default class appAuthView {
     this.addEventListeners();
   }
 
-  async addEventListeners() {
+  addEventListeners() {
     let elipse_link = document.querySelector(".elipse-button");
     elipse_link.addEventListener(
       "click",
@@ -29,12 +29,9 @@ export default class appAuthView {
       let formData = this.getFormObject(new FormData(form));
 
       if (formIsValid(formData, { is_login: true })) {
-        this.sendForm(formData).then((success) => {
-          if (success) {
-            router.goToLink("/").then(() => {
-            });
-          }
-        });
+        if (this.sendForm(formData)) {
+          router.goToLink("/");
+        }
       }
     });
   }
@@ -47,20 +44,18 @@ export default class appAuthView {
     return formObject;
   }
 
-  async sendForm(formData) {
-    try {
+  sendForm(formData) {
     delete formData["remember_password"];
     console.log(formData);
-    
-    const resp = await APIConnector.post(BACKEND_SERVER_URL + "/session", formData);
-
-    console.log(resp.status);
-    return true;
-
-    } catch (err) {
-      console.error(err);
-      return false;
-    }
+    return APIConnector.post(BACKEND_SERVER_URL + "/session", formData)
+      .then((resp) => {
+        console.log(resp.status);
+        return true;
+      })
+      .catch((err) => {
+        console.error(err);
+        return false;
+      });
   }
 
   removeEventListeners() {}
