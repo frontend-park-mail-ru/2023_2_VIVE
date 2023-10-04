@@ -35,8 +35,6 @@ export default class Router {
       if (this.lastUrl) {
         this.objs[this.routes[url]].remove()
       }
-      window.location.href = url;
-      this.lastUrl = url;
       this.objs[this.routes[url]].render();
       this.objs["menu"].render();
     } else {
