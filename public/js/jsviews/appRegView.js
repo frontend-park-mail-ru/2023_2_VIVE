@@ -49,6 +49,7 @@ export default class appRegView {
             console.error(err);
           });
       } else {
+        console.log('Error!');
         console.log(errors);
       }
     });
