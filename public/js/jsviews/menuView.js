@@ -14,10 +14,10 @@ export default class menuView {
     };
   }
 
-  render() {
+  async render() {
     const template = Handlebars.templates["header.hbs"];
     let ctx = {
-      is_user_login: cookie.hasCookie(),
+      is_user_login: await cookie.hasCookie(),
       user_type: {
         app: true
       }
@@ -49,6 +49,12 @@ export default class menuView {
         e.preventDefault();
         router.goToLink(getHrefFromA(link));
       });
+    });
+
+    let logout_btn = document.querySelector(".logout-btn");
+    logout_btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log("click!");
     });
   }
 
