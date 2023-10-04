@@ -19,7 +19,7 @@ app.engine(
 app.set("view engine", "hbs");
 
 app.use(express.static(path.join(__dirname, "..")));
-const SERVER_PORT = 3000;
+const SERVER_PORT = 8082;
 
 app.get("/", (req, res) => {
   res.render("pages/vacancies");
