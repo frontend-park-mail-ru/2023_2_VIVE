@@ -1,7 +1,6 @@
 import APIConnector from "../../modules/APIConnector.js";
 import { router } from "../router/router.js";
 import { BACKEND_SERVER_URL } from "../../../config/config.js";
-import { response } from "express";
 
 export default class CookieCheck {
     constructor() {
