@@ -30,6 +30,7 @@ export default class empRegView {
 
       if (formIsValid(formData, { is_reg: true })) {
         this.sendForm(formData);
+        router.goToLink('/');
       }
     });
   }

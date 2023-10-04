@@ -28,6 +28,7 @@ export default class empAuthView {
 
       if (formIsValid(formData, {is_login: true})) {
         this.sendForm(formData);
+        router.goToLink('/');
       }
     });
   }
