@@ -271,4 +271,5 @@ class Validator {
   }
 }
 
-export default Validator;
+const validator = new Validator();
+export default validator;

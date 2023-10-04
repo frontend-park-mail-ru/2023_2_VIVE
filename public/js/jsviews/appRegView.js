@@ -1,16 +1,14 @@
-import APIConnector from '../../modules/APIConnector.js';
-import { router } from '../router/router.js';
-import Validator from '../../modules/validator.js';
-import { BACKEND_SERVER_URL } from '../../../config/config.js';
+import APIConnector from "../../modules/APIConnector.js";
+import { router } from "../router/router.js";
+import { BACKEND_SERVER_URL } from "../../../config/config.js";
 import { getHrefFromA } from "../utils.js";
-
-const validator = new Validator();
+import { formIsValid } from "./formValidation.js";
 
 export default class appRegView {
   render() {
-    console.log('rendering appReg');
-    const template = Handlebars.templates['app_reg.hbs'];
-    document.querySelector('main').innerHTML = template();
+    console.log("rendering appReg");
+    const template = Handlebars.templates["app_reg.hbs"];
+    document.querySelector("main").innerHTML = template();
     this.addEventListeners();
   }
 
@@ -26,11 +24,11 @@ export default class appRegView {
     );
 
     let form = document.querySelector(".reg-form");
-    form.addEventListener("submit", (e)=> {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
       let formData = this.getFormObject(new FormData(form));
 
-      if (this.formIsValid(formData)) {
+      if (formIsValid(formData, {is_reg: true})) {
         this.sendForm(formData);
       }
     });
@@ -48,7 +46,6 @@ export default class appRegView {
     formData["role"] = "applicant";
     delete formData["repeat_password"];
     delete formData["remember_password"];
-    console.log(formData);
     APIConnector.post(BACKEND_SERVER_URL + "/users", formData)
       .then((resp) => {
         console.log(resp.status);
@@ -56,10 +53,6 @@ export default class appRegView {
       .catch((err) => {
         console.error(err);
       });
-  }
-
-  formIsValid(data) {
-    return true;
   }
 
   removeEventListeners() {}

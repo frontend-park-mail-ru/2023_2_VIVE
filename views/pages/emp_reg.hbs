@@ -1,4 +1,4 @@
-<div class="reg-form">
+<form class="reg-form">
   <span class="default-text x-large-font">Регистрация</span>
   <div class="d-flex">
     <span class="reg-text me-10">Найти работу</span>
@@ -7,30 +7,30 @@
     </a>
     <span class="reg-text ms-10">Найти сотрудников</span>
   </div>
-  <div class="input">
-    <input type="text" class="input-in" id="name" placeholder="Имя">
-  </div>
-  <div class="input">
-    <input type="text" class="input-in" id="surname" placeholder="Фамилия">
-  </div>
-  <div class="input">
-    <input type="text" class="input-in" id="company_name" placeholder="Название компании">
-  </div>
-  <div class="input">
-    <input type="text" class="input-in" id="email" placeholder="Электронная почта">
-  </div>
-  <div class="input">
-    <input type="password" class="input-in" id="password" placeholder="Придумайте ароль">
-  </div>
-  <div class="input">
-    <input type="text" class="input-in" id="repeat_password" placeholder="Повторите пароль">
-  </div>
+  <label class="input">
+    <input type="text" class="input-in" name="first_name" placeholder="Имя">
+  </label>
+  <label class="input">
+    <input type="text" class="input-in" name="last_name" placeholder="Фамилия">
+  </label>
+  <label class="input">
+    <input type="text" class="input-in" name="company_name" placeholder="Название компании">
+  </label>
+  <label class="input">
+    <input type="text" class="input-in" name="email" placeholder="Электронная почта">
+  </label>
+  <label class="input">
+    <input type="password" class="input-in" name="password" placeholder="Придумайте пароль">
+  </label>
+  <label class="input">
+    <input type="password" class="input-in" name="repeat_password" placeholder="Повторите пароль">
+  </label>
   <label for="rememberPassword" class="remember-label">
-    <input type="checkbox" id="rememberPassword" class="remember-checkbox">
-    <span class="reg-text small-font">Запомнить пароль</span>
+    <input type="checkbox" name="remember_password" class="remember-checkbox"> <span class="reg-text small-font">Запомнить
+      пароль</span>
   </label>
   <div class="form-actions">
-    <a href="#" class="fully-button side-m-0">Зарегистрироваться</a>
+    <button type="submit" class="fully-button side-m-0">Зарегистрироваться</button>
     <a href="#" class="transparent-button side-m-0">Уже есть аккаунт</a>
   </div>
-</div>
+</form>
