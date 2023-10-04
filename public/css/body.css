@@ -152,6 +152,7 @@ footer {
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .fully-button:hover {
@@ -196,18 +197,35 @@ footer {
 .input {
   display: flex;
   width: 400px;
-  align-items: flex-start;
+  flex-direction: column;
 }
 
 .input-in {
-  display: flex;
-  height: 25px;
-  padding: 5px 10px 5px 10px;
+  display: block;
+  padding: 5px 10px;
   align-items: center;
   flex: 1 0 0;
   border-radius: 12px;
   border: 0;
   background: var(--main-background-grey);
+  font-size: 18px;
+  outline: none;
+  color: #5E5E5E;
+} 
+
+.input-in-error {
+  background-color: rgba(239, 74, 60, 0.15);
+  border: 2px solid #EF4A3C;
+}
+
+.input-in:focus {
+  background-color: #e8e8e8;
+}
+
+.input-error-msg {
+  margin-top: 5px;
+  padding: 0 10px;
+  color: #EF4A3C;
 }
 
 .remember-label {
