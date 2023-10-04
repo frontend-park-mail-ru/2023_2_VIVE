@@ -19,8 +19,8 @@ export default class menuView {
   async render() {
     const template = Handlebars.templates["header.hbs"];
     let ctx = {
-      // is_user_login: await cookie.hasCookie(),
-      is_user_login: true,
+      is_user_login: await cookie.hasCookie(),
+      // is_user_login: true,
       user_type: {
         app: true
       }
