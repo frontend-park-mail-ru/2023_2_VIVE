@@ -49,7 +49,7 @@ export default class appRegView {
     delete formData["repeat_password"];
     delete formData["remember_password"];
     console.log(formData);
-    APIConnector.post(config.ip + "/users", formData)
+    APIConnector.post(BACKEND_SERVER_URL + "/users", formData)
       .then((resp) => {
         console.log(resp.status);
       })
