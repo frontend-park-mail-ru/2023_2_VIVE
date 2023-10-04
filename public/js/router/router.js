@@ -36,7 +36,7 @@ export default class Router {
         this.objs[this.routes[url]].remove()
       }
       await this.objs[this.routes[url]].render();
-      // this.objs["menu"].render();
+      this.objs["menu"].render();
     } else {
       console.error(`Такого адреса не существует: ${url}`);
     }
