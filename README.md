@@ -3,7 +3,7 @@
 Добро пожаловать в проект HeadHunter!
 
 ## Дизайн в Figma
-[![Figma](https://www.figma.com/logo/favicon.ico)](https://www.figma.com/file/tQXPQ7GbdjeQAo5sSza093/VIVE-Design?node-id=0%3A1&mode=dev)
+[![Figma](https://i.pinimg.com/originals/56/67/67/56676773cb4f0c00d7d47c6a84b9407c.png)](https://www.figma.com/file/tQXPQ7GbdjeQAo5sSza093/VIVE-Design?node-id=0%3A1&mode=dev)
 
 ## Команда
 
@@ -23,4 +23,4 @@
 
 ## Деплой
 
-[Сайт](https://http://212.233.90.231:8082/).
+- [Сайт](https://http://212.233.90.231:8082/)
