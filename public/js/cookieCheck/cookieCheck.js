@@ -21,12 +21,13 @@ export default class CookieCheck {
     }
 
     async hasCookie() {
-        try {
-            const resp = await APIConnector.get(BACKEND_SERVER_URL + "/session");
-            return resp.status === 200;
-        } catch(err) {
-            return false;
-        }
+        return APIConnector.get(BACKEND_SERVER_URL + "/session")
+            .then((resp) => {
+                return resp.status === 200;
+            })
+            .catch((err) => {
+                return false;
+            });
     }
 }
 
