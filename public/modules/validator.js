@@ -240,7 +240,7 @@ class Validator {
   }
 
   /**
-   * Check if registration form is valid. Returns object with errors if any.
+   * Check if authorization form is valid. Returns object with errors if any.
    * Throws error if there are no required fields in `data`.
    *
    * @param {object} data Object with all the input data from registration form.
