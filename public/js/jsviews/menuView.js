@@ -1,3 +1,4 @@
+import { cookie } from "../cookieCheck/cookieCheck.js";
 import { router } from "../router/router.js";
 import { getHrefFromA } from "../utils.js";
 
@@ -16,7 +17,7 @@ export default class menuView {
   render() {
     const template = Handlebars.templates["header.hbs"];
     let ctx = {
-      is_user_login: false,
+      is_user_login: cookie.hasCookie(),
       user_type: {
         app: true
       }
