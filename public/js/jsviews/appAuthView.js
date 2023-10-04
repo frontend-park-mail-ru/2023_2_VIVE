@@ -29,12 +29,8 @@ export default class appAuthView {
       let formData = this.getFormObject(new FormData(form));
 
       if (formIsValid(formData, { is_login: true })) {
-        try {
-          if (this.sendForm(formData)) {
-            router.goToLink("/");
-          }
-        } catch(err) {
-          console.error(err);
+        if (this.sendForm(formData)) {
+          router.goToLink("/");
         }
       }
     });
@@ -49,17 +45,19 @@ export default class appAuthView {
   }
 
   async sendForm(formData) {
+    try {
     delete formData["remember_password"];
     console.log(formData);
-    return await APIConnector.post(BACKEND_SERVER_URL + "/session", formData)
-      .then((resp) => {
-        console.log(resp.status);
-        return true;
-      })
-      .catch((err) => {
-        console.error(err);
-        return false;
-      });
+    
+    const resp = await APIConnector.post(BACKEND_SERVER_URL + "/session", formData);
+
+    console.log(resp.status);
+    return true;
+
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
   }
 
   removeEventListeners() {}
