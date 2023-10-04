@@ -9,7 +9,7 @@ export default class vacsView {
     const data = await this.getVacancies();
     console.log(data);
     document.querySelector("main").innerHTML = template({
-      data: data,
+      'data': data,
     });
     this.addEventListeners();
   }
