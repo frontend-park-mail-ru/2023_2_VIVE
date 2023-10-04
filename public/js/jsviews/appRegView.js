@@ -29,8 +29,9 @@ export default class appRegView {
       let formData = this.getFormObject(new FormData(form));
 
       if (formIsValid(formData, {is_reg: true})) {
-        this.sendForm(formData);
-        router.goToLink('/');
+        if (this.sendForm(formData)) {
+          router.goToLink('/');
+        }
       }
     });
   }
@@ -50,9 +51,11 @@ export default class appRegView {
     APIConnector.post(BACKEND_SERVER_URL + "/users", formData)
       .then((resp) => {
         console.log(resp.status);
+        return true;
       })
       .catch((err) => {
         console.error(err);
+        return false;
       });
   }
 
