@@ -54,8 +54,13 @@ export default class appAuthView {
       if (formIsValid(formData, { is_login: true })) {
         if (await this.sendForm(formData)) {
           router.goToLink('/');
-        } else {
-          // ...
+        } else if (document.getElementsByClassName('form-error').length == 0) {
+          let err = document.createElement('div');
+          err.classList.add('reg-text', 'form-error');
+          err.textContent = 'Неверная электронная почта или пароль';
+
+          let toggler = document.getElementById('toggler');
+          toggler.after(err);
         }
       }
     });

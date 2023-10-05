@@ -1,11 +1,11 @@
 @font-face {
-  font-family: "Acumin";
-  src: url("../fonts/Acumin\ Variable\ Concept.ttf") format("truetype");
+  font-family: 'Acumin';
+  src: url('../fonts/Acumin\ Variable\ Concept.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: url("../fonts/Roboto.ttf") format("truetype");
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto.ttf') format('truetype');
 }
 
 :root {
@@ -13,23 +13,24 @@
   --button-color-primary-default: #0496ff;
   --default-text-prussian-blue: #042439;
   --footer-button-xanthous-orange: #ffbc42;
+  --main-error: #ef4a3c;
 }
 
 .dodger-blue {
-  font-family: "Acumin", sans-serif;
+  font-family: 'Acumin', sans-serif;
   font-weight: bolder;
   font-style: italic;
   color: var(--button-color-primary-default);
 }
 
 .default-text {
-  font-family: "Acumin", sans-serif;
+  font-family: 'Acumin', sans-serif;
   font-weight: bold;
   color: var(--default-text-prussian-blue);
 }
 
 .reg-text {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -39,7 +40,7 @@
 .footer-text {
   margin-top: 4px;
   margin-bottom: 4px;
-  font-family: "Acumin", sans-serif;
+  font-family: 'Acumin', sans-serif;
   font-weight: bold;
   color: var(--main-background-grey);
 }
@@ -54,7 +55,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
-  gap: 20px;  
+  gap: 20px;
   border-radius: 30px;
   background: var(--main-grey-blue, rgba(210, 224, 234, 0.37));
   margin: 10vh auto;
@@ -84,7 +85,7 @@ footer {
 .transparent-button {
   margin-left: 10px;
   margin-right: 10px;
-  font-family: "Acumin", sans-serif;
+  font-family: 'Acumin', sans-serif;
   font-weight: bold;
   background-color: transparent;
   color: var(--button-color-primary-default);
@@ -110,7 +111,7 @@ footer {
 .fully-button {
   margin-left: 10px;
   margin-right: 10px;
-  font-family: "Acumin", sans-serif;
+  font-family: 'Acumin', sans-serif;
   font-weight: bold;
   background-color: var(--button-color-primary-default);
   color: var(--main-background-grey);
@@ -135,7 +136,7 @@ footer {
 }
 
 .footer-button {
-  font-family: "Acumin", sans-serif;
+  font-family: 'Acumin', sans-serif;
   font-weight: bold;
   background-color: var(--footer-button-xanthous-orange);
   color: var(--default-text-prussian-blue);
@@ -179,12 +180,19 @@ footer {
   background: var(--main-background-grey);
   font-size: 18px;
   outline: none;
-  color: #5E5E5E;
-} 
+  color: #5e5e5e;
+}
 
 .input-in-error {
   background-color: rgba(239, 74, 60, 0.15);
-  border: 2px solid #EF4A3C;
+  border: 2px solid var(--main-error);
+}
+
+.form-error {
+  color: var(--main-error);
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
 }
 
 .input-in:focus {
@@ -194,7 +202,7 @@ footer {
 .input-error-msg {
   margin-top: 5px;
   padding: 0 10px;
-  color: #EF4A3C;
+  color: var(--main-error);
 }
 
 .remember-label {
@@ -280,4 +288,3 @@ footer {
 .font-weight-100 {
   font-weight: 100;
 }
-
