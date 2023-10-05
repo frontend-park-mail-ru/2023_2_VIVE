@@ -9,7 +9,8 @@
   "scripts": {
     "prestart": "npm run compile:templates",
     "start": "nodemon server/server.js",
-    "compile:templates": "handlebars views/layouts/*.hbs views/pages/*.hbs views/partials/*.hbs -f views/templates.precompiled.js"
+    "compile:templates": "handlebars views/layouts/*.hbs views/pages/*.hbs views/partials/*.hbs -f views/templates.precompiled.js",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

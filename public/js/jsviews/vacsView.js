@@ -1,6 +1,7 @@
 
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../../modules/APIConnector.js';
+import Handlebars from "handlebars";
 
 export default class vacsView {
   async render() {

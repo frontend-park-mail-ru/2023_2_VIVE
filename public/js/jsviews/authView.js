@@ -3,6 +3,7 @@ import APIConnector from '../../modules/APIConnector.js';
 import router from '../router/router.js';
 import { getHrefFromA } from '../utils.js';
 import { formIsValid } from './formValidation.js';
+import Handlebars from "handlebars";
 
 export default class authView {
   constructor(role) {
