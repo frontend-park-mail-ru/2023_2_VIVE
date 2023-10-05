@@ -10,5 +10,12 @@
     "prestart": "npm run compile:templates",
     "start": "nodemon server/server.js",
     "compile:templates": "handlebars views/layouts/*.hbs views/pages/*.hbs views/partials/*.hbs -f views/templates.precompiled.js"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "3.0.3"
   }
 }

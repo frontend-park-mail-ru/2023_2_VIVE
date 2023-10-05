@@ -8,14 +8,15 @@
   src: url("../fonts/Roboto-Italic.ttf");
 }
 
-body {
-  margin: 0;
-}
-
 * {
   font-family: "Roboto", sans-serif;
   color: #5d5d5d;
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .column-wrapper {
@@ -147,6 +148,7 @@ a {
 
 .vac-res {
   display: flex;
+  justify-content: space-between;
   padding-top: 20px;
   padding-bottom: 20px;
 }

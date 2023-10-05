@@ -1,8 +1,8 @@
-import { BACKEND_SERVER_URL } from "../../../config/config.js";
-import APIConnector from "../../modules/APIConnector.js";
-import { cookie } from "../cookieCheck/cookieCheck.js";
-import { router } from "../router/router.js";
-import { getHrefFromA } from "../utils.js";
+import { BACKEND_SERVER_URL } from '../../../config/config.js';
+import APIConnector from '../../modules/APIConnector.js';
+import { cookie } from '../cookieCheck/cookieCheck.js';
+import { router } from '../router/router.js';
+import { getHrefFromA } from '../utils.js';
 
 export default class menuView {
   constructor() {
@@ -17,15 +17,15 @@ export default class menuView {
   }
 
   async render() {
-    const template = Handlebars.templates["header.hbs"];
+    const template = Handlebars.templates['header.hbs'];
     let ctx = {
       is_user_login: await cookie.hasCookie(),
       // is_user_login: true,
       user_type: {
-        app: true
-      }
+        app: true,
+      },
     };
-    document.querySelector("header").innerHTML = template(ctx);
+    document.querySelector('header').innerHTML = template(ctx);
 
     this.addEventListeners();
   }
@@ -35,31 +35,31 @@ export default class menuView {
     type,
     listener,
     useCapture = false,
-    options = {}
+    options = {},
   ) {
     obj.addEventListener(type, listener, useCapture, options);
     this.eventListeners[obj] = {
       listener,
       useCapture,
-      options
+      options,
     };
   }
 
   async addEventListeners() {
-    let links = document.querySelectorAll(".navbar-item a");
+    let links = document.querySelectorAll('.navbar-item a');
     links.forEach((link, i) => {
-      this.addEventListenerWrapper(link, "click", (e) => {
+      this.addEventListenerWrapper(link, 'click', (e) => {
         e.preventDefault();
         router.goToLink(getHrefFromA(link));
       });
     });
 
     if (await cookie.hasCookie()) {
-      let logout_btn = document.querySelector(".logout-btn");
-      logout_btn.addEventListener("click", function (e) {
+      let logout_btn = document.querySelector('.logout-btn');
+      logout_btn.addEventListener('click', function (e) {
         e.preventDefault();
-        APIConnector.delete(BACKEND_SERVER_URL + "/session")
-          .then(() => router.goToLink("/"))
+        APIConnector.delete(BACKEND_SERVER_URL + '/session')
+          .then(() => router.goToLink('/'))
           .catch((err) => console.error(err));
       });
     }
