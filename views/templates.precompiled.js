@@ -70,6 +70,24 @@ templates['form_login_reg.hbs'] = template({"1":function(container,depth0,helper
 },"21":function(container,depth0,helpers,partials,data) {
     return "          Зарегистрироваться\r\n";
 },"23":function(container,depth0,helpers,partials,data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||container.hooks.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"reg",{"name":"iff","hash":{},"fn":container.program(13, data, 0),"inverse":container.program(8, data, 0),"data":data,"loc":{"start":{"line":53,"column":8},"end":{"line":57,"column":16}}})) != null ? stack1 : "");
+},"25":function(container,depth0,helpers,partials,data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||container.hooks.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"reg",{"name":"iff","hash":{},"fn":container.program(11, data, 0),"inverse":container.program(6, data, 0),"data":data,"loc":{"start":{"line":59,"column":8},"end":{"line":63,"column":16}}})) != null ? stack1 : "");
+},"27":function(container,depth0,helpers,partials,data) {
     return "          Уже есть аккаунт\r\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -89,8 +107,10 @@ templates['form_login_reg.hbs'] = template({"1":function(container,depth0,helper
     + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"inputs") : depth0),{"name":"each","hash":{},"fn":container.program(17, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":33,"column":6},"end":{"line":37,"column":15}}})) != null ? stack1 : "")
     + "\r\n      <label for=\"rememberPassword\" class=\"remember-label\">\r\n        <input type=\"checkbox\" name=\"rememberPassword\" class=\"remember-checkbox\">\r\n        <span class=\"reg-text small-font\">Запомнить пароль</span>\r\n      </label>\r\n      <div class=\"form-actions\">\r\n        <button type=\"submit\" class=\"fully-button side-m-0\">\r\n"
     + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"login",{"name":"iff","hash":{},"fn":container.program(19, data, 0),"inverse":container.program(21, data, 0),"data":data,"loc":{"start":{"line":45,"column":10},"end":{"line":49,"column":18}}})) != null ? stack1 : "")
-    + "        </button>\r\n        <a href=\"#\" class=\"transparent-button side-m-0\">\r\n"
-    + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"login",{"name":"iff","hash":{},"fn":container.program(21, data, 0),"inverse":container.program(23, data, 0),"data":data,"loc":{"start":{"line":52,"column":10},"end":{"line":56,"column":18}}})) != null ? stack1 : "")
+    + "        </button>\r\n        <a href=\"\r\n"
+    + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"role") : depth0),"app",{"name":"iff","hash":{},"fn":container.program(23, data, 0),"inverse":container.program(25, data, 0),"data":data,"loc":{"start":{"line":52,"column":8},"end":{"line":64,"column":16}}})) != null ? stack1 : "")
+    + "        \" class=\"form-type-switch-link transparent-button side-m-0\">\r\n"
+    + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"login",{"name":"iff","hash":{},"fn":container.program(21, data, 0),"inverse":container.program(27, data, 0),"data":data,"loc":{"start":{"line":66,"column":10},"end":{"line":70,"column":18}}})) != null ? stack1 : "")
     + "        </a>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n";
 },"useData":true});
 templates['vacs.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {
@@ -146,7 +166,7 @@ templates['header.hbs'] = template({"1":function(container,depth0,helpers,partia
 
   return ((stack1 = lookupProperty(helpers,"if").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"app") : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.program(5, data, 0),"data":data,"loc":{"start":{"line":16,"column":8},"end":{"line":36,"column":15}}})) != null ? stack1 : "");
 },"3":function(container,depth0,helpers,partials,data) {
-    return "        <div class=\"navbar-item\">\r\n          <a href=\"#\">Мои резюме</a>\r\n        </div>\r\n        <div class=\"navbar-item\">\r\n          <a href=\"#\">Отклики</a>\r\n        </div>\r\n        <div class=\"navbar-item\">\r\n          <a href=\"#\">Вакансии</a>\r\n        </div>\r\n";
+    return "        <div class=\"navbar-item\">\r\n          <a href=\"#\">Мои резюме</a>\r\n        </div>\r\n        <div class=\"navbar-item\">\r\n          <a href=\"#\">Отклики</a>\r\n        </div>\r\n        <div class=\"navbar-item\">\r\n          <a href=\"/\">Вакансии</a>\r\n        </div>\r\n";
 },"5":function(container,depth0,helpers,partials,data) {
     return "        <div class=\"navbar-item\">\r\n          <a href=\"#\">Вакансии</a>\r\n        </div>\r\n        <div class=\"navbar-item\">\r\n          <a href=\"#\">Кандидаты</a>\r\n        </div>\r\n        <div class=\"navbar-item\">\r\n          <a href=\"#\">Прайс-лист</a>\r\n        </div>\r\n";
 },"7":function(container,depth0,helpers,partials,data) {

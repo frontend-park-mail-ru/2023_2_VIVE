@@ -48,7 +48,21 @@
           Зарегистрироваться
           {{/iff}}
         </button>
-        <a href="#" class="transparent-button side-m-0">
+        <a href="
+        {{#iff role 'app'}} 
+        {{#iff form_type 'reg'}} 
+        /app_login
+        {{else}} 
+        /app_reg
+        {{/iff}} 
+        {{else}}   
+        {{#iff form_type 'reg'}} 
+        /emp_login
+        {{else}} 
+        /emp_reg
+        {{/iff}}  
+        {{/iff}}
+        " class="form-type-switch-link transparent-button side-m-0">
           {{#iff form_type 'login' }}
           Зарегистрироваться
           {{else}}

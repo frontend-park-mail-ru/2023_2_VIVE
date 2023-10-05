@@ -50,7 +50,7 @@ export default class menuView {
 
   async addEventListeners() {
     let links = document.querySelectorAll('.navbar-item a');
-    links.forEach((link, i) => {
+    links.forEach(link => {
       this.addEventListenerWrapper(link, 'click', (e) => {
         e.preventDefault();
         router.goToLink(getHrefFromA(link));
@@ -63,7 +63,6 @@ export default class menuView {
         e.preventDefault();
         try {
           await APIConnector.delete(BACKEND_SERVER_URL + '/session');
-          console.log('logout!!!!');
           router.goToLink('/');
         } catch (err) {
           console.error('logout: ', err);

@@ -100,6 +100,12 @@ export default class regView {
       { once: true },
     );
 
+    let switch_link = document.querySelector('.form-type-switch-link');
+    switch_link.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.goToLink(getHrefFromA(switch_link));
+    }) 
+
     let form = document.querySelector('.reg-form');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
