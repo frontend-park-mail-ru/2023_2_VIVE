@@ -3,7 +3,6 @@ import APIConnector from '../../modules/APIConnector.js';
 import { cookie } from '../cookieCheck/cookieCheck.js';
 import router from '../router/router.js';
 import { getHrefFromA } from '../utils.js';
-import Handlebars from "handlebars";
 
 export default class menuView {
   constructor() {
@@ -18,6 +17,7 @@ export default class menuView {
   }
 
   async render() {
+    // eslint-disable-next-line no-undef
     const template = Handlebars.templates['header.hbs'];
     let isOk = await cookie.hasCookie();
 

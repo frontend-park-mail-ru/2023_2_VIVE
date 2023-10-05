@@ -1,11 +1,11 @@
 
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../../modules/APIConnector.js';
-import Handlebars from "handlebars";
 
 export default class vacsView {
   async render() {
     console.log('rendering vacs');
+    // eslint-disable-next-line no-undef
     const template = Handlebars.templates['vacs.hbs'];
     const data = await this.getVacancies();
     document.querySelector('main').innerHTML = template({

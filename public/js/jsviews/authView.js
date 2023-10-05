@@ -3,7 +3,6 @@ import APIConnector from '../../modules/APIConnector.js';
 import router from '../router/router.js';
 import { getHrefFromA } from '../utils.js';
 import { formIsValid } from './formValidation.js';
-import Handlebars from "handlebars";
 
 export default class authView {
   constructor(role) {
@@ -16,6 +15,7 @@ export default class authView {
   }
 
   compileTemplates() {
+    // eslint-disable-next-line no-undef
     const template = Handlebars.templates['form_login_reg.hbs'];
     document.querySelector('main').innerHTML = template(this.getContext());
   }

@@ -25,7 +25,7 @@ export default class CookieCheck {
       let resp = await APIConnector.get(BACKEND_SERVER_URL + '/session');
       return resp.status == 200;
     } catch (err) {
-      console.error('Error in hasCookie', err);
+      // console.error('Error in hasCookie', err);
       return false;
     }
   }
