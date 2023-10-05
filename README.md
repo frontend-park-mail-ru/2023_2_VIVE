@@ -24,3 +24,9 @@
 ## Деплой
 
 - [Сайт](https://http://212.233.90.231:8082/)
+
+## Линтер
+
+| **CI Service** |                                                                                                                                                                                 Build Status |
+|:---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| GitHub Actions | [![Build Status (GitHub Actions)](https://github.com/frontend-park-mail-ru/2023_2_VIVE/actions/workflows/main.yml/badge.svg)](https://github.com/frontend-park-mail-ru/2023_2_VIVE/actions/workflows/main.yml) |
