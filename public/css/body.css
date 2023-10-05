@@ -183,6 +183,24 @@ footer {
   color: #5e5e5e;
 }
 
+.remember-label .custom-checkbox {
+  margin-right: 5px;
+  background-color: #ffffff;
+  padding: 2px;
+}
+
+.remember-label input[type="checkbox"] {
+  display: none;
+}
+
+.remember-label input[type="checkbox"]:checked ~ .custom-checkbox {
+  background-color: hsl(205, 100%, 51%);
+}
+
+.remember-label input[type="checkbox"]:checked ~ .custom-checkbox svg {
+  visibility: visible;
+}
+
 .input-in-error {
   background-color: rgba(239, 74, 60, 0.15);
   border: 2px solid var(--main-error);
