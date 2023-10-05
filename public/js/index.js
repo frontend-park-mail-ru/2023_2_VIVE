@@ -1,5 +1,5 @@
-import { cookie } from "./cookieCheck/cookieCheck.js";
-import { registerHelpers } from "./handlebars/helpers.js";
+import { cookie } from './cookieCheck/cookieCheck.js';
+import { registerHelpers } from './handlebars/helpers.js';
 
 registerHelpers();
 

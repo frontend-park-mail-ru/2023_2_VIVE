@@ -227,7 +227,7 @@ a {
 /* vacancies block */
 
 .vac-list-block {
-  max-width: 80%;
+  width: 80vw;
 }
 
 /* vacancies params */

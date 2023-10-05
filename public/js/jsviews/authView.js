@@ -1,12 +1,14 @@
-import authView from './authView.js';
+import { BACKEND_SERVER_URL } from '../../../config/config.js';
+import APIConnector from '../../modules/APIConnector.js';
+import router from '../router/router.js';
+import { getHrefFromA } from '../utils.js';
+import { formIsValid } from './formValidation.js';
 
-export default class appAuthView extends authView {
-  render() {
-    console.log('rendering appAuth');
-    super.render('app');
-  }
+export default class authView {
+  render(role) {
     this.compileTemplates();
     this.addEventListeners();
+    this.role = role;
   }
 
   compileTemplates() {
@@ -15,22 +17,41 @@ export default class appAuthView extends authView {
   }
 
   getContext() {
-    return {
-      role: 'app',
-      form_type: 'login',
-      inputs: [
-        {
-          type: 'text',
-          name: 'email',
-          placeholder: 'Электронная почта(соискатель)',
-        },
-        {
-          type: 'password',
-          name: 'password',
-          placeholder: 'Пароль',
-        },
-      ],
-    };
+    if (this.role == 'app') {
+      return {
+        role: 'app',
+        form_type: 'login',
+        inputs: [
+          {
+            type: 'text',
+            name: 'email',
+            placeholder: 'Электронная почта(соискатель)',
+          },
+          {
+            type: 'password',
+            name: 'password',
+            placeholder: 'Пароль',
+          },
+        ],
+      };
+    } else {
+      return {
+        role: 'emp',
+        form_type: 'login',
+        inputs: [
+          {
+            type: 'text',
+            name: 'email',
+            placeholder: 'Электронная почта(компания)',
+          },
+          {
+            type: 'password',
+            name: 'password',
+            placeholder: 'Пароль',
+          },
+        ],
+      };
+    }
   }
 
   addEventListeners() {
@@ -44,6 +65,12 @@ export default class appAuthView extends authView {
       { once: true },
     );
 
+    let switch_link = document.querySelector('.form-type-switch-link');
+    switch_link.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.goToLink(getHrefFromA(switch_link));
+    }) 
+
     let form = document.querySelector('.reg-form');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -52,13 +79,8 @@ export default class appAuthView extends authView {
       if (formIsValid(formData, { is_login: true })) {
         if (await this.sendForm(formData)) {
           router.goToLink('/');
-        } else if (document.getElementsByClassName('form-error').length == 0) {
-          let err = document.createElement('div');
-          err.classList.add('reg-text', 'form-error');
-          err.textContent = 'Неверная электронная почта или пароль';
-
-          let toggler = document.getElementById('toggler');
-          toggler.after(err);
+        } else {
+          // ...
         }
       }
     });

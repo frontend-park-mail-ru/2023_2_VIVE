@@ -211,7 +211,7 @@ class Validator {
     for (let key in data) {
       errors[key] = this.validateField(
         data[key],
-        'Обязательное поле для заполнения'
+        'Обязательное поле для заполнения',
       );
     }
 
@@ -258,7 +258,7 @@ class Validator {
     for (let key in data) {
       errors[key] = this.validateField(
         data[key],
-        'Обязательное поле для заполнения'
+        'Обязательное поле для заполнения',
       );
     }
 
