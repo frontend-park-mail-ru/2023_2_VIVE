@@ -18,35 +18,35 @@ export default class appRegView {
 
   getContext() {
     return {
-      'role': 'app',
-      'form_type': 'reg',
-      'inputs': [
+      role: 'app',
+      form_type: 'reg',
+      inputs: [
         {
-          'type': 'text',
-          'name': 'first_name',
-          'placeholder': 'Имя',
+          type: 'text',
+          name: 'first_name',
+          placeholder: 'Имя',
         },
         {
-          'type': 'text',
-          'name': 'last_name',
-          'placeholder': 'Фамилия',
+          type: 'text',
+          name: 'last_name',
+          placeholder: 'Фамилия',
         },
         {
-          'type': 'text',
-          'name': 'email',
-          'placeholder': 'Электронная почта',
+          type: 'text',
+          name: 'email',
+          placeholder: 'Электронная почта',
         },
         {
-          'type': 'password',
-          'name': 'password',
-          'placeholder': 'Придумайте пароль',
+          type: 'password',
+          name: 'password',
+          placeholder: 'Придумайте пароль',
         },
         {
-          'type': 'password',
-          'name': 'repeat_password',
-          'placeholder': 'Повторите пароль',
-        }
-      ]
+          type: 'password',
+          name: 'repeat_password',
+          placeholder: 'Повторите пароль',
+        },
+      ],
     };
   }
 
@@ -62,13 +62,14 @@ export default class appRegView {
     );
 
     let form = document.querySelector('.reg-form');
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       let formData = this.getFormObject(new FormData(form));
 
       if (formIsValid(formData, { is_reg: true })) {
-        this.sendForm(formData);
-        router.goToLink('/');
+        if (await this.sendForm(formData)) {
+          router.goToLink('/');
+        }
       }
     });
   }
@@ -81,19 +82,21 @@ export default class appRegView {
     return formObject;
   }
 
-  sendForm(formData) {
+  async sendForm(formData) {
     formData['role'] = 'applicant';
     delete formData['repeat_password'];
     delete formData['remember_password'];
-    APIConnector.post(BACKEND_SERVER_URL + '/users', formData)
-      .then((resp) => {
-        console.log(resp.status);
-        return true;
-      })
-      .catch((err) => {
-        console.error(err);
-        return false;
-      });
+    try {
+      let resp = await APIConnector.post(
+        BACKEND_SERVER_URL + '/users',
+        formData,
+      );
+      console.log('app_reg: ', resp.status);
+      return true;
+    } catch (err) {
+      console.error('app_reg: ', err);
+      return false;
+    }
   }
 
   removeEventListeners() {}

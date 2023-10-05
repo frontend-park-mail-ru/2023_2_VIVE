@@ -148,14 +148,14 @@ export default {
         mode: mode,
         credentials: credentials,
       });
+      
+      if (!response.ok) {
+        throw new HTTPError('', response.status);
+      }
+  
+      return response;
     } catch (error) {
       throw new Error(`network error: ${error.message}`);
     }
-
-    if (!response.ok) {
-      throw new HTTPError(response.status);
-    }
-
-    return response;
   },
 };

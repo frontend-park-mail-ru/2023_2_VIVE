@@ -6,7 +6,6 @@ export default class vacsView {
     console.log('rendering vacs');
     const template = Handlebars.templates['vacs.hbs'];
     const data = await this.getVacancies();
-    console.log(data);
     document.querySelector('main').innerHTML = template({
       data: data,
     });
@@ -14,30 +13,16 @@ export default class vacsView {
   }
 
   async getVacancies() {
-    return await APIConnector.get(BACKEND_SERVER_URL + '/vacancies')
-      .then(async (resp) => {
-        return await resp.json();
-      })
-      .then((data) => {
-        return data;
-      })
-      .catch((err) => {
-        console.error(err);
-        return undefined;
-      });
+    try {
+      let resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies');
+      return await resp.json();
+    } catch (err) {
+      console.error(err);
+      return undefined;
+    }
   }
 
-  addEventListeners() {
-    // let elipse_btn = document.querySelector(".elipse-button");
-    // elipse_btn.addEventListener(
-    //   "click",
-    //   function (e) {
-    //     e.preventDefault();
-    //     router.goToLink("/emp_login");
-    //   },
-    //   { once: true }
-    // );
-  }
+  addEventListeners() {}
 
   removeEventListeners() {}
 

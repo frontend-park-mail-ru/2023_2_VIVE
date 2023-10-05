@@ -18,8 +18,11 @@ export default class menuView {
 
   async render() {
     const template = Handlebars.templates['header.hbs'];
+    let isOk = await cookie.hasCookie();
+
+    console.log(isOk);
     let ctx = {
-      is_user_login: await cookie.hasCookie(),
+      is_user_login: isOk,
       // is_user_login: true,
       user_type: {
         app: true,
@@ -56,11 +59,15 @@ export default class menuView {
 
     if (await cookie.hasCookie()) {
       let logout_btn = document.querySelector('.logout-btn');
-      logout_btn.addEventListener('click', function (e) {
+      logout_btn.addEventListener('click', async (e) => {
         e.preventDefault();
-        APIConnector.delete(BACKEND_SERVER_URL + '/session')
-          .then(() => router.goToLink('/'))
-          .catch((err) => console.error(err));
+        try {
+          await APIConnector.delete(BACKEND_SERVER_URL + '/session');
+          console.log('logout!!!!');
+          router.goToLink('/');
+        } catch (err) {
+          console.error('logout: ', err);
+        }
       });
     }
   }

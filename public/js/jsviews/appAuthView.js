@@ -18,23 +18,23 @@ export default class appAuthView {
 
   getContext() {
     return {
-      'role': 'app',
-      'form_type': 'login',
-      'inputs': [
+      role: 'app',
+      form_type: 'login',
+      inputs: [
         {
-          'type': 'text',
-          'name': 'email',
-          'placeholder': 'Электронная почта(соискатель)',
+          type: 'text',
+          name: 'email',
+          placeholder: 'Электронная почта(соискатель)',
         },
         {
-          'type': 'password',
-          'name': 'password',
-          'placeholder': 'Пароль',
-        }
-      ]
+          type: 'password',
+          name: 'password',
+          placeholder: 'Пароль',
+        },
+      ],
     };
   }
-
+  
   addEventListeners() {
     let elipse_link = document.querySelector('.elipse-button');
     elipse_link.addEventListener(
@@ -47,12 +47,12 @@ export default class appAuthView {
     );
 
     let form = document.querySelector('.reg-form');
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       let formData = this.getFormObject(new FormData(form));
 
       if (formIsValid(formData, { is_login: true })) {
-        if (this.sendForm(formData)) {
+        if (await this.sendForm(formData)) {
           router.goToLink('/');
         }
       }
@@ -67,18 +67,21 @@ export default class appAuthView {
     return formObject;
   }
 
-  sendForm(formData) {
+  async sendForm(formData) {
     delete formData['remember_password'];
     console.log(formData);
-    return APIConnector.post(BACKEND_SERVER_URL + '/session', formData)
-      .then((resp) => {
-        console.log(resp.status);
-        return true;
-      })
-      .catch((err) => {
-        console.error(err);
-        return false;
-      });
+
+    try {
+      let resp = await APIConnector.post(
+        BACKEND_SERVER_URL + '/session',
+        formData,
+      );
+      console.log(resp.status);
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
   }
 
   removeEventListeners() {}

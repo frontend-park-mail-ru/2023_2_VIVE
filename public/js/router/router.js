@@ -28,16 +28,17 @@ class Router {
   }
 
   async goToLink(url) {
-    if (url == this.lastUrl) {
-      return;
-    }
+    // if (url == this.lastUrl) {
+    //   return;
+    // }
     if (url in this.routes) {
       if (this.lastUrl) {
         this.objs[this.routes[url]].remove()
       }
+      
       this.lastUrl = url;
-      await this.objs[this.routes[url]].render();
       this.objs["menu"].render();
+      this.objs[this.routes[url]].render();
     } else {
       console.error(`Такого адреса не существует: ${url}`);
     }

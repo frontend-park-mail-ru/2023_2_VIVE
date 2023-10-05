@@ -13,21 +13,21 @@ export default class CookieCheck {
   }
 
   async checkPathForNoCookie(url) {
-    if (url in this.urlWithoutCookie && (await this.hasCookie())) {
-      router.goToLink('/');
+    if (url in this.urlWithoutCookie && await this.hasCookie()) {
+      await router.goToLink('/');
       return;
     }
-    router.goToLink(url);
+    await router.goToLink(url);
   }
 
   async hasCookie() {
-    return await APIConnector.get(BACKEND_SERVER_URL + '/session')
-      .then((resp) => {
-        return resp.status === 200;
-      })
-      .catch((err) => {
-        return false;
-      });
+    try {
+      let resp = await APIConnector.get(BACKEND_SERVER_URL + '/session');
+      return resp.status == 200;
+    } catch (err) {
+      console.error('Error in hasCookie', err);
+      return false;
+    }
   }
 }
 

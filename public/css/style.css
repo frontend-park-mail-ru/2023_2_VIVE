@@ -20,8 +20,8 @@ body {
 }
 
 .column-wrapper {
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 10vw;
+  padding-right: 10vw;
 }
 
 a {
