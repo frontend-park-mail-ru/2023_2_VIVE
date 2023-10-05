@@ -34,7 +34,7 @@ export default class appAuthView {
       ],
     };
   }
-  
+
   addEventListeners() {
     let elipse_link = document.querySelector('.elipse-button');
     elipse_link.addEventListener(
@@ -54,6 +54,8 @@ export default class appAuthView {
       if (formIsValid(formData, { is_login: true })) {
         if (await this.sendForm(formData)) {
           router.goToLink('/');
+        } else {
+          // ...
         }
       }
     });
