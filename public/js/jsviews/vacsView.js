@@ -1,23 +1,24 @@
-import { BACKEND_SERVER_URL } from "../../../config/config.js";
-import APIConnector from "../../modules/APIConnector.js";
+import { BACKEND_SERVER_URL } from '../../../config/config.js';
+import APIConnector from '../../modules/APIConnector.js';
 
 export default class vacsView {
   async render() {
-    console.log("rendering vacs");
-    const template = Handlebars.templates["vacs.hbs"];
+    console.log('rendering vacs');
+    const template = Handlebars.templates['vacs.hbs'];
     const data = await this.getVacancies();
     console.log(data);
-    document.querySelector("main").innerHTML = template({
-      'data': data,
+    document.querySelector('main').innerHTML = template({
+      data: data,
     });
     this.addEventListeners();
   }
 
   async getVacancies() {
-    return await APIConnector.get(BACKEND_SERVER_URL + "/vacancies")
+    return await APIConnector.get(BACKEND_SERVER_URL + '/vacancies')
       .then(async (resp) => {
         return await resp.json();
-      }).then(data => {
+      })
+      .then((data) => {
         return data;
       })
       .catch((err) => {

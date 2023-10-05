@@ -1,18 +1,41 @@
 import { BACKEND_SERVER_URL } from "../../../config/config.js";
 import APIConnector from "../../modules/APIConnector.js";
-import { router } from "../router/router.js";
+import router from "../router/router.js";
 import { getHrefFromA } from "../utils.js";
 import { formIsValid } from "./formValidation.js";
 
 
 export default class empAuthView {
-
   render() {
-    console.log('rendering empAuth')
-    const template = Handlebars.templates['emp_login.hbs'];
-    document.querySelector('main').innerHTML = template();
+    console.log('rendering empAuth');
+    this.compileTemplates();
     this.addEventListeners();
   }
+
+  compileTemplates() {
+    const template = Handlebars.templates['form_login_reg.hbs'];
+    document.querySelector('main').innerHTML = template(this.getContext());
+  }
+
+  getContext() {
+    return {
+      'role': 'emp',
+      'form_type': 'login',
+      'inputs': [
+        {
+          'type': 'text',
+          'name': 'email',
+          'placeholder': 'Электронная почта(компания)',
+        },
+        {
+          'type': 'password',
+          'name': 'password',
+          'placeholder': 'Пароль',
+        }
+      ]
+    };
+  }
+  
 
   addEventListeners() {
     let elipse_link = document.querySelector('.elipse-button');

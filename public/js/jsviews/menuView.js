@@ -1,7 +1,7 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../../modules/APIConnector.js';
 import { cookie } from '../cookieCheck/cookieCheck.js';
-import { router } from '../router/router.js';
+import router from '../router/router.js';
 import { getHrefFromA } from '../utils.js';
 
 export default class menuView {

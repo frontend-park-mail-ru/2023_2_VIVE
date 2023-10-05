@@ -1,15 +1,38 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../../modules/APIConnector.js';
-import { router } from '../router/router.js';
+import router from '../router/router.js';
 import { getHrefFromA } from '../utils.js';
 import { formIsValid } from './formValidation.js';
 
 export default class appAuthView {
   render() {
     console.log('rendering appAuth');
-    const template = Handlebars.templates['app_login.hbs'];
-    document.querySelector('main').innerHTML = template();
+    this.compileTemplates();
     this.addEventListeners();
+  }
+
+  compileTemplates() {
+    const template = Handlebars.templates['form_login_reg.hbs'];
+    document.querySelector('main').innerHTML = template(this.getContext());
+  }
+
+  getContext() {
+    return {
+      'role': 'app',
+      'form_type': 'login',
+      'inputs': [
+        {
+          'type': 'text',
+          'name': 'email',
+          'placeholder': 'Электронная почта(соискатель)',
+        },
+        {
+          'type': 'password',
+          'name': 'password',
+          'placeholder': 'Пароль',
+        }
+      ]
+    };
   }
 
   addEventListeners() {

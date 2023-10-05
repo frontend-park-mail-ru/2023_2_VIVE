@@ -1,15 +1,58 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../../modules/APIConnector.js';
-import { router } from '../router/router.js';
+import router from '../router/router.js';
 import { getHrefFromA } from '../utils.js';
 import { formIsValid } from './formValidation.js';
 
 export default class empRegView {
   render() {
-    console.log('rendering empReg');
-    const template = Handlebars.templates['emp_reg.hbs'];
-    document.querySelector('main').innerHTML = template();
+    console.log('rendering appReg');
+    this.compileTemplates();
     this.addEventListeners();
+  }
+
+  compileTemplates() {
+    const template = Handlebars.templates['form_login_reg.hbs'];
+    document.querySelector('main').innerHTML = template(this.getContext());
+  }
+
+  getContext() {
+    return {
+      'role': 'emp',
+      'form_type': 'reg',
+      'inputs': [
+        {
+          'type': 'text',
+          'name': 'first_name',
+          'placeholder': 'Имя',
+        },
+        {
+          'type': 'text',
+          'name': 'last_name',
+          'placeholder': 'Фамилия',
+        },
+        {
+          'type': 'text',
+          'name': 'company_name',
+          'placeholder': 'Название компании',
+        },
+        {
+          'type': 'text',
+          'name': 'email',
+          'placeholder': 'Электронная почта',
+        },
+        {
+          'type': 'password',
+          'name': 'password',
+          'placeholder': 'Придумайте пароль',
+        },
+        {
+          'type': 'password',
+          'name': 'repeat_password',
+          'placeholder': 'Повторите пароль',
+        }
+      ]
+    };
   }
 
   addEventListeners() {

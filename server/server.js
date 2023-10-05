@@ -1,10 +1,12 @@
 'use strict';
+// import router from '../public/js/router/router.js';
 
 const FRONTEND_SERVER_PORT = 8082;
 
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
+
 
 const app = express();
 
@@ -28,22 +30,22 @@ app.get("/", (req, res) => {
 });
 
 app.get('/app_reg', (req, res) => {
-  res.render('pages/app_reg');
+  res.render('layouts/main');
   console.log('ok!');
 });
 
 app.get('/app_login', (req, res) => {
-  res.render('pages/app_login');
+  res.render('layouts/main');
   console.log('ok!');
 });
 
 app.get('/emp_reg', (req, res) => {
-  res.render('pages/emp_reg');
+  res.render('layouts/main');
   console.log('ok!');
 });
 
 app.get('/emp_login', (req, res) => {
-  res.render('pages/emp_login');
+  res.render('layouts/main');
   console.log('ok!');
 });
 

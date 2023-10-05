@@ -19,16 +19,96 @@ templates['main.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(cont
     + "  </footer>\r\n\r\n  <script src=\"../../node_modules/handlebars/dist/handlebars.runtime.js\"></script>\r\n  <script src=\"../../views/templates.precompiled.js\"></script>\r\n  <script src=\"../../public/js/index.js\" type=\"module\"></script>\r\n</body>\r\n\r\n</html>\r\n";
 },"usePartial":true,"useData":true});
 templates['app_login.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"column-wrapper\">\r\n  <div class=\"form-block\">\r\n    <form class=\"reg-form\">\r\n      <span class=\"default-text x-large-font\">Войти</span>\r\n      <div class=\"d-flex\">\r\n        <span class=\"reg-text me-10\">Найти работу</span>\r\n        <a href=\"/emp_login\" class=\"elipse-button\">\r\n          <div class=\"circle\"></div>\r\n        </a>\r\n        <span class=\"reg-text ms-10\">Найти сотрудников</span>\r\n      </div>\r\n      <label class=\"input\">\r\n        <input type=\"text\" class=\"input-in\" name=\"email\" placeholder=\"Электронная почта(соискатель)\">\r\n      </label>\r\n      <label class=\"input\">\r\n        <input type=\"password\" class=\"input-in\" name=\"password\" placeholder=\"Пароль\">\r\n      </label>\r\n      <label for=\"rememberPassword\" class=\"remember-label\">\r\n        <input type=\"checkbox\" name=\"rememberPassword\" class=\"remember-checkbox\">\r\n        <span class=\"reg-text small-font\">Запомнить пароль</span>\r\n      </label>\r\n      <div class=\"form-actions\">\r\n        <button type=\"submit\" class=\"fully-button side-m-0\">Войти</button>\r\n        <a href=\"#\" class=\"transparent-button side-m-0\">Зарегистрироваться</a>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n";
+    return "<div class=\"column-wrapper\">\r\n  <div class=\"form-block\">\r\n    <form class=\"reg-form\">\r\n      <span class=\"default-text x-large-font\">Войти</span>\r\n      <div class=\"d-flex\">\r\n        <span class=\"reg-text me-10\">Найти работу</span>\r\n        <a href=\"/emp_login\" class=\"elipse-button\">\r\n          <div class=\"circle\"></div>\r\n        </a>\r\n        <span class=\"reg-text ms-10\">Найти сотрудников</span>\r\n      </div>\r\n\r\n      \r\n      <label class=\"input\">\r\n        <input type=\"text\" class=\"input-in\" name=\"email\" placeholder=\"Электронная почта(соискатель)\">\r\n      </label>\r\n      <label class=\"input\">\r\n        <input type=\"password\" class=\"input-in\" name=\"password\" placeholder=\"Пароль\">\r\n      </label>\r\n\r\n\r\n      <label for=\"rememberPassword\" class=\"remember-label\">\r\n        <input type=\"checkbox\" name=\"rememberPassword\" class=\"remember-checkbox\">\r\n        <span class=\"reg-text small-font\">Запомнить пароль</span>\r\n      </label>\r\n      <div class=\"form-actions\">\r\n        <button type=\"submit\" class=\"fully-button side-m-0\">Войти</button>\r\n        <a href=\"#\" class=\"transparent-button side-m-0\">Зарегистрироваться</a>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n";
 },"useData":true});
 templates['app_reg.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"column-wrapper\">\r\n  <div class=\"form-block\">\r\n    <form class=\"reg-form\">\r\n      <span class=\"default-text x-large-font\">Регистрация</span>\r\n      <div class=\"d-flex\">\r\n        <span class=\"reg-text me-10\">Найти работу</span>\r\n        <a href=\"/emp_reg\" class=\"elipse-button\">\r\n          <div class=\"circle\"></div>\r\n        </a>\r\n        <span class=\"reg-text ms-10\">Найти сотрудников</span>\r\n      </div>\r\n      <label class=\"input\">\r\n        <input type=\"text\" class=\"input-in\" name=\"first_name\" placeholder=\"Имя\">\r\n      </label>\r\n      <label class=\"input\">\r\n        <input type=\"text\" class=\"input-in\" name=\"last_name\" placeholder=\"Фамилия\">\r\n      </label>\r\n      <label class=\"input\">\r\n        <input type=\"text\" class=\"input-in\" name=\"email\" placeholder=\"Электронная почта\">\r\n      </label>\r\n      <label class=\"input\">\r\n        <input type=\"password\" class=\"input-in\" name=\"password\" placeholder=\"Придумайте пароль\">\r\n      </label>\r\n      <label class=\"input\">\r\n        <input type=\"password\" class=\"input-in\" name=\"repeat_password\" placeholder=\"Повторите пароль\">\r\n      </label>\r\n      <label for=\"rememberPassword\" class=\"remember-label\">\r\n        <input type=\"checkbox\" name=\"remember_password\" class=\"remember-checkbox\"> <span\r\n          class=\"reg-text small-font\">Запомнить\r\n          пароль</span>\r\n      </label>\r\n      <div class=\"form-actions\">\r\n        <button type=\"submit\" class=\"fully-button side-m-0\">Зарегистрироваться</button>\r\n        <a href=\"#\" class=\"transparent-button side-m-0\">Уже есть аккаунт</a>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n";
+    return "<div class=\"column-wrapper\">\r\n  <div class=\"form-block\">\r\n    <form class=\"reg-form\">\r\n      <span class=\"default-text x-large-font\">Регистрация</span>\r\n      <div class=\"d-flex\">\r\n        <span class=\"reg-text me-10\">Найти работу</span>\r\n        <a href=\"/emp_reg\" class=\"elipse-button\">\r\n          <div class=\"circle\"></div>\r\n        </a>\r\n        <span class=\"reg-text ms-10\">Найти сотрудников</span>\r\n      </div>\r\n\r\n\r\n      <label class=\"input\">\r\n        <input type=\"text\" class=\"input-in\" name=\"first_name\" placeholder=\"Имя\">\r\n      </label>\r\n      <label class=\"input\">\r\n        <input type=\"text\" class=\"input-in\" name=\"last_name\" placeholder=\"Фамилия\">\r\n      </label>\r\n      <label class=\"input\">\r\n        <input type=\"text\" class=\"input-in\" name=\"email\" placeholder=\"Электронная почта\">\r\n      </label>\r\n      <label class=\"input\">\r\n        <input type=\"password\" class=\"input-in\" name=\"password\" placeholder=\"Придумайте пароль\">\r\n      </label>\r\n      <label class=\"input\">\r\n        <input type=\"password\" class=\"input-in\" name=\"repeat_password\" placeholder=\"Повторите пароль\">\r\n      </label>\r\n\r\n      \r\n      <label for=\"rememberPassword\" class=\"remember-label\">\r\n        <input type=\"checkbox\" name=\"remember_password\" class=\"remember-checkbox\"> <span\r\n          class=\"reg-text small-font\">Запомнить\r\n          пароль</span>\r\n      </label>\r\n      <div class=\"form-actions\">\r\n        <button type=\"submit\" class=\"fully-button side-m-0\">Зарегистрироваться</button>\r\n        <a href=\"#\" class=\"transparent-button side-m-0\">Уже есть аккаунт</a>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n";
 },"useData":true});
 templates['emp_login.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<form class=\"reg-form\">\r\n  <span class=\"default-text x-large-font\">Войти</span>\r\n  <div class=\"d-flex\">\r\n    <span class=\"reg-text me-10\">Найти работу</span>\r\n    <a href=\"/app_login\" class=\"elipse-button elipse-button-right\">\r\n      <div class=\"circle\"></div>\r\n    </a>\r\n    <span class=\"reg-text ms-10\">Найти сотрудников</span>\r\n  </div>\r\n  <label class=\"input\">\r\n    <input type=\"text\" class=\"input-in\" name=\"email\" placeholder=\"Электронная почта(компания)\">\r\n  </label>\r\n  <label class=\"input\">\r\n    <input type=\"password\" class=\"input-in\" name=\"password\" placeholder=\"Пароль\">\r\n  </label>\r\n  <label for=\"rememberPassword\" class=\"remember-label\">\r\n    <input type=\"checkbox\" name=\"rememberPassword\" class=\"remember-checkbox\">\r\n    <span class=\"reg-text small-font\">Запомнить пароль</span>\r\n  </label>\r\n  <div class=\"form-actions\">\r\n    <button type=\"submit\" class=\"fully-button side-m-0\">Войти</button>\r\n    <a href=\"#\" class=\"transparent-button side-m-0\">Зарегистрироваться</a>\r\n  </div>\r\n</form>\r\n";
 },"useData":true});
 templates['emp_reg.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<form class=\"reg-form\">\r\n  <span class=\"default-text x-large-font\">Регистрация</span>\r\n  <div class=\"d-flex\">\r\n    <span class=\"reg-text me-10\">Найти работу</span>\r\n    <a href=\"/app_reg\" class=\"elipse-button elipse-button-right\">\r\n      <div class=\"circle\"></div>\r\n    </a>\r\n    <span class=\"reg-text ms-10\">Найти сотрудников</span>\r\n  </div>\r\n  <label class=\"input\">\r\n    <input type=\"text\" class=\"input-in\" name=\"first_name\" placeholder=\"Имя\">\r\n  </label>\r\n  <label class=\"input\">\r\n    <input type=\"text\" class=\"input-in\" name=\"last_name\" placeholder=\"Фамилия\">\r\n  </label>\r\n  <label class=\"input\">\r\n    <input type=\"text\" class=\"input-in\" name=\"company_name\" placeholder=\"Название компании\">\r\n  </label>\r\n  <label class=\"input\">\r\n    <input type=\"text\" class=\"input-in\" name=\"email\" placeholder=\"Электронная почта\">\r\n  </label>\r\n  <label class=\"input\">\r\n    <input type=\"password\" class=\"input-in\" name=\"password\" placeholder=\"Придумайте пароль\">\r\n  </label>\r\n  <label class=\"input\">\r\n    <input type=\"password\" class=\"input-in\" name=\"repeat_password\" placeholder=\"Повторите пароль\">\r\n  </label>\r\n  <label for=\"rememberPassword\" class=\"remember-label\">\r\n    <input type=\"checkbox\" name=\"remember_password\" class=\"remember-checkbox\"> <span class=\"reg-text small-font\">Запомнить\r\n      пароль</span>\r\n  </label>\r\n  <div class=\"form-actions\">\r\n    <button type=\"submit\" class=\"fully-button side-m-0\">Зарегистрироваться</button>\r\n    <a href=\"#\" class=\"transparent-button side-m-0\">Уже есть аккаунт</a>\r\n  </div>\r\n</form>\r\n";
+},"useData":true});
+templates['form_login_reg.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {
+    return "        Войти\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "        Регистрация\r\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||container.hooks.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"role") : depth0),"app",{"name":"iff","hash":{},"fn":container.program(6, data, 0),"inverse":container.program(8, data, 0),"data":data,"loc":{"start":{"line":15,"column":8},"end":{"line":19,"column":16}}})) != null ? stack1 : "");
+},"6":function(container,depth0,helpers,partials,data) {
+    return "        /emp_reg\r\n";
+},"8":function(container,depth0,helpers,partials,data) {
+    return "        /app_reg\r\n";
+},"10":function(container,depth0,helpers,partials,data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||container.hooks.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"role") : depth0),"app",{"name":"iff","hash":{},"fn":container.program(11, data, 0),"inverse":container.program(13, data, 0),"data":data,"loc":{"start":{"line":21,"column":8},"end":{"line":25,"column":16}}})) != null ? stack1 : "");
+},"11":function(container,depth0,helpers,partials,data) {
+    return "        /emp_login\r\n";
+},"13":function(container,depth0,helpers,partials,data) {
+    return "        /app_login\r\n";
+},"15":function(container,depth0,helpers,partials,data) {
+    return " elipse-button-right ";
+},"17":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "      <label class=\"input\">\r\n        <input type=\""
+    + alias2(alias1((depth0 != null ? lookupProperty(depth0,"type") : depth0), depth0))
+    + "\" class=\"input-in\" name=\""
+    + alias2(alias1((depth0 != null ? lookupProperty(depth0,"name") : depth0), depth0))
+    + "\" placeholder=\""
+    + alias2(alias1((depth0 != null ? lookupProperty(depth0,"placeholder") : depth0), depth0))
+    + "\">\r\n      </label>\r\n";
+},"19":function(container,depth0,helpers,partials,data) {
+    return "          Войти\r\n";
+},"21":function(container,depth0,helpers,partials,data) {
+    return "          Заргестрироваться\r\n";
+},"23":function(container,depth0,helpers,partials,data) {
+    return "          Зарегистрироваться\r\n";
+},"25":function(container,depth0,helpers,partials,data) {
+    return "          Уже есть аккаунт\r\n";
+},"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "<div class=\"column-wrapper\">\r\n  <div class=\"form-block\">\r\n    <form class=\"reg-form\">\r\n      <span class=\"default-text x-large-font\">\r\n"
+    + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"login",{"name":"iff","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data,"loc":{"start":{"line":5,"column":8},"end":{"line":9,"column":16}}})) != null ? stack1 : "")
+    + "      </span>\r\n      <div class=\"d-flex\">\r\n        <span class=\"reg-text me-10\">Найти работу</span>\r\n        <a href=\"\r\n"
+    + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"reg",{"name":"iff","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(10, data, 0),"data":data,"loc":{"start":{"line":14,"column":8},"end":{"line":26,"column":16}}})) != null ? stack1 : "")
+    + "        \" class=\"elipse-button "
+    + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"role") : depth0),"emp",{"name":"iff","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":27,"column":31},"end":{"line":27,"column":79}}})) != null ? stack1 : "")
+    + "\">\r\n          <div class=\"circle\"></div>\r\n        </a>\r\n        <span class=\"reg-text ms-10\">Найти сотрудников</span>\r\n      </div>\r\n\r\n"
+    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"inputs") : depth0),{"name":"each","hash":{},"fn":container.program(17, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":33,"column":6},"end":{"line":37,"column":15}}})) != null ? stack1 : "")
+    + "\r\n      <label for=\"rememberPassword\" class=\"remember-label\">\r\n        <input type=\"checkbox\" name=\"rememberPassword\" class=\"remember-checkbox\">\r\n        <span class=\"reg-text small-font\">Запомнить пароль</span>\r\n      </label>\r\n      <div class=\"form-actions\">\r\n        <button type=\"submit\" class=\"fully-button side-m-0\">\r\n"
+    + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"login",{"name":"iff","hash":{},"fn":container.program(19, data, 0),"inverse":container.program(21, data, 0),"data":data,"loc":{"start":{"line":45,"column":10},"end":{"line":49,"column":18}}})) != null ? stack1 : "")
+    + "        </button>\r\n        <a href=\"#\" class=\"transparent-button side-m-0\">\r\n"
+    + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"login",{"name":"iff","hash":{},"fn":container.program(23, data, 0),"inverse":container.program(25, data, 0),"data":data,"loc":{"start":{"line":52,"column":10},"end":{"line":56,"column":18}}})) != null ? stack1 : "")
+    + "        </a>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n";
+},"useData":true});
+templates['test.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "";
 },"useData":true});
 templates['vacs.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {

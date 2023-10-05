@@ -5,7 +5,7 @@ import empRegView from "../jsviews/empRegView.js";
 import menuView from "../jsviews/menuView.js";
 import vacsView from "../jsviews/vacsView.js";
 
-export default class Router {
+class Router {
   constructor() {
     this.routes = {
       "/app_login": "appAuth",
@@ -35,6 +35,7 @@ export default class Router {
       if (this.lastUrl) {
         this.objs[this.routes[url]].remove()
       }
+      this.lastUrl = url;
       await this.objs[this.routes[url]].render();
       this.objs["menu"].render();
     } else {
@@ -47,4 +48,5 @@ export default class Router {
   }
 }
 
-export const router = new Router();
+const router = new Router()
+export default router;
