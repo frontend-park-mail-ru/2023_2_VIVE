@@ -5,10 +5,13 @@ import { getHrefFromA } from '../utils.js';
 import { formIsValid } from './formValidation.js';
 
 export default class regView {
-  render(role) {
-    this.compileTemplates(role);
-    this.addEventListeners(role);
+  constructor(role) {
     this.role = role;
+  }
+
+  render() {
+    this.compileTemplates();
+    this.addEventListeners();
   }
 
   compileTemplates() {
@@ -114,6 +117,18 @@ export default class regView {
       if (formIsValid(formData, { is_reg: true })) {
         if (await this.sendForm(formData)) {
           router.goToLink('/');
+        } else {
+          let emailInput = document.querySelector("input[name='email']");
+          console.log(emailInput)
+          let existErrorNode = emailInput.parentNode.querySelector('.input-error-msg');
+          if (!existErrorNode) {
+            let errorNode = document.createElement('div');
+            errorNode.classList.add('input-error-msg');
+            errorNode.textContent = "Пользователь с такой почтой уже существует";
+            emailInput.parentNode.appendChild(errorNode);
+    
+            emailInput.classList.add('input-in-error');
+          }
         }
       }
     });

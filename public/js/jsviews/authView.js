@@ -5,10 +5,13 @@ import { getHrefFromA } from '../utils.js';
 import { formIsValid } from './formValidation.js';
 
 export default class authView {
-  render(role) {
+  constructor(role) {
+    this.role = role;
+  }
+
+  render() {
     this.compileTemplates();
     this.addEventListeners();
-    this.role = role;
   }
 
   compileTemplates() {
@@ -79,8 +82,13 @@ export default class authView {
       if (formIsValid(formData, { is_login: true })) {
         if (await this.sendForm(formData)) {
           router.goToLink('/');
-        } else {
-          // ...
+        } else if (document.getElementsByClassName('form-error').length == 0) {
+          let err = document.createElement('div');
+          err.classList.add('reg-text', 'form-error');
+          err.textContent = 'Неверная электронная почта или пароль';
+
+          let toggler = document.getElementById('toggler');
+          toggler.after(err);
         }
       }
     });
