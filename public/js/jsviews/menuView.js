@@ -76,5 +76,4 @@ export default class menuView {
     // console.log(this.eventListeners);
   }
 
-  remove() {}
 }

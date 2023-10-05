@@ -6,17 +6,18 @@ import { formIsValid } from './formValidation.js';
 
 export default class authView {
   render(role) {
-    this.compileTemplates(role);
-    this.addEventListeners(role);
+    this.compileTemplates();
+    this.addEventListeners();
+    this.role = role;
   }
 
-  compileTemplates(role) {
+  compileTemplates() {
     const template = Handlebars.templates['form_login_reg.hbs'];
-    document.querySelector('main').innerHTML = template(this.getContext(role));
+    document.querySelector('main').innerHTML = template(this.getContext());
   }
 
-  getContext(role) {
-    if (role == 'app') {
+  getContext() {
+    if (this.role == 'app') {
       return {
         role: 'app',
         form_type: 'login',
@@ -53,7 +54,7 @@ export default class authView {
     }
   }
 
-  addEventListeners(role) {
+  addEventListeners() {
     let elipse_link = document.querySelector('.elipse-button');
     elipse_link.addEventListener(
       'click',
