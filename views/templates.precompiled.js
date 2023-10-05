@@ -68,10 +68,8 @@ templates['form_login_reg.hbs'] = template({"1":function(container,depth0,helper
 },"19":function(container,depth0,helpers,partials,data) {
     return "          Войти\r\n";
 },"21":function(container,depth0,helpers,partials,data) {
-    return "          Заргестрироваться\r\n";
-},"23":function(container,depth0,helpers,partials,data) {
     return "          Зарегистрироваться\r\n";
-},"25":function(container,depth0,helpers,partials,data) {
+},"23":function(container,depth0,helpers,partials,data) {
     return "          Уже есть аккаунт\r\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -92,7 +90,7 @@ templates['form_login_reg.hbs'] = template({"1":function(container,depth0,helper
     + "\r\n      <label for=\"rememberPassword\" class=\"remember-label\">\r\n        <input type=\"checkbox\" name=\"rememberPassword\" class=\"remember-checkbox\">\r\n        <span class=\"reg-text small-font\">Запомнить пароль</span>\r\n      </label>\r\n      <div class=\"form-actions\">\r\n        <button type=\"submit\" class=\"fully-button side-m-0\">\r\n"
     + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"login",{"name":"iff","hash":{},"fn":container.program(19, data, 0),"inverse":container.program(21, data, 0),"data":data,"loc":{"start":{"line":45,"column":10},"end":{"line":49,"column":18}}})) != null ? stack1 : "")
     + "        </button>\r\n        <a href=\"#\" class=\"transparent-button side-m-0\">\r\n"
-    + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"login",{"name":"iff","hash":{},"fn":container.program(23, data, 0),"inverse":container.program(25, data, 0),"data":data,"loc":{"start":{"line":52,"column":10},"end":{"line":56,"column":18}}})) != null ? stack1 : "")
+    + ((stack1 = (lookupProperty(helpers,"iff")||(depth0 && lookupProperty(depth0,"iff"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"form_type") : depth0),"login",{"name":"iff","hash":{},"fn":container.program(21, data, 0),"inverse":container.program(23, data, 0),"data":data,"loc":{"start":{"line":52,"column":10},"end":{"line":56,"column":18}}})) != null ? stack1 : "")
     + "        </a>\r\n      </div>\r\n    </form>\r\n  </div>\r\n</div>\r\n";
 },"useData":true});
 templates['vacs.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {

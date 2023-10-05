@@ -1,6 +1,6 @@
 'use strict';
 
-const DEFAULT_ALLOWED_SYMBOLS = `~!?@#$%^&*_-+()[]{}></\|"'.,:;`;
+const DEFAULT_ALLOWED_SYMBOLS = `~!?@#$%^&*_-+()[]{}></|"'.,:;`;
 
 /**
  * Class that validates input data on frontend level.
@@ -202,7 +202,7 @@ class Validator {
    * @throws Will throw an error if there are no required fields in `data`.
    */
   validateRegistrationForm(data) {
-    if (!'email' in data || !'password' in data || !'repeat_password' in data) {
+    if (!('email' in data) || !('password' in data) || !('repeat_password' in data)) {
       throw new Error("data doesn't contain required fields");
     }
 
@@ -249,7 +249,7 @@ class Validator {
    * @throws Will throw an error if there are no required fields in `data`.
    */
   validateAuthForm(data) {
-    if (!'email' in data || !'password' in data) {
+    if (!('email' in data) || !('password' in data)) {
       throw new Error("data doesn't contain required fields");
     }
 

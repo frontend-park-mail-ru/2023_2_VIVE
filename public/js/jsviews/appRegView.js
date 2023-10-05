@@ -3,6 +3,7 @@ import router from '../router/router.js';
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import { getHrefFromA } from '../utils.js';
 import { formIsValid } from './formValidation.js';
+import Handlebars from "handlebars";
 
 export default class appRegView {
   render() {

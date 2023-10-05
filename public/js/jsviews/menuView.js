@@ -3,6 +3,7 @@ import APIConnector from '../../modules/APIConnector.js';
 import { cookie } from '../cookieCheck/cookieCheck.js';
 import router from '../router/router.js';
 import { getHrefFromA } from '../utils.js';
+import Handlebars from "handlebars";
 
 export default class menuView {
   constructor() {
@@ -50,6 +51,7 @@ export default class menuView {
 
   async addEventListeners() {
     let links = document.querySelectorAll('.navbar-item a');
+    // eslint-disable-next-line no-unused-vars
     links.forEach((link, i) => {
       this.addEventListenerWrapper(link, 'click', (e) => {
         e.preventDefault();
@@ -76,6 +78,4 @@ export default class menuView {
     // this.eventListeners.forEach((elem, ))
     // console.log(this.eventListeners);
   }
-
-  remove() {}
 }

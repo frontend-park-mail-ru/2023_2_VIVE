@@ -4,8 +4,8 @@
 const FRONTEND_SERVER_PORT = 8082;
 
 const express = require('express');
-const path = require('path');
 const exphbs = require('express-handlebars');
+const path = require('path');
 
 
 const app = express();
