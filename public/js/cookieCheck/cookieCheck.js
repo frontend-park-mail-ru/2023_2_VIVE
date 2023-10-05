@@ -13,7 +13,7 @@ export default class CookieCheck {
   }
 
   async checkPathForNoCookie(url) {
-    if (url in this.urlWithoutCookie && await this.hasCookie()) {
+    if (url in this.urlWithoutCookie && (await this.hasCookie())) {
       await router.goToLink('/');
       return;
     }
