@@ -1,6 +1,6 @@
 'use strict';
 
-import HTTPError from "./HTTPError.js";
+import HTTPError from './HTTPError.js';
 
 const REQUEST_METHODS = {
   GET: 'GET',
@@ -8,6 +8,14 @@ const REQUEST_METHODS = {
   PUT: 'PUT',
   PATCH: 'PATCH',
   DELETE: 'DELETE',
+};
+
+const MODES = {
+  SAME_ORIGIN: 'same-origin',
+  NO_CORS: 'no-cors',
+  CORS: 'cors',
+  NAVIGATE: 'navigate',
+  WEBSOCKET: 'websocket',
 };
 
 const REQUEST_HEADERS = {
@@ -18,6 +26,15 @@ const REQUEST_HEADERS = {
  * Module for connecting frontend with backend.
  * Provides sending requests to the server using fetch library.
  * @module APIConnector
+ * 
+ * Usage:
+ * ```js
+ * APIConnector
+    .get('example.com')
+    .then((res) => res.json())
+    .then((json) => console.log(json))
+    .catch((err) => console.error(err));
+ * ```
  */
 export default {
   /**
@@ -30,7 +47,7 @@ export default {
    * @returns {Response} A response from HTTP GET-request.
    */
   async get(url) {
-    return this._sendRequest(url);
+    return this._sendRequest({ url });
   },
 
   /**
@@ -44,7 +61,11 @@ export default {
    * @returns {Response} A response from HTTP POST-request.
    */
   async post(url, data) {
-    return this._sendRequest(url, REQUEST_METHODS.POST, JSON.stringify(data));
+    return this._sendRequest({
+      url,
+      method: REQUEST_METHODS.POST,
+      body: JSON.stringify(data),
+    });
   },
 
   /**
@@ -58,7 +79,11 @@ export default {
    * @returns {Response} A response from HTTP PUT-request.
    */
   async put(url, data) {
-    return this._sendRequest(url, REQUEST_METHODS.PUT, JSON.stringify(data));
+    return this._sendRequest({
+      url,
+      method: REQUEST_METHODS.PUT,
+      body: JSON.stringify(data),
+    });
   },
 
   /**
@@ -72,7 +97,11 @@ export default {
    * @returns {Response} A response from HTTP PUT-request.
    */
   async patch(url, data) {
-    return this._sendRequest(url, REQUEST_METHODS.PATCH, JSON.stringify(data));
+    return this._sendRequest({
+      url,
+      method: REQUEST_METHODS.PATCH,
+      body: JSON.stringify(data),
+    });
   },
 
   /**
@@ -85,7 +114,7 @@ export default {
    * @returns {Response} A response from HTTP PUT-request.
    */
   async delete(url) {
-    return this._sendRequest(url, REQUEST_METHODS.DELETE);
+    return this._sendRequest({ url, method: REQUEST_METHODS.DELETE });
   },
 
   /**
@@ -95,27 +124,38 @@ export default {
    *
    * @param {string} url A string to set request's url.
    * @param {REQUEST_METHODS} [method=REQUEST_METHODS.GET] A string to set request's method.
+   * @param {REQUEST_METHODS} [headers=REQUEST_HEADERS] Any headers to add to your request.
    * @param {string} [body=null] A stringfied json to set request's body.
-   * @throws Will throw an error if HTTP status is not 200-299 
+   * @param {MODES} [mode=MODES.CORS] The mode to use for the request.
+   * @throws Will throw an error if HTTP status is not 200-299
    * or when network error occurs.
    * @returns {Response} A response from HTTP request.
    */
-  async _sendRequest(url, method = REQUEST_METHODS.GET, body = null) {
+  async _sendRequest({
+    url,
+    method = REQUEST_METHODS.GET,
+    headers = REQUEST_HEADERS,
+    body = null,
+    mode = MODES.CORS,
+    credentials = 'include',
+  }) {
     let response;
     try {
       response = await fetch(url, {
         method: method,
-        headers: REQUEST_HEADERS,
+        headers: headers,
         body: body,
+        mode: mode,
+        credentials: credentials,
       });
+
+      if (!response.ok) {
+        throw new HTTPError('', response.status);
+      }
+
+      return response;
     } catch (error) {
       throw new Error(`network error: ${error.message}`);
     }
-
-    if (!response.ok) {
-      throw new HTTPError(response.status)
-    }
-
-    return response;
   },
 };
