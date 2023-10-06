@@ -70,7 +70,7 @@ export default class menuView {
     const links = document.querySelectorAll('.navbar-item a');
     // eslint-disable-next-line no-unused-vars
     links.forEach((link, i) => {
-      this.addEventListenerWrapper(link, 'click', (e) => {
+      link.addEventListener('click', (e) => {
         e.preventDefault();
         router.goToLink(getHrefFromA(link));
       });
