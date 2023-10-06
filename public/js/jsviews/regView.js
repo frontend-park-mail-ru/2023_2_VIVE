@@ -94,7 +94,7 @@ export default class regView {
   }
 
   addEventListeners() {
-    let elipse_link = document.querySelector('.elipse-button');
+    const elipse_link = document.querySelector('.elipse-button');
     elipse_link.addEventListener(
       'click',
       function (e) {
@@ -104,26 +104,26 @@ export default class regView {
       { once: true },
     );
 
-    let switch_link = document.querySelector('.form-type-switch-link');
+    const switch_link = document.querySelector('.form-type-switch-link');
     switch_link.addEventListener('click', (e) => {
       e.preventDefault();
       router.goToLink(getHrefFromA(switch_link));
     }) 
 
-    let form = document.querySelector('.reg-form');
+    const form = document.querySelector('.reg-form');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      let formData = this.getFormObject(new FormData(form));
+      const formData = this.getFormObject(new FormData(form));
 
       if (formIsValid(formData, { is_reg: true })) {
         if (await this.sendForm(formData)) {
           router.goToLink('/');
         } else {
-          let emailInput = document.querySelector("input[name='email']");
+          const emailInput = document.querySelector("input[name='email']");
           console.log(emailInput)
-          let existErrorNode = emailInput.parentNode.querySelector('.input-error-msg');
+          const existErrorNode = emailInput.parentNode.querySelector('.input-error-msg');
           if (!existErrorNode) {
-            let errorNode = document.createElement('div');
+            const errorNode = document.createElement('div');
             errorNode.classList.add('input-error-msg');
             errorNode.textContent = "Пользователь с такой почтой уже существует";
             emailInput.parentNode.appendChild(errorNode);
@@ -136,7 +136,7 @@ export default class regView {
   }
 
   getFormObject(formData) {
-    let formObject = {};
+    const formObject = {};
     formData.forEach(function (value, key) {
       formObject[key] = value;
     });
@@ -148,7 +148,7 @@ export default class regView {
     delete formData['repeat_password'];
     delete formData['remember_password'];
     try {
-      let resp = await APIConnector.post(
+      const resp = await APIConnector.post(
         BACKEND_SERVER_URL + '/users',
         formData,
       );

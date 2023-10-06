@@ -19,10 +19,10 @@ export default class menuView {
   async render() {
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['header.hbs'];
-    let isOk = await cookie.hasCookie();
+    const isOk = await cookie.hasCookie();
 
     console.log(isOk);
-    let ctx = {
+    const ctx = {
       is_user_login: isOk,
       // is_user_login: true,
       user_type: {
@@ -50,7 +50,7 @@ export default class menuView {
   }
 
   async addEventListeners() {
-    let links = document.querySelectorAll('.navbar-item a');
+    const links = document.querySelectorAll('.navbar-item a');
     // eslint-disable-next-line no-unused-vars
     links.forEach((link, i) => {
       this.addEventListenerWrapper(link, 'click', (e) => {
@@ -59,14 +59,14 @@ export default class menuView {
       });
     });
 
-    let logo_link = document.querySelector('.navbar-logo a');
+    const logo_link = document.querySelector('.navbar-logo a');
     logo_link.addEventListener('click', (e) => {
       e.preventDefault();
       router.goToLink(getHrefFromA(logo_link));
     }) 
 
     if (await cookie.hasCookie()) {
-      let logout_btn = document.querySelector('.logout-btn');
+      const logout_btn = document.querySelector('.logout-btn');
       logout_btn.addEventListener('click', async (e) => {
         e.preventDefault();
         try {

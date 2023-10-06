@@ -16,7 +16,7 @@ export default class vacsView {
 
   async getVacancies() {
     try {
-      let resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies');
+      const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies');
       return await resp.json();
     } catch (err) {
       console.error(err);

@@ -7,7 +7,7 @@ export function formIsValid(data, { is_login, is_reg }) {
   } else if (is_login) {
     errors = validator.validateAuthForm(data);
   }
-  let inputs = document.querySelectorAll('input');
+  const inputs = document.querySelectorAll('input');
   let isValid = true;
   for (let field in errors) {
     if (errors[field]) {
@@ -16,10 +16,10 @@ export function formIsValid(data, { is_login, is_reg }) {
   }
 
   inputs.forEach((input) => {
-    let existErrorNode = input.parentNode.querySelector('.input-error-msg');
+    const existErrorNode = input.parentNode.querySelector('.input-error-msg');
     if (errors[input.name]) {
       if (!existErrorNode) {
-        let errorNode = document.createElement('div');
+        const errorNode = document.createElement('div');
         errorNode.classList.add('input-error-msg');
         errorNode.textContent = errors[input.name];
         input.parentNode.appendChild(errorNode);

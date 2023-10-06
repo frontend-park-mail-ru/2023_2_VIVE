@@ -59,7 +59,7 @@ export default class authView {
   }
 
   addEventListeners() {
-    let elipse_link = document.querySelector('.elipse-button');
+    const elipse_link = document.querySelector('.elipse-button');
     elipse_link.addEventListener(
       'click',
       function (e) {
@@ -69,26 +69,26 @@ export default class authView {
       { once: true },
     );
 
-    let switch_link = document.querySelector('.form-type-switch-link');
+    const switch_link = document.querySelector('.form-type-switch-link');
     switch_link.addEventListener('click', (e) => {
       e.preventDefault();
       router.goToLink(getHrefFromA(switch_link));
     }) 
 
-    let form = document.querySelector('.reg-form');
+    const form = document.querySelector('.reg-form');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      let formData = this.getFormObject(new FormData(form));
+      const formData = this.getFormObject(new FormData(form));
 
       if (formIsValid(formData, { is_login: true })) {
         if (await this.sendForm(formData)) {
           router.goToLink('/');
         } else if (document.getElementsByClassName('form-error').length == 0) {
-          let err = document.createElement('div');
+          const err = document.createElement('div');
           err.classList.add('reg-text', 'form-error');
           err.textContent = 'Неверная электронная почта или пароль';
 
-          let toggler = document.getElementById('toggler');
+          const toggler = document.getElementById('toggler');
           toggler.after(err);
         }
       }
@@ -96,7 +96,7 @@ export default class authView {
   }
 
   getFormObject(formData) {
-    let formObject = {};
+    const formObject = {};
     formData.forEach(function (value, key) {
       formObject[key] = value;
     });
@@ -108,7 +108,7 @@ export default class authView {
     console.log(formData);
 
     try {
-      let resp = await APIConnector.post(
+      const resp = await APIConnector.post(
         BACKEND_SERVER_URL + '/session',
         formData,
       );

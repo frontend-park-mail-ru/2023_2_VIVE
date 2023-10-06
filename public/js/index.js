@@ -3,5 +3,5 @@ import { registerHelpers } from './handlebars/helpers.js';
 
 registerHelpers();
 
-let cur_path = window.location.pathname;
+const cur_path = window.location.pathname;
 await cookie.checkPathForNoCookie(cur_path);
