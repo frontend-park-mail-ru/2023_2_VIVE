@@ -1,6 +1,6 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
-import APIConnector from '../../modules/APIConnector.js';
-import router from '../router/router.js';
+import APIConnector from '../modules/APIConnector.js';
+import router from '../modules/router.js';
 import { getHrefFromA } from '../utils.js';
 import { formIsValid } from './formValidation.js';
 

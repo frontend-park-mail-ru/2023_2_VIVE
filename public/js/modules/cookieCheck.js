@@ -1,5 +1,5 @@
-import APIConnector from '../../modules/APIConnector.js';
-import router from '../router/router.js';
+import APIConnector from './APIConnector.js';
+import router from './router.js';
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 
 export default class CookieCheck {

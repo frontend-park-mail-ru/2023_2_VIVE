@@ -1,7 +1,7 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
-import APIConnector from '../../modules/APIConnector.js';
-import { cookie } from '../cookieCheck/cookieCheck.js';
-import router from '../router/router.js';
+import APIConnector from '../modules/APIConnector.js';
+import { cookie } from '../modules/cookieCheck.js';
+import router from '../modules/router.js';
 import { getHrefFromA } from '../utils.js';
 
 export default class menuView {
@@ -58,6 +58,12 @@ export default class menuView {
         router.goToLink(getHrefFromA(link));
       });
     });
+
+    let logo_link = document.querySelector('.navbar-logo a');
+    logo_link.addEventListener('click', (e) => {
+      e.preventDefault();
+      router.goToLink(getHrefFromA(logo_link));
+    }) 
 
     if (await cookie.hasCookie()) {
       let logout_btn = document.querySelector('.logout-btn');

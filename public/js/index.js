@@ -1,4 +1,4 @@
-import { cookie } from './cookieCheck/cookieCheck.js';
+import { cookie } from './modules/cookieCheck.js';
 import { registerHelpers } from './handlebars/helpers.js';
 
 registerHelpers();

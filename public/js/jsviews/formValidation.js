@@ -1,4 +1,4 @@
-import validator from '../../modules/validator.js';
+import validator from '../modules/validator.js';
 
 export function formIsValid(data, { is_login, is_reg }) {
   let errors = {};
