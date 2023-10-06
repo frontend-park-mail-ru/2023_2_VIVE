@@ -1,22 +1,40 @@
 @font-face {
-  font-family: "Roboto";
-  src: url("../fonts/Roboto.ttf");
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto.ttf');
 }
 
 @font-face {
-  font-family: "Roboto-Italic";
-  src: url("../fonts/Roboto-Italic.ttf");
+  font-family: 'Roboto-Italic';
+  src: url('../fonts/Roboto-Italic.ttf');
 }
 
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #5d5d5d;
   box-sizing: border-box;
 }
+html {
+  height: 100%;
+}
 
 body {
+  display: flex;
   margin: 0;
   padding: 0;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header {
+  width: 100%;
+}
+
+main {
+  height: auto !important;
+  height: 100%;
+  display: flex;
 }
 
 .column-wrapper {
@@ -193,19 +211,19 @@ a {
   margin-right: 10px;
 }
 
-.filter-list-item input[type="checkbox"] {
+.filter-list-item input[type='checkbox'] {
   display: none;
 }
 
-.filter-list-item input[type="checkbox"]:checked ~ .custom-checkbox {
+.filter-list-item input[type='checkbox']:checked ~ .custom-checkbox {
   background-color: #0496ff;
 }
 
-.filter-list-item input[type="checkbox"]:checked ~ .custom-checkbox svg {
+.filter-list-item input[type='checkbox']:checked ~ .custom-checkbox svg {
   visibility: visible;
 }
 
-.filter-list-item input[type="radio"] {
+.filter-list-item input[type='radio'] {
   display: none;
 }
 
@@ -219,7 +237,7 @@ a {
   margin-right: 10px;
 }
 
-.filter-list-item input[type="radio"]:checked ~ .custom-radio {
+.filter-list-item input[type='radio']:checked ~ .custom-radio {
   border: 6px solid #0496ff;
 }
 
