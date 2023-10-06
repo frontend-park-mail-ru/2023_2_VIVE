@@ -1,5 +1,12 @@
 import validator from '../modules/validator.js';
 
+/**
+ * Функция для проверки формы на валидность
+ * @param {Object} data - объект с данными полей
+ * @param {boolean} is_login - если форма для входа
+ * @param {boolean} is_reg - если форма для регистрации
+ * @returns {boolean} true, если формула валидна, false иначе
+ */
 export function formIsValid(data, { is_login, is_reg }) {
   let errors = {};
   if (is_reg) {

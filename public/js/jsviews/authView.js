@@ -5,21 +5,37 @@ import { getHrefFromA } from '../utils.js';
 import { formIsValid } from './formValidation.js';
 
 export default class authView {
+  /**
+   * Конструктор для создания класса, который обрабатывает страницу
+   * @constructor
+   * @param {string} role - роль пользователя('app', 'emp')
+   */
   constructor(role) {
     this.role = role;
   }
 
+  /**
+   * Основной метод класса, который отображает все необходимое после открытия страницы
+   */
   render() {
     this.compileTemplates();
     this.addEventListeners();
   }
 
+  /**
+   * Метод, который компилирует шаблон с данными
+   */
   compileTemplates() {
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['form_login_reg.hbs'];
     document.querySelector('main').innerHTML = template(this.getContext());
   }
 
+  /**
+   * Метод для создания контекста шаблона
+   * @param {string} role - роль пользователя('app', 'emp')
+   * @returns {Object} объект с данными в зависимости от роли
+   */
   getContext() {
     if (this.role == 'app') {
       return {
@@ -58,6 +74,9 @@ export default class authView {
     }
   }
 
+  /**
+   * Метод, добавляющий обработчики событий на страницу
+   */
   addEventListeners() {
     const elipse_link = document.querySelector('.elipse-button');
     elipse_link.addEventListener(
@@ -95,6 +114,10 @@ export default class authView {
     });
   }
 
+  /**
+   * Метод, получающий объект данных формы
+   * @returns {Object} объект с данными формы
+   */
   getFormObject(formData) {
     const formObject = {};
     formData.forEach(function (value, key) {
@@ -103,6 +126,10 @@ export default class authView {
     return formObject;
   }
 
+  /**
+   * Асинхронный метод, отправляющий данные формы
+   * @returns {boolean} true - если отправилась успешно, false - иначе
+   */
   async sendForm(formData) {
     delete formData['remember_password'];
     formData['role'] = this.role == 'app' ? 'applicant' : 'employer';
@@ -121,7 +148,15 @@ export default class authView {
     }
   }
 
+  /**
+   * Метод, удаляющий обработчики событий
+   */
   removeEventListeners() {}
 
-  remove() {}
+  /**
+   * Основной метод, который вызывается при закрытии страницы
+   */
+  remove() {
+    this.removeEventListeners();
+  }
 }
