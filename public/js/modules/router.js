@@ -26,9 +26,6 @@ class Router {
   }
 
   async goToLink(url) {
-    // if (url == this.lastUrl) {
-    //   return;
-    // }
     if (url in this.routes) {
       if (this.lastUrl) {
         this.objs[this.routes[url]].remove();

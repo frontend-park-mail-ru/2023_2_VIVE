@@ -23,29 +23,9 @@ app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, '..')));
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   res.render('pages/vacs');
-  console.log('ok!');
-});
-
-app.get('/app_reg', (req, res) => {
-  res.render('layouts/main');
-  console.log('ok!');
-});
-
-app.get('/app_login', (req, res) => {
-  res.render('layouts/main');
-  console.log('ok!');
-});
-
-app.get('/emp_reg', (req, res) => {
-  res.render('layouts/main');
-  console.log('ok!');
-});
-
-app.get('/emp_login', (req, res) => {
-  res.render('layouts/main');
-  console.log('ok!');
+  console.log('render');
 });
 
 app.listen(FRONTEND_SERVER_PORT, () => {
