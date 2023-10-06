@@ -23,6 +23,7 @@ export default class CookieCheck {
 
   /**
    * Функция для проверки URL на предмет перехода по текущему адресу
+   * @param {String} url - текущий адрес, на котором находится пользователь
    * @returns {Promise<void>} 
    */
   async checkPathForNoCookie(url) {
