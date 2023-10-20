@@ -1,3 +1,4 @@
 {
-  "ext": "js,json,hbs,html"
+  "ext": "js,json,hbs,html",
+  "ignore": "views/templates.precompiled.js"
 }

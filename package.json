@@ -7,8 +7,7 @@
     "nodemon": "^3.0.1"
   },
   "scripts": {
-    "prestart": "npm run compile:templates",
-    "start": "nodemon server/server.js",
+    "start": "nodemon --exec \"npm run compile:templates && node server/server.js\"",
     "compile:templates": "handlebars views/layouts/*.hbs views/pages/*.hbs views/partials/*.hbs -f views/templates.precompiled.js",
     "lint": "eslint ."
   },
