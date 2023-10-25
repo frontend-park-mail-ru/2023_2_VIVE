@@ -12,7 +12,7 @@ export default class vacsView {
     const data = await this.getVacancies();
 
     // eslint-disable-next-line no-undef
-    const template = Handlebars.templates['vacs.hbs'];
+    const template = Handlebars.templates['vacs'];
     document.querySelector('main').innerHTML = template({
       data: data,
     });

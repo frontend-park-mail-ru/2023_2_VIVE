@@ -27,7 +27,7 @@ export default class regView {
    */
   compileTemplates() {
     // eslint-disable-next-line no-undef
-    const template = Handlebars.templates['form_login_reg.hbs'];
+    const template = Handlebars.templates['form_login_reg'];
     document.querySelector('main').innerHTML = template(this.getContext());
   }
 

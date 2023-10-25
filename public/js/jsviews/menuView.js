@@ -3,6 +3,7 @@ import APIConnector from '../modules/APIConnector.js';
 import { cookie } from '../modules/cookieCheck.js';
 import router from '../modules/router.js';
 import { getHrefFromA } from '../utils.js';
+// import { Handlebars } from '../../../node_modules/handlebars/dist/handlebars.runtime.js'
 
 export default class menuView {
   // constructor() {
@@ -29,7 +30,7 @@ export default class menuView {
    */
   async compileTemplates() {
     // eslint-disable-next-line no-undef
-    const template = Handlebars.templates['header.hbs'];
+    const template = Handlebars.partials['header'];
     document.querySelector('header').innerHTML = template(await this.getContext());
   }
 

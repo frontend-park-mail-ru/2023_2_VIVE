@@ -1,3 +1,6 @@
+@import url("components/button.css");
+@import url("components/link-btn.css");
+
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto.ttf');
@@ -10,7 +13,6 @@
 
 * {
   font-family: 'Roboto', sans-serif;
-  color: #5d5d5d;
   box-sizing: border-box;
 }
 html {
@@ -43,11 +45,6 @@ main {
   padding-right: 10vw;
 }
 
-a {
-  color: #333333;
-  text-decoration: none;
-}
-
 /* Components */
 
 .comp-input-text {
@@ -67,35 +64,6 @@ a {
   border-color: #333333;
   outline-color: #333333;
 }
-
-.btn,
-.btn-filled {
-  color: #0496ff;
-  border: 1px #0496ff solid;
-  padding: 10px 15px 10px 15px;
-  background-color: #ffffff;
-  border-radius: 5px;
-}
-
-.btn-filled {
-  color: #ffffff;
-  background-color: #0496ff;
-}
-
-.btn:hover,
-.btn-filled:hover {
-  cursor: pointer;
-}
-
-/* overlay-navbar */
-
-/* .overlay-navbar {
-  display: flex;
-}
-
-.overlay-navbar-item {
-  margin-right: 30px;
-} */
 
 /* navbar */
 
@@ -125,24 +93,6 @@ a {
 .navbar-items-left {
   .navbar-item {
     margin-right: 30px;
-  }
-
-  .navbar-item:hover a {
-    color: #0496ff;
-  }
-
-  .navbar-item a {
-    display: block;
-    padding: 10px 10px;
-    box-sizing: border-box;
-  }
-
-  .navbar-item-active a {
-    border-bottom: 2px solid #ffbc42;
-  }
-
-  .navbar-item-active a {
-    color: #0496ff;
   }
 }
 
