@@ -1,0 +1,17 @@
+.radio-btn__input {
+  display: none;
+}
+
+.radio-btn__div {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 1px solid #b0b0b0;
+  margin-right: 10px;
+}
+
+.radio-btn__input:checked~.radio-btn__div {
+  border: 6px solid #0496ff;
+}

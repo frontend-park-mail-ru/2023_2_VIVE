@@ -1,0 +1,113 @@
+@import url("filters.css");
+
+.vacs {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.vacs__block {
+  width: 80vw;
+}
+
+/* params */
+
+.vacs__block__params {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vacs__block__params__sorted__btn {
+  font-weight: 500;
+  color: #0496ff;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.vacs__block__params__view {
+  display: flex;
+}
+
+.vacs__block__params__view__left {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.vacs__block__params__view__right {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/* vacs list */
+
+.vacs__list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* vac */
+
+.vacs__list__item {
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 40px -30px gray;
+  background-color: #eaeff2;
+  margin-bottom: 40px;
+}
+
+.vacs__list__item__desc__main {
+  display: flex;
+}
+
+.vacs__list__item__company-logo {
+  margin-right: 25px;
+}
+
+.vacs__list__item__company-name {
+  margin-top: 0;
+  color: #333333;
+}
+
+.vacs__list__item__desc__list {
+  display: flex;
+}
+
+.vacs__list__item__desc__list__item {
+  font-weight: 200;
+  margin-right: 30px;
+}
+
+.vacs__list__item__desc__name {
+  color: #333333;
+}
+
+.vacs__list__item__desc__name__link {
+  padding: 5px 0px;
+}
+
+.vacs__list__item__desc__prev {
+  margin-top: 0px;
+  margin-bottom: 35px;
+}
+
+
+
+
+.vacs__list__item__feed {
+  display: flex;
+}
+
+.vacs__list__item__feed__respond {
+  margin-right: 30px;
+}
+
+.vacs__list__item__feed__respond__btn {
+  height: 100%;
+}
+
+.vacs__list__item__feed__fav__btn {
+  padding: 10px 10px 6px 10px;
+  background-color: transparent;
+}

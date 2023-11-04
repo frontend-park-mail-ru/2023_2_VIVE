@@ -1,0 +1,57 @@
+<aside class="vacs__filters">
+  <div class="vacs__desc">
+    Найдено <span>{{ data.length }}</span> вакансий
+  </div>
+  <!-- Input field -->
+  <div class="vacs__search vacs__filter">
+    <div class="vacs__search__name vacs__filter__name">
+      Профессия, должность или компания
+    </div>
+    {{> input (object obj=(object placeholder="Ключевые слова")
+    class="vacs__search__input")}}
+    {{> link-btn (object text="Применить"
+    class="link-btn_blue link-btn_bd-rad-sm link-btn_pd-med")}}
+  </div>
+  <!-- Checkbox buttons -->
+  <div class="vacs__filter">
+    <div class="vacs__filter__name">
+      Регион
+    </div>
+    <ul class="vacs__filter__list">
+      <li class="vacs__filter__list__item">
+        <label class="vacs__filter__list__item__label">
+          {{> input_checkbox }}
+          <span>Россия</span>
+        </label>
+      </li>
+      <li class="vacs__filter__list__item">
+        <label class="vacs__filter__list__item__label">
+          {{> input_checkbox }}
+          <span>Москва</span>
+        </label>
+      </li>
+
+    </ul>
+  </div>
+  <!-- Radio buttons -->
+  <div class="vacs__filter">
+    <ul class="vacs__filter__list">
+      <div class="vacs__filter__name">
+        Уровень дохода
+      </div>
+      <li class="vacs__filter__list__item">
+        <label class="vacs__filter__list__item__label">
+          {{> input_radio (object name="category") }}
+          <span>Не имеет значения</span>
+        </label>
+      </li>
+      <li class="vacs__filter__list__item">
+        <label class="vacs__filter__list__item__label">
+          {{> input_radio (object name="category") }}
+          <span>> 70000</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+
+</aside>

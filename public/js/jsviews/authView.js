@@ -78,37 +78,28 @@ export default class authView {
    * Метод, добавляющий обработчики событий на страницу
    */
   addEventListeners() {
-    const elipse_link = document.querySelector('.elipse-button');
-    elipse_link.addEventListener(
-      'click',
-      function (e) {
+    const links = document.querySelectorAll('.js-link');
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
         e.preventDefault();
-        router.goToLink(getHrefFromA(elipse_link));
-      },
-      { once: true },
-    );
+        router.goToLink(getHrefFromA(link));
+      }) 
+    })
 
-    const switch_link = document.querySelector('.form-type-switch-link');
-    switch_link.addEventListener('click', (e) => {
-      e.preventDefault();
-      router.goToLink(getHrefFromA(switch_link));
-    }) 
-
-    const form = document.querySelector('.reg-form');
+    const form = document.querySelector('.form');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = this.getFormObject(new FormData(form));
 
-      if (formIsValid(formData, { is_login: true })) {
+      if (formIsValid(form, formData, { is_login: true })) {
         if (await this.sendForm(formData)) {
           router.goToLink('/');
-        } else if (document.getElementsByClassName('form-error').length == 0) {
-          const err = document.createElement('div');
-          err.classList.add('reg-text', 'form-error');
-          err.textContent = 'Неверная электронная почта или пароль';
-
-          const toggler = document.getElementById('toggler');
-          toggler.after(err);
+        } else {
+          const form_error = form.querySelector('.form__error');
+          form_error.textContent = 'Неверная электронная почта или пароль';
+          if (form_error.classList.contains('d-none')) {
+            form_error.classList.remove('d-none');
+          }
         }
       }
     });

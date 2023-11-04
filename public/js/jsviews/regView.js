@@ -113,43 +113,42 @@ export default class regView {
    * Метод, добавляющий обработчики событий на страницу
    */
   addEventListeners() {
-    const elipse_link = document.querySelector('.elipse-button');
-    elipse_link.addEventListener(
-      'click',
-      function (e) {
+    const links = document.querySelectorAll('.js-link');
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
         e.preventDefault();
-        router.goToLink(getHrefFromA(elipse_link));
-      },
-      { once: true },
-    );
+        router.goToLink(getHrefFromA(link));
+      }) 
+    })
 
-    const switch_link = document.querySelector('.form-type-switch-link');
-    switch_link.addEventListener('click', (e) => {
-      e.preventDefault();
-      router.goToLink(getHrefFromA(switch_link));
-    }) 
-
-    const form = document.querySelector('.reg-form');
+    const form = document.querySelector('.form');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = this.getFormObject(new FormData(form));
 
-      if (formIsValid(formData, { is_reg: true })) {
+      if (formIsValid(form, formData, { is_reg: true })) {
         if (await this.sendForm(formData)) {
           router.goToLink('/');
         } else {
-          const emailInput = document.querySelector("input[name='email']");
-          console.log(emailInput)
-          const existErrorNode = emailInput.parentNode.querySelector('.input-error-msg');
-          if (!existErrorNode) {
-            const errorNode = document.createElement('div');
-            errorNode.classList.add('input-error-msg');
-            errorNode.textContent = "Пользователь с такой почтой уже существует";
-            emailInput.parentNode.appendChild(errorNode);
-    
-            emailInput.classList.add('input-in-error');
+          const form_error = form.querySelector('.form__error');
+          form_error.textContent = 'Неверная электронная почта или пароль';
+          if (form_error.classList.contains('d-none')) {
+            form_error.classList.remove('d-none');
           }
         }
+        
+        // else {
+        //   const emailInput = document.querySelector("input[name='email']");
+        //   const existErrorNode = emailInput.parentNode.querySelector('.input__error-msg');
+        //   if (!existErrorNode) {
+        //     const errorNode = document.createElement('div');
+        //     errorNode.classList.add('input-error-msg');
+        //     errorNode.textContent = "Пользователь с такой почтой уже существует";
+        //     emailInput.parentNode.appendChild(errorNode);
+    
+        //     emailInput.classList.add('input-in-error');
+        //   }
+        // }
       }
     });
   }

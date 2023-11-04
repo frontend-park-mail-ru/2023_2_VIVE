@@ -1,24 +1,20 @@
-<div class="navbar-items-left">
-  <div class="navbar-item">
-    <a href="#">О нас</a>
-  </div>
-  <div class="navbar-item">
-    <a href="#">Как это работает</a>
-  </div>
-  <div class="navbar-item">
-    <a href="/">Вакансии</a>
-  </div>
-</div>
+{{> header_left (object links=(array
+(object href="#" text="О нас")
+(object href="#" text="Как это работает")
+(object href="/" text="Вакансии")
+))}}
 
-<div class="navbar-items-right">
-  <div class="navbar-item">
-    <a href="/app_login" class="navbar-btn link-btn link-btn_transp" data-type="login">
-      <span class="link-btn__text">Уже есть аккаунт</span>
-    </a>
+<div class="navbar__right">
+  <div class="navbar__item">
+    {{> link-btn (object href="/app_login" text="Уже есть аккаунт"
+    class="navbar__item__btn link-btn_transp-box-blue link-btn_block link-btn_pd-med link-btn_bd-rad-sm
+    link-btn_semi-bold"
+    data=(array (object key="type" value="login")))}}
   </div>
-  <div class="navbar-item">
-    <a href="/app_reg" class="navbar-btn link-btn link-btn_blue" data-type="reg">
-      <span class="link-btn__text">Зарегистрироваться</span>
-    </a>
+  <div class="navbar__item">
+    {{> link-btn (object href="/app_reg" text="Зарегистрироваться"
+    class="navbar__item__btn link-btn_blue link-btn_block link-btn_pd-med link-btn_bd-rad-sm
+    link-btn_semi-bold"
+    data=(array (object key="type" value="reg")))}}
   </div>
 </div>

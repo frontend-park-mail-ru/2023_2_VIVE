@@ -7,14 +7,15 @@ import validator from '../modules/validator.js';
  * @param {boolean} is_reg - если форма для регистрации
  * @returns {boolean} true, если формула валидна, false иначе
  */
-export function formIsValid(data, { is_login, is_reg }) {
+export function formIsValid(form, data, { is_login, is_reg }) {
   let errors = {};
   if (is_reg) {
     errors = validator.validateRegistrationForm(data);
   } else if (is_login) {
     errors = validator.validateAuthForm(data);
   }
-  const inputs = document.querySelectorAll('input');
+
+  const inputs = form.querySelectorAll('.input');
   let isValid = true;
   for (let field in errors) {
     if (errors[field]) {
@@ -23,22 +24,18 @@ export function formIsValid(data, { is_login, is_reg }) {
   }
 
   inputs.forEach((input) => {
-    const existErrorNode = input.parentNode.querySelector('.input-error-msg');
-    if (errors[input.name]) {
-      if (!existErrorNode) {
-        const errorNode = document.createElement('div');
-        errorNode.classList.add('input-error-msg');
-        errorNode.textContent = errors[input.name];
-        input.parentNode.appendChild(errorNode);
-
-        input.classList.add('input-in-error');
-      } else {
-        existErrorNode.textContent = errors[input.name];
+    const input_name = input.getAttribute('for')
+    const error_node = input.querySelector('.input__error-msg')
+    if (errors[input_name]) {
+      if (error_node.classList.contains('d-none')) {
+        error_node.classList.remove('d-none');
+        input.classList.add('input_error');
       }
+      error_node.textContent = errors[input_name];
     } else {
-      if (existErrorNode) {
-        input.parentNode.removeChild(existErrorNode);
-        input.classList.remove('input-in-error');
+      if (!error_node.classList.contains('d-none')) {
+        error_node.classList.add('d-none');
+        input.classList.remove('input_error');
       }
     }
   });

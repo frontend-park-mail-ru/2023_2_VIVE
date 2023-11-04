@@ -1,0 +1,41 @@
+.vacs__filters {
+  margin-right: 40px;
+}
+
+.vacs__desc {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 30px;
+  color: #333333;
+}
+
+.vacs__filter {
+  margin-bottom: 25px;
+}
+
+.vacs__search__name {
+  margin-bottom: 10px;
+}
+
+.vacs__search__input {
+  margin-bottom: 10px;
+}
+
+.vacs__filter__name {
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.vacs__filter__list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.vacs__filter__list__item {
+  margin-bottom: 10px;
+}
+
+.vacs__filter__list__item__label {
+  display: flex;
+}

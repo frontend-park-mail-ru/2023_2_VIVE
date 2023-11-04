@@ -1,16 +1,16 @@
 <div class="column-wrapper">
   <div class="form-block">
-    <form class="reg-form">
-      <span class="default-text x-large-font">
+    <form class="form">
+      <span class="form__title x-large-font">
         {{#iff form_type 'login'}}
         Войти
         {{else}}
         Регистрация
         {{/iff}}
       </span>
-      <div id="toggler" class="d-flex">
-        <span class="reg-text me-10">Найти работу</span>
-        <a href="
+      <div class="d-flex">
+        <span class="me-10">Найти работу</span>
+        <a class="form__slider {{#iff role 'emp'}} form__slider_right {{/iff}} js-link" href="
         {{#iff form_type 'reg'}} 
         {{#iff role 'app'}} 
         /emp_reg
@@ -24,38 +24,33 @@
         /app_login
         {{/iff}}  
         {{/iff}}
-        " class="elipse-button {{#iff role 'emp'}} elipse-button-right {{/iff}}">
-          <div class="circle"></div>
+        ">
+          <div class="form__slider__circle"></div>
         </a>
-        <span class="reg-text ms-10">Найти сотрудников</span>
+        <span class="ms-10">Найти сотрудников</span>
       </div>
 
+      <div class="form__error d-none"></div>
+
       {{#each inputs}}
-      <label class="input">
-        <input type="{{ this.type }}" class="input-in" name="{{ this.name }}" placeholder="{{ this.placeholder }}">
-      </label>
+      {{> input (object obj=this class="form__input-txt")}}
       {{/each}}
 
-      <label for="remember_password" class="remember-label">
-        <input type="checkbox" name="remember_password" id="remember_password">
-        <div class="custom-checkbox">
-          <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M6.5501 12.5L0.850098 6.79998L2.2751 5.37498L6.5501 9.64998L15.7251 0.474976L17.1501 1.89998L6.5501 12.5Z"
-              fill="#E4FDE1" />
-          </svg>
-        </div>
+      <label class="form__input-remember" for="remember">
+        {{> input_checkbox (object name="remember")}}
         <span>Запомнить пароль</span>
       </label>
-      <div class="form-actions">
-        <button type="submit" class="fully-button side-m-0">
-          {{#iff form_type 'login' }}
-          Войти
-          {{else}}
-          Зарегистрироваться
-          {{/iff}}
+      <div class="form__actions">
+        <button type="submit" class="link-btn link-btn_blue link-btn_pd-med link-btn_bd-rad-sm">
+          <span class="link-btn__text">{{#iff form_type 'login' }}
+            Войти
+            {{else}}
+            Зарегистрироваться
+            {{/iff}}
+          </span>
         </button>
-        <a href="
+        <a class="js-link link-btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm"
+          href="
         {{#iff role 'app'}} 
         {{#iff form_type 'reg'}} 
         /app_login
@@ -69,12 +64,14 @@
         /emp_reg
         {{/iff}}  
         {{/iff}}
-        " class="form-type-switch-link transparent-button side-m-0">
-          {{#iff form_type 'login' }}
-          Зарегистрироваться
-          {{else}}
-          Уже есть аккаунт
-          {{/iff}}
+        ">
+          <span class="link-btn__text">
+            {{#iff form_type 'login' }}
+            Создать аккаунт
+            {{else}}
+            Уже есть аккаунт
+            {{/iff}}
+          </span>
         </a>
       </div>
     </form>

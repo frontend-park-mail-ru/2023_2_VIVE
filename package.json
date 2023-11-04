@@ -9,9 +9,9 @@
     "path": "^0.12.7"
   },
   "scripts": {
-    "start": "nodemon --exec \"npm run compile:templates && npm run compile:partials && node server/server.js\"",
+    "start": "nodemon --exec \"npm run compile:partials && npm run compile:templates && node server/server.js\"",
     "compile:templates": "handlebars views/layouts/*.handlebars views/pages/*.handlebars -f views/templates.precompiled.js",
-    "compile:partials": "handlebars views/partials/*.handlebars -p -f views/partials.precompiled.js",
+    "compile:partials": "handlebars views/partials/*.handlebars views/components/*.handlebars -p -f views/partials.precompiled.js",
     "lint": "eslint ."
   },
   "devDependencies": {

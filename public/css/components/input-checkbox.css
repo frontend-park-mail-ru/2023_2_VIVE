@@ -1,0 +1,23 @@
+.checkbox-btn__input {
+  display: none;
+}
+
+.checkbox-btn__div {
+  display: inline-block;
+  border: 1px solid #0496ff;
+  border-radius: 4px;
+  padding: 3px;
+  margin-right: 10px;
+}
+
+.checkbox-btn__svg {
+  visibility: hidden;
+}
+
+.checkbox-btn__input:checked~.checkbox-btn__div {
+  background-color: #0496ff;
+}
+
+.checkbox-btn__input:checked~.checkbox-btn__div .checkbox-btn__svg {
+  visibility: visible;
+}

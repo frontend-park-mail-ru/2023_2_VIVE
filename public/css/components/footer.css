@@ -1,0 +1,24 @@
+.footer {
+  background-color: var(--default-text-prussian-blue);
+  padding-top: 15px;
+  padding-bottom: 20px;
+}
+
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--main-background-grey);
+  margin-bottom: 15px;
+}
+
+.footer__text {
+  font-family: 'Acumin', sans-serif;
+  font-weight: bold;
+  color: var(--main-background-grey);
+  margin: 0px 0px;
+}
+
+.footer__text__company-name {
+  margin-bottom: 10px;
+}

@@ -41,7 +41,7 @@ export default class menuView {
   async getContext() { 
     const isOk = await cookie.hasCookie();
     return {
-      is_user_login: isOk,
+      is_user_login: !isOk,
       user_type: {
         app: true,
       },
@@ -68,7 +68,7 @@ export default class menuView {
    * Метод, добавляющий обработчики событий на страницу
    */
   async addEventListeners() {
-    const links = document.querySelectorAll('.navbar-item a');
+    const links = document.querySelectorAll('.navbar__item__btn');
     // eslint-disable-next-line no-unused-vars
     links.forEach((link, i) => {
       link.addEventListener('click', (e) => {
@@ -76,12 +76,6 @@ export default class menuView {
         router.goToLink(getHrefFromA(link));
       });
     });
-
-    const logo_link = document.querySelector('.navbar-logo a');
-    logo_link.addEventListener('click', (e) => {
-      e.preventDefault();
-      router.goToLink(getHrefFromA(logo_link));
-    }) 
 
     if (await cookie.hasCookie()) {
       const logout_btn = document.querySelector('.logout-btn');
