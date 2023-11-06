@@ -1,0 +1,62 @@
+@import url("fonts.css");
+@import url("vars.css");
+@import url("styles.css");
+
+@import url("components/profile/profile.css");
+@import url("components/view/view.css");
+@import url("components/response.css");
+@import url("components/link-btn.css");
+@import url("components/resume.css");
+@import url("components/vacancie.css");
+
+.x-large-font {
+    font-size: x-large;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
+.small-font {
+    font-size: small;
+}
+
+.side-m-0 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.font-weight-100 {
+    font-weight: 100;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.ms-10 {
+    margin-left: 10px;
+}
+
+.me-10 {
+    margin-right: 10px;
+}
+
+.cursor-img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+  
