@@ -1,0 +1,62 @@
+<div class="profile">
+    <div class="d-flex profile__header profile__header--background--default-hh">
+        <img class="profile_image" src="../../../public/images/img/buttersss.jpg" alt="profile-logo">
+        <div class="profile__info">
+            <div class="profile__main-info">
+                <div class="profile__about">
+                    <div class="profile__main-text">Иванов Иван Иванович</div>
+                    <div class="profile__primary-text">Краткая информация</div>
+                </div>
+                <div class="profile__switch-btns">
+                    <div class="profile__btn profile__btn--active">
+                        <div class="profile__btn-text">Настройки</div>
+                        <div class="profile__line"></div>
+                    </div>
+                    <div class="profile__btn profile__btn--hover">
+                        <div class="profile__btn-text">Отклики</div>
+                        <div class="profile__line"></div>
+                    </div>
+                    <div class="profile__btn profile__btn--hover">
+                        <div class="profile__btn-text">Резюме</div>
+                        <div class="profile__line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{#each (array (object key="hello") (object  key="ilya"))}}
+{{this.key}}
+{{/each}}
+<br>
+<br>
+{{#each (array (object key='<div style="color:red">hjghfjgkd</div>'))}}
+{{{this.key}}}
+{{/each}}
+
+{{#with (object state="responses")}}
+
+{{#iff state 'settings'}}
+{{> profile_app_settings }}
+{{else iff state 'responses'}}
+{{> profile_app_responses}}
+{{/iff}}
+
+{{/with}}
+
+{{#with (object state="responses")}}
+
+{{#iff ../state 'settings'}}
+{{> profile_app_settings }}
+{{else iff ../state 'responses'}}
+{{> profile_app_responses}}
+{{/iff}}
+
+{{/with}}
+
+{{#iff state 'settings'}}
+{{> profile_app_settings }}
+{{else iff state 'responses'}}
+{{> profile_app_responses}}
+{{/iff}}
+</div>

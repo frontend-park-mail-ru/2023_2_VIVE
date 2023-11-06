@@ -1,7 +1,9 @@
+
 import authView from '../jsviews/authView.js';
 import menuView from '../jsviews/menuView.js';
 import regView from '../jsviews/regView.js';
 import vacsView from '../jsviews/vacsView.js';
+import profileView from '../jsviews/profileView.js';
 
 /**
  * Класс Router для управления навигацией по сайту
@@ -21,6 +23,7 @@ class Router {
       '/emp_login': 'empAuth',
       '/app_reg': 'appReg',
       '/emp_reg': 'empReg',
+      '/profile': 'profile',
       '/': 'vacs',
     };
 
@@ -30,6 +33,7 @@ class Router {
       empAuth: new authView('emp'),
       appReg: new regView('app'),
       empReg: new regView('emp'),
+      profile: new profileView(),
       menu: new menuView(),
     };
 
