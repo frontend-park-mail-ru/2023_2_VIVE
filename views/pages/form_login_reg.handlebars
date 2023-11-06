@@ -2,7 +2,7 @@
   <div class="form-block">
     <form class="form">
       <span class="form__title x-large-font">
-        {{#iff form_type 'login'}}
+        {{#iff form_type '==' 'login'}}
         Войти
         {{else}}
         Регистрация
@@ -10,15 +10,15 @@
       </span>
       <div class="d-flex">
         <span class="me-10">Найти работу</span>
-        <a class="form__slider {{#iff role 'emp'}} form__slider_right {{/iff}} js-link" href="
-        {{#iff form_type 'reg'}} 
-        {{#iff role 'app'}} 
+        <a class="form__slider {{#iff role '==' 'emp'}} form__slider_right {{/iff}} js-link" href="
+        {{#iff form_type '==' 'reg'}} 
+        {{#iff role '==' 'app'}} 
         /emp_reg
         {{else}} 
         /app_reg
         {{/iff}} 
         {{else}}   
-        {{#iff role 'app'}} 
+        {{#iff role '==' 'app'}} 
         /emp_login
         {{else}} 
         /app_login
@@ -33,7 +33,7 @@
       <div class="form__error d-none"></div>
 
       {{#each inputs}}
-      {{> input (object obj=this class="form__input-txt")}}
+      {{> input_text (object obj=this class="form__input-txt")}}
       {{/each}}
 
       <label class="form__input-remember" for="remember">
@@ -42,7 +42,7 @@
       </label>
       <div class="form__actions">
         <button type="submit" class="link-btn link-btn_blue link-btn_pd-med link-btn_bd-rad-sm">
-          <span class="link-btn__text">{{#iff form_type 'login' }}
+          <span class="link-btn__text">{{#iff form_type '==' 'login' }}
             Войти
             {{else}}
             Зарегистрироваться
@@ -51,14 +51,14 @@
         </button>
         <a class="js-link link-btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm"
           href="
-        {{#iff role 'app'}} 
-        {{#iff form_type 'reg'}} 
+        {{#iff role '==' 'app'}} 
+        {{#iff form_type '==' 'reg'}} 
         /app_login
         {{else}} 
         /app_reg
         {{/iff}} 
         {{else}}   
-        {{#iff form_type 'reg'}} 
+        {{#iff form_type '==' 'reg'}} 
         /emp_login
         {{else}} 
         /emp_reg
@@ -66,7 +66,7 @@
         {{/iff}}
         ">
           <span class="link-btn__text">
-            {{#iff form_type 'login' }}
+            {{#iff form_type '==' 'login' }}
             Создать аккаунт
             {{else}}
             Уже есть аккаунт

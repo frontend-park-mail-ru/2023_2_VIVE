@@ -1,0 +1,32 @@
+<label class="res__form__input d-block">
+  {{> input_checkbox }}
+  <span>У меня есть опыт работы</span>
+</label>
+
+{{#each (array 
+(object title="В какой компании вы работали" name="company" placeholder="Компания")
+(object title="На какой должности" name="post" placeholder="Должность")
+(object title="Начало работы" name="start_of_work" type="date")
+(object title="Год окончания" name="final_year_of_work" placeholder="Год окончания")
+)}}
+
+{{> input (object obj=this
+class_title="res__form__input__title"
+class="res__form__input")}}
+
+{{/each}}
+
+<label class="res__form__input d-block">
+  {{> input_checkbox }}
+  <span>По настоящее время</span>
+</label>
+
+{{#each (array 
+(object title="Расскажите о ваших обязанностях и достижениях" name="achievs" placeholder="Достижения и обязанности")
+)}}
+
+{{> input (object obj=this
+class_title="res__form__input__title"
+class="res__form__input")}}
+
+{{/each}}

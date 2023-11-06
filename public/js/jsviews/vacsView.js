@@ -7,7 +7,6 @@ export default class vacsView {
    * Асинхронный метод для отображения страницы
    */
   async render() {
-    console.log('rendering vacs');
     
     const data = await this.getVacancies();
 

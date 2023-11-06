@@ -1,0 +1,27 @@
+<form class="rescr__form">
+  <p class="rescr__form__title form__title x-large-font">
+    Создание резюме
+  </p>
+
+  <p class="rescr__form__step__title">
+    {{{lookup steps (sub page 1)}}}(шаг {{page}}/{{steps.length}})
+  </p>
+
+  {{> (concat 'res_form_' page) }}
+  
+  <div class="form__actions rescr__form__actions_{{page}}">
+    {{#if page}}
+    {{> link-btn (object text="Назад"
+    class="link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm")}}
+    {{/if}}
+    <button type="submit" class="link-btn link-btn_blue link-btn_pd-med link-btn_bd-rad-sm">
+      <span class="link-btn__text">
+        {{#iff page '==' steps.length}}
+        Создать резюме
+        {{else}}
+        Сохранить и продолжить
+        {{/iff}}
+      </span>
+    </button>
+  </div>
+</form>

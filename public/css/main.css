@@ -1,7 +1,10 @@
+@import url("common.css");
+
 @import url("components/header.css");
 @import url("components/footer.css");
 @import url("./components/vacs/vacs.css");
 @import url("./components/form.css");
+@import url("./components/resume/res.css");
 
 
 * {
@@ -30,8 +33,8 @@ header {
 main {
   height: auto !important;
   height: 100%;
-  /* display: flex; */
   width: 100%;
+  padding: 60px 0px;
 }
 
 footer {

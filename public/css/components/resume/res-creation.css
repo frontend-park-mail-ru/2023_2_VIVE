@@ -1,0 +1,8 @@
+@import url("res-steps.css");
+@import url("rescr-form.css");
+
+.rescr {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}

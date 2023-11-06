@@ -1,0 +1,127 @@
+<section class="resv-section">
+  <div class="column-wrapper">
+    {{> res_card }}
+    <div class="resv">
+      <div class="resv__nav">
+        {{> link-btn text="К списку моих резюме"
+        class="resv__nav__link link-btn_transp link-btn_text_blue link-btn_pd-med"
+        svg_pos="before"
+        svg='<svg class="resv__nav__link__svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+          viewBox="0 0 16 16" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M6.47007 3.21985C6.61225 3.08737 6.80029 3.01524 6.9946 3.01867C7.1889 3.0221 7.37428 3.10081 7.51169 3.23822C7.64911 3.37564 7.72782 3.56102 7.73125 3.75532C7.73468 3.94963 7.66255 4.13767 7.53007 4.27985L4.56007 7.24985H13.2501C13.449 7.24985 13.6397 7.32886 13.7804 7.46952C13.9211 7.61017 14.0001 7.80093 14.0001 7.99985C14.0001 8.19876 13.9211 8.38952 13.7804 8.53018C13.6397 8.67083 13.449 8.74985 13.2501 8.74985H4.56007L7.53007 11.7198C7.60376 11.7885 7.66286 11.8713 7.70385 11.9633C7.74485 12.0553 7.76689 12.1546 7.76866 12.2553C7.77044 12.356 7.75192 12.4561 7.7142 12.5494C7.67647 12.6428 7.62033 12.7277 7.54911 12.7989C7.47789 12.8701 7.39306 12.9262 7.29967 12.964C7.20628 13.0017 7.10625 13.0202 7.00555 13.0184C6.90485 13.0167 6.80553 12.9946 6.71353 12.9536C6.62153 12.9126 6.53873 12.8535 6.47007 12.7798L2.22007 8.52985C2.07962 8.38922 2.00073 8.1986 2.00073 7.99985C2.00073 7.8011 2.07962 7.61047 2.22007 7.46985L6.47007 3.21985Z"
+            fill="#0496FF" />
+        </svg>'}}
+      </div>
+      <div class="resv__data">
+        <div class="resv__data__list">
+          <div class="resv__data__item">
+            <div class="resv__data__main mb-20">
+              <div>
+                <div class="resv__text_big mb-15">
+                  Web-разработчик
+                </div>
+                <div class="resv__text_med mb-20">
+                  Иванов Иван Иванович
+                </div>
+                <div class="resv__text_sm">
+                  Мужской, 30 лет, 01.01.1993, г.Москва
+                </div>
+              </div>
+              <img class="resv__data__main__avatar" src="../../../public/images/profile.png" alt="">
+            </div>
+            {{> link-btn text="Редактировать"
+            class="resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}}
+          </div>
+          <div class="resv__data__item">
+            <div class="resv__data__main mb-20">
+              <div>
+                <div class="resv__text_big mb-15">
+                  Высшее образование
+                </div>
+                <div class="resv__text_med mb-5">
+                  Московский государственный технический университет им. Н.Э. Баумана
+                </div>
+                <div class="resv__text_sm mb-15">
+                  г. Москва, 2019
+                </div>
+                <div class="resv__text_med mb-5">
+                  Инженерный бизнес и менеджмент (ИБМ)
+                </div>
+                <div class="resv__text_sm">
+                  Экономика и финансы
+                </div>
+              </div>
+            </div>
+            {{> link-btn text="Редактировать"
+            class="resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}}
+          </div>
+          <div class="resv__data__item">
+            <div class="resv__data__main mb-20">
+              <div>
+                <div class="resv__text_big mb-15">
+                  Опыт работы 1 год 10 месяцев
+                </div>
+                <div class="resv__text_med mb-5">
+                  VK
+                </div>
+                <div class="resv__text_sm mb-15">
+                  Январь 2020 - по настоящее время
+                </div>
+                <div class="resv__text_med mb-5">
+                  Младший специалист по разработке ПО
+                </div>
+                <div class="resv__text_sm">
+                  Работал бэкэнд разработчиком
+                </div>
+              </div>
+            </div>
+            {{> link-btn text="Редактировать"
+            class="resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}}
+          </div>
+          <div class="resv__data__item">
+            <div class="resv__data__main mb-20">
+              <div>
+                <div class="resv__text_big mb-20">
+                  Информация о себе
+                </div>
+                <div class="resv__text_sm">
+                  Я хороший парень, ответственный, быстро учусь.
+                  Мое портфолио можно посмотреть по ссылке: example.com
+                </div>
+              </div>
+            </div>
+            {{> link-btn text="Редактировать"
+            class="resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}}
+          </div>
+        </div>
+
+        <div class="resv__params">
+          <div class="resv__params__item resv__text_sm mb-20">
+            Резюме обновлено 01.11.23
+          </div>
+          <div class="resv__params__actions mb-20">
+            {{> link-btn
+            class="resv__params__actions__print link-btn_transp-box-blue link-btn_pd-sm link-btn_bd-rad-sm link-btn_semi-bold d-block"
+            svg_pos="before"
+            svg='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <mask id="mask0_1583_4628" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+                height="24">
+                <rect width="24" height="24" fill="#D9D9D9" />
+              </mask>
+              <g mask="url(#mask0_1583_4628)">
+                <path
+                  d="M16 8V5H8V8H6V3H18V8H16ZM18 12.5C18.2833 12.5 18.5208 12.4042 18.7125 12.2125C18.9042 12.0208 19 11.7833 19 11.5C19 11.2167 18.9042 10.9792 18.7125 10.7875C18.5208 10.5958 18.2833 10.5 18 10.5C17.7167 10.5 17.4792 10.5958 17.2875 10.7875C17.0958 10.9792 17 11.2167 17 11.5C17 11.7833 17.0958 12.0208 17.2875 12.2125C17.4792 12.4042 17.7167 12.5 18 12.5ZM16 19V15H8V19H16ZM18 21H6V17H2V11C2 10.15 2.29167 9.4375 2.875 8.8625C3.45833 8.2875 4.16667 8 5 8H19C19.85 8 20.5625 8.2875 21.1375 8.8625C21.7125 9.4375 22 10.15 22 11V17H18V21ZM20 15V11C20 10.7167 19.9042 10.4792 19.7125 10.2875C19.5208 10.0958 19.2833 10 19 10H5C4.71667 10 4.47917 10.0958 4.2875 10.2875C4.09583 10.4792 4 10.7167 4 11V15H6V13H18V15H20Z"
+                  fill="#0496FF" />
+              </g>
+            </svg>'}}
+            {{> link-btn text="Удалить резюме"
+            class="resv__params__actions__delete link-btn_text_red link-btn_pd-sm d-block"}}
+          </div>
+          {{> link-btn text="Доступно для просмотра"
+          class="resv__params__view link-btn_transp-box-green link-btn_pd-sm link-btn_bd-rad-med d-block"}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

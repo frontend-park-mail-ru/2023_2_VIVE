@@ -1,0 +1,30 @@
+.res__form__input {
+  margin-bottom: 20px;
+}
+
+.res__form__input__title {
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.res__form__input {
+  padding: 10px 20px;
+}
+
+.res__form__input_radio_field {
+  margin-bottom: 10px;
+}
+
+.res__form__input_radio_flex {
+  display: flex;
+}
+
+.res__form__input_radio_flex_field {
+  margin-right: 20px;
+}
+
+.res__form__input_textarea {
+  display: block;
+  width: 100%;
+  resize: none;
+}

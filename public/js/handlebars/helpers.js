@@ -1,18 +1,57 @@
 /**
  * Функция для добавления пользовательских handlebars-helpers
  */
+
 export function registerHelpers() {
-  // eslint-disable-next-line no-undef
-  Handlebars.registerHelper('iff', function (v1, v2, options) {
-    if (v1 === v2) {
-      return options.fn(this);
-    }
-    return options.inverse(this);
+  Handlebars.registerHelper('sub', function(num1, num2) {
+    return num1 - num2;
   });
+
   Handlebars.registerHelper('object', function({hash}) {
     return hash;
   });
+
   Handlebars.registerHelper('array', function() {
     return Array.from(arguments).slice(0, arguments.length-1)
   });
+
+  Handlebars.registerHelper('sum', function(arr) {
+    return arr.reduce((partialSum, a) => partialSum + a, 0);
+  });
+
+  Handlebars.registerHelper('concat', function(str1, str2) {
+    return str1 + str2;
+  });
+
+  Handlebars.registerHelper('iff', function (v1, operator, v2, options) {
+    function checkCondition(v1, operator, v2) {
+      switch(operator) {
+          case '==':
+              return (v1 == v2);
+          case '===':
+              return (v1 === v2);
+          case '!==':
+              return (v1 !== v2);
+          case '<':
+              return (v1 < v2);
+          case '<=':
+              return (v1 <= v2);
+          case '>':
+              return (v1 > v2);
+          case '>=':
+              return (v1 >= v2);
+          case '&&':
+              return (v1 && v2);
+          case '||':
+              return (v1 || v2);
+          default:
+              return false;
+      }
+    }
+    
+    return checkCondition(v1, operator, v2)
+                ? options.fn(this)
+                : options.inverse(this);
+  });
 }
+registerHelpers();

@@ -10,8 +10,8 @@
   },
   "scripts": {
     "start": "nodemon --exec \"npm run compile:partials && npm run compile:templates && node server/server.js\"",
-    "compile:templates": "handlebars views/layouts/*.handlebars views/pages/*.handlebars -f views/templates.precompiled.js",
-    "compile:partials": "handlebars views/partials/*.handlebars views/components/*.handlebars -p -f views/partials.precompiled.js",
+    "compile:templates": "handlebars views/layouts/*.handlebars views/pages/resume/*.handlebars views/pages/*.handlebars -f views/templates.precompiled.js",
+    "compile:partials": "handlebars views/partials/resume/*.handlebars views/partials/*.handlebars views/components/*.handlebars -p -f views/partials.precompiled.js",
     "lint": "eslint ."
   },
   "devDependencies": {

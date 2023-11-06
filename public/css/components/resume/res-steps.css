@@ -1,0 +1,47 @@
+.rescr__steps {
+  border-left: 3px solid #DEDEDE;
+  padding-left: 20px;
+}
+
+.rescr__steps__item {
+  display: flex;
+}
+
+.rescr__steps__item__number {
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #DEDEDE;
+  text-align: center;
+  font-size: 48px;
+  color: #EBEDEB;
+}
+
+.rescr__steps__item__title {
+  color: #DEDEDE;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.rescr__steps__splitter {
+  display: block;
+  margin-left: 20px;
+}
+
+.rescr__steps__splitter_done path {
+  fill:#000;
+}
+
+.rescr__steps__item_done {
+  .rescr__steps__item__number {
+    background-color: #0496FF;
+  }
+
+  .rescr__steps__item__title {
+    color:#000;
+  }
+} 

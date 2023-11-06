@@ -1,0 +1,31 @@
+{{#each (array 
+(object title="Профессия" name="profession" placeholder="Профессия")
+(object title="Имя" name="first_name" placeholder="Имя")
+(object title="Фамилия" name="last_name" placeholder="Фамилия")
+(object title="Отчество (не обязательно)" name="middle_name" placeholder="Отчество")
+)}}
+
+{{> input (object obj=this
+class_title="res__form__input__title"
+class="res__form__input")}}
+
+{{/each}}
+
+<p class="res__form__input_radio__title res__form__input__title">Пол</p>
+<div class="res__form__input res__form__input_radio_flex">
+  {{#each (array
+  (object text="Мужской")
+  (object text="Женский")
+  )}}
+  {{> input_radio (object text=this.text class_label="res__form__input_radio_flex_field" name="gender")}}
+  {{/each}}
+</div>
+
+{{> input (object obj=(object title="Дата рождения" name="dat_of_birth" type="date")
+class_title="res__form__input__title"
+class="res__form__input")}}
+
+{{> input (object obj=(object title="Город" name="city" placeholder="Город")
+class_title="res__form__input__title"
+class="res__form__input")}}
+

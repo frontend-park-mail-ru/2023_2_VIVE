@@ -1,6 +1,8 @@
 import authView from '../jsviews/authView.js';
 import menuView from '../jsviews/menuView.js';
 import regView from '../jsviews/regView.js';
+import resCreationView from '../jsviews/resCreationView.js';
+import resViewView from '../jsviews/resViewView.js';
 import vacsView from '../jsviews/vacsView.js';
 
 /**
@@ -21,11 +23,15 @@ class Router {
       '/emp_login': 'empAuth',
       '/app_reg': 'appReg',
       '/emp_reg': 'empReg',
+      '/resume_creation': 'resCreation',
+      '/resume_view': 'resView',
       '/': 'vacs',
     };
 
     this.objs = {
       vacs: new vacsView(),
+      resCreation: new resCreationView(),
+      resView: new resViewView(),
       appAuth: new authView('app'),
       empAuth: new authView('emp'),
       appReg: new regView('app'),

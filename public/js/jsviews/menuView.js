@@ -41,7 +41,7 @@ export default class menuView {
   async getContext() { 
     const isOk = await cookie.hasCookie();
     return {
-      is_user_login: !isOk,
+      is_user_login: isOk,
       user_type: {
         app: true,
       },

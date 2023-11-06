@@ -1,0 +1,30 @@
+
+<p class="res__form__input_radio__title res__form__input__title">Уровень образования</p>
+<div class="res__form__input">
+  {{#each (array
+  (object text="Среднее")
+  (object text="Среднее специальное")
+  (object text="Неоконченное высшее")
+  (object text="Высшее")
+  (object text="Бакалавр")
+  (object text="Магистр")
+  (object text="Кандидат наук")
+  (object text="Доктор наук")
+  )}}
+  {{> input_radio (object text=this.text class_label="res__form__input_radio_field" name="education")}}
+  {{/each}}
+</div>
+
+{{#each (array 
+(object title="Учебное заведение" name="edu_inst" placeholder="Учебное заведение")
+(object title="Факультет" name="faculty" placeholder="Факультет")
+(object title="Специализация" name="specialization" placeholder="Специализация")
+(object title="Год окончания" name="final_year" placeholder="Год окончания")
+)}}
+
+{{> input (object obj=this
+class_title="res__form__input__title"
+class="res__form__input")}}
+
+{{/each}}
+

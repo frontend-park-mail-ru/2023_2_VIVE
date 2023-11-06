@@ -1,5 +1,24 @@
 <{{#if href}}a href="{{href}}" {{else}}button{{/if}} class="link-btn {{class}}" {{#each data}} data-{{key}}="{{value}}"
   {{/each}}>
-  <span class="link-btn__text {{class_text}}">{{text}}</span>
+
+  {{#if svg_pos}}
+
+  {{#iff svg_pos '==' 'before'}}
   {{{svg}}}
+  {{/iff}}
+
+  <span class="link-btn__text {{class_text}}">{{text}}</span>
+
+  {{#iff svg_pos '==' 'after'}}
+  {{{svg}}}
+  {{/iff}}
+
+  {{else}}
+  {{#if svg}}
+  {{{svg}}}
+  {{else}}
+  <span class="link-btn__text {{class_text}}">{{text}}</span>
+  {{/if}}
+  {{/if}}
+
 </{{#if href}}a{{else}}button{{/if}}>
