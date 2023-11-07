@@ -1,8 +1,6 @@
 import { registerHelpers } from './handlebars/helpers.js';
-import { cookie } from './modules/cookieCheck.js';
+import router from './modules/router.js';
 
 registerHelpers();
-document.querySelector('footer').innerHTML = Handlebars.partials['footer']();
 
-const cur_path = window.location.pathname;
-await cookie.checkPathForNoCookie(cur_path);
+router.goToLink(window.location.pathname);

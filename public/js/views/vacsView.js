@@ -1,13 +1,12 @@
 
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
+import View from './view.js';
 
-export default class vacsView {
-  /**
-   * Асинхронный метод для отображения страницы
-   */
+export default class vacsView extends View {
+
   async render() {
-    
+    super.render();
     const data = await this.getVacancies();
 
     // eslint-disable-next-line no-undef
@@ -31,22 +30,5 @@ export default class vacsView {
       console.error(err);
       return undefined;
     }
-  }
-
-  /**
-   * Метод, добавляющий обработчики событий на страницу
-   */
-  addEventListeners() {}
-
-  /**
-   * Метод, удаляющий обработчики событий
-   */
-  removeEventListeners() {}
-
-  /**
-   * Основной метод, который вызывается при закрытии страницы
-   */
-  remove() {
-    this.removeEventListeners();
   }
 }

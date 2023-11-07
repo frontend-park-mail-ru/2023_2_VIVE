@@ -13,16 +13,14 @@
           </svg>'
         )}}
       </div>
-      {{#if is_user_login}}
-      {{#with user_type}}
-
-      {{#if app }}
+      {{#if user}}
+      
+      {{#iff user.role '==' 'applicant'}}
       {{> header_app}}
       {{else}}
       {{> header_emp}}
-      {{/if}}
+      {{/iff}}
 
-      {{/with}}
       {{else}}
       {{> header_anm }}
       {{/if}}

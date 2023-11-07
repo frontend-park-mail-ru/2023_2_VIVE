@@ -1,5 +1,6 @@
 @import url("common.css");
 
+@import url("components/404.css");
 @import url("components/header.css");
 @import url("components/footer.css");
 @import url("./components/vacs/vacs.css");

@@ -1,16 +1,18 @@
-import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import router from '../modules/router.js';
-import { getHrefFromA } from '../utils.js';
+import { BACKEND_SERVER_URL } from '../../../config/config.js';
+import { getHrefFromLink } from '../utils.js';
 import { formIsValid } from './formValidation.js';
+import View from './view.js';
 
-export default class authView {
+export default class regView extends View {
   /**
    * Конструктор для создания класса, который обрабатывает страницу
    * @constructor
    * @param {string} role - роль пользователя('app', 'emp')
    */
   constructor(role) {
+    super();
     this.role = role;
   }
 
@@ -40,34 +42,69 @@ export default class authView {
     if (this.role == 'app') {
       return {
         role: 'app',
-        form_type: 'login',
+        form_type: 'reg',
         inputs: [
           {
             type: 'text',
+            name: 'first_name',
+            placeholder: 'Имя',
+          },
+          {
+            type: 'text',
+            name: 'last_name',
+            placeholder: 'Фамилия',
+          },
+          {
+            type: 'text',
             name: 'email',
-            placeholder: 'Электронная почта(соискатель)',
+            placeholder: 'Электронная почта',
           },
           {
             type: 'password',
             name: 'password',
-            placeholder: 'Пароль',
+            placeholder: 'Придумайте пароль',
+          },
+          {
+            type: 'password',
+            name: 'repeat_password',
+            placeholder: 'Повторите пароль',
           },
         ],
       };
     } else {
       return {
         role: 'emp',
-        form_type: 'login',
+        form_type: 'reg',
         inputs: [
           {
             type: 'text',
+            name: 'first_name',
+            placeholder: 'Имя',
+          },
+          {
+            type: 'text',
+            name: 'last_name',
+            placeholder: 'Фамилия',
+          },
+          {
+            type: 'text',
+            name: 'company_name',
+            placeholder: 'Название компании',
+          },
+          {
+            type: 'text',
             name: 'email',
-            placeholder: 'Электронная почта(компания)',
+            placeholder: 'Электронная почта',
           },
           {
             type: 'password',
             name: 'password',
-            placeholder: 'Пароль',
+            placeholder: 'Придумайте пароль',
+          },
+          {
+            type: 'password',
+            name: 'repeat_password',
+            placeholder: 'Повторите пароль',
           },
         ],
       };
@@ -82,8 +119,8 @@ export default class authView {
     links.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        router.goToLink(getHrefFromA(link));
-      }) 
+        router.goToLink(getHrefFromLink(link));
+      })
     })
 
     const form = document.querySelector('.form');
@@ -91,16 +128,29 @@ export default class authView {
       e.preventDefault();
       const formData = this.getFormObject(new FormData(form));
 
-      if (formIsValid(form, formData, { is_login: true })) {
+      if (formIsValid(form, formData, { is_reg: true })) {
         if (await this.sendForm(formData)) {
           router.goToLink('/');
         } else {
           const form_error = form.querySelector('.form__error');
-          form_error.textContent = 'Неверная электронная почта или пароль';
+          form_error.textContent = 'Пользователь с такой электронной почтой уже зарегистрирован';
           if (form_error.classList.contains('d-none')) {
             form_error.classList.remove('d-none');
           }
         }
+
+        // else {
+        //   const emailInput = document.querySelector("input[name='email']");
+        //   const existErrorNode = emailInput.parentNode.querySelector('.input__error-msg');
+        //   if (!existErrorNode) {
+        //     const errorNode = document.createElement('div');
+        //     errorNode.classList.add('input-error-msg');
+        //     errorNode.textContent = "Пользователь с такой почтой уже существует";
+        //     emailInput.parentNode.appendChild(errorNode);
+
+        //     emailInput.classList.add('input-in-error');
+        //   }
+        // }
       }
     });
   }
@@ -122,32 +172,18 @@ export default class authView {
    * @returns {boolean} true - если отправилась успешно, false - иначе
    */
   async sendForm(formData) {
-    delete formData['remember_password'];
     formData['role'] = this.role == 'app' ? 'applicant' : 'employer';
+    delete formData['repeat_password'];
+    delete formData['remember_password'];
     console.log(formData);
-
     try {
       const resp = await APIConnector.post(
-        BACKEND_SERVER_URL + '/session',
+        BACKEND_SERVER_URL + '/users',
         formData,
       );
-      console.log(resp.status);
-      return true;
+      return resp.ok;
     } catch (err) {
-      console.error(err);
       return false;
     }
-  }
-
-  /**
-   * Метод, удаляющий обработчики событий
-   */
-  removeEventListeners() {}
-
-  /**
-   * Основной метод, который вызывается при закрытии страницы
-   */
-  remove() {
-    this.removeEventListeners();
   }
 }

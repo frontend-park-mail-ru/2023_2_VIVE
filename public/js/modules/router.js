@@ -1,9 +1,11 @@
-import authView from '../jsviews/authView.js';
-import menuView from '../jsviews/menuView.js';
-import regView from '../jsviews/regView.js';
-import resCreationView from '../jsviews/resCreationView.js';
-import resViewView from '../jsviews/resViewView.js';
-import vacsView from '../jsviews/vacsView.js';
+import authView from '../views/authView.js';
+import footerView from '../views/footerView.js';
+import menuView from '../views/menuView.js';
+import page404View from '../views/page404View.js';
+import regView from '../views/regView.js';
+import resCreationView from '../views/resCreationView.js';
+import resViewView from '../views/resViewView.js';
+import vacsView from '../views/vacsView.js';
 
 /**
  * Класс Router для управления навигацией по сайту
@@ -37,9 +39,11 @@ class Router {
       appReg: new regView('app'),
       empReg: new regView('emp'),
       menu: new menuView(),
+      footer: new footerView(),
+      page404: new page404View(),
     };
 
-    this.lastUrl = '';
+    this.prevView = undefined;
   }
 
   /**
@@ -48,17 +52,20 @@ class Router {
    * @returns {Promise<void>} - Промис, который разрешается, когда навигация успешно завершена (URL существует)
    */
   async goToLink(url) {
-    if (url in this.routes) {
-      if (this.lastUrl) {
-        this.objs[this.routes[url]].remove();
-      }
-
-      this.lastUrl = url;
-      this.objs['menu'].render();
-      this.objs[this.routes[url]].render();
-    } else {
-      console.error(`Такого адреса не существует: ${url}`);
+    if (this.prevView) {
+      this.prevView.remove();
     }
+
+    this.objs['menu'].remove();
+    this.objs['footer'].remove();
+    if (url in this.routes) {
+      this.objs['menu'].render();
+      this.objs['footer'].render();
+      this.prevView = this.objs[this.routes[url]];
+    } else {
+      this.prevView = this.objs['page404'];
+    }
+    this.prevView.render();
   }
 
   /**
