@@ -25,6 +25,9 @@ class Router {
       '/app_reg': 'appReg',
       '/emp_reg': 'empReg',
       '/profile': 'profile',
+      '/profile/settings': 'profile',
+      '/profile/resumes': 'profile',
+      '/profile/responses': 'profile',
       '/vacancy': 'vacancy',
       '/': 'vacs',
     };
@@ -55,6 +58,7 @@ class Router {
       }
 
       this.lastUrl = url;
+      history.pushState(null, null, url);
       this.objs['menu'].render();
       this.objs[this.routes[url]].render();
     } else {

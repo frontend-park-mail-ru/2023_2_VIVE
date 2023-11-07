@@ -91,6 +91,7 @@
 .profile__btn--active {
     border-bottom: 3px solid var(--button-color-active);
     color: var(--button-color-active);
+    cursor: pointer;
 }
 
 .profile__btn--hover {

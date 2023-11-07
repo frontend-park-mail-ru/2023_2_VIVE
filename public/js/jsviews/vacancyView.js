@@ -12,11 +12,6 @@ export default class profileView {
 
 
     /**
-     * Метод, добавляющий обработчики событий на страницу
-     */
-    addEventListeners() {}
-
-    /**
      * Метод, удаляющий обработчики событий
      */
     removeEventListeners() {}
