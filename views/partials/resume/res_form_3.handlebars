@@ -1,13 +1,13 @@
 <label class="res__form__input d-block">
-  {{> input_checkbox }}
+  {{> input_checkbox (object name="is_expirience")}}
   <span>У меня есть опыт работы</span>
 </label>
 
 {{#each (array 
-(object title="В какой компании вы работали" name="company" placeholder="Компания")
-(object title="На какой должности" name="post" placeholder="Должность")
-(object title="Начало работы" name="start_of_work" type="date")
-(object title="Год окончания" name="final_year_of_work" placeholder="Год окончания")
+(object title="В какой компании вы работали" name="expirience_organization_name" placeholder="Компания")
+(object title="На какой должности" name="expirience_position" placeholder="Должность")
+(object title="Начало работы" name="expirience_start_date" type="date")
+(object title="Год окончания" name="expirience_end_date" placeholder="Год окончания" type="date")
 )}}
 
 {{> input (object obj=this
@@ -22,7 +22,7 @@ class="res__form__input")}}
 </label>
 
 {{#each (array 
-(object title="Расскажите о ваших обязанностях и достижениях" name="achievs" placeholder="Достижения и обязанности")
+(object title="Расскажите о ваших обязанностях и достижениях" name="expirience_description" placeholder="Достижения и обязанности")
 )}}
 
 {{> input (object obj=this

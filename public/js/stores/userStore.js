@@ -1,10 +1,11 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import router from '../modules/router.js';
+import Store from './store.js';
 
-class UserStore {
+class UserStore extends Store {
     constructor() {
-
+        super();
     }
 
     async isLoggedIn() {

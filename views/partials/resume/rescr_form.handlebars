@@ -10,11 +10,11 @@
   {{> (concat 'res_form_' page) }}
   
   <div class="form__actions rescr__form__actions_{{page}}">
-    {{#if page}}
+    {{#iff page '>' 1}}
     {{> link-btn (object text="Назад"
-    class="link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm")}}
-    {{/if}}
-    <button type="submit" class="link-btn link-btn_blue link-btn_pd-med link-btn_bd-rad-sm">
+    class="js-rescr-back link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm")}}
+    {{/iff}}
+    <button type="submit" class="{{#iff page '==' steps.length}} js-rescr-submit {{else}} js-rescr-save-continue {{/iff}} link-btn link-btn_blue link-btn_pd-med link-btn_bd-rad-sm">
       <span class="link-btn__text">
         {{#iff page '==' steps.length}}
         Создать резюме

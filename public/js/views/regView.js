@@ -1,7 +1,7 @@
 import APIConnector from '../modules/APIConnector.js';
 import router from '../modules/router.js';
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
-import { getHrefFromLink } from '../utils.js';
+import { getHrefFromLink, getFormObject } from '../utils.js';
 import { formIsValid } from './formValidation.js';
 import View from './view.js';
 
@@ -126,7 +126,7 @@ export default class regView extends View {
     const form = document.querySelector('.form');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const formData = this.getFormObject(new FormData(form));
+      const formData = getFormObject(new FormData(form));
 
       if (formIsValid(form, formData, { is_reg: true })) {
         if (await this.sendForm(formData)) {
@@ -153,18 +153,6 @@ export default class regView extends View {
         // }
       }
     });
-  }
-
-  /**
-   * Метод, получающий объект данных формы
-   * @returns {Object} объект с данными формы
-   */
-  getFormObject(formData) {
-    const formObject = {};
-    formData.forEach(function (value, key) {
-      formObject[key] = value;
-    });
-    return formObject;
   }
 
   /**
