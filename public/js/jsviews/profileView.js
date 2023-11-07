@@ -14,8 +14,16 @@ export default class profileView {
 
     const data = await this.getUser()
 
+    let type = '';
+
+    if (data['role'] === 'applicant') {
+      type = 'profile_app';
+    } else {
+      type = 'profile_emp';
+    }
+
     // eslint-disable-next-line no-undef
-    const template = Handlebars.templates['profile_app'];
+    const template = Handlebars.templates[type];
     document.querySelector('main').innerHTML = template({state: this.state, data: data});
 
     this.addEventListeners();
@@ -38,11 +46,13 @@ export default class profileView {
     const profileButtons = document.querySelectorAll('.profile__btn');
     const settingButtons = document.querySelectorAll('[data-name="changing"]');
     const cancelButtons = document.querySelectorAll('[data-name="cancel-changing"]');
+    const sendButtons = document.querySelectorAll('[data-name="send-form"]');
 
     profileButtons.forEach(button => {
       button.addEventListener('click', () => {
         const buttonName = button.getAttribute('data-name');
-        this.changeStateAndRender(buttonName);
+        this.state = buttonName;
+        router.goToLink(`/profile/${buttonName}`)
       });
     });
 
@@ -64,11 +74,38 @@ export default class profileView {
         defaultBlock.classList.remove('ch-i__d-none');
       });
     });
-  }
-  
-  changeStateAndRender(newState) {
-    this.state = newState;
-    router.goToLink(`/profile/${newState}`)
+
+    sendButtons.forEach(button => {
+      button.addEventListener('click', async () => {
+        const changingFullNameForm = button.closest('.changing-inpute');
+        const fields = changingFullNameForm.querySelectorAll('input');
+
+        const formData = new FormData();
+        fields.forEach(input => {
+          formData.append(input.name, input.value);
+        });
+
+        try {
+          const user = await this.getUser();
+
+          delete user.id;
+          delete user.role;
+          
+          fields.forEach(input => {
+            user[input.name.replace(/-/g, '_')] = input.value;
+          });
+
+          const resp = await APIConnector.put(
+            BACKEND_SERVER_URL + '/current_user',
+            user,
+          );
+          console.log(resp.status);
+
+        } catch (error) {
+          console.error('Error: ', error);
+        }
+      });
+    });
   }
 
   /**

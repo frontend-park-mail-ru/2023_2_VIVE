@@ -171,6 +171,7 @@ export default class regView {
    */
   async sendForm(formData) {
     formData['role'] = this.role == 'app' ? 'applicant' : 'employer';
+    console.log(formData);
     delete formData['repeat_password'];
     delete formData['remember_password'];
     try {
