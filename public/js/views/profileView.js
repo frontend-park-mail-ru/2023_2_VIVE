@@ -1,9 +1,12 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import router from '../modules/router.js';
+import User from '../stores/userStore.js';
+import View from './view.js';
 
-export default class profileView {
+export default class profileView extends View {
   constructor() {
+    super();
     this.state = 'settings';
   }
 
@@ -12,7 +15,7 @@ export default class profileView {
    */
   async render() {
 
-    const data = await this.getUser()
+    const data = await User.getUser();
 
     let type = '';
 
@@ -27,16 +30,6 @@ export default class profileView {
     document.querySelector('main').innerHTML = template({state: this.state, data: data});
 
     this.addEventListeners();
-  }
-
-  async getUser() {
-    try {
-      const resp = await APIConnector.get(BACKEND_SERVER_URL + '/current_user');
-      return await resp.json();
-    } catch (err) {
-      console.error(err);
-      return undefined;
-    }
   }
 
   /*
@@ -86,7 +79,7 @@ export default class profileView {
         });
 
         try {
-          const user = await this.getUser();
+          const user = await User.getUser();
 
           delete user.id;
           delete user.role;
@@ -106,17 +99,5 @@ export default class profileView {
         }
       });
     });
-  }
-
-  /**
-   * Метод, удаляющий обработчики событий
-   */
-  removeEventListeners() {}
-
-  /**
-   * Основной метод, который вызывается при закрытии страницы
-   */
-  remove() {
-    this.removeEventListeners();
   }
 }

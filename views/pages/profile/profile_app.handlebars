@@ -8,15 +8,15 @@
                     <div class="profile__primary-text">Расскажите о себе</div>
                 </div>
                 <div class="profile__switch-btns">
-                    <div class="profile__btn {{#iff state 'settings'}}profile__btn--active{{else}}profile__btn--hover{{/iff}}" data-name="settings">
+                    <div class="profile__btn {{#iff state '==' 'settings'}}profile__btn--active{{else}}profile__btn--hover{{/iff}}" data-name="settings">
                         <div class="profile__btn-text">Настройки</div>
                         <div class="profile__line"></div>
                     </div>
-                    <div class="profile__btn {{#iff state 'responses'}}profile__btn--active{{else}}profile__btn--hover{{/iff}}" data-name="responses">
+                    <div class="profile__btn {{#iff state '==' 'responses'}}profile__btn--active{{else}}profile__btn--hover{{/iff}}" data-name="responses">
                         <div class="profile__btn-text">Отклики</div>
                         <div class="profile__line"></div>
                     </div>
-                    <div class="profile__btn {{#iff state 'resumes'}}profile__btn--active{{else}}profile__btn--hover{{/iff}}" data-name="resumes">
+                    <div class="profile__btn {{#iff state '==' 'resumes'}}profile__btn--active{{else}}profile__btn--hover{{/iff}}" data-name="resumes">
                         <div class="profile__btn-text">Резюме</div>
                         <div class="profile__line"></div>
                     </div>
@@ -25,11 +25,11 @@
         </div>
     </div>
     
-    {{#iff state 'settings'}}
+    {{#iff state '==' 'settings'}}
     {{> profile_app_settings}}
-    {{else iff state 'responses'}}
+    {{else iff state '==' 'responses'}}
     {{> profile_app_responses}}
-    {{else iff state 'resumes'}}
+    {{else iff state '==' 'resumes'}}
     {{> profile_app_resumes}}
     {{else}}
     {{> profile_app_settings}}

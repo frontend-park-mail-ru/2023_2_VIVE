@@ -25,7 +25,9 @@ export default class vacsView extends View {
   async getVacancies() {
     try {
       const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies');
-      return await resp.json();
+      const data = await resp.json();
+      console.log(data);
+      return data;
     } catch (err) {
       console.error(err);
       return undefined;

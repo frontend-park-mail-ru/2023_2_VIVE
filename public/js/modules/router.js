@@ -6,8 +6,8 @@ import regView from '../views/regView.js';
 import resCreationView from '../views/resCreationView.js';
 import resViewView from '../views/resViewView.js';
 import vacsView from '../views/vacsView.js';
-import profileView from '../jsviews/profileView.js';
-import vacancyView from '../jsviews/vacancyView.js'
+import profileView from '../views/profileView.js';
+import vacancyView from '../views/vacancyView.js'
 
 /**
  * Класс Router для управления навигацией по сайту
