@@ -13,6 +13,24 @@
   margin: auto;
 }
 
+.primary-btn {
+  display: flex;
+  height: 40px;
+  padding: 6px 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.complex-btn {
+  display: flex;
+  align-items: center;
+}
+
+.primary-btn_blue-primary {
+  background-color: var(--button-color-primary-default);
+}
+
 /* transp */
 
 .link-btn_transp {
@@ -47,7 +65,10 @@
 
 /* grey */
 
-
+/* blue-no-db */
+.link-btn_blue-without-bd {
+  color: var(--button-color-primary-default);
+}
 
 /* transp-box-blue */
 
@@ -142,6 +163,10 @@
   border-radius: 7px;
 }
 
+.link-btn-bd-rad-10 {
+  border-radius: 10px;
+}
+
 .link-btn_bd-rad-med {
   border-radius: 12px;
 }
@@ -161,4 +186,9 @@
 .link-btn_semi-bold {
   font-weight: 600;
   border-width: 2px;
+}
+
+/* green */
+.link-btn_green {
+  border: 1px solid var(--greeen-main);
 }

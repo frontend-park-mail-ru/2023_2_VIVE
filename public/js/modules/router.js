@@ -6,6 +6,8 @@ import regView from '../views/regView.js';
 import resCreationView from '../views/resCreationView.js';
 import resViewView from '../views/resViewView.js';
 import vacsView from '../views/vacsView.js';
+import profileView from '../jsviews/profileView.js';
+import vacancyView from '../jsviews/vacancyView.js'
 
 /**
  * Класс Router для управления навигацией по сайту
@@ -27,6 +29,11 @@ class Router {
       '/emp_reg': 'empReg',
       '/resume_creation': 'resCreation',
       '/resume_view': 'resView',
+      '/profile': 'profile',
+      '/profile/settings': 'profile',
+      '/profile/resumes': 'profile',
+      '/profile/responses': 'profile',
+      '/vacancy': 'vacancy',
       '/': 'vacs',
     };
 
@@ -38,6 +45,8 @@ class Router {
       empAuth: new authView('emp'),
       appReg: new regView('app'),
       empReg: new regView('emp'),
+      profile: new profileView(),
+      vacancy: new vacancyView(),
       menu: new menuView(),
       footer: new footerView(),
       page404: new page404View(),
@@ -59,6 +68,7 @@ class Router {
     this.objs['menu'].remove();
     this.objs['footer'].remove();
     if (url in this.routes) {
+      history.pushState(null, null, url);
       this.objs['menu'].render();
       this.objs['footer'].render();
       this.prevView = this.objs[this.routes[url]];

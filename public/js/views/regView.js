@@ -173,6 +173,7 @@ export default class regView extends View {
    */
   async sendForm(formData) {
     formData['role'] = this.role == 'app' ? 'applicant' : 'employer';
+    console.log(formData);
     delete formData['repeat_password'];
     delete formData['remember_password'];
     console.log(formData);

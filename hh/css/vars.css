@@ -1,0 +1,18 @@
+:root {
+    --text-dark: #000;
+    --text-filled: #5E5E5E;
+    --text-red-primary: #EF4A3C;
+    --background-disabled: #D2D2D2;
+    --main-background-grey: #f7f7f7;
+    --button-color-primary-default: #0496ff;
+    --greeen-main: #31B546;
+    --button-color-active: #43B1FF;
+    --button-color-hover: #FBFBFB;
+    --default-text-prussian-blue: #042439;
+    --text-form-inactive: #A6A6A6;
+    --orange-main: #FFBC42;
+    --main-error: #ef4a3c;
+    --profile-blue-hover: #063452;
+    --profile-blue-primary-default: #0496ff;
+    --card-back-default: rgba(210, 224, 234, 0.37);
+}

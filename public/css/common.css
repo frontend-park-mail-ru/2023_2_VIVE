@@ -5,6 +5,9 @@
 @import url("components/input-checkbox.css");
 @import url("components/input-radio.css");
 @import url("components/input.css");
+@import url("components/response.css");
+@import url("components/resume.css");
+@import url("components/vacancie.css");
 
 
 .x-large-font {
@@ -64,3 +67,8 @@
   margin-right: 10px;
 }
 
+.cursor-img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}

@@ -1,0 +1,100 @@
+.profile__header {
+    width: 1187px;
+    padding: 10px 80px 0 80px;
+    align-items: center;
+    gap: 50px;
+    border-radius: 12px;
+    height: 220px;
+}
+
+.profile__header--background--default-hh {
+    background: linear-gradient(to bottom, var(--profile-blue-primary-default) 50%, var(--profile-blue-hover) 50%);
+}
+
+.profile_image {
+    width: 198px;
+    height: 198px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 5px solid var(--profile-blue-hover);
+    padding: 5px;
+}
+
+.profile__info {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile__main-info {
+    display: flex;
+    height: 50%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.profile__about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5px;
+    flex-shrink: 0;
+    align-self: stretch;
+}
+
+.profile__main-text {
+    color: var(--main-background-grey);
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 28px;
+}
+
+.profile__primary-text {
+    color: var(--text-form-inactive);
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: 18px;
+}
+
+.profile__switch-btns {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.profile__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile__btn-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.profile__btn--active {
+    border-bottom: 3px solid var(--button-color-active);
+    color: var(--button-color-active);
+    cursor: pointer;
+}
+
+.profile__btn--hover {
+    color: var(--button-color-hover);
+    cursor: pointer;
+}
