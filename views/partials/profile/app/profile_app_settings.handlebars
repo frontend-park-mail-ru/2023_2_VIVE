@@ -1,41 +1,125 @@
 <div class="profile__settings">
   <div class="setting-inputes-block">
-    <div class="setting-inpute">
+    <div class="changing-inpute ch-i__d-none" data-name="changing-change-full-name">
+      <div class="changing-inpute__field">
+        <div class="changing-inpute__value">
+          Фамилия
+        </div>
+          <input class="changing-inpute__label" type="text" placeholder="Фамилия">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="changing-inpute__value">
+          Имя
+        </div>
+        <input class="changing-inpute__label" type="text" placeholder="Имя">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="changing-inpute__value">
+          Пароль
+        </div>
+        <input class="changing-inpute__label" type="text" placeholder="Введите пароль">
+      </div>
+      <div class="changing-inpute__btns">
+        <div class="setting-inpute__button" data-name="cancel-changing">
+          Отменить
+        </div>
+        <div class="link-btn primary-btn link-btn-bd-rad-10 primary-btn_blue-primary resume__btns-text resume__btns-text--primary">
+          Применить
+        </div>
+      </div>
+    </div>
+    <div class="setting-inpute" data-name="setting-change-full-name">
       <div class="setting-inpute__main-text">
         ФИО
       </div>
       <div class="settings-inpute__field">
-        Иванов Иван Иванович
+        {{ data.last_name }} {{ data.first_name }}
       </div>
-      <div class="setting-inpute__button">
+      <div class="setting-inpute__button" data-name="changing" type="change-full-name">
         Изменить
       </div>
     </div>
-    <div class="setting-inpute">
+    <div class="changing-inpute ch-i__d-none" data-name="changing-change-mail">
+      <div class="changing-inpute__field">
+        <div class="changing-inpute__value">
+          Почта
+        </div>
+          <input class="changing-inpute__label" type="text" placeholder="Введите текущую почту">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="changing-inpute__value">
+          Новая почта
+        </div>
+        <input class="changing-inpute__label" type="text" placeholder="Почта">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="changing-inpute__value">
+          Пароль
+        </div>
+        <input class="changing-inpute__label" type="text" placeholder="Введите пароль">
+      </div>
+      <div class="changing-inpute__btns">
+        <div class="setting-inpute__button" data-name="cancel-changing">
+          Отменить
+        </div>
+        <div class="link-btn primary-btn link-btn-bd-rad-10 primary-btn_blue-primary resume__btns-text resume__btns-text--primary">
+          Применить
+        </div>
+      </div>
+    </div>
+    <div class="setting-inpute" data-name="setting-change-mail">
       <div class="setting-inpute__main-text">
         Почта
       </div>
       <div class="settings-inpute__field">
-        example@example.com
+       {{ data.email }}
       </div>
-      <div class="setting-inpute__button">
+      <div class="setting-inpute__button" data-name="changing" type="change-mail">
         Изменить
       </div>
     </div>
-    <div class="setting-inpute">
+    <div class="changing-inpute ch-i__d-none" data-name="changing-change-password">
+      <div class="changing-inpute__field">
+        <div class="changing-inpute__value">
+          Старый пароль
+        </div>
+          <input class="changing-inpute__label" type="text" placeholder="Пароль">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="changing-inpute__value">
+          Новый пароль
+        </div>
+        <input class="changing-inpute__label" type="text" placeholder="Пароль">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="changing-inpute__value">
+          Повторите пароль
+        </div>
+        <input class="changing-inpute__label" type="text" placeholder="Повторите пароль">
+      </div>
+      <div class="changing-inpute__btns">
+        <div class="setting-inpute__button" data-name="cancel-changing">
+          Отменить
+        </div>
+        <div class="link-btn primary-btn link-btn-bd-rad-10 primary-btn_blue-primary resume__btns-text resume__btns-text--primary">
+          Применить
+        </div>
+      </div>
+    </div>
+    <div class="setting-inpute" data-name="setting-change-password">
       <div class="setting-inpute__main-text">
         Пароль
       </div>
       <div class="settings-inpute__field">
         ***************************
       </div>
-      <div class="setting-inpute__button">
+      <div class="setting-inpute__button" data-name="changing" type="change-password">
         Изменить
       </div>
     </div>
   </div>
   <div class="setting__btn">
-    <div class="setting__delete-btn">
+    <div class="setting__delete-btn" data-name="delete-account" style="cursor:not-allowed;">
       Удалить аккаунт
     </div>
   </div>

@@ -4,8 +4,8 @@
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="profile__main-text">Иванов Иван Иванович</div>
-                    <div class="profile__primary-text">Краткая информация</div>
+                    <div class="profile__main-text">{{ data.last_name }} {{ data.first_name }}</div>
+                    <div class="profile__primary-text">Расскажите о себе</div>
                 </div>
                 <div class="profile__switch-btns">
                     <div class="profile__btn {{#iff state 'settings'}}profile__btn--active{{else}}profile__btn--hover{{/iff}}" data-name="settings">

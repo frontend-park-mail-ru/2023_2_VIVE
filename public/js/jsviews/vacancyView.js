@@ -10,7 +10,6 @@ export default class profileView {
         this.addEventListeners();
     }
 
-
     /**
      * Метод, удаляющий обработчики событий
      */
