@@ -4,6 +4,7 @@ import menuView from '../jsviews/menuView.js';
 import regView from '../jsviews/regView.js';
 import vacsView from '../jsviews/vacsView.js';
 import profileView from '../jsviews/profileView.js';
+import vacancyView from '../jsviews/vacancyView.js'
 
 /**
  * Класс Router для управления навигацией по сайту
@@ -24,6 +25,7 @@ class Router {
       '/app_reg': 'appReg',
       '/emp_reg': 'empReg',
       '/profile': 'profile',
+      '/vacancy': 'vacancy',
       '/': 'vacs',
     };
 
@@ -34,6 +36,7 @@ class Router {
       appReg: new regView('app'),
       empReg: new regView('emp'),
       profile: new profileView(),
+      vacancy: new vacancyView(),
       menu: new menuView(),
     };
 

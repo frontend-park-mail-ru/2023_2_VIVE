@@ -55,3 +55,9 @@
     border-radius: 30px;
     background: var(--card-back-default); 
 }
+
+.vacancie__btns {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
