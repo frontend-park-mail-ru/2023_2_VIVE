@@ -24,7 +24,7 @@ export const Constraints = {
   },
 
   // Password constraint
-  email: {
+  password: {
     check: validator.checkPassword,
     error: () => {
       return 'Пароль должен быть от 6 до 128 символов, иметь заглавные буквы';
