@@ -26,6 +26,11 @@ export const FieldType = {
         return Constraints.digits.check(data, requiredFlag);
       },
     },
+    nodigits: {
+      check: (data, requiredFlag) => {
+        return Constraints.nodigits.check(data, requiredFlag);
+      },
+    },
     count_words: {
       check: (data, requiredFlag) => {
         return Constraints.count_words.check(data, requiredFlag);
@@ -80,11 +85,28 @@ export const FieldType = {
 
 // const preCheck = (fieldType, data) => {};
 
-// Constraints data for form validation
+/**
+ * Constraints data for form validation. On default all constraint flags are false.
+ * That means that check() function will return true anyway,
+ * even if you make your flag false by hand.
+ *
+ * Exception is `passwordFlag` it is an object with following fields:
+ * ```js
+ * {
+ * minLength: 6,
+ * maxLength: 128,
+ * includeUpperCase: true,
+ * includeDigits: true,
+ * }
+ * ```
+ *
+ */
 export const Constraints = {
   // When data is required
   required: {
-    check: validator.checkRequired.bind(validator),
+    check: (data, requiredFlag) => {
+      return requiredFlag && data;
+    },
     // check: (data, required) => {
     //   return required && !data;
     // },
@@ -95,7 +117,13 @@ export const Constraints = {
 
   // Email constraint
   email: {
-    check: validator.checkEmail.bind(validator),
+    check: (data, emailFlag) => {
+      if (!emailFlag) {
+        return true;
+      }
+      const res = data.match(EMAIL_REGEX) || [];
+      return res.length == 1;
+    },
     error: () => {
       return 'Некорректный email';
     },
@@ -103,31 +131,73 @@ export const Constraints = {
 
   // Password constraint
   password: {
-    check: validator.checkPassword,
+    check: (
+      data,
+      passwordFlag = {
+        minLength: 6,
+        maxLength: 128,
+        includeUpperCase: true,
+        includeDigits: true,
+      },
+    ) => {
+      if (!passwordFlag) {
+        return false;
+      }
+
+      const isLengthValid =
+        validator.checkMinLen(data, minLength) &&
+        validator.checkMaxLen(data, maxLength);
+
+      const hasUpperCase = includeUpperCase
+        ? data.split('').some((sym) => validator.isUpperCase(sym))
+        : true;
+
+      const hasDigits = includeDigits
+        ? data.split('').some((sym) => validator.isDigit(sym))
+        : true;
+
+      const symbolsAreValid = data
+        .split('')
+        .every((sym) => validator.checkPasswordSymbol(sym));
+
+      return isLengthValid && hasUpperCase && hasDigits && symbolsAreValid;
+    },
+
+    hasDigits(str) {
+      return str.split('').some((sym) => validator.isDigit(sym));
+    },
     error: () => {
       return 'Пароль должен быть от 6 до 128 символов, иметь заглавные буквы';
     },
   },
 
-  // Constraint on data containing digits
+  // Constraint on data must containing digits
   digits: {
-    check: validator.checkDigits.bind(validator),
-    // check: (data, digits) => {
-    //   return digits ? data.split('').some((sym) => this.isDigit(sym)) : true;
-    // },
+    check: (data, digitsAllowed) => {
+      return digitsAllowed ? validator.hasDigits(data) : true;
+    },
     error: () => {
       return 'Это поле должно содержать цифры';
     },
   },
 
+  // Constraint on data containing no digits
+  nodigits: {
+    check: (data, noDigitsAllowed) => {
+      return noDigitsAllowed ? !validator.hasDigits(data) : true;
+    },
+    error: () => {
+      return 'Это поле не должно содержать цифры';
+    },
+  },
+
   // Constraint on word's number
   count_words: {
-    check: validator.checkCountWords.bind(validator),
-    // check: (data, countWords) => {
-    //   return countWords
-    //     ? data.trim().split(WORDS_SEPARATOR_REG_EX).length <= countWords
-    //     : false;
-    // },
+    check: (data, countWordsFlag) => {
+      return data.trim() !== '' && countWordsFlag
+        ? validator.countWords(data) <= countWordsFlag
+        : false;
+    },
     error: (wordCount) => {
       return `Максимальное количество слов: ${wordCount}`;
     },
@@ -135,10 +205,9 @@ export const Constraints = {
 
   // Constraint on max length of data
   max_len: {
-    check: validator.checkMaxLen.bind(validator),
-    // check: (data, maxLen) => {
-    //   return maxLen ? data.length <= maxLen : false;
-    // },
+    check: (data, maxLenFlag) => {
+      return maxLenFlag ? data.length <= maxLenFlag : false;
+    },
     error: (maxLen) => {
       return `Максимальная длина: ${maxLen}`;
     },
@@ -146,10 +215,9 @@ export const Constraints = {
 
   // Constraint on min length of data
   min_len: {
-    check: validator.checkMinLen.bind(validator),
-    // check: (data, minLen) => {
-    //   return minLen >= 0 ? data.length >= minLen : false;
-    // },
+    check: (data, minLenFlag) => {
+      return minLenFlag >= 0 ? data.length >= minLenFlag : false;
+    },
     error: (minLen) => {
       return `Минимальная длина: ${minLen}`;
     },
@@ -157,29 +225,22 @@ export const Constraints = {
 
   // Data must be valid date formatting like (dd.mm.yyyy)
   date: {
-    check: validator.checkDate.bind(validator),
-    // check: (data, date) => {
-    //   if (!date) {
-    //     return false;
-    //   }
-    //   res = data.match(DATE_REGEX) || [];
-    //   isValid = res.length == 1;
-    //   if (!isValid) {
-    //     return false;
-    //   }
+    check: (data, dateFlag) => {
+      if (!dateFlag) {
+        return false;
+      }
+      const res = data.match(DATE_REGEX) || [];
+      const isValid = res.length == 1;
+      if (!isValid) {
+        return false;
+      }
 
-    //   tokens = data.split('.');
-    //   day = tokens[0];
-    //   month = tokens[1];
-    //   year = tokens[2];
-
-    //   res = Date.parse(`${year}-${month}-${day}`);
-    //   if (isNaN(res)) {
-    //     return false;
-    //   }
-    //   return true;
-    //   // return this.isValidDate(day, month, year);
-    // },
+      const tokens = data.split('.');
+      const day = tokens[0];
+      const month = tokens[1];
+      const year = tokens[2];
+      return validator.isValidDate(day, month, year);
+    },
     error: () => {
       return 'Это поле должно содержать дату';
     },
@@ -187,10 +248,9 @@ export const Constraints = {
 
   // Data must be valid year
   year: {
-    check: validator.checkYear.bind(validator),
-    // check: (data, year) => {
-    //   return year ? Number(data) > 1900 && Number(data) < 2100 : false;
-    // },
+    check: (data, yearFlag) => {
+      return yearFlag ? this.isValidYear(data) : false;
+    },
     error: () => {
       return 'Это поле должно содержать корректный год';
     },

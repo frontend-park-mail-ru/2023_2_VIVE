@@ -13,16 +13,16 @@ class resCreationStore extends Store {
                 {
                     name: "first_name",
                     type: "text",
-                    count_words: 1,
-                    digits: false,
                     required: true,
+                    count_words: 1,
+                    nodigits: true,
                 },
                 {
                     name: "last_name",
                     type: "text",
-                    count_words: 1,
-                    digits: false,
                     required: true,
+                    count_words: 1,
+                    nodigits: true,
                 },
                 {
                     name: "gender",
@@ -33,6 +33,7 @@ class resCreationStore extends Store {
                     name: "birthday",
                     type: "date",
                     required: true,
+                    digits: true,
                 },
             ],
             [
