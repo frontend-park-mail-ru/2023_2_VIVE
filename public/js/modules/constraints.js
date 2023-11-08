@@ -12,43 +12,48 @@ export const FieldType = {
       },
     },
     email: {
-      check: (data, requiredFlag) => {
-        return Constraints.email.check(data, requiredFlag);
+      check: (data, emailFlag) => {
+        return Constraints.email.check(data, emailFlag);
       },
     },
     password: {
-      check: (data, requiredFlag) => {
-        return Constraints.password.check(data, requiredFlag);
+      check: (data, passwordFlag) => {
+        return Constraints.password.check(data, passwordFlag);
       },
     },
     digits: {
-      check: (data, requiredFlag) => {
-        return Constraints.digits.check(data, requiredFlag);
+      check: (data, digitsFlag) => {
+        return Constraints.digits.check(data, digitsFlag);
       },
     },
     nodigits: {
-      check: (data, requiredFlag) => {
-        return Constraints.nodigits.check(data, requiredFlag);
+      check: (data, nodigitsFlag) => {
+        return Constraints.nodigits.check(data, nodigitsFlag);
       },
     },
     count_words: {
-      check: (data, requiredFlag) => {
-        return Constraints.count_words.check(data, requiredFlag);
+      check: (data, countWordsFlag) => {
+        return Constraints.count_words.check(data, countWordsFlag);
       },
     },
     max_len: {
-      check: (data, requiredFlag) => {
-        return Constraints.max_len.check(data, requiredFlag);
+      check: (data, maxLenFlag) => {
+        return Constraints.max_len.check(data, maxLenFlag);
       },
     },
     min_len: {
-      check: (data, requiredFlag) => {
-        return Constraints.min_len.check(data, requiredFlag);
+      check: (data, minLenFlag) => {
+        return Constraints.min_len.check(data, minLenFlag);
       },
     },
     year: {
-      check: (data, requiredFlag) => {
-        return Constraints.year.check(data, requiredFlag);
+      check: (data, yearFlag) => {
+        return Constraints.year.check(data, yearFlag);
+      },
+    },
+    regExp: {
+      check: (data, regExpFlag) => {
+        return Constraints.year.check(data, regExpFlag);
       },
     },
   },
@@ -90,7 +95,8 @@ export const FieldType = {
  * That means that check() function will return true anyway,
  * even if you make your flag false by hand.
  *
- * Exception is `passwordFlag` it is an object with following fields:
+ * Exceptions are:
+ * - `passwordFlag` is an object with following fields:
  * ```js
  * {
  * minLength: 6,
@@ -99,7 +105,7 @@ export const FieldType = {
  * includeDigits: true,
  * }
  * ```
- *
+ * - `regExpFlag` is an regular expression string
  */
 export const Constraints = {
   // When data is required
@@ -107,9 +113,6 @@ export const Constraints = {
     check: (data, requiredFlag) => {
       return requiredFlag && data;
     },
-    // check: (data, required) => {
-    //   return required && !data;
-    // },
     error: () => {
       return 'Это поле обязательно для заполнения';
     },
@@ -191,6 +194,16 @@ export const Constraints = {
     },
   },
 
+  // Constraint on data containing only digits
+  onlydigits: {
+    check: (data, onlyDigitsFlag) => {
+      return onlyDigitsFlag ? validator.onlyDigits(data) : true;
+    },
+    error: () => {
+      return 'Это поле должно содержать только цифры';
+    },
+  },
+
   // Constraint on word's number
   count_words: {
     check: (data, countWordsFlag) => {
@@ -249,10 +262,20 @@ export const Constraints = {
   // Data must be valid year
   year: {
     check: (data, yearFlag) => {
-      return yearFlag ? this.isValidYear(data) : false;
+      return yearFlag ? validator.isValidYear(data) : false;
     },
     error: () => {
       return 'Это поле должно содержать корректный год';
+    },
+  },
+
+  // RegExp constraint on data
+  regExp: {
+    check: (data, regExpFlag) => {
+      return validator.fullMatchRegExp(data, regExpFlag);
+    },
+    error: () => {
+      return 'Неверный формат';
     },
   },
 };
@@ -293,7 +316,7 @@ export const constraintExists = (fieldTypeName, constraintName) => {
  *  first_name: "Jhon",
  * };
  * ```
- * @returns {object} Object of errors.
+ * @returns {object} Object with errors.
  * @throws Will throw error if in the given metaData there is no field `name`.
  */
 export const validateForm = (metaDataArr, dataObj) => {
@@ -309,13 +332,7 @@ export const validateForm = (metaDataArr, dataObj) => {
     const fieldName = metaData.name;
     const fieldData = dataObj[fieldName];
 
-    // if (!PreCheckField[fieldType].preCheck(fieldData)) {
-    //   res[fieldName] = PreCheckField[fieldType].error();
-    // } else {
     for (let field in metaData) {
-      // if (res[fieldName] !== undefined) {
-      //   break;
-      // }
       if (constraintExists(fieldType, field)) {
         const constraint = metaData[field];
         const errorMsg = validateFormField(
@@ -350,13 +367,12 @@ export const validateFormField = (
   fieldType,
   constraint,
   constraintValue,
-  fieldData /* , check */,
+  fieldData,
 ) => {
   if (!constraintExists(fieldType, constraint)) {
     throw new Error(`wrong given type: ${constraint}`);
   }
 
-  // if (fieldType)
   if (FieldType[fieldType][constraint].check(fieldData, constraintValue)) {
     return null;
   }

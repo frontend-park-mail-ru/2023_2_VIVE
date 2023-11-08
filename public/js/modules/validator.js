@@ -8,6 +8,7 @@ const ALPHANUMERIC_REGEX = /^[a-zA-Z0-9]$/;
 const UPPERCASE_REGEX = /^[A-Z]$/;
 const DIGIT_REGEX = /^[0-9]$/g;
 const DATE_REGEX = /^\d{1,2}\.\d{1,2}\.\d{4}$/g;
+const ONLY_DIGITS_REDEX = /^\d+$/;
 
 /**
  * Class that validates input data on frontend level.
@@ -90,6 +91,16 @@ class Validator {
 
   hasDigits(str) {
     return str.split('').some((sym) => this.isDigit(sym));
+  }
+
+  onlyDigits(str) {
+    const res = str.match(ONLY_DIGITS_REDEX) || [];
+    return res.length == 1;
+  }
+
+  fullMatchRegExp(str, regExp) {
+    const res = str.match(regExp) || [];
+    return res.length == 1;
   }
 
   /**
