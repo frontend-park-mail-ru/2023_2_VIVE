@@ -1,3 +1,5 @@
+import { Constraints, validateForm } from '../modules/constraints.js';
+import ResCreationStore from '../stores/resCreationStore.js';
 import User from '../stores/userStore.js';
 import { getFormObject } from '../utils.js';
 import View from './view.js';
@@ -30,13 +32,15 @@ export default class resCreationView extends View {
     if (save_cont_btn) {
       save_cont_btn.addEventListener('click', event => {
         event.preventDefault();
-        this.page++;
         this.render();
         const cur_data = getFormObject(new FormData(form));
         // TODO валидация формы
         console.log(cur_data);
+        console.log("validate result: ",validateForm(ResCreationStore.form_fields[this.page - 1], cur_data))
         Object.assign(this.data, cur_data);
         console.log(this.data);
+
+        this.page++;
       })
     }
 
@@ -54,7 +58,7 @@ export default class resCreationView extends View {
       submit_btn.addEventListener('click', event => {
         event.preventDefault();
         const cur_data = getFormObject(new FormData(form));
-        // TODO валидация формы
+        
         console.log(cur_data);
       })
     }

@@ -1,7 +1,6 @@
 import Store from './store.js';
 
-
-export default class resCreationStore extends Store {
+class resCreationStore extends Store {
     constructor() {
         super();
         this.form_fields = [
@@ -30,6 +29,11 @@ export default class resCreationStore extends Store {
                     type: "radio",
                     required: true,
                 },
+                {
+                    name: "birthday",
+                    type: "date",
+                    required: true,
+                },
             ],
             [
                 {
@@ -44,7 +48,7 @@ export default class resCreationStore extends Store {
                 },
                 {
                     name: "major_field_name",
-                    type: "text", 
+                    type: "text",
                     required: true,
                 },
                 {
@@ -58,7 +62,7 @@ export default class resCreationStore extends Store {
                     name: "is_expirience",
                     type: "checkbox",
                     required: false,
-                }
+                },
                 {
                     name: "expirience_organization_name",
                     type: "text",
@@ -85,3 +89,6 @@ export default class resCreationStore extends Store {
 
 
 }
+
+const ResCreationStore = new resCreationStore();
+export default ResCreationStore;

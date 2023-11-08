@@ -38,10 +38,10 @@ class Validator {
     if (!passwordFlag) {
       return false;
     }
-    minLength = 6;
-    maxLength = 128;
-    includeUpperCase = true;
-    includeDigits = true;
+    const minLength = 6;
+    const maxLength = 128;
+    const includeUpperCase = true;
+    const includeDigits = true;
     // if (passwordFlag.minLength === undefined) {
     //   passwordFlag.minLength = 6;
     // }
@@ -145,16 +145,16 @@ class Validator {
     if (!dateFlag) {
       return false;
     }
-    res = data.match(DATE_REGEX) || [];
-    isValid = res.length == 1;
+    const res = data.match(DATE_REGEX) || [];
+    const isValid = res.length == 1;
     if (!isValid) {
       return false;
     }
 
-    tokens = data.split('.');
-    day = tokens[0];
-    month = tokens[1];
-    year = tokens[2];
+    const tokens = data.split('.');
+    const day = tokens[0];
+    const month = tokens[1];
+    const year = tokens[2];
     return this.isValidDate(day, month, year);
   }
 
@@ -235,7 +235,7 @@ class Validator {
    * @returns {boolean} Returns true if date is valid, false otherwise.
    */
   isValidDate(day, month, year) {
-    res = Date.parse(`${year}-${month}-${day}`);
+    const res = Date.parse(`${year}-${month}-${day}`);
     if (isNaN(res)) {
       return false;
     }

@@ -24,7 +24,7 @@ export const Constraints = {
   },
 
   // Password constraint
-  email: {
+  password: {
     check: validator.checkPassword,
     error: () => {
       return 'Пароль должен быть от 6 до 128 символов, иметь заглавные буквы';
@@ -44,7 +44,7 @@ export const Constraints = {
 
   // Constraint on word's number
   count_words: {
-    check: validator.checkCountWords,
+    check: validator.checkCountWords.bind(validator),
     // check: (data, countWords) => {
     //   return countWords
     //     ? data.trim().split(WORDS_SEPARATOR_REG_EX).length <= countWords
@@ -157,12 +157,12 @@ export const constraintExists = (constraintName) => {
  * @throws Will throw error if in the given metaData there is no field `name`.
  */
 export const validateForm = (metaDataArr, dataObj) => {
-  res = {};
-  for (let metaData in metaDataArr) {
+  const res = {};
+  metaDataArr.forEach(metaData => {
     if (!('name' in metaData)) {
       throw new Error('There is no field `name` in the given `metaData`');
     }
-    currentName = metaData.name;
+    const currentName = metaData.name;
     for (let field in metaData) {
       if (constraintExists(field)) {
         res[currentName] = validateFormField(
@@ -173,7 +173,10 @@ export const validateForm = (metaDataArr, dataObj) => {
         break;
       }
     }
-  }
+  })
+  
+    
+
   return res;
 };
 
