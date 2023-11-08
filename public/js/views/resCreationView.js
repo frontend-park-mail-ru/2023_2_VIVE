@@ -9,6 +9,7 @@ export default class resCreationView extends View {
     super();
     this.page = 1;
     this.data = {};
+    this.errors = {};
   }
   /**
    * Асинхронный метод для отображения страницы
@@ -17,9 +18,11 @@ export default class resCreationView extends View {
     super.render();
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['res_creation'];
+    console.log("render errors: ",this.errors);
     document.querySelector('main').innerHTML = template({
       user: await User.getUser(),
-      page: this.page
+      page: this.page,
+      errors: this.errors,
     });
 
     this.addEventListeners();
@@ -32,15 +35,20 @@ export default class resCreationView extends View {
     if (save_cont_btn) {
       save_cont_btn.addEventListener('click', event => {
         event.preventDefault();
-        this.render();
         const cur_data = getFormObject(new FormData(form));
         // TODO валидация формы
         console.log(cur_data);
-        console.log("validate result: ",validateForm(ResCreationStore.form_fields[this.page - 1], cur_data))
-        Object.assign(this.data, cur_data);
-        console.log(this.data);
+        const errors = validateForm(ResCreationStore.form_fields[this.page - 1], cur_data);
+        console.log("validate result: ", errors)
 
-        this.page++;
+        if (Object.keys(errors).length === 0) {
+          Object.assign(this.data, cur_data);
+          console.log(this.data);
+          this.page++;
+        } else {
+          this.errors = errors;
+          this.render();
+        }
       })
     }
 
@@ -58,7 +66,7 @@ export default class resCreationView extends View {
       submit_btn.addEventListener('click', event => {
         event.preventDefault();
         const cur_data = getFormObject(new FormData(form));
-        
+
         console.log(cur_data);
       })
     }

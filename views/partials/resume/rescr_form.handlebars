@@ -7,7 +7,7 @@
     {{{lookup steps (sub page 1)}}}(шаг {{page}}/{{steps.length}})
   </p>
 
-  {{> (concat 'res_form_' page) }}
+  {{> (concat 'res_form_' page) (object errors=errors) }}
   
   <div class="form__actions rescr__form__actions_{{page}}">
     {{#iff page '>' 1}}

@@ -1,12 +1,13 @@
 <section class="rescr-section">
   <div class="column-wrapper">
+    {{lookup errors "profession"}}
     <div class="rescr">
       {{#with (object steps=(array
       "Основная информация"
       "Информация об образовании"
       "Информация об опыте работы"
       "Информация о Вас"))}}
-      {{> rescr_form (object page=../page steps=steps)}}
+      {{> rescr_form (object page=../page steps=steps errors=../errors)}}
       {{> res_steps (object page=../page steps=steps)}}
       {{/with}}
     </div>

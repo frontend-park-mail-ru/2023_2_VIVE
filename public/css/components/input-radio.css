@@ -23,3 +23,8 @@
 .input_radio__input:checked~.input_radio__div {
   border: 6px solid #0496ff;
 }
+
+.input_error .input_radio__div {
+  background-color: rgba(239, 74, 60, 0.15);
+  border: 2px solid var(--main-error);
+}

@@ -4,9 +4,10 @@
 (object title="Фамилия" name="last_name" placeholder="Фамилия")
 )}}
 
+{{lookup ../errors this.name}}
 {{> input (object obj=this
 class_title="res__form__input__title"
-class="res__form__input")}}
+class="res__form__input" error=this.name)}}
 
 {{/each}}
 
