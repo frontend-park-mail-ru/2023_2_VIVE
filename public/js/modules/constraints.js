@@ -31,6 +31,11 @@ export const FieldType = {
         return Constraints.nodigits.check(data, nodigitsFlag);
       },
     },
+    onlydigits: {
+      check: (data, nodigitsFlag) => {
+        return Constraints.onlydigits.check(data, nodigitsFlag);
+      },
+    },
     count_words: {
       check: (data, countWordsFlag) => {
         return Constraints.count_words.check(data, countWordsFlag);
@@ -51,7 +56,7 @@ export const FieldType = {
         return Constraints.year.check(data, yearFlag);
       },
     },
-    regExp: {
+    regexp: {
       check: (data, regExpFlag) => {
         return Constraints.year.check(data, regExpFlag);
       },
@@ -270,7 +275,7 @@ export const Constraints = {
   },
 
   // RegExp constraint on data
-  regExp: {
+  regexp: {
     check: (data, regExpFlag) => {
       return validator.fullMatchRegExp(data, regExpFlag);
     },
