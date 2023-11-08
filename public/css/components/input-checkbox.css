@@ -1,8 +1,14 @@
-.checkbox-btn__input {
+.input_checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.input_checkbox__input {
   display: none;
 }
 
-.checkbox-btn__div {
+.input_checkbox__div {
   display: inline-block;
   border: 1px solid #0496ff;
   border-radius: 4px;
@@ -10,14 +16,15 @@
   margin-right: 10px;
 }
 
-.checkbox-btn__svg {
+
+.input_checkbox__svg {
   visibility: hidden;
 }
 
-.checkbox-btn__input:checked~.checkbox-btn__div {
+.input_checkbox__input:checked~.input_checkbox__div {
   background-color: #0496ff;
 }
 
-.checkbox-btn__input:checked~.checkbox-btn__div .checkbox-btn__svg {
+.input_checkbox__input:checked~.input_checkbox__div .input_checkbox__svg {
   visibility: visible;
 }

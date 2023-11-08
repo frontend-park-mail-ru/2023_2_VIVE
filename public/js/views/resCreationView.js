@@ -7,7 +7,7 @@ import View from './view.js';
 export default class resCreationView extends View {
   constructor() {
     super();
-    this.page = 3;
+    this.page = 4;
     this.form_data = {};
     this.errors = {};
     this.pages_data = [
@@ -43,21 +43,26 @@ export default class resCreationView extends View {
     this.addEventListenersToPage();
   }
 
+  save() {
+    const cur_data = getFormObject(new FormData(this.form));
+    Object.assign(this.form_data, cur_data);
+    return cur_data
+  }
+
+  saveAndCheck() {
+    const cur_data = this.save();
+    return validateForm(ResCreationStore.form_fields[this.page - 1], cur_data);
+  }
+
   addEventListeners() {
-    const form = document.querySelector('.rescr__form')
+    this.form = document.querySelector('.rescr__form')
     const save_cont_btn = document.querySelector('.js-rescr-save-continue');
     if (save_cont_btn) {
       save_cont_btn.addEventListener('click', event => {
         event.preventDefault();
-        const cur_data = getFormObject(new FormData(form));
 
-        this.errors = validateForm(ResCreationStore.form_fields[this.page - 1], cur_data);
-        console.log(cur_data);
-        console.log("validate result: ", this.errors)
-
-        Object.assign(this.form_data, cur_data);
+        this.errors = this.saveAndCheck();
         if (Object.keys(this.errors).length === 0) {
-          console.log("validate OK!:", this.form_data);
           this.page++;
         }
         this.render();
@@ -68,6 +73,7 @@ export default class resCreationView extends View {
     if (back_btn) {
       back_btn.addEventListener('click', event => {
         event.preventDefault();
+        this.save();
         this.page--;
         this.render();
       })
@@ -77,9 +83,12 @@ export default class resCreationView extends View {
     if (submit_btn) {
       submit_btn.addEventListener('click', event => {
         event.preventDefault();
-        const cur_data = getFormObject(new FormData(form));
-
-        console.log(cur_data);
+        
+        this.errors = this.saveAndCheck();
+        if (Object.keys(this.errors).length === 0) {
+          console.log(this.form_data);
+        }
+        this.render();
       })
     }
   }
@@ -90,6 +99,7 @@ export default class resCreationView extends View {
       is_exp.checked = this.page_data.is_exp;
       is_exp.addEventListener('change', event => {
         this.page_data.is_exp = is_exp.checked;
+        this.save();
         this.render();
       })
       if (this.page_data.is_exp) {
@@ -100,11 +110,10 @@ export default class resCreationView extends View {
 
   addListenersToExpForm() {
     const is_end_date = document.querySelector(".js-name-is-expirience_end_date");
-    console.log(is_end_date);
     is_end_date.checked = !this.page_data.is_end_date;
     is_end_date.addEventListener('change', event => {
       this.page_data.is_end_date = !is_end_date.checked;
-      console.log(this.page_data.is_end_date);
+      this.save();
       this.render();
     })
   }

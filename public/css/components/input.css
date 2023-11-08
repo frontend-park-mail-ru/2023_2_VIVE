@@ -1,5 +1,6 @@
 .input {
   width: 100%;
+  display: block;
 }
 
 .input__title {
@@ -29,8 +30,6 @@
   border: 2px solid var(--main-error);
 }
 
-.input__error-msg {
-  margin-top: 5px;
-  padding: 0 10px;
+.input_error__msg {
   color: var(--main-error);
 }

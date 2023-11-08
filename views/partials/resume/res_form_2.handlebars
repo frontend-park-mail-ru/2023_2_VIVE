@@ -1,38 +1,47 @@
+<div class="form">
+  <div class="res__form__input__title">Уровень образования</div>
+  <div class="res__form__field">
+    {{#each (array
+    (object text="Среднее")
+    (object text="Среднее специальное")
+    (object text="Неоконченное высшее")
+    (object text="Высшее")
+    (object text="Бакалавр")
+    (object text="Магистр")
+    (object text="Кандидат наук")
+    (object text="Доктор наук")
+    )}}
 
-<p class="res__form__input_radio__title res__form__input__title">Уровень образования</p>
-<div class="res__form__input">
+    {{> input_radio (object text=this.text
+    class=(object
+    block="res__form__input_radio_field"
+    )
+    name="education_level"
+    error=(lookup ../errors "education_level")
+    )}}
+
+    {{/each}}
+    {{#if (lookup errors "education_level")}}
+    <div class="input_error__msg">{{lookup errors "education_level"}}</div>
+    {{/if}}
+  </div>
+
   {{#each (array
-  (object text="Среднее")
-  (object text="Среднее специальное")
-  (object text="Неоконченное высшее")
-  (object text="Высшее")
-  (object text="Бакалавр")
-  (object text="Магистр")
-  (object text="Кандидат наук")
-  (object text="Доктор наук")
+  (object title="Учебное заведение" name="education_institution_name" placeholder="Учебное заведение")
+  (object title="Специализация" name="major_field_name" placeholder="Специализация")
+  (object title="Год окончания" name="education_graduation_year" placeholder="Год окончания")
   )}}
 
-  {{> input_radio (object text=this.text 
-  class_label="res__form__input_radio_field" 
-  name="education_level"
-  error=(lookup ../errors "education_level")
+  {{> input (object obj=this
+  class=(object
+  block="res__form__field"
+  input="res__form__input"
+  title="res__form__input__title"
+  )
+  error=(lookup ../errors this.name)
+  value=(lookup ../data this.name)
   )}}
 
   {{/each}}
+
 </div>
-
-{{#each (array 
-(object title="Учебное заведение" name="education_institution_name" placeholder="Учебное заведение")
-(object title="Специализация" name="major_field_name" placeholder="Специализация")
-(object title="Год окончания" name="education_graduation_year" placeholder="Год окончания")
-)}}
-
-{{> input (object obj=this
-class_title="res__form__input__title"
-class="res__form__input"
-error=(lookup ../errors this.name)
-value=(lookup ../data this.name)
-)}}
-
-{{/each}}
-

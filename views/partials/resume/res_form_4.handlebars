@@ -1,2 +1,18 @@
-<div class="form__title">Расскажите немного о себе (ваше хобби, личные качества, любая дополнительная информация)</div>
-<textarea class="res__form__input res__form__input_textarea input__field" rows="10" name="description" placeholder="Расскажите о своих качествах, знаниях, увлечениях, которые , как вам кажется, будут полезны работодателю"></textarea>
+{{#each (array
+(object 
+name="description"
+placeholder="Расскажите о своих качествах, знаниях, увлечениях, которые , как вам кажется, будут полезны работодателю"
+title="Расскажите немного о себе (ваше хобби, личные качества, любая дополнительная информация)")
+)}}
+
+{{> input_textarea (object obj=this
+rows=15
+class=(object
+block="res__form__field"
+title="res__form__input__title"
+input="res__form__input"
+)
+error=(lookup ../errors this.name)
+value=(lookup ../data this.name)
+)}}
+{{/each}}

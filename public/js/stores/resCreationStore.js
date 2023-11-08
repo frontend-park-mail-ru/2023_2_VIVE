@@ -83,14 +83,20 @@ class resCreationStore extends Store {
                 {
                     name: "expirience_end_date",
                     type: "date",
-                    required: false,
                 },
                 {
                     name: "expirience_description",
                     type: "text",
                     required: true,
                 },
-            ]
+            ],
+            [
+                {
+                    name: "description",
+                    type: "text",
+                    required: true,
+                },
+            ],
         ]
     }
 

@@ -4,6 +4,7 @@
 @import url("components/link-btn.css");
 @import url("components/input-checkbox.css");
 @import url("components/input-radio.css");
+@import url("components/input-textarea.css");
 @import url("components/input.css");
 @import url("components/response.css");
 @import url("components/resume.css");
@@ -64,6 +65,10 @@
 }
 
 .me-10 {
+  margin-right: 10px;
+}
+
+.mr-10 {
   margin-right: 10px;
 }
 

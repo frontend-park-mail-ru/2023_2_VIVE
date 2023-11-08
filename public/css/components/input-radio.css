@@ -1,5 +1,7 @@
 .input_radio {
   display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .input_radio__title {
