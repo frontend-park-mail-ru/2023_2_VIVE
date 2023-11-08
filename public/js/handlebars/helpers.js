@@ -7,6 +7,20 @@ export function registerHelpers() {
     return num1 - num2;
   });
 
+  Handlebars.registerHelper('and', function() {
+    const arr = Array.from(arguments).slice(0, arguments.length-1);
+    console.log(arr);
+    let isOk = true;
+    isOk = arr.every(arg =>{
+      if (arg) {
+        console.log(arg)
+        return true;
+      }
+      return false
+    });
+    return isOk;
+  });
+
   Handlebars.registerHelper('object', function({hash}) {
     return hash;
   });

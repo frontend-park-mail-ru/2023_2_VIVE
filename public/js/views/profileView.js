@@ -15,19 +15,24 @@ export default class profileView extends View {
    */
   async render() {
 
-    const data = await User.getUser();
+    const user = await User.getUser();
+    let data = {};
 
     let type = '';
 
-    if (data['role'] === 'applicant') {
+    if (user['role'] === 'applicant') {
       type = 'profile_app';
     } else {
       type = 'profile_emp';
     }
 
+    if (this.state == 'vacancies') {
+      data = await this.getUserVacancies();
+    }
+
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates[type];
-    document.querySelector('main').innerHTML = template({state: this.state, data: data});
+    document.querySelector('main').innerHTML = template({state: this.state, user: user, data: data});
 
     this.addEventListeners();
   }
@@ -97,5 +102,15 @@ export default class profileView extends View {
         }
       });
     });
+  }
+
+  async getUserVacancies() {
+    try {
+      const resp = await APIConnector.get(BACKEND_SERVER_URL + "/user_vacancies");
+      const data = await resp.json();
+      return data;
+    } catch(err) {
+        return undefined;
+    }
   }
 }

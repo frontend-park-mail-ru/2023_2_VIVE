@@ -5,13 +5,13 @@
         <div class="changing-inpute__value">
           Фамилия
         </div>
-          <input class="changing-inpute__label" name="last-name" type="text" placeholder="Фамилия" value="{{ data.last_name }}">
+          <input class="changing-inpute__label" name="last-name" type="text" placeholder="Фамилия" value="{{ user.last_name }}">
       </div>
       <div class="changing-inpute__field">
         <div class="changing-inpute__value">
           Имя
         </div>
-        <input class="changing-inpute__label" name="first_name" type="text" placeholder="Имя" value="{{ data.first_name }}">
+        <input class="changing-inpute__label" name="first_name" type="text" placeholder="Имя" value="{{ user.first_name }}">
       </div>
       <div class="changing-inpute__field">
         <div class="changing-inpute__value">
@@ -34,7 +34,7 @@
         ФИО
       </div>
       <div class="settings-inpute__field">
-        {{ data.last_name }} {{ data.first_name }}
+        {{ user.last_name }} {{ user.first_name }}
       </div>
       <div class="setting-inpute__button" data-name="changing" type="change-full-name">
         Изменить
@@ -45,7 +45,7 @@
         <div class="changing-inpute__value">
           Новая почта
         </div>
-        <input class="changing-inpute__label" name="email" type="text" placeholder="Почта" value="{{ data.email }}">
+        <input class="changing-inpute__label" name="email" type="text" placeholder="Почта" value="{{ user.email }}">
       </div>
       <div class="changing-inpute__field">
         <div class="changing-inpute__value">
@@ -68,7 +68,7 @@
         Почта
       </div>
       <div class="settings-inpute__field">
-       {{ data.email }}
+       {{ user.email }}
       </div>
       <div class="setting-inpute__button" data-name="changing" type="change-mail">
         Изменить

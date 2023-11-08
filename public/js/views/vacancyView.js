@@ -51,7 +51,7 @@ export default class profileView extends View {
         });
 
         refactorMainButton.addEventListener('click', () => {
-            
+
         });
     }
 }
