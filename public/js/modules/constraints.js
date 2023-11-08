@@ -2,11 +2,89 @@
 
 import validator from './validator.js';
 
+export const FieldType = {
+  text: {
+    required: {
+      check: (data, requiredFlag) => {
+        return validator.isEmpty(data)
+          ? Constraints.required.check(data, requiredFlag)
+          : false;
+      },
+    },
+    email: {
+      check: (data, requiredFlag) => {
+        return Constraints.email.check(data, requiredFlag);
+      },
+    },
+    password: {
+      check: (data, requiredFlag) => {
+        return Constraints.password.check(data, requiredFlag);
+      },
+    },
+    digits: {
+      check: (data, requiredFlag) => {
+        return Constraints.digits.check(data, requiredFlag);
+      },
+    },
+    count_words: {
+      check: (data, requiredFlag) => {
+        return Constraints.count_words.check(data, requiredFlag);
+      },
+    },
+    max_len: {
+      check: (data, requiredFlag) => {
+        return Constraints.max_len.check(data, requiredFlag);
+      },
+    },
+    min_len: {
+      check: (data, requiredFlag) => {
+        return Constraints.min_len.check(data, requiredFlag);
+      },
+    },
+    year: {
+      check: (data, requiredFlag) => {
+        return Constraints.year.check(data, requiredFlag);
+      },
+    },
+  },
+
+  radio: {
+    required: {
+      check: (data, requiredFlag) => {
+        return Constraints.required.check(data, requiredFlag);
+      },
+    },
+  },
+
+  checkbox: {
+    required: {
+      check: (data, requiredFlag) => {
+        return Constraints.required.check(data, requiredFlag);
+      },
+    },
+  },
+
+  date: {
+    required: {
+      check: (data, requiredFlag) => {
+        return Constraints.required.check(data, requiredFlag);
+      },
+    },
+    date: {
+      check: (data, requiredFlag) => {
+        return Constraints.date.check(data, requiredFlag);
+      },
+    },
+  },
+};
+
+// const preCheck = (fieldType, data) => {};
+
 // Constraints data for form validation
 export const Constraints = {
   // When data is required
   required: {
-    check: validator.checkRequired,
+    check: validator.checkRequired.bind(validator),
     // check: (data, required) => {
     //   return required && !data;
     // },
@@ -17,7 +95,7 @@ export const Constraints = {
 
   // Email constraint
   email: {
-    check: validator.checkEmail,
+    check: validator.checkEmail.bind(validator),
     error: () => {
       return 'Некорректный email';
     },
@@ -33,7 +111,7 @@ export const Constraints = {
 
   // Constraint on data containing digits
   digits: {
-    check: validator.checkDigits,
+    check: validator.checkDigits.bind(validator),
     // check: (data, digits) => {
     //   return digits ? data.split('').some((sym) => this.isDigit(sym)) : true;
     // },
@@ -57,7 +135,7 @@ export const Constraints = {
 
   // Constraint on max length of data
   max_len: {
-    check: validator.checkMaxLen,
+    check: validator.checkMaxLen.bind(validator),
     // check: (data, maxLen) => {
     //   return maxLen ? data.length <= maxLen : false;
     // },
@@ -68,7 +146,7 @@ export const Constraints = {
 
   // Constraint on min length of data
   min_len: {
-    check: validator.checkMinLen,
+    check: validator.checkMinLen.bind(validator),
     // check: (data, minLen) => {
     //   return minLen >= 0 ? data.length >= minLen : false;
     // },
@@ -79,7 +157,7 @@ export const Constraints = {
 
   // Data must be valid date formatting like (dd.mm.yyyy)
   date: {
-    check: validator.checkDate,
+    check: validator.checkDate.bind(validator),
     // check: (data, date) => {
     //   if (!date) {
     //     return false;
@@ -109,7 +187,7 @@ export const Constraints = {
 
   // Data must be valid year
   year: {
-    check: validator.checkYear,
+    check: validator.checkYear.bind(validator),
     // check: (data, year) => {
     //   return year ? Number(data) > 1900 && Number(data) < 2100 : false;
     // },
@@ -119,8 +197,10 @@ export const Constraints = {
   },
 };
 
-export const constraintExists = (constraintName) => {
-  return constraintName in Constraints;
+export const constraintExists = (fieldTypeName, constraintName) => {
+  return (
+    constraintName in Constraints && constraintName in FieldType[fieldTypeName]
+  );
 };
 
 /**
@@ -158,24 +238,40 @@ export const constraintExists = (constraintName) => {
  */
 export const validateForm = (metaDataArr, dataObj) => {
   const res = {};
-  metaDataArr.forEach(metaData => {
+  metaDataArr.forEach((metaData) => {
     if (!('name' in metaData)) {
       throw new Error('There is no field `name` in the given `metaData`');
     }
-    const currentName = metaData.name;
-    for (let field in metaData) {
-      if (constraintExists(field)) {
-        res[currentName] = validateFormField(
-          field,
-          metaData[field],
-          dataObj[metaData.name],
-        );
-        break;
-      }
+    if (!('type' in metaData)) {
+      throw new Error('There is no field `type` in the given `metaData`');
     }
-  })
-  
-    
+    const fieldType = metaData.type;
+    const fieldName = metaData.name;
+    const fieldData = dataObj[fieldName];
+
+    // if (!PreCheckField[fieldType].preCheck(fieldData)) {
+    //   res[fieldName] = PreCheckField[fieldType].error();
+    // } else {
+    for (let field in metaData) {
+      // if (res[fieldName] !== undefined) {
+      //   break;
+      // }
+      if (constraintExists(fieldType, field)) {
+        const constraint = metaData[field];
+        const errorMsg = validateFormField(
+          fieldType,
+          field,
+          constraint,
+          fieldData,
+        );
+        if (errorMsg !== null) {
+          res[fieldName] = errorMsg;
+          break;
+        }
+      }
+      // }
+    }
+  });
 
   return res;
 };
@@ -184,22 +280,25 @@ export const validateForm = (metaDataArr, dataObj) => {
  * Returns error message or null accorging to a given constraint.
  *
  * @param {string} constraint String name of constraint.
- * @param {object} constraintFlag Value of a constraint.
- * @param {any} data Data for given .
+ * @param {object} constraintValue Value of a constraint.
+ * @param {any} fieldData Data for given .
  * @param {Function} check Function that checks if data is valid.
  * @returns {string} Error message or null.
  * @throws Will throw an error when given the wrong type.
  */
 export const validateFormField = (
+  fieldType,
   constraint,
-  constraintFlag,
-  data /* , check */,
+  constraintValue,
+  fieldData /* , check */,
 ) => {
-  if (!constraintExists(constraint)) {
+  if (!constraintExists(fieldType, constraint)) {
     throw new Error(`wrong given type: ${constraint}`);
   }
-  if (Constraints[constraint].check(data, constraintFlag)) {
+
+  // if (fieldType)
+  if (FieldType[fieldType][constraint].check(fieldData, constraintValue)) {
     return null;
   }
-  return Constraints[constraint].Error(constraintFlag);
+  return Constraints[constraint].error(constraintValue);
 };

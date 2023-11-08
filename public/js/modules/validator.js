@@ -1,6 +1,6 @@
 'use strict';
 
-// import { Constraints, constraintExists } from './constraints.js';
+// import { PreCheckField } from './constraints.js';
 // const DEFAULT_ALLOWED_SYMBOLS = `~!?@#$%^&*_-+()[]{}></|"'.,:;`;
 const EMAIL_REGEX = /.+@.+\..+$/g;
 const WORDS_SEPARATOR_REG_EX = /\s+/;
@@ -15,6 +15,29 @@ const DATE_REGEX = /^\d{1,2}\.\d{1,2}\.\d{4}$/g;
  * @class
  */
 class Validator {
+  /**
+   *
+   * @param {string} data Given data.
+   * @returns {boolean} True if data is not empty string.
+   */
+  preCheckText(data) {
+    if (data.trim() === '') {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Checks if `data` for a required constraint.
+   *
+   * @param {any} data Given data.
+   * @param {boolean} requiredFlag Required field flag.
+   * @returns {boolean} True if `required` is true and `data` is given otherwise false.
+   */
+  checkRequired(data, requiredFlag) {
+    return requiredFlag && data;
+  }
+
   /**
    * Check if given string is a valid email.
    *
@@ -31,7 +54,7 @@ class Validator {
    * Check if the password is valid.
    *
    * @param {string} password A string with the given password.
-   * @param {object} passwordFlag Object that contains info about valid password.
+   * @param {boolean} passwordFlag Password check flag.
    * @returns {boolean} True if the password is valid, false otherwise.
    */
   checkPassword(data, passwordFlag) {
@@ -78,17 +101,6 @@ class Validator {
   }
 
   /**
-   * Checks if `data` for a required constraint.
-   *
-   * @param {any} data Given data.
-   * @param {boolean} requiredFlag Required field flag.
-   * @returns {boolean} True if `required` is true and `data` is given otherwise false.
-   */
-  checkRequired(data, requiredFlag) {
-    return requiredFlag && !data;
-  }
-
-  /**
    *  Checks for digits in `data`.
    *
    * @param {string} data Given text to check.
@@ -109,7 +121,13 @@ class Validator {
    * false otherwise.
    */
   checkCountWords(data, countWordsFlag) {
-    return countWordsFlag ? this.countWords(data) <= countWordsFlag : false;
+    // if (data.trim() === '') {
+    //   return false;
+    // }
+    // return data.trim() !== '';
+    return data.trim() !== '' && countWordsFlag
+      ? this.countWords(data) <= countWordsFlag
+      : false;
   }
 
   /**
@@ -167,6 +185,10 @@ class Validator {
    */
   checkYear(data, yearFlag) {
     return yearFlag ? this.isValidYear(data) : false;
+  }
+
+  isEmpty(str) {
+    return str.trim() === '' ? false : true;
   }
 
   /**
