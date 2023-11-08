@@ -8,6 +8,7 @@
         </div>
         <div class="view__field">
             <div class="view__main">
+                {{> vac_refactoring}}
                 <div class="vacancie">
                     <div class="vacancie__main-info">
                         Младший Go разработчик в VK
@@ -35,15 +36,23 @@
                         </div>
                     </div>
                     <div class="vacancie__btns">
-                        <div class="link-btn primary-btn link-btn-bd-rad-10 link-btn_transp-box-blue resume__btns-text resume__btns-text--secondary">
+                        <div class="link-btn primary-btn link-btn-bd-rad-10 link-btn_transp-box-blue resume__btns-text resume__btns-text--secondary"
+                        data-name="refactor-main">
                             Редактировать
                         </div>
-                        <div class="link-btn link-btn_blue-without-bd">
+                        <div class="link-btn link-btn_blue-without-bd {{#iff state '==' 'responses'}}d-none{{/iff}}" data-name="responses">
                             Просмотреть отклики
+                        </div>
+                        <div class="link-btn link-btn_blue-without-bd {{#iff state '==' 'description'}}d-none{{/iff}}" data-name="description">
+                            Просмотреть описание
                         </div>
                     </div>
                 </div>
+                {{#iff state '==' 'description'}}
+                {{> vac_description}}
+                {{else iff state '==' 'responses'}}
                 {{> vac_responses}}
+                {{/iff}}
             </div>
             <div class="view-company">
                 <img class="view-company__img" src="../../../public/images/img/vk-company.png">

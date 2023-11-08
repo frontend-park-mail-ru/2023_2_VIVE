@@ -1,0 +1,55 @@
+<div class="vacancie-refactor">
+    <div class="vacancie-refactor__main">
+        {{#each (array 
+        (object title="Название вакансии" name="vacancy_name" placeholder="Название вакансии")
+        (object title="Расположение работы" name="location" placeholder="Расположение")
+        )}}
+
+        {{> input (object obj=this
+        class_title="res__form__input__title"
+        class="res__form__input")}}
+        {{/each}}
+        {{#each (array
+        (object title="Предпологаемый уровень дохода ₽" placeholderFirst="От" placeholderSecond="До")
+        )}}
+
+        {{> double_input obj=this
+        class_title="res__form__input__title"}}
+        {{/each}}
+        <div>
+            <p class="res__form__input_radio__title res__form__input__title">Требуемый опыт</p>
+            <div class="res__form__input">
+                {{#each (array
+                (object text="Нет опыта")
+                (object text="От 1 года до 3-х лет")
+                (object text="От 3-х до 6-ти лет")
+                (object text="Более 6 лет")
+                )}}
+                {{> input_radio (object text=this.text class_label="res__form__input_radio_field" name="experience")}}
+                {{/each}}
+            </div>
+        </div>
+        <div>
+            <p class="res__form__input_radio__title res__form__input__title">Занятость</p>
+            <div class="res__form__input">
+                {{#each (array
+                (object text="Полная занятость")
+                (object text="Частичная занятость")
+                (object text="Проектная работа или разовое задание")
+                (object text="Волонтерство")
+                (object text="Стажировка")
+                )}}
+                {{> input_radio (object text=this.text class_label="res__form__input_radio_field" name="busyness")}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="vacancie-refactor__btns">
+        <div class="link-btn primary-btn link-btn-bd-rad-10 link-btn_transp-box-blue resume__btns-text resume__btns-text--secondary">
+            Отменить изменения
+        </div>
+        <div class="link-btn primary-btn link-btn-bd-rad-10 primary-btn_blue-primary resume__btns-text resume__btns-text--primary">
+            Сохранить изменения
+        </div>
+    </div>
+</div>

@@ -35,6 +35,8 @@ class Router {
       '/profile/vacancies': 'profile',
       '/profile/responses': 'profile',
       '/vacancy': 'vacancy',
+      '/vacancy/description': 'vacancy',
+      '/vacancy/responses': 'vacancy',
       '/': 'vacs',
     };
 

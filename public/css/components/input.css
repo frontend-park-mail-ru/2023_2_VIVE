@@ -34,3 +34,17 @@
   padding: 0 10px;
   color: var(--main-error);
 }
+
+.double-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.dobule-input__inputes {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}

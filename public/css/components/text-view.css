@@ -1,0 +1,8 @@
+.label-text {
+    color: var(--text-filled);
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 13px
+}
