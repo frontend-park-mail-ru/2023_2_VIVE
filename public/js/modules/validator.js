@@ -8,6 +8,7 @@ const ALPHANUMERIC_REGEX = /^[a-zA-Z0-9]$/;
 const UPPERCASE_REGEX = /^[A-Z]$/;
 const DIGIT_REGEX = /^[0-9]$/g;
 const DATE_REGEX = /^\d{1,2}\.\d{1,2}\.\d{4}$/g;
+const ONLY_DIGITS_REDEX = /^\d+$/;
 
 /**
  * Class that validates input data on frontend level.
@@ -54,29 +55,21 @@ class Validator {
    * Check if the password is valid.
    *
    * @param {string} password A string with the given password.
-   * @param {boolean} passwordFlag Password check flag.
+   * @param {object} passwordFlag Password check flag.
    * @returns {boolean} True if the password is valid, false otherwise.
    */
-  checkPassword(data, passwordFlag) {
+  checkPassword(
+    data,
+    passwordFlag = {
+      minLength: 6,
+      maxLength: 128,
+      includeUpperCase: true,
+      includeDigits: true,
+    },
+  ) {
     if (!passwordFlag) {
       return false;
     }
-    const minLength = 6;
-    const maxLength = 128;
-    const includeUpperCase = true;
-    const includeDigits = true;
-    // if (passwordFlag.minLength === undefined) {
-    //   passwordFlag.minLength = 6;
-    // }
-    // if (passwordFlag.maxLength === undefined) {
-    //   passwordFlag.maxLength = 128;
-    // }
-    // if (passwordFlag.includeUpperCase === undefined) {
-    //   passwordFlag.includeUpperCase = true;
-    // }
-    // if (passwordFlag.includeDigits === undefined) {
-    //   passwordFlag.includeDigits = true;
-    // }
 
     const isLengthValid =
       this.checkMinLen(data, minLength) && this.checkMaxLen(data, maxLength);
@@ -89,10 +82,6 @@ class Validator {
       ? data.split('').some((sym) => this.isDigit(sym))
       : true;
 
-    // const hasSpecialSymbols = data
-    //   .split('')
-    //   .some((sym) => this.contains(includeSpecialSymbols, sym));
-
     const symbolsAreValid = data
       .split('')
       .every((sym) => this.checkPasswordSymbol(sym));
@@ -100,16 +89,44 @@ class Validator {
     return isLengthValid && hasUpperCase && hasDigits && symbolsAreValid;
   }
 
+  hasDigits(str) {
+    return str.split('').some((sym) => this.isDigit(sym));
+  }
+
+  onlyDigits(str) {
+    const res = str.match(ONLY_DIGITS_REDEX) || [];
+    return res.length == 1;
+  }
+
+  fullMatchRegExp(str, regExp) {
+    const res = str.match(regExp) || [];
+    return res.length == 1;
+  }
+
   /**
    *  Checks for digits in `data`.
    *
    * @param {string} data Given text to check.
-   * @param {boolean} digitsFlag Flag to check for digits.
-   * @returns {boolean} Returns true if `digits` is true and `data` contains digits,
+   * @param {boolean} digitsAllowed Flag to check for digits.
+   * @returns {boolean} Returns true if `digitsAllowed` is true,
+   * otherwise if there are some digits in `data` returns false,
    * otherwise false.
    */
-  checkDigits(data, digitsFlag) {
-    return digitsFlag ? data.split('').some((sym) => this.isDigit(sym)) : true;
+  checkDigits(data, digitsAllowed) {
+    return digitsAllowed ? this.hasDigits(data) : !this.hasDigits(data);
+  }
+
+  /**
+   *  Checks if `data` contains no digits.
+   *
+   * @param {string} data Given text to check.
+   * @param {boolean} noDigitsAllowed Flag to check for digits.
+   * @returns {boolean} Returns true if `digitsAllowed` is true,
+   * otherwise if there are some digits in `data` returns false,
+   * otherwise false.
+   */
+  checkDigits(data, noDigitsAllowed) {
+    return noDigitsAllowed ? this.hasDigits(data) : !this.hasDigits(data);
   }
 
   /**
