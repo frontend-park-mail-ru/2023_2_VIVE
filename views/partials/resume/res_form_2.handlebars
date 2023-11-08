@@ -11,25 +11,28 @@
   (object text="Кандидат наук")
   (object text="Доктор наук")
   )}}
-  {{!-- {{#iff @index '==' 0}}
-  {{> input_radio (object text=this.text class_label="res__form__input_radio_field" name="education_level" checked=true)}}
-  {{else}} --}}
-  {{> input_radio (object text=this.text class_label="res__form__input_radio_field" name="education_level")}}
-  {{!-- {{/iff}} --}}
+
+  {{> input_radio (object text=this.text 
+  class_label="res__form__input_radio_field" 
+  name="education_level"
+  error=(lookup ../errors "education_level")
+  )}}
+
   {{/each}}
 </div>
 
-{{!-- (object title="Факультет" name="faculty" placeholder="Факультет") --}}
 {{#each (array 
 (object title="Учебное заведение" name="education_institution_name" placeholder="Учебное заведение")
-
 (object title="Специализация" name="major_field_name" placeholder="Специализация")
 (object title="Год окончания" name="education_graduation_year" placeholder="Год окончания")
 )}}
 
 {{> input (object obj=this
 class_title="res__form__input__title"
-class="res__form__input")}}
+class="res__form__input"
+error=(lookup ../errors this.name)
+value=(lookup ../data this.name)
+)}}
 
 {{/each}}
 

@@ -1,7 +1,56 @@
 <label class="res__form__input d-block">
+  {{#if page_data.is_exp }}
+  {{> input_checkbox (object name="is_expirience" class="js-name-is-experience" attributes="checked")}}
+  {{else}}
   {{> input_checkbox (object name="is_expirience" class="js-name-is-experience")}}
+  {{/if}}
   <span>У меня есть опыт работы</span>
 </label>
 
-<div class="js-res-form-exp"></div>
+{{#if page_data.is_exp }}
 
+{{#each (array
+(object title="В какой компании вы работали" name="expirience_organization_name" placeholder="Компания")
+(object title="На какой должности" name="expirience_position" placeholder="Должность")
+(object title="Начало работы" name="expirience_start_date" type="date")
+)}}
+
+{{> input (object obj=this
+class_title="res__form__input__title"
+class="res__form__input"
+error=(lookup ../errors this.name)
+)}}
+
+{{/each}}
+
+{{#if page_data.is_end_date }}
+
+{{> input (object obj=(object title="Год окончания" class="js-name-expirience_end_date" name="expirience_end_date"
+placeholder="Год окончания" type="date")
+class_title="res__form__input__title"
+class="res__form__input")
+error=(lookup errors "expirience_end_date")}}
+
+{{/if}}
+
+
+<label class="res__form__input d-block">
+  {{#if page_data.is_end_date}}
+  {{> input_checkbox (object class="js-name-is-expirience_end_date")}}
+  {{else}}
+  {{> input_checkbox (object class="js-name-is-expirience_end_date" attributes="checked")}}
+  {{/if}}
+  <span>По настоящее время</span>
+</label>
+
+{{#each (array
+(object title="Расскажите о ваших обязанностях и достижениях" name="expirience_description" placeholder="Достижения и обязанности"))}}
+
+{{> input (object obj=this
+class_title="res__form__input__title"
+class="res__form__input"
+error=(lookup ../errors this.name))}}
+
+{{/each}}
+
+{{/if}}

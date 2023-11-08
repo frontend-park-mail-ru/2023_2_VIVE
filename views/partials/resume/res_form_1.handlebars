@@ -1,13 +1,13 @@
 {{#each (array 
 (object title="Профессия" name="profession" placeholder="Профессия")
-(object title="Имя" name="first_name" placeholder="Имя")
+(object title="Имя" name="first_name" placeholder="Имя" )
 (object title="Фамилия" name="last_name" placeholder="Фамилия")
 )}}
 
-{{lookup ../errors this.name}}
 {{> input (object obj=this
+value=(lookup ../data this.name)
 class_title="res__form__input__title"
-class="res__form__input" error=this.name)}}
+class="res__form__input" error=(lookup ../errors this.name))}}
 
 {{/each}}
 
@@ -20,16 +20,20 @@ class="res__form__input" error=this.name)}}
   {{!-- {{#iff @index '==' 0}}
   {{> input_radio (object text=this.text class_label="res__form__input_radio_flex_field" name="gender" checked=true)}}
   {{else}} --}}
-  {{> input_radio (object text=this.text class_label="res__form__input_radio_flex_field" name="gender")}}
+  {{> input_radio (object text=this.text class_label="res__form__input_radio_flex_field" name="gender"  error=(lookup ../errors "gender"))}}
   {{!-- {{/iff}} --}}
   {{/each}}
 </div>
 
 {{> input (object obj=(object title="Дата рождения" name="birthday" type="date")
 class_title="res__form__input__title"
-class="res__form__input")}}
+class="res__form__input" 
+value=(lookup data "birthday")
+error=(lookup errors "birthday"))}}
 
 {{> input (object obj=(object title="Город" name="location" placeholder="Город")
 class_title="res__form__input__title"
-class="res__form__input")}}
+class="res__form__input"
+value=(lookup data "location")
+error=(lookup errors "location"))}}
 

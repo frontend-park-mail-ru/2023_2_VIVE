@@ -34,6 +34,11 @@ class resCreationStore extends Store {
                     type: "date",
                     required: true,
                 },
+                {
+                    name: "location",
+                    type: "text",
+                    required: true,
+                },
             ],
             [
                 {
@@ -54,15 +59,11 @@ class resCreationStore extends Store {
                 {
                     name: "education_graduation_year",
                     type: "text",
+                    digits: true,
                     required: true,
                 },
             ],
             [
-                {
-                    name: "is_expirience",
-                    type: "checkbox",
-                    required: false,
-                },
                 {
                     name: "expirience_organization_name",
                     type: "text",
@@ -82,6 +83,11 @@ class resCreationStore extends Store {
                     name: "expirience_end_date",
                     type: "date",
                     required: false,
+                },
+                {
+                    name: "expirience_description",
+                    type: "text",
+                    required: true,
                 },
             ]
         ]

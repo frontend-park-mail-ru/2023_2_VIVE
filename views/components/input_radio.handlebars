@@ -1,4 +1,4 @@
-<label class="input_radio {{class_label}}">
+<label class="input_radio {{class_label}} {{#if error}} input_error {{/if}}">
   <input class="input_radio__input {{class_input}}" type="radio" name="{{name}}" {{#if checked}}checked{{/if}}>
   <div class="input_radio__div"></div>
   <div class="{{class_text}}">{{text}}</div>
