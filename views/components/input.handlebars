@@ -1,5 +1,5 @@
 <label class="input" for="{{obj.name}}">
   <p class="input__title {{class_title}}">{{obj.title}}</p>
-  <input class="{{class}} input__field" autocomplete="off" type="{{#if obj.type}}{{obj.type}}{{else}}text{{/if}}" name="{{obj.name}}" id="{{ obj.name }}" placeholder="{{ obj.placeholder }}">
+  <input class="{{class}} input__field" autocomplete="off" type="{{#if obj.type}}{{obj.type}}{{else}}text{{/if}}" name="{{obj.name}}" id="{{ obj.name }}" placeholder="{{ obj.placeholder }}" {{{attributes}}}>
   <div class="input__error-msg d-none"></div>
 </label>
