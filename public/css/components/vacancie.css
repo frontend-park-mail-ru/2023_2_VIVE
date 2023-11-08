@@ -58,6 +58,7 @@
 
 .vacancie__btns {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 20px;
 }

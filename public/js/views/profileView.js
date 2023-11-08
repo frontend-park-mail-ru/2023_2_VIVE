@@ -80,9 +80,6 @@ export default class profileView extends View {
 
         try {
           const user = await User.getUser();
-
-          delete user.id;
-          delete user.role;
           
           fields.forEach(input => {
             user[input.name.replace(/-/g, '_')] = input.value;
@@ -92,7 +89,8 @@ export default class profileView extends View {
             BACKEND_SERVER_URL + '/current_user',
             user,
           );
-          console.log(resp.status);
+
+          router.goToLink(`/profile/settings`);
 
         } catch (error) {
           console.error('Error: ', error);

@@ -126,7 +126,8 @@ export default class authView extends View {
    */
   async sendForm(formData) {
     delete formData['remember_password'];
-    // formData['role'] = this.role == 'app' ? 'applicant' : 'employer';
+    formData['role'] = this.role == 'app' ? 'applicant' : 'employer';
+
     console.log(formData);
 
     try {

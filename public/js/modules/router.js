@@ -32,6 +32,7 @@ class Router {
       '/profile': 'profile',
       '/profile/settings': 'profile',
       '/profile/resumes': 'profile',
+      '/profile/vacancies': 'profile',
       '/profile/responses': 'profile',
       '/vacancy': 'vacancy',
       '/': 'vacs',

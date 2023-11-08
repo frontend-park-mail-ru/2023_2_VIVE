@@ -82,6 +82,12 @@
     line-height: 25px;
 }
 
+.response-block__img {
+    width: 67px;
+    height: 67px;
+    flex-shrink: 0;
+}
+
 .response-block__date {
     display: flex;
     justify-content: center;
