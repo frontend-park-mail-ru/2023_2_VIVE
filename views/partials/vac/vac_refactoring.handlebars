@@ -1,4 +1,4 @@
-<div class="vacancie-refactor">
+<div class="vacancie-refactor d-none">
     <div class="vacancie-refactor__main">
         {{#each (array 
         (object title="Название вакансии" name="vacancy_name" placeholder="Название вакансии")
@@ -10,7 +10,7 @@
         class="res__form__input")}}
         {{/each}}
         {{#each (array
-        (object title="Предпологаемый уровень дохода ₽" placeholderFirst="От" placeholderSecond="До")
+        (object title="Предпологаемый уровень дохода ₽" placeholderFirst="От" nameOn="fromMoney" placeholderSecond="До" nameTo="toMoney")
         )}}
 
         {{> double_input obj=this
@@ -45,10 +45,12 @@
         </div>
     </div>
     <div class="vacancie-refactor__btns">
-        <div class="link-btn primary-btn link-btn-bd-rad-10 link-btn_transp-box-blue resume__btns-text resume__btns-text--secondary">
+        <div class="link-btn primary-btn link-btn-bd-rad-10 link-btn_transp-box-blue resume__btns-text resume__btns-text--secondary"
+        data-name="cancel-refactoring">
             Отменить изменения
         </div>
-        <div class="link-btn primary-btn link-btn-bd-rad-10 primary-btn_blue-primary resume__btns-text resume__btns-text--primary">
+        <div class="link-btn primary-btn link-btn-bd-rad-10 primary-btn_blue-primary resume__btns-text resume__btns-text--primary"
+        data-name="send-refactoring">
             Сохранить изменения
         </div>
     </div>

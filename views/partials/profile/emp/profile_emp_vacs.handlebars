@@ -11,17 +11,12 @@
         </div>
         <div class="vacancie__additional-info">
           <div class="add-info">
-            <img class="add-info__img" src="../../../../../public/images/img/rouble_outline_20.png">
-            <div class="add-info__text">{{#if this.salary_lower_bound and this.salary_upper_bound}}от {{this.salary_lower_bound}} до {{this.salary_upper_bound}} тыс. рублей
-              {{else if this.salary_lower_bound}}от {{this.salary_lower_bound}} тыс. рублей
-              {{else if this.salary_upper_bound}}до {{this.salary_upper_bound}} тыс. рублей
-              {{else}}
-              Не указана
-              {{/if}}</div>
+            <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
+            <div class="add-info__text">{{#if this.salary_lower_bound}}{{this.salary_lower_bound}}{{else}}Не указана{{/if}}</div>
           </div>
           <div class="add-info">
             <img class="add-info__img" src="../../../../../public/images/img/stars_20.png">
-            <div class="add-info__text">{{#if this.salary_lower_bound}}{{this.salary_lower_bound}}{{else}}Не указана{{/if}}</div>
+            <div class="add-info__text">{{#if this.experience_lower_bound}}{{this.experience_lower_bound}}{{else}}Не указана{{/if}}</div>
           </div>
           <div class="add-info">
             <img class="add-info__img" src="../../../../../public/images/img/clock_outline_20.png">
@@ -37,7 +32,7 @@
           </div>
         </div>
         <div
-          class="link-btn primary-btn link-btn-bd-rad-10 link-btn_transp-box-blue resume__btns-text resume__btns-text--secondary">
+          class="link-btn primary-btn link-btn-bd-rad-10 link-btn_transp-box-blue resume__btns-text resume__btns-text--secondary" vacancy-id="{{this.id}}">
           Посмотреть подробную информацию
         </div>
       </div>

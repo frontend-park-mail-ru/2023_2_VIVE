@@ -45,7 +45,16 @@ export default class profileView extends View {
     const settingButtons = document.querySelectorAll('[data-name="changing"]');
     const cancelButtons = document.querySelectorAll('[data-name="cancel-changing"]');
     const sendButtons = document.querySelectorAll('[data-name="send-form"]');
+    const buttonsWithVacancyId = document.querySelectorAll('[vacancy-id]');
 
+    // Добавить обработчик событий для каждой кнопки
+    buttonsWithVacancyId.forEach(button => {
+      button.addEventListener('click',() => {
+        const vacId = button.getAttribute('vacancy-id');
+        router.goToLink(`/vacancy/${vacId}`)
+      });
+    });
+    
     profileButtons.forEach(button => {
       button.addEventListener('click', () => {
         const buttonName = button.getAttribute('data-name');
@@ -78,11 +87,6 @@ export default class profileView extends View {
         const changingFullNameForm = button.closest('.changing-inpute');
         const fields = changingFullNameForm.querySelectorAll('input');
 
-        const formData = new FormData();
-        fields.forEach(input => {
-          formData.append(input.name, input.value);
-        });
-
         try {
           const user = await User.getUser();
           
@@ -106,7 +110,7 @@ export default class profileView extends View {
 
   async getUserVacancies() {
     try {
-      const resp = await APIConnector.get(BACKEND_SERVER_URL + "/user_vacancies");
+      const resp = await APIConnector.get(BACKEND_SERVER_URL + "/vacancies/current_user");
       const data = await resp.json();
       return data;
     } catch(err) {

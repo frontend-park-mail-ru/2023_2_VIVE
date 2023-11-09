@@ -34,9 +34,9 @@ class Router {
       '/profile/resumes': 'profile',
       '/profile/vacancies': 'profile',
       '/profile/responses': 'profile',
-      '/vacancy': 'vacancy',
-      '/vacancy/description': 'vacancy',
-      '/vacancy/responses': 'vacancy',
+      '/vacancy/:id': 'vacancy',
+      '/vacancy/:id/description': 'vacancy',
+      '/vacancy/:id/responses': 'vacancy',
       '/': 'vacs',
     };
 
@@ -67,14 +67,34 @@ class Router {
     if (this.prevView) {
       this.prevView.remove();
     }
+    let matchedRoute = null;
+
+    for (const route in this.routes) {
+      const routeRegex = new RegExp(route.replace(/:\w+/g, '(\\d+)'));
+      if (routeRegex.test(url)) {
+        matchedRoute = route;
+        break;
+      }
+    }
+
+    const idMatch = url.match(/\d+/);
+    const id = idMatch ? parseInt(idMatch[0]) : null;
+    if (!isNaN(id)) {
+      this.prevView = this.objs[this.routes[matchedRoute]];
+      if (!(await this.prevView.updateInnerData({'id': id}))) {
+        this.prevView = this.objs['page404'];
+        this.prevView.render();
+        return;
+      }
+    }
 
     this.objs['menu'].remove();
     this.objs['footer'].remove();
-    if (url in this.routes) {
+    if (matchedRoute) {
       history.pushState(null, null, url);
       this.objs['menu'].render();
       this.objs['footer'].render();
-      this.prevView = this.objs[this.routes[url]];
+      this.prevView = this.objs[this.routes[matchedRoute]];
     } else {
       this.prevView = this.objs['page404'];
     }
