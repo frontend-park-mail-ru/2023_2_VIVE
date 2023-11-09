@@ -1,6 +1,7 @@
 @import url("text/text.css");
 
 @import url("components/404.css");
+@import url("components/drop-content.css");
 @import url("components/footer.css");
 @import url("components/form.css");
 @import url("components/header.css");
@@ -75,6 +76,10 @@
 
 .me-10 {
   margin-right: 10px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .cursor-img {
