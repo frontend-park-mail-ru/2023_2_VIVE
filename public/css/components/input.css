@@ -23,13 +23,13 @@
 
 .input_error .input__field {
   background-color: rgba(239, 74, 60, 0.15);
-  border: 2px solid var(--main-error);
+  border: 2px solid var(--main-error-red);
 }
 
 .input__error-msg {
   margin-top: 5px;
   padding: 0 10px;
-  color: var(--main-error);
+  color: var(--text-error-regular);
 }
 
 .double-input {

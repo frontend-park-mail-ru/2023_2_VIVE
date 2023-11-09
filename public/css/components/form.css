@@ -16,7 +16,7 @@
 
 
 .form__error {
-  color: var(--main-error);
+  color: var(--text-error-regular);
   font-feature-settings:
     'clig' off,
     'liga' off;
@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  background-color: var(--button-color-primary-default);
+  background-color: var(--main-dodger-blue);
   border: none;
   cursor: pointer;
   outline: none;

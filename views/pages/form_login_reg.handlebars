@@ -1,7 +1,7 @@
 <div class="column-wrapper">
   <div class="form-block">
     <form class="form">
-      <span class="form__title x-large-font">
+      <span class="form__title text header-text header-text--first text-dark-title">
         {{#iff form_type '==' 'login'}}
         Войти
         {{else}}
@@ -9,7 +9,7 @@
         {{/iff}}
       </span>
       <div class="d-flex">
-        <span class="me-10">Найти работу</span>
+        <span class="me-10 common-text common-text--regular {{#iff role '==' 'emp'}}text-dark-regular{{else}}text-dark-title{{/iff}}">Найти работу</span>
         <a class="form__slider {{#iff role '==' 'emp'}} form__slider_right {{/iff}} js-link" href="
         {{#iff form_type '==' 'reg'}} 
         {{#iff role '==' 'app'}} 
@@ -27,13 +27,13 @@
         ">
           <div class="form__slider__circle"></div>
         </a>
-        <span class="ms-10">Найти сотрудников</span>
+        <span class="ms-10 common-text common-text--regular {{#iff role '==' 'app'}}text-dark-regular{{else}}text-dark-title{{/iff}}">Найти сотрудников</span>
       </div>
 
       <div class="form__error d-none"></div>
 
       {{#each inputs}}
-      {{> input (object obj=this class="form__input-txt")}}
+      {{> input (object obj=this class="form__input-txt common-text common-text--medium")}}
       {{/each}}
 
       <label class="form__input-remember" for="remember">
@@ -41,7 +41,7 @@
         <span>Запомнить пароль</span>
       </label>
       <div class="form__actions">
-        <button type="submit" class="link-btn link-btn_blue link-btn_pd-med link-btn_bd-rad-sm">
+        <button type="submit" class="link-btn-blue--bg common-text common-text--medium text-light-title">
           <span class="link-btn__text">{{#iff form_type '==' 'login' }}
             Войти
             {{else}}
@@ -49,7 +49,7 @@
             {{/iff}}
           </span>
         </button>
-        <a class="js-link link-btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm"
+        <a class="js-link link-btn-blue text-dodger-blue"
           href="
         {{#iff role '==' 'app'}} 
         {{#iff form_type '==' 'reg'}} 
