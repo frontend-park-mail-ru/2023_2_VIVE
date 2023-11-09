@@ -14,10 +14,7 @@
   flex: 1 0 0;
   border-radius: 12px;
   border: 0;
-  background: var(--main-background-grey);
-  font-size: 18px;
   outline: none;
-  color: #5e5e5e;
 }
 
 .input__field:focus {

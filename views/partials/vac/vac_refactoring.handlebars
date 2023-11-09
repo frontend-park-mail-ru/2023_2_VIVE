@@ -6,19 +6,20 @@
         )}}
 
         {{> input (object obj=this
-        class_title="res__form__input__title"
-        class="res__form__input")}}
+        class_title="res__form__input__title header-text header-text--fourth text-form-active"
+        class="res__form__input common-text common-text--medium  text-dark-title")}}
         {{/each}}
+
         {{#each (array
-        (object title="Предпологаемый уровень дохода ₽" placeholderFirst="От" nameOn="fromMoney" placeholderSecond="До" nameTo="toMoney")
+        (object class="common-text common-text--medium  text-dark-title" title="Предпологаемый уровень дохода ₽" placeholderFirst="От" nameOn="fromMoney" placeholderSecond="До" nameTo="toMoney")
         )}}
 
         {{> double_input obj=this
-        class_title="res__form__input__title"}}
+        class_title="res__form__input__title header-text header-text--fourth text-form-active"}}
         {{/each}}
         <div>
-            <p class="res__form__input_radio__title res__form__input__title">Требуемый опыт</p>
-            <div class="res__form__input">
+            <p class="res__form__input__title header-text header-text--fourth text-form-active">Требуемый опыт</p>
+            <div class="res__form__input common-text common-text--regular text-form-active">
                 {{#each (array
                 (object text="Нет опыта")
                 (object text="От 1 года до 3-х лет")
@@ -30,8 +31,8 @@
             </div>
         </div>
         <div>
-            <p class="res__form__input_radio__title res__form__input__title">Занятость</p>
-            <div class="res__form__input">
+            <p class="res__form__input__title header-text header-text--fourth text-form-active">Занятость</p>
+            <div class="res__form__input common-text common-text--regular text-form-active">
                 {{#each (array
                 (object text="Полная занятость")
                 (object text="Частичная занятость")
@@ -45,11 +46,11 @@
         </div>
     </div>
     <div class="vacancie-refactor__btns">
-        <div class="link-btn primary-btn link-btn-bd-rad-10 link-btn_transp-box-blue resume__btns-text resume__btns-text--secondary"
+        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
         data-name="cancel-refactoring">
             Отменить изменения
         </div>
-        <div class="link-btn primary-btn link-btn-bd-rad-10 primary-btn_blue-primary resume__btns-text resume__btns-text--primary"
+        <div class="text-light-title setting-inpute__button setting-inpute__button--primary common-text common-text--medium"
         data-name="send-refactoring">
             Сохранить изменения
         </div>

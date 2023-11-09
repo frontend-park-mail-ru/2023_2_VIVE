@@ -19,6 +19,7 @@ export default class profileView extends View {
     let data = {};
 
     if (this.state == 'vacancies') {
+      console.log(200);
       data = await this.getUserVacancies();
     }
 

@@ -16,15 +16,6 @@
     gap: 30px;
 }
 
-.resume__job-name {
-    color: var(--text-dark);
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 26px;
-}
-
 .resume__status {
     display: flex;
     height: 25px;
@@ -33,11 +24,6 @@
     align-items: center;
     gap: 10px;
     border-radius: 12px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
 }
 
 .resume__status--avaliable {
@@ -58,29 +44,12 @@
     gap: 10px;
 }
 
-.resume__statistic-text {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 22px;
-}
-
 .resume__statistic-more {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 20px;
     gap: 20px;
-}
-
-.resume__statistic-more-text {
-    color: var(--text-filled);
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 25px;
 }
 
 .resume__statistic-line {
@@ -93,14 +62,6 @@
     display: flex;
     align-items: center;
     gap: 20px;
-}
-
-.resume__btns-text {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 25px;
 }
 
 .resume__btns-text--primary {

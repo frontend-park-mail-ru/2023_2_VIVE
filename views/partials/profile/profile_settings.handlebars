@@ -1,6 +1,6 @@
 <div class="profile__settings">
   <div class="setting-inputes-block">
-    {{#iff user.role '==' 'applicant'}}
+    {{!-- {{#iff user.role '==' 'applicant'}} --}}
     <div class="changing-inpute ch-i__d-none" data-name="changing-change-full-name">
       <div class="changing-inpute__field">
         <div class="setting-inpute__main-text header-text header-text--first">
@@ -121,8 +121,8 @@
         <div class="common-text common-text--medium">Изменить</div>
       </div>
     </div>
-    {{else iff user.role '==' 'employer'}}
-    {{/iff}}
+    {{!-- {{else iff user.role '==' 'employer'}}
+    {{/iff}} --}}
   </div>
   <div class="setting__btn">
     <div class="setting__delete-btn" data-name="delete-account" style="cursor:not-allowed;">

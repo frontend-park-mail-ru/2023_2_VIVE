@@ -9,15 +9,6 @@
     background: var(--card-back-default);
 }
 
-.vacancie__main-info {
-    color: var(--text-dark);
-    font-family: 'Roboto', sans-serif;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 28px;
-}
-
 .vacancie__additional-info {
     display: flex;
     align-items: flex-start;
@@ -34,15 +25,6 @@
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-}
-
-.add-info__text {
-    color: var(--text-filled);
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 25px;
 }
 
 .vacancie__form-create {
