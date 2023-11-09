@@ -19,7 +19,7 @@ const WRONG_PSWD_PARAM =
  * - `min_len` is min length of a string
  * - `regExpFlag` is an regular expression string
  */
-const Constraints = {
+export const Constraints = {
   // When data is required
   required: {
     check: (ctx, fieldToCheckName) => {
