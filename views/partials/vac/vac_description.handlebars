@@ -3,9 +3,11 @@
     <div class="common-text common-text--regular">
     {{vacancy.description}}
     </div>
-    <div class="text-dodger-blue setting-inpute__button common-text common-text--medium">
-          Редактировать подробное описание
-    </div>
+    {{#iff role '==' 'employer'}}
+        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium">
+            Редактировать подробное описание
+        </div>
+    {{/iff}}
     {{/if}}
         {{!-- <div class="full-job-info__main-text">
             VK HR Tek — это система кадрового электронного документооборота для компаний и их сотрудников. Мы начали создавать инструменты для HR еще в 2019 году и в конце 2021-го представили сервис VK HR Tek. Среди наших клиентов уже есть крупные российские и международные компании: Алиэкспресс, Юрент, Твоя Аптека, Nexign, Гемотест, Аскона и многие другие. Сервис позволяет кадровикам обрабатывать до 95% кадровых документов одним нажатием кнопки, компании — экономить на канцелярии и логистике, а сотрудникам — уходить в отпуск без посещения отдела кадров.

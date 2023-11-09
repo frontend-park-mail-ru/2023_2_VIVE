@@ -18,18 +18,11 @@ export default class profileView extends View {
 
         console.log(this.id);
 
-        let type = '';
         let vacancy = await this.getVacancyData(this.id);
 
-        if (user['role'] === 'applicant') {
-            type = 'vac_app';
-        } else {
-            type = 'vac_emp';
-        }
-
         // eslint-disable-next-line no-undef
-        const template = Handlebars.templates[type];
-        document.querySelector('main').innerHTML = template({state: this.state, vacancy: vacancy});
+        const template = Handlebars.templates['vac'];
+        document.querySelector('main').innerHTML = template({state: this.state, role: user['role'], vacancy: vacancy});
 
         this.addEventListeners();
     }

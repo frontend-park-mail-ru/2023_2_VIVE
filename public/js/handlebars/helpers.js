@@ -20,7 +20,7 @@ export function registerHelpers() {
     });
     return isOk;
   });
-
+  
   Handlebars.registerHelper('object', function({hash}) {
     return hash;
   });
