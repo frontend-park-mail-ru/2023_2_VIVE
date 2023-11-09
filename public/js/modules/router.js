@@ -29,7 +29,7 @@ class Router {
       '/emp_reg': 'empReg',
       '/resume_creation': 'resCreation',
       '/resume_view': 'resView',
-      '/profile': 'profile',
+      '/profile$': 'profile',
       '/profile/settings': 'profile',
       '/profile/resumes': 'profile',
       '/profile/vacancies': 'profile',

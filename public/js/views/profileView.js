@@ -18,20 +18,12 @@ export default class profileView extends View {
     const user = await User.getUser();
     let data = {};
 
-    let type = '';
-
-    if (user['role'] === 'applicant') {
-      type = 'profile_app';
-    } else {
-      type = 'profile_emp';
-    }
-
     if (this.state == 'vacancies') {
       data = await this.getUserVacancies();
     }
 
     // eslint-disable-next-line no-undef
-    const template = Handlebars.templates[type];
+    const template = Handlebars.templates['profile'];
     document.querySelector('main').innerHTML = template({state: this.state, user: user, data: data});
 
     this.addEventListeners();

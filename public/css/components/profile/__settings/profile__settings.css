@@ -25,10 +25,7 @@
 }
 
 .setting-inpute__main-text {
-    display: flex;
     width: 250px;
-    align-items: center;
-    gap: 10px;
 }
 
 .settings-inpute__field {
@@ -38,7 +35,7 @@
     align-items: center;
     align-self: stretch;
     border-radius: 10px;
-    background: var(--background-disabled);
+    background: var(--forms-background-disabled);
 }
 
 .setting-inpute__button {
@@ -49,8 +46,36 @@
     align-items: center;
     gap: 5px;
     border-radius: 10px;
-    border: 1px solid var(--button-color-primary-default);
     cursor: pointer;
+    border: 1px solid var(--buttons-blue-primary-default);
+}
+
+.setting-inpute__button:hover {
+    color: var(--text-light-title);
+    background-color: var(--buttons-blue-primary-default);
+    transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+.setting-inpute__button:active {
+    color: var(--text-dodger-blue);
+    background-color: unset;
+    transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+.setting-inpute__button--primary {
+    background-color: var(--buttons-blue-primary-default);
+}
+
+.setting-inpute__button--primary:hover {
+    background-color: unset;
+    color: var(--text-dodger-blue);
+    transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+.setting-inpute__button--primary:active {
+    background-color: var(--buttons-blue-primary-default);
+    color: var(--text-light-title);
+    transition: color 0.5s ease, background-color 0.5s ease;
 }
 
 .setting__btn {
@@ -99,10 +124,11 @@
 
 .changing-inpute__label {
     width: 400px;
+    height: 100%;
     padding: 5px 10px;
     border-radius: 10px;
-    border: 0.5px solid var(--border-active, #0496FF);
-    background: var(--background-normal, #F7F7F7);
+    border: 0.5px solid var(--forms-border-active);
+    background: var(--forms-background-normal);
 }
 
 .changing-inpute__btns {

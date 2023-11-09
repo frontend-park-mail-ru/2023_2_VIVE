@@ -9,6 +9,7 @@
   --text-form-inactive: #A6A6A6;
   --text-form-active: #5E5E5E;
   --text-dodger-blue: #0496FF;
+  --text-error-regular: #EF4A3C;
   /* END TEXT COLORS */
 
   /* CARD BACK COLORS */
@@ -37,4 +38,69 @@
   --mono-blue-faded-blue: #43B1FF;
   --mono-blue-dark-blue: #063452;
   /* END MONO BLUE COLORS */
+
+  /* LABELS COLORS */
+  --labels-blue-main: #0496FF;
+  --labels-blue-back: #0496FF10;
+  --labels-red-main: #EF4A3C;
+  --labels-red-back: #EF4A3C10;
+  --labels-green-main: #31B546;
+  --labels-green-back: #31B54610;
+  --labels-orange-main: #FFBC42;
+  --labels-orange-back: #FFBC4210;
+  /* END LABELS COLORS */
+
+  /* FORMS COLORS */
+  --forms-background-normal: #F7F7F7;
+  --forms-background-error: #EF4A3C10;
+  --forms-background-disabled: #D2D2D2;
+  --forms-text-filled: #5E5E5E;
+  --forms-text-placeholder: #A6A6A6;
+  --forms-border-active: #0496FF;
+  --forms-border-error: #EF4A3C;
+  /* END FORMS COLORS */
+
+  /* BUTTON COLORS */
+  --buttons-blue-primary-default: #0496FF;
+  --buttons-blue-primary-hover: #018AED;
+  --buttons-blue-primary-active: #0284E2;
+  --buttons-blue-primary-disabled: #0496FF20;
+
+  --buttons-blue-secondary-deafult: #EBEDEB;
+  --buttons-blue-secondary-hover: #E3E3E3;
+  --buttons-blue-secondary-active: #DEDEDE;
+  --buttons-blue-secondary-disabled: #F5F5F450;
+
+  --buttons-blue-outline-hover: #F2F2F2;
+  --buttons-blue-outlinea-active: #E8E8E8;
+
+  --buttons-orange-primary-default: #FFBC42;
+  --buttons-orange-primary-hover: #E3A93F;
+  --buttons-orange-primary-active: #CD9939;
+  --buttons-orange-primary-disabled: #FFBC4250;
+  
+  --buttons-orange-outline-hover: #063452;
+  --buttons-orange-outline-active: #0C5788;
+  
+  --buttons-orange-secondary-default: #063452;
+  --buttons-orange-secondary-hover: #09446B;
+  --buttons-orange-secondary-active: #0C5788;
+  --buttons-orange-secondary-disabled: #042439;
+
+  --buttons-red-primary-default: #EF4A3C;
+  --buttons-red-primary-hover: #D6463A;
+  --buttons-red-primary-active: #BB3E33;
+  --buttons-red-primary-disabled: #EF4A3C20;
+  
+  --buttons-red-secondary-default: #EBEDEB;
+  --buttons-red-secondary-hover: #E3E3E3;
+  --buttons-red-secondary-active: #DEDEDE;
+  --buttons-red-secondary-disabled: #F5F5F450;
+
+  --buttons-red-outline-hover: #F2F2F2;
+  --buttons-red-outline-active: #E8E8E8;
+
+  --buttons-photo-hover: #EBEDEB70;
+  --buttons-photo-hover: #DEDEDE80;
+  /* END BUTTON COLORS */
 }

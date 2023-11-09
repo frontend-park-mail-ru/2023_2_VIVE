@@ -1,0 +1,134 @@
+<div class="profile__settings">
+  <div class="setting-inputes-block">
+    {{#iff user.role '==' 'applicant'}}
+    <div class="changing-inpute ch-i__d-none" data-name="changing-change-full-name">
+      <div class="changing-inpute__field">
+        <div class="setting-inpute__main-text header-text header-text--first">
+          Фамилия
+        </div>
+          <input class="changing-inpute__label common-text common-text--medium text-dark-title" name="last-name" type="text" placeholder="Фамилия" value="{{ user.last_name }}">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="setting-inpute__main-text header-text header-text--first">
+          Имя
+        </div>
+        <input class="changing-inpute__label common-text common-text--medium text-dark-title" name="first_name" type="text" placeholder="Имя" value="{{ user.first_name }}">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="setting-inpute__main-text header-text header-text--first">
+          Пароль
+        </div>
+        <input class="changing-inpute__label common-text common-text--medium text-dark-title" name="password" type="password" placeholder="Введите пароль">
+      </div>
+      <div class="changing-inpute__btns">
+        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium" data-name="cancel-changing">
+          Отменить
+        </div>
+        <div class="text-light-title setting-inpute__button setting-inpute__button--primary common-text common-text--medium"
+        data-name="send-form">
+          Применить
+        </div>
+      </div>
+    </div>
+    <div class="setting-inpute" data-name="setting-change-full-name">
+      <div class="setting-inpute__main-text header-text header-text--first">
+        ФИО
+      </div>
+      <div class="settings-inpute__field">
+        <div class="common-text common-text--medium --text-dark-regular">
+        {{ user.last_name }} {{ user.first_name }}
+        </div>
+      </div>
+      <div class="text-dodger-blue setting-inpute__button" data-name="changing" type="change-full-name">
+        <div class="common-text common-text--medium">Изменить</div>
+      </div>
+    </div>
+    <div class="changing-inpute ch-i__d-none" data-name="changing-change-mail">
+      <div class="changing-inpute__field">
+        <div class="setting-inpute__main-text header-text header-text--first">
+          Новая почта
+        </div>
+        <input class="changing-inpute__label common-text common-text--medium text-dark-title" name="email" type="text" placeholder="Почта" value="{{ user.email }}">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="setting-inpute__main-text header-text header-text--first">
+          Пароль
+        </div>
+        <input class="changing-inpute__label common-text common-text--medium text-dark-title" name="password" type="password" placeholder="Введите пароль">
+      </div>
+      <div class="changing-inpute__btns">
+        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium" data-name="cancel-changing">
+          Отменить
+        </div>
+        <div class="text-light-title setting-inpute__button setting-inpute__button--primary common-text common-text--medium"
+        data-name="send-form">
+          Применить
+        </div>
+      </div>
+    </div>
+    <div class="setting-inpute" data-name="setting-change-mail">
+      <div class="setting-inpute__main-text header-text header-text--first">
+        Почта
+      </div>
+      <div class="settings-inpute__field">
+        <div class="common-text common-text--medium --text-dark-regular">
+          {{ user.email }}
+        </div>
+      </div>
+      <div class="text-dodger-blue setting-inpute__button" data-name="changing" type="change-mail">
+        <div class="common-text common-text--medium">Изменить</div>
+      </div>
+    </div>
+    <div class="changing-inpute ch-i__d-none" data-name="changing-change-password">
+      <div class="changing-inpute__field">
+        <div class="setting-inpute__main-text header-text header-text--first">
+          Старый пароль
+        </div>
+          <input class="changing-inpute__label common-text common-text--medium text-dark-title" name="password" type="password" placeholder="Пароль">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="setting-inpute__main-text header-text header-text--first">
+          Новый пароль
+        </div>
+        <input class="changing-inpute__label common-text common-text--medium text-dark-title" name="new_password" type="password" placeholder="Пароль">
+      </div>
+      <div class="changing-inpute__field">
+        <div class="setting-inpute__main-text header-text header-text--first">
+          Повторите пароль
+        </div>
+        <input class="changing-inpute__label common-text common-text--medium text-dark-title" name="repeat_password" type="password" placeholder="Повторите пароль">
+      </div>
+      <div class="changing-inpute__btns">
+        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium" data-name="cancel-changing">
+          Отменить
+        </div>
+        <div class="text-light-title setting-inpute__button setting-inpute__button--primary common-text common-text--medium"
+        data-name="send-form">
+          Применить
+        </div>
+      </div>
+    </div>
+    <div class="setting-inpute" data-name="setting-change-password">
+      <div class="setting-inpute__main-text header-text header-text--first">
+        Пароль
+      </div>
+      <div class="settings-inpute__field">
+        <div class="common-text common-text--medium --text-dark-regular">
+        ***************************
+        </div>
+      </div>
+      <div class="text-dodger-blue setting-inpute__button" data-name="changing" type="change-password">
+        <div class="common-text common-text--medium">Изменить</div>
+      </div>
+    </div>
+    {{else iff user.role '==' 'employer'}}
+    {{/iff}}
+  </div>
+  <div class="setting__btn">
+    <div class="setting__delete-btn" data-name="delete-account" style="cursor:not-allowed;">
+      <div class="common-text common-text--medium text-error-regular">
+        Удалить аккаунт
+      </div>
+    </div>
+  </div>
+</div>
