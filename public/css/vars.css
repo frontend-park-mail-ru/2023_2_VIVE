@@ -4,10 +4,11 @@
   --text-dark-title: #333333;
   --text-dark-regular: #5E5E5E;
   --text-dark-link: #006BA6;
-  --text-light-title: #;
-  --text-light-regular: #;
-  --text-form-inactive: #;
-  --text-form-active: #;
+  --text-light-title: #FBFBFB;
+  --text-light-regular: #f3f3f398;
+  --text-form-inactive: #A6A6A6;
+  --text-form-active: #5E5E5E;
+  --text-dodger-blue: #0496FF;
   /* END TEXT COLORS */
 
   /* CARD BACK COLORS */
@@ -34,5 +35,6 @@
   --mono-blue-dark-blue: #0162A6;
   --mono-blue-blue-ws: #43B1FF;
   --mono-blue-faded-blue: #43B1FF;
+  --mono-blue-dark-blue: #063452;
   /* END MONO BLUE COLORS */
 }

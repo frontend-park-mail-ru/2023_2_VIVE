@@ -4,17 +4,15 @@
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="profile__main-text">{{ user.last_name }} {{ user.first_name }} {{ user.third_name }}</div>
-                    <div class="profile__primary-text">{{ user.email }}</div>
+                    <div class="header-text header-text--first text-light-title">{{ user.last_name }} {{ user.first_name }} {{ user.third_name }}</div>
+                    <div class="secondary-text text-light-regular">{{ user.email }}</div>
                 </div>
                 <div class="profile__switch-btns">
-                    <div class="profile__btn {{#iff state '==' 'settings'}}profile__btn--active{{else}}profile__btn--hover{{/iff}}" data-name="settings">
-                        <div class="profile__btn-text">Настройки</div>
-                        <div class="profile__line"></div>
+                    <div class="profile__btn {{#iff state '==' 'settings'}}profile__btn--active text-dodger-blue{{else}}text-dark-title{{/iff}}" data-name="settings">
+                        <div class="common-text common-text--bold">Настройки</div>
                     </div>
-                    <div class="profile__btn {{#iff state '==' 'vacancies'}}profile__btn--active{{else}}profile__btn--hover{{/iff}}" data-name="vacancies">
-                        <div class="profile__btn-text">Вакансии</div>
-                        <div class="profile__line"></div>
+                    <div class="profile__btn {{#iff state '==' 'vacancies'}}profile__btn--active text-dodger-blue{{else}}text-dark-title{{/iff}}" data-name="vacancies">
+                        <div class="common-text common-text--bold">Вакансии</div>
                     </div>
                 </div>
             </div>

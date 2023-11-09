@@ -8,7 +8,7 @@
 }
 
 .profile__header--background--default-hh {
-    background: linear-gradient(to bottom, var(--profile-blue-primary-default) 50%, var(--profile-blue-hover) 50%);
+    background: linear-gradient(to bottom, var(--main-dodger-blue) 50%, var(--mono-blue-dark-blue) 50%);
 }
 
 .profile_image {
@@ -50,24 +50,6 @@
     align-self: stretch;
 }
 
-.profile__main-text {
-    color: var(--main-background-grey);
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 28px;
-}
-
-.profile__primary-text {
-    color: var(--text-form-inactive);
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 200;
-    line-height: 18px;
-}
-
 .profile__switch-btns {
     display: inline-flex;
     align-items: flex-start;
@@ -79,22 +61,9 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-}
-
-.profile__btn-text {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
+    cursor: pointer;
 }
 
 .profile__btn--active {
-    border-bottom: 3px solid var(--button-color-active);
-    color: var(--button-color-active);
-    cursor: pointer;
-}
-
-.profile__btn--hover {
-    color: var(--button-color-hover);
-    cursor: pointer;
+    border-bottom: 3px solid var(--mono-blue-faded-blue);
 }

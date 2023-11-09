@@ -29,12 +29,6 @@
     width: 250px;
     align-items: center;
     gap: 10px;
-    columns: var(--text-dark);
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 28px;
 }
 
 .settings-inpute__field {
@@ -45,12 +39,6 @@
     align-self: stretch;
     border-radius: 10px;
     background: var(--background-disabled);
-    color: var(--text-filled);
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 25px;
 }
 
 .setting-inpute__button {
@@ -62,12 +50,6 @@
     gap: 5px;
     border-radius: 10px;
     border: 1px solid var(--button-color-primary-default);
-    color: var(--profile-blue-primary-default);
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 25px;
     cursor: pointer;
 }
 
@@ -88,12 +70,6 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
-    color: var(--text-red-primary);
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 25px;
     cursor: pointer;
 }
 
@@ -119,12 +95,6 @@
     width: 250px;
     align-items: center;
     gap: 10px;
-    color: var(--text-dark);
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 28px;
 }
 
 .changing-inpute__label {
@@ -133,12 +103,6 @@
     border-radius: 10px;
     border: 0.5px solid var(--border-active, #0496FF);
     background: var(--background-normal, #F7F7F7);
-    color: var(--text-filled);
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 25px;
 }
 
 .changing-inpute__btns {

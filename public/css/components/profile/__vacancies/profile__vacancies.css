@@ -6,15 +6,6 @@
     gap: 20px;
 }
 
-.vacancies__main-text {
-    color: var(--text-dark);
-    font-family: 'Roboto', sans-serif;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 28px;
-}
-
 .vacancies__block {
     display: flex;
     width: 100%;

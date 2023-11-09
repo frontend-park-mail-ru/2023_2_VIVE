@@ -25,3 +25,7 @@
 .text-form-active {
   color: var(--text-form-active);
 }
+
+.text-dodger-blue {
+  color: var(--text-dodger-blue);
+}

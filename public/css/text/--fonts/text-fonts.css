@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'Roboto';
-  src: url('../fonts/Roboto.ttf');
+  src: url('../../../fonts/Roboto.ttf');
 }
 
 @font-face {
   font-family: 'Acumin';
-  src: url('../fonts/Acumin\ Variable\ Concept.ttf');
+  src: url('../../../fonts/Acumin\ Variable\ Concept.ttf');
 }
