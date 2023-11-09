@@ -237,3 +237,18 @@
 .link-btn_green {
   border: 1px solid var(--greeen-main);
 }
+
+
+.link-btn-default-dark {
+  color: var(--text-dark-title);
+}
+
+.link-btn-default-dark:hover {
+  color: var(--text-dodger-blue);
+  transition: color 0.5s ease;
+}
+
+.link-btn-default-dark:active {
+  color: var(--text-dark-title);
+  transition: color 0.5s ease;
+}
