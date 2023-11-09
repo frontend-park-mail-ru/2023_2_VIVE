@@ -82,6 +82,10 @@
   cursor: pointer;
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
 .cursor-img {
   width: 24px;
   height: 24px;

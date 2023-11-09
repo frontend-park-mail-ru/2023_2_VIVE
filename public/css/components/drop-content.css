@@ -34,6 +34,16 @@
   flex-shrink: 0;
 }
 
+.dropdown__img--rotate {
+  transform: rotate(90deg);
+  transition: 0.3s ease;
+}
+
+.dropdown__img--rotate-secondary {
+  transform: rotate(0deg);
+  transition: 0.3s ease;
+}
+
 .dropdown__btn {
   background-color: #3498db;
   color: #fff;

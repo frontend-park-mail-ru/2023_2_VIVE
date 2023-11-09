@@ -30,21 +30,27 @@
     </svg>
     ')}}
   </div>
-  <div class="dropdown" id="dropdownTrigger">
+  <div class="dropdown">
     <div class="navbar__item">
-      {{> link-btn (object href="/profile"
-      class="navbar__item__btn link-btn_transp link-btn_block link-btn_pd-sm"
-      svg='<svg width="31" height="20" viewBox="0 0 31 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0.5 20V17.2223H30.5V20H0.5ZM0.5 11.3889V8.61112H30.5V11.3889H0.5ZM0.5 2.77775V0H30.5V2.77775H0.5Z"
-          fill="#0496FF" />
-      </svg>
-      ')}}
+      <img class="cursor-pointer dropdown__padd-btn" src="../../public/images/img/more_28-01.png" style="width: 36px; height: 36px; flex-shrink: 0;">
     </div>
-    <div class="dropdown__content" id="dropdownContent">
-      <a href="#" class="dropdown__item">Профиль</a>
-      <a href="#" class="dropdown__item">Настройки</a>
-      <a href="#" class="dropdown__item">Сменить роль</a>
-      <a href="#" class="dropdown__item">Выход из аккаунта</a>
+    <div class="dropdown__content d-none">
+      <div class="dropdown__item cursor-pointer">
+        <img class="dropdown__img" src="../../public/images/img/profile_28-01.png">
+        <div class="common-text common-text--medium text-dodger-blue" name="profile">Профиль</div>
+      </div>
+      <div class="dropdown__item cursor-pointer">
+        <img class="dropdown__img" src="../../public/images/img/settings_outline_28-01.png">
+        <div class="common-text common-text--medium text-dodger-blue" name="settings">Настройки</div>
+      </div>
+      <div class="dropdown__item cursor-not-allowed">
+        <img class="dropdown__img" src="../../public/images/img/refresh_outline_28-01.png">
+        <div class="common-text common-text--medium text-dodger-blue" name="switch">Сменить роль</div>
+      </div>
+      <div class="dropdown__item cursor-pointer">
+        <img class="dropdown__img" src="../../public/images/img/door_arrow_left_outline_28-01.png">
+        <div class="common-text common-text--medium text-dodger-blue" name="leave">Выход из аккаунта</div>
+      </div>
     </div>
   </div>
 </div>
