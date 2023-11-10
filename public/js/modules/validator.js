@@ -81,11 +81,11 @@ class Validator {
       ? str.split('').some((sym) => this.isDigit(sym))
       : true;
 
-    const symbolsAreValid = str
-      .split('')
-      .every((sym) => this.checkPasswordSymbol(sym));
+    // const symbolsAreValid = str
+    //   .split('')
+    //   .every((sym) => this.checkPasswordSymbol(sym));
 
-    return isLengthValid && hasUpperCase && hasDigits && symbolsAreValid;
+    return isLengthValid && hasUpperCase && hasDigits; /* && symbolsAreValid */
   }
 
   hasDigits(str) {
