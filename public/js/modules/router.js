@@ -29,7 +29,7 @@ class Router {
       '/emp_reg': 'empReg',
       '/resume_creation': 'resCreation',
       '/resume_view': 'resView',
-      '/profile$': 'profile',
+      '/profile': 'profile',
       '/profile/settings': 'profile',
       '/profile/resumes': 'profile',
       '/profile/vacancies': 'profile',
@@ -54,6 +54,22 @@ class Router {
       footer: new footerView(),
       page404: new page404View(),
     };
+
+    this.authoriziedNeed = [
+    '/resCreation', 
+    '/profile', 
+    '/profile/settings', 
+    '/profile/resumes', 
+    '/profile/responses', 
+    '/vacancy/:id/responses'
+    ];
+
+    this.denyWithAuth = [
+      '/app_login',
+      '/emp_login',
+      '/app_reg',
+      '/emp_reg',
+    ]
 
     this.prevView = undefined;
   }
@@ -107,6 +123,10 @@ class Router {
    */
   get curUrl() {
     return this.lastUrl;
+  }
+
+  async authCheck() {
+    
   }
 }
 
