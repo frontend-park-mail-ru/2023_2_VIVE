@@ -1,0 +1,80 @@
+@import url("--fonts/text-fonts.css");
+@import url("--colors/text-colors.css");
+
+.common-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 25px
+}
+
+.common-text--regular {
+    font-weight: 400;
+}
+
+.common-text--medium {
+    font-weight: 500;
+}
+
+.common-text--bold {
+    font-weight: 700;
+}
+
+.secondary-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: 18px;
+}
+
+.big-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px;
+}
+
+.small-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.header-text {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.header-text--first {
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.header-text--second {
+    font-size: 20px;
+    line-height: 26px
+}
+
+.header-text--third {
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.header-text--fourth {
+    font-size: 11px;
+    line-height: 13px;
+}
+
+.link-in-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px;
+    text-decoration-line: underline;
+}

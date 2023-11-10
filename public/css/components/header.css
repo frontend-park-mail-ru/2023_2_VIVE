@@ -1,8 +1,13 @@
 .navbar-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: #ffffff;
   padding-top: 15px;
   padding-bottom: 15px;
   box-shadow: -2px 14px 39px -28px #948f8f;
+  z-index: 100;
 }
 
 .navbar,

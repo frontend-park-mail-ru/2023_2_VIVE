@@ -1,2 +1,6 @@
-@import url("res-creation.css");
-@import url("res-view.css");
+@import url("__card/res-card.css");
+@import url("__cr-form/rescr-form.css");
+@import url("__creation/res-creation.css");
+@import url("__form/res-form.css");
+@import url("__steps/res-steps.css");
+@import url("__view/res-view.css");

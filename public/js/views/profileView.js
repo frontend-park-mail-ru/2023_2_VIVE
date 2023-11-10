@@ -8,26 +8,17 @@ export default class profileView extends View {
   constructor() {
     super();
     this.state = 'settings';
+    this.data = {};
+    this.user = {};
   }
 
   /**
    * Асинхронный метод для отображения страницы
    */
   async render() {
-
-    const data = await User.getUser();
-
-    let type = '';
-
-    if (data['role'] === 'applicant') {
-      type = 'profile_app';
-    } else {
-      type = 'profile_emp';
-    }
-
     // eslint-disable-next-line no-undef
-    const template = Handlebars.templates[type];
-    document.querySelector('main').innerHTML = template({ state: this.state, data: data });
+    const template = Handlebars.templates['profile'];
+    document.querySelector('main').innerHTML = template({state: this.state, user: this.user, data: this.data});
 
     this.addEventListeners();
   }
@@ -40,7 +31,16 @@ export default class profileView extends View {
     const settingButtons = document.querySelectorAll('[data-name="changing"]');
     const cancelButtons = document.querySelectorAll('[data-name="cancel-changing"]');
     const sendButtons = document.querySelectorAll('[data-name="send-form"]');
+    const buttonsWithVacancyId = document.querySelectorAll('[vacancy-id]');
 
+    // Добавить обработчик событий для каждой кнопки
+    buttonsWithVacancyId.forEach(button => {
+      button.addEventListener('click',() => {
+        const vacId = button.getAttribute('vacancy-id');
+        router.goToLink(`/vacancy/${vacId}`)
+      });
+    });
+    
     profileButtons.forEach(button => {
       button.addEventListener('click', () => {
         const buttonName = button.getAttribute('data-name');
@@ -73,17 +73,9 @@ export default class profileView extends View {
         const changingFullNameForm = button.closest('.changing-inpute');
         const fields = changingFullNameForm.querySelectorAll('input');
 
-        const formData = new FormData();
-        fields.forEach(input => {
-          formData.append(input.name, input.value);
-        });
-
         try {
           const user = await User.getUser();
-
-          delete user.id;
-          delete user.role;
-
+          
           fields.forEach(input => {
             user[input.name.replace(/-/g, '_')] = input.value;
           });
@@ -92,12 +84,42 @@ export default class profileView extends View {
             BACKEND_SERVER_URL + '/current_user',
             user,
           );
-          console.log(resp.status);
+
+          router.goToLink(`/profile/settings`);
 
         } catch (error) {
           console.error('Error: ', error);
         }
       });
     });
+  }
+
+  async getUserVacancies() {
+    try {
+      const resp = await APIConnector.get(BACKEND_SERVER_URL + "/vacancies/current_user");
+      const data = await resp.json();
+      return data;
+    } catch(err) {
+        return undefined;
+    }
+  }
+
+  async updateInnerData(url) {
+    this.user = await User.getUser();
+
+    const parts = url.split('/');
+    this.state = parts[2] ? parts[2] : 'settings';
+
+    if ((this.state == 'resumes' || this.state == 'responses') && this.user.role == 'employer') {
+      return false;
+    } else if (this.state == 'vacancies' && this.user.role == 'applicant') {
+      return false;
+    }
+
+    if (this.state == 'vacancies') {
+      this.data = await this.getUserVacancies();
+    }
+
+    return true;
   }
 }

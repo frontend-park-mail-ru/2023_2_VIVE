@@ -150,12 +150,16 @@ export default {
       });
 
       if (!response.ok) {
-        throw new HTTPError('', response.status);
+        const httpError = new HTTPError('', response.status);
+        httpError.statusCode = response.status;
+        throw httpError;
       }
 
       return response;
     } catch (error) {
-      throw new Error(`network error: ${error.message}`);
+      const networkError = new Error(`network error: ${error.message}`);
+      networkError.status = error;
+      throw networkError;
     }
   },
 };

@@ -15,10 +15,7 @@
   flex: 1 0 0;
   border-radius: 12px;
   border: 0;
-  background: var(--main-background-grey);
-  font-size: 18px;
   outline: none;
-  color:black;
 }
 
 .input__field::placeholder {
@@ -31,9 +28,25 @@ x
 
 .input_error .input__field {
   background-color: rgba(239, 74, 60, 0.15);
-  border: 2px solid var(--main-error);
+  border: 2px solid var(--main-error-red);
 }
 
-.input_error__msg {
-  color: var(--main-error);
+.input__error-msg {
+  margin-top: 5px;
+  padding: 0 10px;
+  color: var(--text-error-regular);
+}
+
+.double-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.dobule-input__inputes {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
 }

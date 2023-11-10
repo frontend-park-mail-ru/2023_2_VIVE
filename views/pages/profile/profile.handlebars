@@ -1,0 +1,59 @@
+<div class="profile">
+    <div class="d-flex profile__header profile__header--background--default-hh">
+        <img class="profile_image" src="../../../public/images/img/buttersss.jpg" alt="profile-logo">
+        <div class="profile__info">
+            <div class="profile__main-info">
+                <div class="profile__about">
+                    <div class="header-text header-text--first text-light-title">{{ user.last_name }} {{ user.first_name }} {{ user.third_name }} {{#iff user.role '==' 'applicant'}}(Соискатель){{else iff user.role '==' 'employer'}}(Работодатель){{/iff}}</div>
+                    <div class="secondary-text text-light-regular">{{ user.email }}</div>
+                </div>
+                {{#iff user.role '==' 'applicant'}}
+                <div class="profile__switch-btns">
+                    <div class="profile__btn {{#iff state '==' 'settings'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}" data-name="settings">
+                        <div class="common-text common-text--bold">Настройки</div>
+                    </div>
+                    <div class="profile__btn {{#iff state '==' 'responses'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}" data-name="responses">
+                        <div class="common-text common-text--bold">Отклики</div>
+                    </div>
+                    <div class="profile__btn {{#iff state '==' 'resumes'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}" data-name="resumes">
+                        <div class="common-text common-text--bold">Резюме</div>
+                    </div>
+                </div>
+                {{else iff user.role '==' 'employer'}}
+                <div class="profile__switch-btns">
+                    <div class="profile__btn {{#iff state '==' 'settings'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}" data-name="settings">
+                        <div class="common-text common-text--bold">Настройки</div>
+                    </div>
+                    <div class="profile__btn {{#iff state '==' 'vacancies'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}" data-name="vacancies">
+                        <div class="common-text common-text--bold">Вакансии</div>
+                    </div>
+                </div>
+                {{/iff}}
+            </div>
+        </div>
+        <div class="profile__filled-container">
+            <div class="profile__role-big-frame">
+                <div class="profile__roles-frame">
+                    {{#iff user.role '==' 'applicant'}}
+                    <img src="../../../public/images/img/profile_28-01.png" class="profile__role-img">
+                    {{else iff user.role '==' 'employer'}}
+                    <img src="../../../public/images/img/briefcase_outline_28-01.png" class="profile__role-img">
+                    {{/iff}}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{#iff state '==' 'settings'}}
+    {{> profile_settings}}
+    {{else iff state '==' 'responses'}}
+    {{> profile_responses}}
+    {{else iff state '==' 'resumes'}}
+    {{> profile_resumes}}
+    {{else iff state '==' 'vacancies'}}
+    {{> profile_vacs }}
+    {{else}}
+    {{> profile_settings}}
+    {{/iff}}
+
+</div>

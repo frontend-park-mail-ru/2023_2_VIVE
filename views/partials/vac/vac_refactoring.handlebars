@@ -1,0 +1,58 @@
+<div class="vacancie-refactor d-none">
+    <div class="vacancie-refactor__main">
+        {{#each (array 
+        (object title="Название вакансии" name="vacancy_name" placeholder="Название вакансии")
+        (object title="Расположение работы" name="location" placeholder="Расположение")
+        )}}
+
+        {{> input (object obj=this
+        class_title="res__form__input__title header-text header-text--fourth text-form-active"
+        class="res__form__input common-text common-text--medium  text-dark-title")}}
+        {{/each}}
+
+        {{#each (array
+        (object class="common-text common-text--medium  text-dark-title" title="Предпологаемый уровень дохода ₽" placeholderFirst="От" nameOn="fromMoney" placeholderSecond="До" nameTo="toMoney")
+        )}}
+
+        {{> double_input obj=this
+        class_title="res__form__input__title header-text header-text--fourth text-form-active"}}
+        {{/each}}
+        <div>
+            <p class="res__form__input__title header-text header-text--fourth text-form-active">Требуемый опыт</p>
+            <div class="res__form__input common-text common-text--regular text-form-active">
+                {{#each (array
+                (object text="Нет опыта")
+                (object text="От 1 года до 3-х лет")
+                (object text="От 3-х до 6-ти лет")
+                (object text="Более 6 лет")
+                )}}
+                {{> input_radio (object text=this.text class_label="res__form__input_radio_field" name="experience")}}
+                {{/each}}
+            </div>
+        </div>
+        <div>
+            <p class="res__form__input__title header-text header-text--fourth text-form-active">Занятость</p>
+            <div class="res__form__input common-text common-text--regular text-form-active">
+                {{#each (array
+                (object text="Полная занятость")
+                (object text="Частичная занятость")
+                (object text="Проектная работа или разовое задание")
+                (object text="Волонтерство")
+                (object text="Стажировка")
+                )}}
+                {{> input_radio (object text=this.text class_label="res__form__input_radio_field" name="busyness")}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="vacancie-refactor__btns">
+        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
+        data-name="cancel-refactoring">
+            Отменить изменения
+        </div>
+        <div class="text-light-title setting-inpute__button setting-inpute__button--primary common-text common-text--medium"
+        data-name="send-refactoring">
+            Сохранить изменения
+        </div>
+    </div>
+</div>

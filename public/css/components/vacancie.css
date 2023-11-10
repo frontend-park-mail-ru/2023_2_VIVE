@@ -9,15 +9,6 @@
     background: var(--card-back-default);
 }
 
-.vacancie__main-info {
-    color: var(--text-dark);
-    font-family: 'Roboto', sans-serif;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 28px;
-}
-
 .vacancie__additional-info {
     display: flex;
     align-items: flex-start;
@@ -36,15 +27,6 @@
     flex-shrink: 0;
 }
 
-.add-info__text {
-    color: var(--text-filled);
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 25px;
-}
-
 .vacancie__form-create {
     display: flex;
     padding: 50px;
@@ -58,6 +40,33 @@
 
 .vacancie__btns {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.vacancie-refactor {
+    display: flex;
+    width: 790px;
+    padding: 30px;
+    flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    border-radius: 30px;
+    background: var(--card-back-default);
+}
+
+.vacancie-refactor__main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+}
+
+.vacancie-refactor__btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
 }

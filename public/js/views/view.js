@@ -25,6 +25,11 @@ export default class View {
         })
     }
 
+    // eslint-disable-next-line no-unused-vars
+    async updateInnerData(data) {
+        return true;
+    }
+
     /**
      * Метод, удаляющий обработчики событий
      */
