@@ -33,4 +33,14 @@ export default class vacsView extends View {
       return undefined;
     }
   }
+  
+  addEventListeners() {
+    super.addEventListeners();
+
+    const descriptionText = document.querySelectorAll('.vacs__list__item__desc__prev');
+
+    descriptionText.forEach(description => {
+      description.textContent = description.textContent.substring(0, 300) + "...";
+    })
+  }
 }
