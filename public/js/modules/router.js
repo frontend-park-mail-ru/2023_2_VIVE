@@ -61,12 +61,13 @@ class Router {
     '/profile/settings', 
     '/profile/resumes', 
     '/profile/responses', 
-    '/vacancy/:id/responses'
+    '/vacancy/:id/responses',
+    '/resume_creation'
     ];
 
     this.denyWithAuth = [
-      '/app_login',
-      '/emp_login',
+      '/app_auth',
+      '/emp_auth',
       '/app_reg',
       '/emp_reg',
     ]
@@ -137,7 +138,7 @@ class Router {
     if (this.denyWithAuth.includes(url) && await this.authCheck()) {
       return {'redirect': '/vacs'};
     } else if (this.authoriziedNeed.includes(url) && !(await this.authCheck())) {
-      return {'redirect': '/app_login'};
+      return {'redirect': '/app_auth'};
     } else {
       return {};
     }

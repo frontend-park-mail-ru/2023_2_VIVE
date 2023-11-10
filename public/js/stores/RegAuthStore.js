@@ -70,7 +70,7 @@ class RegAuthStore extends Store {
             if (this.view.role == ROLES.emp) {
                 return Object.assign(common,
                     {
-                        "company_name": {
+                        "organization_name": {
                             type: "text",
                             required: true,
                         }
