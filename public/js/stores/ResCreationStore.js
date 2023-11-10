@@ -3,116 +3,126 @@ import Store from './Store.js';
 class ResCreationStore extends Store {
     constructor() {
         super();
-        this.page = 3;
+        this.page = 4;
+        this.pages_data = [
+            {},
+            {},
+            {
+                is_exp: false,
+                is_end_date: true,
+            },
+            {},
+        ];
     }
 
-    get pageFormFieldsMeta() {
-        return [[
-            {
-                name: "profession",
+    getPageData() {
+        return this.pages_data[this.page - 1];
+    }
+
+    get page_data() {
+        return this.getPageData();
+    }
+
+    pageFormFieldsMeta() {
+        return [{
+            "profession": {
                 type: "text",
                 required: true,
             },
-            {
-                name: "first_name",
+            "first_name": {
                 type: "text",
                 required: true,
                 count_words: 1,
                 nodigits: true,
             },
-            {
-                name: "last_name",
+            "last_name": {
                 type: "text",
                 required: true,
                 count_words: 1,
                 nodigits: true,
             },
-            {
-                name: "gender",
+            "gender": {
                 type: "radio",
                 required: true,
+                data: "",
             },
-            {
-                name: "birthday",
+            "birthday": {
                 type: "date",
                 required: true,
                 digits: true,
             },
-            {
-                name: "location",
+            "location": {
                 type: "text",
                 required: true,
             },
-        ],
-        [
-            {
-                name: "education_level",
+        },
+        {
+            "education_level": {
                 type: "radio",
                 required: true,
+                data: "",
             },
-            {
-                name: "education_institution_name",
+            "education_institution_name": {
                 type: "text",
                 required: true,
             },
-            {
-                name: "major_field_name",
+            "major_field_name": {
                 type: "text",
                 required: true,
             },
-            {
-                name: "education_graduation_year",
+            "education_graduation_year": {
                 type: "text",
                 digits: true,
                 required: true,
             },
-        ],
-        [
-            ...this.getExpFieldsMeta()
-        ],
-        [
-            {
-                name: "description",
+        },
+        this.getExpFieldsMeta(),
+        {
+            "description": {
                 type: "text",
                 required: true,
             },
-        ],
+        },
         ][this.page - 1];
     }
 
     getExpFieldsMeta() {
-        const is_exp = true;
-        const is_end_date = true;
-        if (!is_exp) {
-            return [];
+        if (!this.page_data.is_exp) {
+            return {};
         }
+
+        const without_end_date = {
+            "expirience_organization_name": {
+                type: "text",
+                required: true,
+            },
+            "expirience_position": {
+                type: "text",
+                required: true,
+            },
+            "expirience_start_date": {
+                type: "date",
+                required: true,
+            },
+
+            "expirience_description": {
+                type: "text",
+                required: true,
+            }
+        };
+        if (this.page_data.is_end_date) {
+            return Object.assign(without_end_date, {
+                "expirience_end_date": {
+                    type: "date",
+                    required: true,
+                }
+            });
+        }
+        return without_end_date;
+    }
+
+    sendForm(form_data) {
         
-        return [{
-            name: "expirience_organization_name",
-            type: "text",
-            required: true,
-        },
-        {
-            name: "expirience_position",
-            type: "text",
-            required: true,
-        },
-        {
-            name: "expirience_start_date",
-            type: "date",
-            required: true,
-        },
-        {
-            name: "expirience_end_date",
-            type: "date",
-        },
-        {
-            name: "expirience_description",
-            type: "text",
-            required: true,
-        },]
-
-
     }
 }
 

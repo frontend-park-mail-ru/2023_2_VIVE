@@ -1,7 +1,7 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import { Constraints, validateForm } from '../modules/constraints.js';
-import { isObjEmpty } from '../utils.js';
+import { getMetaPlusDataObj, isObjEmpty } from '../utils.js';
 import regAuthView from '../views/regAuthView.js';
 import Store from './Store.js';
 
@@ -18,17 +18,16 @@ const ROLES = {
 class RegAuthStore extends Store {
     constructor() {
         super();
-        this.sendType("", "");
+        this.view = null;
         this.errors = {};
     }
 
-    sendType(form_type, role) { // ("auth", "reg") / ("app", "emp")
-        const is_change = this.form_type != form_type || this.role != role;
-        this.form_type = form_type;
-        this.role = role;
+    sendView(view) { // ("auth", "reg") / ("app", "emp")
+        const is_change = this.view != view;
+        this.view = view;
 
         // очищаем данные при смене формы
-        if (is_change) { 
+        if (is_change) {
             this.form_data = {};
             this.form_error = null;
             this.errors = {};
@@ -36,42 +35,61 @@ class RegAuthStore extends Store {
     }
 
     pageFormFieldsMeta() {
-        if (this.form_type == FORM_TYPES.reg) {
+        if (this.view.form_type == FORM_TYPES.reg) {
             const common = {
                 "first_name": {
-
+                    type: "text",
+                    required: true,
+                    count_words: 1,
+                    no_digits: true,
                 },
                 "last_name": {
-
+                    type: "text",
+                    required: true,
+                    count_words: 1,
+                    no_digits: true,
                 },
                 "email": {
-
+                    type: "text",
+                    required: true,
+                    count_words: 1,
+                    email: true,
                 },
                 "password": {
-
+                    type: "password",
+                    required: true,
+                    password: true,
+                    password_repeat: "repeat_password",
                 },
                 "repeat_password": {
-
+                    type: "password",
+                    required: true,
                 },
             }
-            if (this.role == ROLES.emp) {
+            if (this.view.role == ROLES.emp) {
                 return Object.assign(common,
                     {
                         "company_name": {
-
+                            type: "text",
+                            required: true,
                         }
                     })
             }
             return common;
         }
-        else if (this.form_type == FORM_TYPES.auth) {
+        else if (this.view.form_type == FORM_TYPES.auth) {
             return {
                 "email": {
-
+                    type: "text",
+                    required: true,
+                    count_words: 1,
+                    email: true,
                 },
                 "password": {
-
-                }
+                    type: "password",
+                    required: true,
+                    password: true,
+                },
             }
         }
         else {
@@ -83,70 +101,54 @@ class RegAuthStore extends Store {
         return {
             ROLES: ROLES,
             FORM_TYPES: FORM_TYPES,
-            role: this.role,
-            form_type: this.form_type,
+            role: this.view.role,
+            form_type: this.view.form_type,
             errors: this.errors,
             data: this.form_data,
             form_error: this.form_error,
         }
     }
 
-    sendForm(form_data) {
-        // this.errors = validateForm(this.pageFormFieldsMeta(), form_data);
-        this.errors = {
-            "first_name": "Ошибка!",
-        }
-
+    checkForm(form_data) {
+        this.errors = validateForm(getMetaPlusDataObj(this.pageFormFieldsMeta(), form_data));
         this.form_data = form_data;
 
         if (isObjEmpty(this.errors)) {
-            this.send();
-        } else {
-
-        }
-        // if (this.) {
-        //     errors = validator.validateRegistrationForm(data);
-        //   } else if (is_login) {
-        //     errors = validator.validateAuthForm(data);
-        //   }
-        // if (formIsValid(form, formData, { is_login: true })) {
-        //     if (await this.sendForm(formData)) {
-        //       router.goToLink('/');
-        //     } else {
-        //       const form_error = form.querySelector('.form__error');
-        //       form_error.textContent = 'Неверная электронная почта или пароль';
-        //       if (form_error.classList.contains('d-none')) {
-        //         form_error.classList.remove('d-none');
-        //       }
-        //     }
-        //   }
-    }
-
-    send() {
-        if (this.form_type == FORM_TYPES.reg) {
-
-        }
-        console.log(this.form_data);
-    }
-
-    async temp(formData) {
-        delete formData['remember_password'];
-        // formData['role'] = this.role == 'app' ? 'applicant' : 'employer';
-        console.log(formData);
-
-        try {
-            const resp = await APIConnector.post(
-                BACKEND_SERVER_URL + '/session',
-                formData,
-            );
-            console.log(resp.status);
             return true;
-        } catch (err) {
-            console.error("hello!", err);
+        } else {
             return false;
         }
     }
 
+    async sendForm() {
+        this.form_data['role'] = this.view.role;
+        if (this.view.form_type == FORM_TYPES.reg) {
+            delete this.form_data['repeat_password'];
+            console.log(this.form_data);
+            try {
+                const resp = await APIConnector.post(
+                    BACKEND_SERVER_URL + '/users',
+                    this.form_data,
+                );
+                console.log(this.role + '_reg: ', resp.status);
+                return true;
+            } catch (err) {
+                console.error(this.role + '_reg: ', err);
+                return false;
+            }
+        } else {
+            console.log(this.form_data);
+            this.form_error = "Ошибка!";
+            console.log(this.form_error);
+            this.view.render();
+            // const resp = await APIConnector.post(
+            //     BACKEND_SERVER_URL + '/session',
+            //     this.form_data,
+            // );
+            // console.log(resp.status);
+        }
+
+    }
 }
 
 const regAuthStore = new RegAuthStore();

@@ -1,7 +1,7 @@
 import { Constraints, validateForm } from '../modules/constraints.js';
 import ResCreationStore from '../stores/ResCreationStore.js';
 import User from '../stores/UserStore.js';
-import { getFormObject } from '../utils.js';
+import { getFormObject, getMetaPlusDataObj } from '../utils.js';
 import View from './view.js';
 
 export default class resCreationView extends View {
@@ -9,19 +9,11 @@ export default class resCreationView extends View {
     super();
     this.form_data = {};
     this.errors = {};
-    this.pages_data = [
-      {},
-      {},
-      {
-        is_exp: false,
-        is_end_date: true,
-      },
-      {},
-    ];
+    this.form_error = null;
   }
 
   get page_data() {
-    return this.pages_data[ResCreationStore.page - 1];
+    return ResCreationStore.getPageData();
   }
   /**
    * Асинхронный метод для отображения страницы
@@ -35,7 +27,8 @@ export default class resCreationView extends View {
       page: ResCreationStore.page,
       errors: this.errors,
       data: this.form_data,
-      page_data: this.page_data
+      page_data: this.page_data,
+      form_error: this.form_error,
     });
 
     this.addEventListeners();
@@ -45,13 +38,15 @@ export default class resCreationView extends View {
   save() {
     const cur_data = getFormObject(new FormData(this.form));
     Object.assign(this.form_data, cur_data);
-    console.log(this.form_data);
+    this.form_error = null;
     return cur_data
   }
 
   saveAndCheck() {
     const cur_data = this.save();
-    return validateForm(ResCreationStore.pageFormFieldsMeta, cur_data);
+    const meta = ResCreationStore.pageFormFieldsMeta();
+    const temp = getMetaPlusDataObj(meta, cur_data);
+    return validateForm(temp);
   }
 
   addEventListeners() {
@@ -87,8 +82,13 @@ export default class resCreationView extends View {
         this.errors = this.saveAndCheck();
         if (Object.keys(this.errors).length === 0) {
           console.log(this.form_data);
+          this.form_error = ResCreationStore.sendForm(this.form_data);
+          if (this.form_error) {
+            this.render();
+          }
+        } else {
+          this.render();
         }
-        this.render();
       })
     }
   }

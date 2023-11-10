@@ -1,3 +1,4 @@
+
 export function isObjEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
@@ -5,6 +6,13 @@ export function isObjEmpty(obj) {
 export function getHrefFromLink(aTag) {
   const splittedHref = aTag.href.split(aTag.host);
   return splittedHref[splittedHref.length - 1];
+}
+
+export function getMetaPlusDataObj(meta_obj, data_obj) {
+  for (const key in data_obj) {
+    meta_obj[key]["data"] = data_obj[key];
+  }
+  return meta_obj;
 }
 
 /**

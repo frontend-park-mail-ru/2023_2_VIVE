@@ -24,7 +24,7 @@ export default class regAuthView extends View {
    */
   render() {
     super.render();
-    regAuthStore.sendType(this.form_type, this.role);
+    regAuthStore.sendView(this);
     this.compileTemplates();
     this.addEventListeners();
   }
@@ -48,8 +48,11 @@ export default class regAuthView extends View {
     const form = document.querySelector('.form');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      regAuthStore.sendForm(getFormObject(new FormData(form)));
-      this.render();
+      if (regAuthStore.checkForm(getFormObject(new FormData(form)))) {
+        regAuthStore.sendForm();
+      } else {
+        this.render();
+      }
     });
   }
 }
