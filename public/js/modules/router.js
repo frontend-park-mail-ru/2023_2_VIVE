@@ -1,6 +1,5 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js'
-import authView from '../views/authView.js';
 import footerView from '../views/footerView.js';
 import menuView from '../views/menuView.js';
 import page404View from '../views/page404View.js';
@@ -8,7 +7,8 @@ import resCreationView from '../views/resCreationView.js';
 import resViewView from '../views/resViewView.js';
 import vacsView from '../views/vacsView.js';
 import profileView from '../views/profileView.js';
-import vacancyView from '../views/vacancyView.js'
+import vacancyView from '../views/vacancyView.js';
+import regAuthView from '../views/regAuthView.js'
 
 /**
  * Класс Router для управления навигацией по сайту
