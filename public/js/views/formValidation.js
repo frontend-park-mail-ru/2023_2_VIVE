@@ -1,4 +1,4 @@
-import validator from '../modules/validator.js';
+import { validator } from '../modules/validator.js';
 
 /**
  * Функция для проверки формы на валидность
@@ -19,8 +19,8 @@ export function formIsValid(form, data, { is_login, is_reg }) {
   }
 
   inputs.forEach((input) => {
-    const input_name = input.getAttribute('for')
-    const error_node = input.querySelector('.input__error-msg')
+    const input_name = input.getAttribute('for');
+    const error_node = input.querySelector('.input__error-msg');
     if (errors[input_name]) {
       if (!error_node.classList.contains('d-none')) {
         error_node.classList.remove('d-none');

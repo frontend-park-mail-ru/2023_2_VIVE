@@ -1,122 +1,29 @@
 'use strict';
 
-import validator from './validator.js';
+import { validator, DEFAULT_PASSWORD_PARAM } from './validator.js';
+import { zip, checkField, contains } from '../utils.js';
 
-export const FieldType = {
-  text: {
-    required: {
-      check: (data, requiredFlag) => {
-        return validator.isEmpty(data)
-          ? Constraints.required.check(data, requiredFlag)
-          : false;
-      },
-    },
-    email: {
-      check: (data, emailFlag) => {
-        return Constraints.email.check(data, emailFlag);
-      },
-    },
-    password: {
-      check: (data, passwordFlag) => {
-        return Constraints.password.check(data, passwordFlag);
-      },
-    },
-    digits: {
-      check: (data, digitsFlag) => {
-        return Constraints.digits.check(data, digitsFlag);
-      },
-    },
-    nodigits: {
-      check: (data, nodigitsFlag) => {
-        return Constraints.nodigits.check(data, nodigitsFlag);
-      },
-    },
-    onlydigits: {
-      check: (data, nodigitsFlag) => {
-        return Constraints.onlydigits.check(data, nodigitsFlag);
-      },
-    },
-    count_words: {
-      check: (data, countWordsFlag) => {
-        return Constraints.count_words.check(data, countWordsFlag);
-      },
-    },
-    max_len: {
-      check: (data, maxLenFlag) => {
-        return Constraints.max_len.check(data, maxLenFlag);
-      },
-    },
-    min_len: {
-      check: (data, minLenFlag) => {
-        return Constraints.min_len.check(data, minLenFlag);
-      },
-    },
-    year: {
-      check: (data, yearFlag) => {
-        return Constraints.year.check(data, yearFlag);
-      },
-    },
-    regexp: {
-      check: (data, regExpFlag) => {
-        return Constraints.year.check(data, regExpFlag);
-      },
-    },
-  },
-
-  radio: {
-    required: {
-      check: (data, requiredFlag) => {
-        return Constraints.required.check(data, requiredFlag);
-      },
-    },
-  },
-
-  checkbox: {
-    required: {
-      check: (data, requiredFlag) => {
-        return Constraints.required.check(data, requiredFlag);
-      },
-    },
-  },
-
-  date: {
-    required: {
-      check: (data, requiredFlag) => {
-        return Constraints.required.check(data, requiredFlag);
-      },
-    },
-    date: {
-      check: (data, requiredFlag) => {
-        return Constraints.date.check(data, requiredFlag);
-      },
-    },
-  },
-};
-
-// const preCheck = (fieldType, data) => {};
+const WRONG_PSWD_PARAM =
+  'Wrong password flag, mus be an object with (minLength, maxLength, includeUpperCase, includeDigits) fields or true';
 
 /**
- * Constraints data for form validation. On default all constraint flags are false.
- * That means that check() function will return true anyway,
- * even if you make your flag false by hand.
+ * Constraints data for form validation. All flags must be present to be true
+ * meaning that it doesn't matter what value the have.
  *
  * Exceptions are:
- * - `passwordFlag` is an object with following fields:
- * ```js
- * {
- * minLength: 6,
- * maxLength: 128,
- * includeUpperCase: true,
- * includeDigits: true,
- * }
- * ```
+ * - `passwordFlag` is an object with following fields
+ * [`minLength`, `maxLength`, `includeUpperCase`, `includeDigits`]:
+ * - `password_repeat` is a name of field with a main field with password
+ * - `count_words` is a max word number in the string
+ * - `max_len` is max length of a string
+ * - `min_len` is min length of a string
  * - `regExpFlag` is an regular expression string
  */
 export const Constraints = {
   // When data is required
   required: {
-    check: (data, requiredFlag) => {
-      return requiredFlag && data;
+    check: (ctx, fieldToCheckName) => {
+      return ctx[fieldToCheckName] ? null : [fieldToCheckName];
     },
     error: () => {
       return 'Это поле обязательно для заполнения';
@@ -125,64 +32,76 @@ export const Constraints = {
 
   // Email constraint
   email: {
-    check: (data, emailFlag) => {
-      if (!emailFlag) {
-        return true;
-      }
-      const res = data.match(EMAIL_REGEX) || [];
-      return res.length == 1;
+    check: (ctx, fieldToCheckName) => {
+      return validator.isEmail(ctx[fieldToCheckName])
+        ? null
+        : [fieldToCheckName];
     },
     error: () => {
       return 'Некорректный email';
     },
   },
 
-  // Password constraint
+  // Password constraint for registration form.
   password: {
-    check: (
-      data,
-      passwordFlag = {
-        minLength: 6,
-        maxLength: 128,
-        includeUpperCase: true,
-        includeDigits: true,
-      },
-    ) => {
-      if (!passwordFlag) {
-        return false;
+    check: (ctx, fieldToCheckName, passwordParams) => {
+      if (passwordParams === true) {
+        return validator.isValidPasswor(ctx[fieldToCheckName])
+          ? null
+          : [fieldToCheckName];
       }
-
-      const isLengthValid =
-        validator.checkMinLen(data, minLength) &&
-        validator.checkMaxLen(data, maxLength);
-
-      const hasUpperCase = includeUpperCase
-        ? data.split('').some((sym) => validator.isUpperCase(sym))
-        : true;
-
-      const hasDigits = includeDigits
-        ? data.split('').some((sym) => validator.isDigit(sym))
-        : true;
-
-      const symbolsAreValid = data
-        .split('')
-        .every((sym) => validator.checkPasswordSymbol(sym));
-
-      return isLengthValid && hasUpperCase && hasDigits && symbolsAreValid;
+      if (passwordParams instanceof Object) {
+        checkField(passwordParams, 'minLength');
+        checkField(passwordParams, 'maxLength');
+        checkField(passwordParams, 'includeUpperCase');
+        checkField(passwordParams, 'includeDigits');
+        return validator.isValidPasswor(ctx[fieldToCheckName], passwordParams)
+          ? null
+          : [fieldToCheckName];
+      }
+      throw new Error(WRONG_PSWD_PARAM);
     },
+    error: (passwordParams) => {
+      if (passwordParams === true) {
+        passwordParams = DEFAULT_PASSWORD_PARAM;
+      }
+      if (passwordParams instanceof Object) {
+        checkField(passwordParams, 'minLength');
+        checkField(passwordParams, 'maxLength');
+        checkField(passwordParams, 'includeUpperCase');
+        checkField(passwordParams, 'includeDigits');
 
-    hasDigits(str) {
-      return str.split('').some((sym) => validator.isDigit(sym));
+        let errorMsg = `Пароль должен: быть от ${passwordParams.minLength} до ${passwordParams.maxLength} символов`;
+        if (passwordParams.includeUpperCase) {
+          errorMsg += ', содержать заглавные символы';
+        }
+        if (passwordParams.includeDigits) {
+          errorMsg += ', содержать цифры';
+        }
+        return errorMsg;
+      }
+      throw new Error(WRONG_PSWD_PARAM);
+    },
+  },
+
+  // Check if entered password matches the one in another field
+  password_repeat: {
+    check: (ctx, fieldToCheckName, passwordFieldName) => {
+      return validator.equals(ctx[fieldToCheckName], ctx[passwordFieldName])
+        ? null
+        : [fieldToCheckName, passwordFieldName];
     },
     error: () => {
-      return 'Пароль должен быть от 6 до 128 символов, иметь заглавные буквы';
+      return 'Пароли не совпадают';
     },
   },
 
   // Constraint on data must containing digits
   digits: {
-    check: (data, digitsAllowed) => {
-      return digitsAllowed ? validator.hasDigits(data) : true;
+    check: (ctx, fieldToCheckName) => {
+      return validator.hasDigits(ctx[fieldToCheckName])
+        ? null
+        : [fieldToCheckName];
     },
     error: () => {
       return 'Это поле должно содержать цифры';
@@ -190,9 +109,11 @@ export const Constraints = {
   },
 
   // Constraint on data containing no digits
-  nodigits: {
-    check: (data, noDigitsAllowed) => {
-      return noDigitsAllowed ? !validator.hasDigits(data) : true;
+  no_digits: {
+    check: (ctx, fieldToCheckName) => {
+      return !validator.hasDigits(ctx[fieldToCheckName])
+        ? null
+        : [fieldToCheckName];
     },
     error: () => {
       return 'Это поле не должно содержать цифры';
@@ -200,9 +121,12 @@ export const Constraints = {
   },
 
   // Constraint on data containing only digits
-  onlydigits: {
-    check: (data, onlyDigitsFlag) => {
-      return onlyDigitsFlag ? validator.onlyDigits(data) : true;
+  only_digits: {
+    check: (ctx, fieldToCheckName) => {
+      if (validator.onlyDigits(ctx[fieldToCheckName])) {
+        return null;
+      }
+      return [fieldToCheckName];
     },
     error: () => {
       return 'Это поле должно содержать только цифры';
@@ -211,10 +135,11 @@ export const Constraints = {
 
   // Constraint on word's number
   count_words: {
-    check: (data, countWordsFlag) => {
-      return data.trim() !== '' && countWordsFlag
-        ? validator.countWords(data) <= countWordsFlag
-        : false;
+    check: (ctx, fieldToCheckName, countWordsValue) => {
+      return ctx[fieldToCheckName].trim() &&
+        validator.countWords(ctx[fieldToCheckName]) <= countWordsValue
+        ? null
+        : [fieldToCheckName];
     },
     error: (wordCount) => {
       return `Максимальное количество слов: ${wordCount}`;
@@ -223,8 +148,10 @@ export const Constraints = {
 
   // Constraint on max length of data
   max_len: {
-    check: (data, maxLenFlag) => {
-      return maxLenFlag ? data.length <= maxLenFlag : false;
+    check: (ctx, fieldToCheckName, maxLenValue) => {
+      return ctx[fieldToCheckName].length <= maxLenValue
+        ? null
+        : [fieldToCheckName];
     },
     error: (maxLen) => {
       return `Максимальная длина: ${maxLen}`;
@@ -233,31 +160,24 @@ export const Constraints = {
 
   // Constraint on min length of data
   min_len: {
-    check: (data, minLenFlag) => {
-      return minLenFlag >= 0 ? data.length >= minLenFlag : false;
+    check: (ctx, fieldToCheckName, minLenFlag) => {
+      return ctx[fieldToCheckName].length >= minLenFlag
+        ? null
+        : [fieldToCheckName];
     },
     error: (minLen) => {
       return `Минимальная длина: ${minLen}`;
     },
   },
 
+  // equals: {},
+
   // Data must be valid date formatting like (dd.mm.yyyy)
   date: {
-    check: (data, dateFlag) => {
-      if (!dateFlag) {
-        return false;
-      }
-      const res = data.match(DATE_REGEX) || [];
-      const isValid = res.length == 1;
-      if (!isValid) {
-        return false;
-      }
-
-      const tokens = data.split('.');
-      const day = tokens[0];
-      const month = tokens[1];
-      const year = tokens[2];
-      return validator.isValidDate(day, month, year);
+    check: (ctx, fieldToCheckName) => {
+      return validator.isValidDate(ctx[fieldToCheckName])
+        ? null
+        : [fieldToCheckName];
     },
     error: () => {
       return 'Это поле должно содержать дату';
@@ -266,8 +186,10 @@ export const Constraints = {
 
   // Data must be valid year
   year: {
-    check: (data, yearFlag) => {
-      return yearFlag ? validator.isValidYear(data) : false;
+    check: (ctx, fieldToCheckName) => {
+      return validator.isValidYear(ctx[fieldToCheckName])
+        ? null
+        : [fieldToCheckName];
     },
     error: () => {
       return 'Это поле должно содержать корректный год';
@@ -276,8 +198,10 @@ export const Constraints = {
 
   // RegExp constraint on data
   regexp: {
-    check: (data, regExpFlag) => {
-      return validator.fullMatchRegExp(data, regExpFlag);
+    check: (ctx, fieldToCheckName, regExpFlag) => {
+      return validator.fullMatchRegExp(ctx[fieldToCheckName], regExpFlag)
+        ? null
+        : [fieldToCheckName];
     },
     error: () => {
       return 'Неверный формат';
@@ -285,101 +209,161 @@ export const Constraints = {
   },
 };
 
-export const constraintExists = (fieldTypeName, constraintName) => {
-  return (
-    constraintName in Constraints && constraintName in FieldType[fieldTypeName]
+const TypeConstraints = {
+  text: {
+    required: {
+      check: (ctx, fieldToCheckName) => {
+        return validator.isEmpty(ctx[fieldToCheckName])
+          ? Constraints.required.check(ctx, fieldToCheckName)
+          : [fieldToCheckName];
+      },
+    },
+  },
+};
+
+const isTypeConstraint = (fieldType, constraintName) => {
+  return fieldType in TypeConstraints
+    ? constraintName in TypeConstraints[fieldType]
+    : false;
+};
+
+const allowedConstraints = () => {
+  let res = [];
+  for (let constraint in Constraints) {
+    res = res.concat(constraint);
+  }
+
+  return res;
+};
+
+export const constraintExists = (constraintName) => {
+  if (constraintName in Constraints) {
+    return true;
+  }
+  if (contains(['type', 'data'], constraintName)) {
+    return false;
+  }
+  throw new Error(
+    `Wrong constraint '${constraintName}. Allowed constraints: [${allowedConstraints().join(
+      ', ',
+    )}]'`,
   );
 };
 
-/**
- * Returns object with errors.
- *
- * @param {Array} metaDataArr Array, containing array of metaData objects that
- * must contain fields `name` and constraints names.
- *
- * For example:
- * ```js
- * metaDataArr = [
- *    {
- *      name: "profession",
- *      required: true,
- *    },
- *    {
- *      name: "first_name",
- *      count_words: 1,
- *      digits: false,
- *      required: true,
- *    }
- * ];
- * ```
- * @param {object} dataObj Object containing data from the form field.
- *
- * For example:
- * ```js
- * dataObj = {
- *  profession: "Web-developer",
- *  first_name: "Jhon",
- * };
- * ```
- * @returns {object} Object with errors.
- * @throws Will throw error if in the given metaData there is no field `name`.
- */
-export const validateForm = (metaDataArr, dataObj) => {
+const collectData = (dataObj) => {
   const res = {};
-  metaDataArr.forEach((metaData) => {
-    if (!('name' in metaData)) {
-      throw new Error('There is no field `name` in the given `metaData`');
-    }
-    if (!('type' in metaData)) {
-      throw new Error('There is no field `type` in the given `metaData`');
-    }
-    const fieldType = metaData.type;
-    const fieldName = metaData.name;
-    const fieldData = dataObj[fieldName];
-
-    for (let field in metaData) {
-      if (constraintExists(fieldType, field)) {
-        const constraint = metaData[field];
-        const errorMsg = validateFormField(
-          fieldType,
-          field,
-          constraint,
-          fieldData,
-        );
-        if (errorMsg !== null) {
-          res[fieldName] = errorMsg;
-          break;
-        }
-      }
-      // }
-    }
-  });
+  for (let filedName in dataObj) {
+    checkField(dataObj[filedName], 'data');
+    checkField(dataObj[filedName], 'type');
+    res[filedName] = dataObj[filedName].data;
+  }
 
   return res;
 };
 
 /**
- * Returns error message or null accorging to a given constraint.
+ * Returns object with errors.
  *
- * @param {string} constraint String name of constraint.
- * @param {object} constraintValue Value of a constraint.
- * @param {any} fieldData Data for given .
- * @param {Function} check Function that checks if data is valid.
- * @returns {string} Error message or null.
- * @throws Will throw an error when given the wrong type.
+ * @param {object} dataObj Object where keys are **names** of form fields and value
+ * is another object where keys are:
+ * - `data` from the form field
+ * - `type` of the data
+ * - constraints for this field
+ *
+ * For example:
+ * ```js
+ * dataObj = {
+ *  first_name: {
+ *    data: "Jhon",
+ *    type: "text",
+ *    required: true,
+ *    count_words: 1,
+ *    no_digits: true
+ *  }
+ * };
+ * ```
+ * @returns {object} Object with errors.
+ * @throws Will throw error if in the objects of given dataObj no fields with `type` and `data`.
+ * Also error will occur when provided with invalid constraints and values for them.
  */
-export const validateFormField = (
-  fieldType,
-  constraint,
-  constraintValue,
-  fieldData,
-) => {
-  if (!constraintExists(fieldType, constraint)) {
-    throw new Error(`wrong given type: ${constraint}`);
+export const validateForm = (dataObj) => {
+  const ctx = collectData(dataObj);
+
+  let res = {};
+  for (let formFieldName in dataObj) {
+    // dataObj.forEach((formFieldName) => {
+    const constraints = dataObj[formFieldName];
+
+    const errorObj = validateFormdField(constraints, formFieldName, ctx);
+    if (errorObj === null) {
+      continue;
+    }
+
+    res = zip(res, errorObj);
   }
 
-  if (FieldType[fieldType][constraint].check(fieldData, constraintValue)) {
+  return res;
+};
+
+const validateFormdField = (constraints, fieldName, ctx) => {
+  for (let constraintName in constraints) {
+    if (constraintExists(constraintName)) {
+      const fieldType = constraints.type;
+      const constraintValue = constraints[constraintName];
+
+      const constraintRes = validateFormConstraint(
+        ctx,
+        fieldName,
+        fieldType,
+        constraintName,
+        constraintValue,
+      );
+
+      if (constraintRes !== null) {
+        return constraintRes;
+      }
+    }
+  }
+  return null;
+};
+
+const validateFormConstraint = (
+  ctx,
+  fieldName,
+  fieldType,
+  constraintName,
+  constraintValue,
+) => {
+  const errorFields = check(
+    ctx,
+    fieldName,
+    fieldType,
+    constraintName,
+    constraintValue,
+  );
+
+  if (!errorFields) {
     return null;
   }
-  return Constraints[constraint].error(constraintValue);
+  let res = {};
+  for (let errorField of errorFields) {
+    res[errorField] = constraintError(constraintName, constraintValue);
+  }
+
+  return res;
+};
+
+const check = (ctx, fieldName, fieldType, constraintName, constraintValue) => {
+  if (isTypeConstraint(fieldType, constraintName)) {
+    return TypeConstraints[fieldType][constraintName].check(
+      ctx,
+      fieldName,
+      constraintValue,
+    );
+  }
+  return Constraints[constraintName].check(ctx, fieldName, constraintValue);
+};
+
+const constraintError = (constraintName, constraintErrorArg) => {
+  return Constraints[constraintName].error(constraintErrorArg);
 };
