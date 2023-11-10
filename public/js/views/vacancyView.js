@@ -18,11 +18,20 @@ export default class profileView extends View {
 
         console.log(this.id);
 
-        let vacancy = await this.getVacancyData(this.id);
+        const vacancy = await this.getVacancyData(this.id);
+        let role = ''; 
+
+        if(!user) {
+            role = 'applicant';
+        } else if (user['role'] == 'applicant') {
+            role = 'applicant';
+        } else {
+            role = 'employer';
+        }
 
         // eslint-disable-next-line no-undef
         const template = Handlebars.templates['vac'];
-        document.querySelector('main').innerHTML = template({state: this.state, role: user['role'], vacancy: vacancy});
+        document.querySelector('main').innerHTML = template({state: this.state, role: role, vacancy: vacancy});
 
         this.addEventListeners();
     }

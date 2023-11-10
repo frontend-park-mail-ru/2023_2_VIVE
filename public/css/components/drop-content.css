@@ -23,9 +23,15 @@
 .dropdown__item {
   display: flex;
   justify-content: center;
+  padding: 5px;
   align-items: center;
   white-space: nowrap;
   gap: 5px;
+}
+
+.dropdown__item:hover {
+  border-radius: 12px;
+  background: var(--main-main-green);
 }
 
 .dropdown__img {

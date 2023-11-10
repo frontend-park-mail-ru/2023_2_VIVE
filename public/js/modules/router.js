@@ -1,3 +1,5 @@
+import { BACKEND_SERVER_URL } from '../../../config/config.js';
+import APIConnector from '../modules/APIConnector.js'
 import authView from '../views/authView.js';
 import footerView from '../views/footerView.js';
 import menuView from '../views/menuView.js';
@@ -37,7 +39,7 @@ class Router {
       '/vacancy/:id': 'vacancy',
       '/vacancy/:id/description': 'vacancy',
       '/vacancy/:id/responses': 'vacancy',
-      '/': 'vacs',
+      '/vacs': 'vacs',
     };
 
     this.objs = {
@@ -83,25 +85,18 @@ class Router {
     if (this.prevView) {
       this.prevView.remove();
     }
-    let matchedRoute = null;
 
-    for (const route in this.routes) {
-      const routeRegex = new RegExp(route.replace(/:\w+/g, '(\\d+)'));
-      if (routeRegex.test(url)) {
-        matchedRoute = route;
-        break;
-      }
+    const matchedRoute = await this.parsingUrlOnMathced(url);
+    if (!matchedRoute) {
+      this.prevView = this.objs['page404'];
+      this.prevView.render();
+      return;
     }
 
-    const idMatch = url.match(/\d+/);
-    const id = idMatch ? parseInt(idMatch[0]) : null;
-    if (!isNaN(id)) {
-      this.prevView = this.objs[this.routes[matchedRoute]];
-      if (!(await this.prevView.updateInnerData({'id': id}))) {
-        this.prevView = this.objs['page404'];
-        this.prevView.render();
-        return;
-      }
+    const redirect = await this.needRedirect(matchedRoute);
+    if ('redirect' in redirect) {
+      router.goToLink(redirect['redirect']);
+      return;
     }
 
     this.objs['menu'].remove();
@@ -124,9 +119,63 @@ class Router {
   get curUrl() {
     return this.lastUrl;
   }
+  
+  async needRedirect(url) {
+    if (this.denyWithAuth.includes(url) && await this.authCheck()) {
+      return {'redirect': '/vacs'};
+    } else if (this.authoriziedNeed.includes(url) && !(await this.authCheck())) {
+      return {'redirect': '/app_login'};
+    } else {
+      return {};
+    }
+  }
+
+  async parsingUrlOnMathced(url) {
+    if (url == '/') {
+      return '/vacs';
+    }
+    for (const route in this.routes) {
+      const routeRegex = new RegExp(`^${route.replace(/:\w+/g, '(\\d+)')}(#)?$`);
+      if (routeRegex.test(url)) {
+        
+        if (url.startsWith('/vacancy')) {
+          const id = await this.getVacancyId(url);
+          if (id <= 0) {
+            return null;
+          }
+        }
+
+        return url;
+      }
+    }
+    return null;
+  }
+
+  async getVacancyId(url) {
+    const idMatch = url.match(/\d+/);
+    const id = idMatch ? parseInt(idMatch[0]) : null;
+    if (!isNaN(id)) {
+      this.prevView = this.objs[this.routes['/vacancy/:id']];
+      if (!(await this.prevView.updateInnerData({'id': id}))) {
+        return -1;
+      } else {
+        return id; 
+      }
+    }
+  }
 
   async authCheck() {
-    
+    try {
+      const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/session`);
+      return true;
+    } catch(err) {
+      const statusCode = err.status.StatusCode;
+      if (statusCode > 500) {
+        throw new Error("INTERNAL ERROR");
+      } else {
+        return false;
+      }
+    }
   }
 }
 
