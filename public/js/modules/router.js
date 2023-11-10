@@ -61,17 +61,23 @@ class Router {
     '/profile/settings', 
     '/profile/resumes', 
     '/profile/responses', 
-    '/vacancy/:id/responses'
+    '/vacancy/:id/responses',
+    '/resume_creation',
     ];
 
     this.denyWithAuth = [
-      '/app_login',
-      '/emp_login',
+      '/app_auth',
+      '/emp_auth',
       '/app_reg',
       '/emp_reg',
     ]
 
     this.prevView = undefined;
+
+    window.addEventListener('popstate', (e) => {
+      const urlObj = new URL(window.location.href);
+      this.urlWork(urlObj.pathname);
+    });
   }
 
   /**
@@ -80,6 +86,19 @@ class Router {
    * @returns {Promise<void>} - Промис, который разрешается, когда навигация успешно завершена (URL существует)
    */
   async goToLink(url) {
+    await this.urlWork(url);
+    history.pushState(null, null, url);
+  }
+
+  /**
+   * Получение текущего URL
+   * @returns {String}
+   */
+  get curUrl() {
+    return this.lastUrl;
+  }
+
+  async urlWork(url) {
     this.deleteLastRender();
 
     url = (url == '/') ? '/vacs' : url;
@@ -98,15 +117,6 @@ class Router {
     }
 
     this.render(matchedRoute);
-    history.pushState(null, null, url);
-  }
-
-  /**
-   * Получение текущего URL
-   * @returns {String}
-   */
-  get curUrl() {
-    return this.lastUrl;
   }
 
   deleteLastRender() {
@@ -137,7 +147,7 @@ class Router {
     if (this.denyWithAuth.includes(url) && await this.authCheck()) {
       return {'redirect': '/vacs'};
     } else if (this.authoriziedNeed.includes(url) && !(await this.authCheck())) {
-      return {'redirect': '/app_login'};
+      return {'redirect': '/app_auth'};
     } else {
       return {};
     }
