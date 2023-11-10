@@ -21,7 +21,7 @@
   class=(object
   block="res__form__field"
   title="res__form__input__title"
-  input="res__form__input"
+  input="res__form__input forms-placeholder"
   )
   error=(lookup ../errors this.name)
   value=(lookup ../data this.name)
@@ -39,7 +39,7 @@
   class=(object
   block="res__form__field"
   title="res__form__input__title"
-  input="js-name-expirience_end_date res__form__input"
+  input="js-name-expirience_end_date res__form__input forms-placeholder"
   )
   error=(lookup ../errors this.name)
   value=(lookup ../data this.name)
@@ -60,14 +60,13 @@
   </label>
 
   {{#each (array
-  (object title="Расскажите о ваших обязанностях и достижениях" name="expirience_description" placeholder="Достижения и
-  обязанности"))}}
+  (object title="Расскажите о ваших обязанностях и достижениях" name="expirience_description" placeholder="Достижения и обязанности"))}}
 
   {{> input (object obj=this
   class=(object
   block="res__form__field"
   title="res__form__input__title"
-  input="res__form__input"
+  input="res__form__input forms-placeholder"
   )
   error=(lookup ../errors this.name)
   value=(lookup ../data this.name)

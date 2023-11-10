@@ -1,9 +1,9 @@
 <form class="rescr__form">
-  <p class="rescr__form__title form__title x-large-font">
+  <p class="rescr__form__title form__title text header-text header-text--first text-dark-title">
     Создание резюме
   </p>
 
-  <p class="rescr__form__step__title">
+  <p class="rescr__form__step__title header-text header-text--second">
     {{{lookup steps (sub page 1)}}}(шаг {{page}}/{{steps.length}})
   </p>
 
@@ -19,8 +19,8 @@
     class="js-rescr-back link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm")}}
     {{/iff}}
     <button type="submit"
-      class="{{#iff page '==' steps.length}} js-rescr-submit {{else}} js-rescr-save-continue {{/iff}} link-btn link-btn_blue link-btn_pd-med link-btn_bd-rad-sm">
-      <span class="link-btn__text">
+      class="{{#iff page '==' steps.length}} js-rescr-submit {{else}} js-rescr-save-continue {{/iff}} link-btn-blue--bg common-text common-text--medium text-light-title">
+      <span class="link-btn__text ">
         {{#iff page '==' steps.length}}
         Создать резюме
         {{else}}

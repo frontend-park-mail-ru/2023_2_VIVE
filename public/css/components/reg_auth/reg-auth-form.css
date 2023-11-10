@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: var(--main-dodger-blue);
+    background-color: var(--buttons-blue-primary-default);
     cursor: pointer;
     width: 40px;
     height: 24px;

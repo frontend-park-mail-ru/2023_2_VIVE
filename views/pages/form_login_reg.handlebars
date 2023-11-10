@@ -10,13 +10,13 @@
       </div>
 
       <div class="reg_auth__form__nav">
-        <span class="me-10">Соискатель</span>
+        <span class="me-10 {{#iff role '==' ROLES.emp}}text-dark-regular{{else}}text-dark-title{{/iff}}">Соискатель</span>
         <a class="reg_auth__form__slider {{#iff role '==' ROLES.emp}} reg_auth__form__slider_right {{/iff}} js-nav-link"
           href="{{iffs form_type '==' FORM_TYPES.reg (iffs role '==' ROLES.emp " app_reg" "emp_reg" ) 
           (iffs role '==' ROLES.emp "app_auth" "emp_auth" )}}">
           <div class="reg_auth__form__slider__circle"></div>
         </a>
-        <span class="ms-10">Работодатель</span>
+        <span class="ms-10 {{#iff role '==' ROLES.app}}text-dark-regular{{else}}text-dark-title{{/iff}}">Работодатель</span>
       </div>
 
       {{#if form_error }}
