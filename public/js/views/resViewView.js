@@ -1,6 +1,7 @@
 import View from './view.js';
 
 export default class resViewView extends View {
+  
   /**
    * Асинхронный метод для отображения страницы
    */
@@ -12,5 +13,9 @@ export default class resViewView extends View {
     });
 
     this.addEventListeners();
+  }
+
+  addEventListeners() {
+    
   }
 }

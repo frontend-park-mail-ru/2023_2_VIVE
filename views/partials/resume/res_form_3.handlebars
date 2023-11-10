@@ -12,9 +12,9 @@
   {{#if page_data.is_exp }}
 
   {{#each (array
-  (object title="В какой компании вы работали" name="expirience_organization_name" placeholder="Компания")
-  (object title="На какой должности" name="expirience_position" placeholder="Должность")
-  (object title="Начало работы" name="expirience_start_date" type="date")
+  (object title="В какой компании вы работали" name="organization_name" placeholder="Компания")
+  (object title="На какой должности" name="job_position" placeholder="Должность")
+  (object title="Начало работы" name="start_date" type="date")
   )}}
 
   {{> input (object obj=this
@@ -31,16 +31,21 @@
 
   {{#if page_data.is_end_date }}
 
-  {{> input (object obj=(object title="Год окончания" class="js-name-expirience_end_date" name="expirience_end_date"
-  placeholder="Год окончания" type="date")
+  {{#each (array
+  (object title="Год окончания" name="end_date" placeholder="Год окончания" type="date")
+  )}}
+
+  {{> input (object obj=this
   class=(object
   block="res__form__field"
   title="res__form__input__title"
-  input="res__form__input"
+  input="js-name-expirience_end_date res__form__input"
   )
-  error=(lookup errors "expirience_end_date")
-  value=(lookup data "expirience_end_date")
+  error=(lookup ../errors this.name)
+  value=(lookup ../data this.name)
   )}}
+
+  {{/each}}
 
   {{/if}}
 

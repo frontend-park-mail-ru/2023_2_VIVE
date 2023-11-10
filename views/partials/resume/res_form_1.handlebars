@@ -1,9 +1,10 @@
 <div class="form">
 
   {{#each (array
-  (object title="Профессия" name="profession" placeholder="Профессия")
+  (object title="Профессия" name="profession_name" placeholder="Профессия")
   (object title="Имя" name="first_name" placeholder="Имя" )
   (object title="Фамилия" name="last_name" placeholder="Фамилия")
+  (object title="Отчество" name="middle_name" placeholder="Отчество")
   )}}
 
   {{> input (object obj=this
@@ -45,7 +46,7 @@
 
   {{#each (array
   (object title="Дата рождения" name="birthday" type="date")
-  (object title="Город" name="location" placeholder="Город")
+  (object title="Город" name="city" placeholder="Город")
   )}}
 
   {{> input (object obj=this

@@ -76,16 +76,16 @@ export default class resCreationView extends View {
 
     const submit_btn = document.querySelector(".js-rescr-submit");
     if (submit_btn) {
-      submit_btn.addEventListener('click', event => {
+      submit_btn.addEventListener('click', async event => {
         event.preventDefault();
 
         this.errors = this.saveAndCheck();
         if (Object.keys(this.errors).length === 0) {
-          console.log(this.form_data);
-          this.form_error = ResCreationStore.sendForm(this.form_data);
+          this.form_error = await ResCreationStore.sendForm(this.form_data);
           if (this.form_error) {
             this.render();
           }
+          this.form_data = null;
         } else {
           this.render();
         }

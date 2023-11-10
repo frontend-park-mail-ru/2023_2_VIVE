@@ -1,6 +1,7 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import { Constraints, validateForm } from '../modules/constraints.js';
+import router from '../modules/router.js';
 import { getMetaPlusDataObj, isObjEmpty } from '../utils.js';
 import regAuthView from '../views/regAuthView.js';
 import Store from './Store.js';
@@ -130,22 +131,27 @@ class RegAuthStore extends Store {
                     BACKEND_SERVER_URL + '/users',
                     this.form_data,
                 );
-                console.log(this.role + '_reg: ', resp.status);
-                return true;
+                this.form_data = null;
+                router.goToLink('/');
+                console.log(resp.status);
             } catch (err) {
-                console.error(this.role + '_reg: ', err);
-                return false;
+                console.error(err);
             }
         } else {
             console.log(this.form_data);
-            this.form_error = "Ошибка!";
-            console.log(this.form_error);
             this.view.render();
-            // const resp = await APIConnector.post(
-            //     BACKEND_SERVER_URL + '/session',
-            //     this.form_data,
-            // );
-            // console.log(resp.status);
+            try {
+                const resp = await APIConnector.post(
+                    BACKEND_SERVER_URL + '/session',
+                    this.form_data,
+                );
+                this.form_data = null;
+                router.goToLink('/');
+                console.log(resp.status);
+            } catch (err) {
+                this.form_error = "Ошибка!";
+                console.error(err);
+            }
         }
 
     }
