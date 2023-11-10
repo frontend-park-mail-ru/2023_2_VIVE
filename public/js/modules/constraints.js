@@ -146,6 +146,30 @@ export const Constraints = {
     },
   },
 
+  // Constraint on the field value that must be less than another field value
+  less_than: {
+    check: (ctx, fieldToCheckName, fieldToCompare) => {
+      return ctx[fieldToCheckName] <= ctx[fieldToCompare]
+        ? null
+        : [fieldToCheckName];
+    },
+    error: () => {
+      return `Должно быть меньше`;
+    },
+  },
+
+  // Constraint on the field value that must be greater than another field value
+  greater_than: {
+    check: (ctx, fieldToCheckName, fieldToCompare) => {
+      return ctx[fieldToCheckName] >= ctx[fieldToCompare]
+        ? null
+        : [fieldToCheckName];
+    },
+    error: () => {
+      return `Должно быть больше`;
+    },
+  },
+
   // Constraint on max length of data
   max_len: {
     check: (ctx, fieldToCheckName, maxLenValue) => {
