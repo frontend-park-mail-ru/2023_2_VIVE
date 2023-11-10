@@ -106,3 +106,7 @@
   --buttons-photo-hover: #DEDEDE80;
   /* END BUTTON COLORS */
 }
+
+.forms-placeholder {
+  background-color: var(--forms-background-disabled);
+}

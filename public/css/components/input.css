@@ -31,7 +31,7 @@ x
   border: 2px solid var(--main-error-red);
 }
 
-.input__error-msg {
+.input_error__msg {
   margin-top: 5px;
   padding: 0 10px;
   color: var(--text-error-regular);

@@ -21,7 +21,6 @@ class UserStore extends Store {
         try {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + "/current_user");
             const data = await resp.json();
-            data['role'] = 'applicant';
             return data;
         } catch (err) {
             return undefined;
