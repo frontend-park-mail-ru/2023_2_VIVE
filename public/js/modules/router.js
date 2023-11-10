@@ -21,7 +21,6 @@ class Router {
    * @constructor
    * @param {Object} routes - Хранилище рабочих адресов
    * @param {Object} ojbs - Хранилище для сопоставления адреса и соответствующей функции
-   * @param {String} lastUrl - Переменная, хранящаяя предыдущий адрес посещения при переходе на следующий
    */
   constructor() {
     this.routes = {
@@ -82,9 +81,9 @@ class Router {
    * @returns {Promise<void>} - Промис, который разрешается, когда навигация успешно завершена (URL существует)
    */
   async goToLink(url) {
-    if (this.prevView) {
-      this.prevView.remove();
-    }
+    this.deleteLastRender();
+
+    url = (url == '/') ? '/vacs' : url;
 
     const matchedRoute = await this.parsingUrlOnMathced(url);
     if (!matchedRoute) {
@@ -99,17 +98,8 @@ class Router {
       return;
     }
 
-    this.objs['menu'].remove();
-    this.objs['footer'].remove();
-    if (matchedRoute) {
-      history.pushState(null, null, url);
-      this.objs['menu'].render();
-      this.objs['footer'].render();
-      this.prevView = this.objs[this.routes[matchedRoute]];
-    } else {
-      this.prevView = this.objs['page404'];
-    }
-    this.prevView.render();
+    this.render(matchedRoute);
+    history.pushState(null, null, url);
   }
 
   /**
@@ -119,7 +109,26 @@ class Router {
   get curUrl() {
     return this.lastUrl;
   }
-  
+
+  deleteLastRender() {
+    if (this.prevView) {
+      this.prevView.remove();
+    }
+    this.objs['menu'].remove();
+    this.objs['footer'].remove();
+  }
+
+  render(url) {
+    if (url) {
+      this.objs['menu'].render();
+      this.objs['footer'].render();
+      this.prevView = this.objs[this.routes[url]];
+    } else {
+      this.prevView = this.objs['page404'];
+    }
+    this.prevView.render();
+  }
+
   async needRedirect(url) {
     if (this.denyWithAuth.includes(url) && await this.authCheck()) {
       return {'redirect': '/vacs'};
@@ -131,9 +140,6 @@ class Router {
   }
 
   async parsingUrlOnMathced(url) {
-    if (url == '/') {
-      return '/vacs';
-    }
     for (const route in this.routes) {
       const routeRegex = new RegExp(`^${route.replace(/:\w+/g, '(\\d+)')}(#)?$`);
       if (routeRegex.test(url)) {
@@ -141,6 +147,10 @@ class Router {
         if (url.startsWith('/vacancy')) {
           const id = await this.getVacancyId(url);
           if (id <= 0) {
+            return null;
+          } 
+        } else if (url.startsWith('/profile')) {
+          if (!(await this.setDataUrlToProfile(url))) {
             return null;
           }
         }
@@ -155,13 +165,18 @@ class Router {
     const idMatch = url.match(/\d+/);
     const id = idMatch ? parseInt(idMatch[0]) : null;
     if (!isNaN(id)) {
-      this.prevView = this.objs[this.routes['/vacancy/:id']];
-      if (!(await this.prevView.updateInnerData({'id': id}))) {
+      const view = this.objs[this.routes['/vacancy/:id']];
+      if (!(await view.updateInnerData({'id': id}))) {
         return -1;
       } else {
         return id; 
       }
     }
+  }
+
+  async setDataUrlToProfile(url) {
+    const view = this.objs[this.routes[url]];
+    return await view.updateInnerData(url);
   }
 
   async authCheck() {

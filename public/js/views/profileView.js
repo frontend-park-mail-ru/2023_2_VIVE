@@ -8,24 +8,17 @@ export default class profileView extends View {
   constructor() {
     super();
     this.state = 'settings';
+    this.data = {};
+    this.user = {};
   }
 
   /**
    * Асинхронный метод для отображения страницы
    */
   async render() {
-
-    const user = await User.getUser();
-    let data = {};
-
-    if (this.state == 'vacancies') {
-      console.log(200);
-      data = await this.getUserVacancies();
-    }
-
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['profile'];
-    document.querySelector('main').innerHTML = template({state: this.state, user: user, data: data});
+    document.querySelector('main').innerHTML = template({state: this.state, user: this.user, data: this.data});
 
     this.addEventListeners();
   }
@@ -109,5 +102,24 @@ export default class profileView extends View {
     } catch(err) {
         return undefined;
     }
+  }
+
+  async updateInnerData(url) {
+    this.user = await User.getUser();
+
+    const parts = url.split('/');
+    this.state = parts[2] ? parts[2] : 'settings';
+
+    if ((this.state == 'resumes' || this.state == 'responses') && this.user.role == 'employer') {
+      return false;
+    } else if (this.state == 'vacancies' && this.user.role == 'applicant') {
+      return false;
+    }
+
+    if (this.state == 'vacancies') {
+      this.data = await this.getUserVacancies();
+    }
+
+    return true;
   }
 }

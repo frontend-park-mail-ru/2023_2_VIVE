@@ -16,8 +16,6 @@ export default class profileView extends View {
     async render() {
         const user = await User.getUser();
 
-        console.log(this.id);
-
         const vacancy = await this.getVacancyData(this.id);
         let role = ''; 
 
@@ -108,7 +106,6 @@ export default class profileView extends View {
                 // data.salary_upper_bound = incomeTo;
                 // data.experience_lower_bound = experience;
 
-                console.log(data);
                 const resp = await APIConnector.put(
                     BACKEND_SERVER_URL + '/vacancies/' + this.id,
                     data,
