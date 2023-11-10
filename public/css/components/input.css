@@ -10,7 +10,7 @@
 .input__field {
   width:100%;
   display: block;
-  padding: 5px 10px;
+  padding: 10px 20px;
   align-items: center;
   flex: 1 0 0;
   border-radius: 12px;
@@ -18,9 +18,13 @@
   background: var(--main-background-grey);
   font-size: 18px;
   outline: none;
-  color: #5e5e5e;
+  color:black;
 }
 
+.input__field::placeholder {
+  color: #7e7e7e;
+}
+x
 .input__field:focus {
   background-color: #e8e8e8;
 }

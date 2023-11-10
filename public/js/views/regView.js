@@ -43,70 +43,11 @@ export default class regView extends View {
       return {
         role: 'app',
         form_type: 'reg',
-        inputs: [
-          {
-            type: 'text',
-            name: 'first_name',
-            placeholder: 'Имя',
-          },
-          {
-            type: 'text',
-            name: 'last_name',
-            placeholder: 'Фамилия',
-          },
-          {
-            type: 'text',
-            name: 'email',
-            placeholder: 'Электронная почта',
-          },
-          {
-            type: 'password',
-            name: 'password',
-            placeholder: 'Придумайте пароль',
-          },
-          {
-            type: 'password',
-            name: 'repeat_password',
-            placeholder: 'Повторите пароль',
-          },
-        ],
       };
     } else {
       return {
         role: 'emp',
         form_type: 'reg',
-        inputs: [
-          {
-            type: 'text',
-            name: 'first_name',
-            placeholder: 'Имя',
-          },
-          {
-            type: 'text',
-            name: 'last_name',
-            placeholder: 'Фамилия',
-          },
-          {
-            type: 'text',
-            name: 'company_name',
-            placeholder: 'Название компании',
-          },
-          {
-            type: 'text',
-            name: 'email',
-            placeholder: 'Электронная почта',
-          },
-          {
-            type: 'password',
-            name: 'password',
-            placeholder: 'Придумайте пароль',
-          },
-          {
-            type: 'password',
-            name: 'repeat_password',
-            placeholder: 'Повторите пароль',
-          },
-        ],
       };
     }
   }

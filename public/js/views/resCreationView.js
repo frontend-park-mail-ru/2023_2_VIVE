@@ -1,13 +1,12 @@
 import { Constraints, validateForm } from '../modules/constraints.js';
-import ResCreationStore from '../stores/resCreationStore.js';
-import User from '../stores/userStore.js';
+import ResCreationStore from '../stores/ResCreationStore.js';
+import User from '../stores/UserStore.js';
 import { getFormObject } from '../utils.js';
 import View from './view.js';
 
 export default class resCreationView extends View {
   constructor() {
     super();
-    this.page = 4;
     this.form_data = {};
     this.errors = {};
     this.pages_data = [
@@ -22,7 +21,7 @@ export default class resCreationView extends View {
   }
 
   get page_data() {
-    return this.pages_data[this.page - 1];
+    return this.pages_data[ResCreationStore.page - 1];
   }
   /**
    * Асинхронный метод для отображения страницы
@@ -33,7 +32,7 @@ export default class resCreationView extends View {
 
     document.querySelector('main').innerHTML = template({
       // user: await User.getUser(),
-      page: this.page,
+      page: ResCreationStore.page,
       errors: this.errors,
       data: this.form_data,
       page_data: this.page_data
@@ -46,12 +45,13 @@ export default class resCreationView extends View {
   save() {
     const cur_data = getFormObject(new FormData(this.form));
     Object.assign(this.form_data, cur_data);
+    console.log(this.form_data);
     return cur_data
   }
 
   saveAndCheck() {
     const cur_data = this.save();
-    return validateForm(ResCreationStore.form_fields[this.page - 1], cur_data);
+    return validateForm(ResCreationStore.pageFormFieldsMeta, cur_data);
   }
 
   addEventListeners() {
@@ -63,7 +63,7 @@ export default class resCreationView extends View {
 
         this.errors = this.saveAndCheck();
         if (Object.keys(this.errors).length === 0) {
-          this.page++;
+          ResCreationStore.page++;
         }
         this.render();
       })
@@ -74,7 +74,7 @@ export default class resCreationView extends View {
       back_btn.addEventListener('click', event => {
         event.preventDefault();
         this.save();
-        this.page--;
+        ResCreationStore.page--;
         this.render();
       })
     }
@@ -83,7 +83,7 @@ export default class resCreationView extends View {
     if (submit_btn) {
       submit_btn.addEventListener('click', event => {
         event.preventDefault();
-        
+
         this.errors = this.saveAndCheck();
         if (Object.keys(this.errors).length === 0) {
           console.log(this.form_data);
@@ -94,7 +94,7 @@ export default class resCreationView extends View {
   }
 
   addEventListenersToPage() {
-    if (this.page == 3) {
+    if (ResCreationStore.page == 3) {
       const is_exp = document.querySelector(".js-name-is-experience");
       is_exp.checked = this.page_data.is_exp;
       is_exp.addEventListener('change', event => {

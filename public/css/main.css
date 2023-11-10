@@ -6,8 +6,8 @@
 @import url("./components/vacs/vacs.css");
 @import url("./components/view/view.css");
 @import url("./components/profile/profile.css");
-@import url("./components/form.css");
 @import url("./components/resume/res.css");
+@import url("./components/reg_auth/reg-auth-form.css");
 
 
 * {

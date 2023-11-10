@@ -1,0 +1,52 @@
+.reg_auth {
+    padding: 30px;
+    border-radius: 30px;
+    background: var(--main-grey-blue, rgba(210, 224, 234, 0.37));
+    width: 500px;
+    margin: auto;
+}
+
+.reg_auth__form {
+    width: 100%;
+}
+
+.reg_auth__form__title {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.reg_auth__form__nav {
+    margin: auto;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.reg_auth__form__slider {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--button-color-primary-default);
+    cursor: pointer;
+    width: 40px;
+    height: 24px;
+    border-radius: 25px;
+}
+
+.reg_auth__form__slider_right {
+    justify-content: flex-end;
+}
+
+.reg_auth__form__slider__circle {
+    width: 20px;
+    height: 20px;
+    margin-left: 2px;
+    margin-right: 2px;
+    background-color: var(--main-background-grey);
+    border-radius: 50%;
+}
+
+.reg_auth__form__field {
+    margin-bottom: 20px;
+}

@@ -2,21 +2,25 @@
   <div class="res__form__input__title">Уровень образования</div>
   <div class="res__form__field">
     {{#each (array
-    (object text="Среднее")
-    (object text="Среднее специальное")
-    (object text="Неоконченное высшее")
-    (object text="Высшее")
-    (object text="Бакалавр")
-    (object text="Магистр")
-    (object text="Кандидат наук")
-    (object text="Доктор наук")
+    (object text="Среднее" value="secondary")
+    (object text="Среднее специальное" value="special_secondary")
+    (object text="Неоконченное высшее" value="unfinished_higher")
+    (object text="Высшее" value="higher")
+    (object text="Бакалавр" value="bachelor")
+    (object text="Магистр" value="master")
+    (object text="Кандидат наук" value="candidate")
+    (object text="Доктор наук" value="doctor")
     )}}
 
     {{> input_radio (object text=this.text
+    attrs=(object
+    name="education_level"
+    value=this.value
+    )
+    checked=(iffs (lookup ../data "education_level") '==' this.value true false)
     class=(object
     block="res__form__input_radio_field"
     )
-    name="education_level"
     error=(lookup ../errors "education_level")
     )}}
 

@@ -1,8 +1,7 @@
-import authView from '../views/authView.js';
+import regAuthView from '../views/regAuthView.js';
 import footerView from '../views/footerView.js';
 import menuView from '../views/menuView.js';
 import page404View from '../views/page404View.js';
-import regView from '../views/regView.js';
 import resCreationView from '../views/resCreationView.js';
 import resViewView from '../views/resViewView.js';
 import vacsView from '../views/vacsView.js';
@@ -23,8 +22,8 @@ class Router {
    */
   constructor() {
     this.routes = {
-      '/app_login': 'appAuth',
-      '/emp_login': 'empAuth',
+      '/app_auth': 'appAuth',
+      '/emp_auth': 'empAuth',
       '/app_reg': 'appReg',
       '/emp_reg': 'empReg',
       '/resume_creation': 'resCreation',
@@ -41,10 +40,10 @@ class Router {
       vacs: new vacsView(),
       resCreation: new resCreationView(),
       resView: new resViewView(),
-      appAuth: new authView('app'),
-      empAuth: new authView('emp'),
-      appReg: new regView('app'),
-      empReg: new regView('emp'),
+      appAuth: new regAuthView('auth', 'applicant'),
+      empAuth: new regAuthView('auth', 'employer'),
+      appReg: new regAuthView('reg', 'applicant'),
+      empReg: new regAuthView('reg', 'employer'),
       profile: new profileView(),
       vacancy: new vacancyView(),
       menu: new menuView(),
@@ -67,12 +66,18 @@ class Router {
 
     this.objs['menu'].remove();
     this.objs['footer'].remove();
+
     if (url in this.routes) {
       history.pushState(null, null, url);
       this.objs['menu'].render();
       this.objs['footer'].render();
       this.prevView = this.objs[this.routes[url]];
     } else {
+      if (this.prevView) {
+        this.prevView.clear();
+      }
+      this.objs['menu'].clear();
+      this.objs['footer'].clear();
       this.prevView = this.objs['page404'];
     }
     this.prevView.render();

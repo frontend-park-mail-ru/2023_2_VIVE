@@ -1,7 +1,7 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import router from '../modules/router.js';
-import Store from './store.js';
+import Store from './Store.js';
 
 class UserStore extends Store {
     constructor() {
@@ -24,7 +24,7 @@ class UserStore extends Store {
             data['role'] = 'applicant';
             console.log(data);
             return data;
-        } catch(err) {
+        } catch (err) {
             return undefined;
         }
     }

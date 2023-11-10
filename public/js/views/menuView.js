@@ -1,5 +1,5 @@
 import router from '../modules/router.js';
-import User from '../stores/userStore.js';
+import User from '../stores/UserStore.js';
 import { getHrefFromLink } from '../utils.js';
 import View from './view.js';
 
@@ -48,5 +48,9 @@ export default class menuView extends View {
     //     }
     //   });
     // }
+  }
+
+  clear() {
+    document.querySelector('header').innerHTML = "";
   }
 }

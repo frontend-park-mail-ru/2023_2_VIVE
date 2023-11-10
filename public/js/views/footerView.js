@@ -18,4 +18,8 @@ export default class footerView extends View {
     // eslint-disable-next-line no-undef
     document.querySelector('footer').innerHTML = Handlebars.partials['footer']();
   }
+
+  clear() {
+    document.querySelector('footer').innerHTML = "";
+  }
 }

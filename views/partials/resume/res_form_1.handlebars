@@ -21,15 +21,19 @@
     <div class="res__form__input__title">Пол</div>
     <div class=" res__form__input_radio_flex">
       {{#each (array
-      (object text="Мужской")
-      (object text="Женский")
+      (object text="Мужской" value="male")
+      (object text="Женский" value="female")
       )}}
       {{> input_radio (object
       text=this.text
       class=(object
       block="mr-10"
       )
+      attrs=(object
       name="gender"
+      value=this.value 
+      )
+      checked=(iffs (lookup ../data "gender") '==' this.value true false)
       error=(lookup ../errors "gender"))}}
       {{/each}}
     </div>

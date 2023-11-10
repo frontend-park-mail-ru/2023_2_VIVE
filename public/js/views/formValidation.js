@@ -9,11 +9,6 @@ import validator from '../modules/validator.js';
  */
 export function formIsValid(form, data, { is_login, is_reg }) {
   let errors = {};
-  if (is_reg) {
-    errors = validator.validateRegistrationForm(data);
-  } else if (is_login) {
-    errors = validator.validateAuthForm(data);
-  }
 
   const inputs = form.querySelectorAll('.input');
   let isValid = true;

@@ -1,7 +1,7 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import router from '../modules/router.js';
-import User from '../stores/userStore.js';
+import User from '../stores/UserStore.js';
 import View from './view.js';
 
 export default class profileView extends View {
@@ -27,7 +27,7 @@ export default class profileView extends View {
 
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates[type];
-    document.querySelector('main').innerHTML = template({state: this.state, data: data});
+    document.querySelector('main').innerHTML = template({ state: this.state, data: data });
 
     this.addEventListeners();
   }
@@ -83,7 +83,7 @@ export default class profileView extends View {
 
           delete user.id;
           delete user.role;
-          
+
           fields.forEach(input => {
             user[input.name.replace(/-/g, '_')] = input.value;
           });

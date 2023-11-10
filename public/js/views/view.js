@@ -36,4 +36,8 @@ export default class View {
     remove() {
         this.removeEventListeners();
     }
+
+    clear() {
+        
+    }
 }

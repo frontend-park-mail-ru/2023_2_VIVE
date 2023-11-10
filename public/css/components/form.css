@@ -1,60 +1,3 @@
-.form-block {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  gap: 20px;
-  border-radius: 30px;
-  background: var(--main-grey-blue, rgba(210, 224, 234, 0.37));
-  width: 400px;
-  margin: auto;
-}
-
-
-.form__error {
-  color: var(--main-error);
-  font-feature-settings:
-    'clig' off,
-    'liga' off;
-}
-
-
-.form__actions {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.form__slider {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: var(--button-color-primary-default);
-  border: none;
-  cursor: pointer;
-  outline: none;
-  padding: 0;
-  position: relative;
-  width: 40px;
-  height: 24px;
-  border-radius: 25px;
-  overflow: hidden;
-}
-
-.form__slider_right{
-  justify-content: flex-end;
-}
-
-.form__slider__circle {
-  width: 20px;
-  height: 20px;
-  margin-left: 2px;
-  margin-right: 2px;
-  background-color: var(--main-background-grey);
-  border-radius: 50%;
-}
-
-
-
 
 .form {
   display: flex;
@@ -71,4 +14,16 @@
   flex-direction: row;
   justify-content: start;
   align-items: center;
+}
+
+.form__error {
+  color: var(--main-error);
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.form__actions {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
