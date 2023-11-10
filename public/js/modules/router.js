@@ -62,7 +62,7 @@ class Router {
     '/profile/resumes', 
     '/profile/responses', 
     '/vacancy/:id/responses',
-    '/resume_creation'
+    '/resume_creation',
     ];
 
     this.denyWithAuth = [
@@ -73,6 +73,11 @@ class Router {
     ]
 
     this.prevView = undefined;
+
+    window.addEventListener('popstate', (e) => {
+      const urlObj = new URL(window.location.href);
+      this.urlWork(urlObj.pathname);
+    });
   }
 
   /**
@@ -81,6 +86,19 @@ class Router {
    * @returns {Promise<void>} - Промис, который разрешается, когда навигация успешно завершена (URL существует)
    */
   async goToLink(url) {
+    await this.urlWork(url);
+    history.pushState(null, null, url);
+  }
+
+  /**
+   * Получение текущего URL
+   * @returns {String}
+   */
+  get curUrl() {
+    return this.lastUrl;
+  }
+
+  async urlWork(url) {
     this.deleteLastRender();
 
     url = (url == '/') ? '/vacs' : url;
@@ -99,15 +117,6 @@ class Router {
     }
 
     this.render(matchedRoute);
-    history.pushState(null, null, url);
-  }
-
-  /**
-   * Получение текущего URL
-   * @returns {String}
-   */
-  get curUrl() {
-    return this.lastUrl;
   }
 
   deleteLastRender() {
