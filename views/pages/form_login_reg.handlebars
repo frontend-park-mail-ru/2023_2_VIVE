@@ -1,7 +1,7 @@
 <div class="column-wrapper">
   <div class="reg_auth">
     <form class="reg_auth__form form">
-      <div class="reg_auth__form__title x-large-font">
+      <div class="reg_auth__form__title header-text header-text--first text-dark-title">
         {{#iff form_type '==' FORM_TYPES.auth}}
         Войти ({{iffs role '==' ROLES.app "как соискатель" "как работодатель"}})
         {{else}}
@@ -66,7 +66,7 @@
       {{!-- ====== --}}
 
       <div class="form__actions">
-        <button type="submit" class="link-btn link-btn_blue link-btn_pd-med link-btn_bd-rad-sm">
+        <button type="submit" class="link-btn-blue--bg common-text common-text--medium text-light-title">
           <span class="link-btn__text">{{#iff form_type '==' FORM_TYPES.auth }}
             Войти
             {{else}}
@@ -74,7 +74,7 @@
             {{/iff}}
           </span>
         </button>
-        <a class="js-nav-link link-btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm"
+        <a class="js-nav-link link-btn-blue text-dodger-blue"
           href="{{iffs role '==' ROLES.app (iffs form_type '==' FORM_TYPES.reg "app_auth" "app_reg" ) 
           (iffs form_type '==' FORM_TYPES.reg "emp_auth" "emp_reg" )}}">
           <span class="link-btn__text">
