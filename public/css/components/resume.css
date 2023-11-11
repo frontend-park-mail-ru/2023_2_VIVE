@@ -27,13 +27,13 @@
 }
 
 .resume__status--avaliable {
-    color: var(--greeen-main);
-    border: 2px solid var(--greeen-main);
+    color: var(--labels-green-main);
+    border: 2px solid var(--labels-green-main);
 }
 
 .resume__status--hidden {
-    color: var(--orange-main);
-    border: 2px solid var(--orange-main);
+    color: var(--labels-orange-main);
+    border: 2px solid var(--labels-orange-main);
 }
 
 .resume__statistic {
@@ -54,8 +54,8 @@
 
 .resume__statistic-line {
     height: 100%;
-    width: 1px;
-    background-color: var(--text-filled);
+    width: 2px;
+    background-color: var(--text-dark-regular);
 }
 
 .resume__btns {

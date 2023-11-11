@@ -1,3 +1,4 @@
+import User from '../stores/UserStore.js';
 import View from './view.js';
 
 export default class footerView extends View {
@@ -16,7 +17,8 @@ export default class footerView extends View {
    */
   async compileTemplates() {
     // eslint-disable-next-line no-undef
-    document.querySelector('footer').innerHTML = Handlebars.partials['footer']();
+    const template = Handlebars.partials['footer'];
+    document.querySelector('footer').innerHTML = template({user: await User.getUser() });
   }
 
   clear() {

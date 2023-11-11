@@ -2,18 +2,24 @@
   <div class="column-wrapper">
     <div class="footer__top">
       <div>
-        <p class="big-text text-light-title" style="line-height: 10px;">Найди работу</p>
-        <p class="big-text text-light-title" style="line-height: 10px;">Своей мечты здесь</p>
+        <p class="big-text text-light-title" style="line-height: 10px;">{{#iff user.role '==' 'applicant' }}Найди работу{{else}}Постройте свой идеальный{{/iff}}</p>
+        <p class="big-text text-light-title" style="line-height: 10px;">{{#iff user.role '==' 'applicant'}}Своей мечты здесь{{else}}Коллектив с нами{{/iff}}</p>
       </div>
       <div>
-        {{> link-btn (object href="" text="Создать резюме"
-        class="footer__btn link-btn_orange"
-        class_text="common-text common-text--medium")}}
+        {{#iff user.role '==' 'applicant' }}
+          {{> link-btn (object href="/resume_creation" text="Создать резюме"
+          class="footer__btn link-btn_orange"
+          class_text="common-text common-text--medium")}}
+        {{else}}
+          {{> link-btn (object href="" text="Создать вакансию"
+          class="footer__btn link-btn_orange cursor-not-allowed"
+          class_text="common-text common-text--medium")}}
+        {{/iff}}
       </div>
     </div>
     <div class="footer__bottom">
       <p class="header-text header-text--second text-light-title">Hunt & Hire</p>
-      <p class="secondary-text text-light-regular">Найти работу своей мечты теперь проще чем когда-либо</p>
+      <p class="secondary-text text-light-regular">{{#iff user.role '==' 'applicant' }}Найти работу своей мечты теперь проще чем когда-либо{{else}}Откройте двери для поиска талантов и создания вдохновляющей команды{{/iff}}</p>
     </div>
   </div>
 </div>

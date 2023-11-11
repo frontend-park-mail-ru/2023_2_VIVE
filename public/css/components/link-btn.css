@@ -48,6 +48,7 @@
 /* blue */
 
 .link-btn-blue {
+  text-decoration: none;
   display: flex;
   text-decoration: none;
   height: 40px;
@@ -73,6 +74,7 @@
 }
 
 .link-btn-blue--bg {
+  text-decoration: none;
   display: flex;
   height: 40px;
   padding: 6px 15px;
@@ -101,7 +103,13 @@
 
 /* blue-no-db */
 .link-btn_blue-without-bd {
+  text-decoration: none;
+  cursor: pointer;
   color: var(--buttons-blue-primary-default);
+}
+
+.link-btn_blue-without-bd:hover {
+  color: var(--mono-blue-dark-blue);
 }
 
 /* transp-box-blue */
@@ -132,7 +140,9 @@
 }
 
 .link-btn_transp-box-green:hover {
-  background-color: #F2F2F2;
+  color: var(--text-light-title);
+  background-color: #31B546;
+  transition: color 0.5s ease, background-color 0.5s ease;
 }
 
 .link-btn_transp-box-green:active {
