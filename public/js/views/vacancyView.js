@@ -55,32 +55,34 @@ export default class profileView extends View {
     }
 
     addEventListeners() {
-        const showResponsesButton = document.querySelector('[data-name="responses"]');
-        const showDescriptionButton = document.querySelector('[data-name="description"]');
-        const refactorMainButton = document.querySelector('[data-name="refactoring"]');
+        super.addEventListeners();
+
+        // const showResponsesButton = document.querySelector('[data-name="responses"]');
+        // const showDescriptionButton = document.querySelector('[data-name="description"]');
+        // const refactorMainButton = document.querySelector('[data-name="refactoring"]');
         const cancelRefactoring = document.querySelector('[data-name="cancel-refactoring"]');
         const sendRefactoringButton = document.querySelector('[data-name="send-refactoring"]');
 
-        showDescriptionButton.addEventListener('click', () => {
-            showDescriptionButton.classList.add('d-none');
-            showResponsesButton.classList.remove('d-none');
-            this.state = 'description';
-            router.goToLink(`/vacancy/${this.id}/description`);
-        });
+        // showDescriptionButton.addEventListener('click', () => {
+        //     showDescriptionButton.classList.add('d-none');
+        //     showResponsesButton.classList.remove('d-none');
+        //     this.state = 'description';
+        //     router.goToLink(`/vacancy/${this.id}/description`);
+        // });
 
-        showResponsesButton.addEventListener('click', () => {
-            showResponsesButton.classList.add('d-none');
-            showDescriptionButton.classList.remove('d-none');
-            this.state = 'responses';
-            router.goToLink(`/vacancy/${this.id}/responses`);
-        });
+        // showResponsesButton.addEventListener('click', () => {
+        //     showResponsesButton.classList.add('d-none');
+        //     showDescriptionButton.classList.remove('d-none');
+        //     this.state = 'responses';
+        //     router.goToLink(`/vacancy/${this.id}/responses`);
+        // });
 
-        refactorMainButton.addEventListener('click', () => {
-            const refactoringForm = document.querySelector('.vacancie-refactor');
-            const mainInfo = document.querySelector('.vacancie');
-            refactoringForm.classList.remove('d-none');
-            mainInfo.classList.add('d-none');
-        });
+        // refactorMainButton.addEventListener('click', () => {
+        //     const refactoringForm = document.querySelector('.vacancie-refactor');
+        //     const mainInfo = document.querySelector('.vacancie');
+        //     refactoringForm.classList.remove('d-none');
+        //     mainInfo.classList.add('d-none');
+        // });
 
         cancelRefactoring.addEventListener('click', () => {
             const refactoringForm = document.querySelector('.vacancie-refactor');

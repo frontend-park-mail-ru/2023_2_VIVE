@@ -167,7 +167,7 @@ class Router {
             if (!(await this.setDataUrlToProfile(url))) {
               return null;
             }
-        } else if (url.startsWith('/resume')) {
+        } else if (url.startsWith('/resume') && (url[7] != '_')) {
             const id = await this.setResumeIdToView(url);
             if (id <= 0) {
               return null;

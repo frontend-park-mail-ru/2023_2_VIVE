@@ -30,6 +30,7 @@
 
 .resv__data__main {
   display: flex;
+  justify-content: space-between;
 }
 
 .resv__data__main__avatar {

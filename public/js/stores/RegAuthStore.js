@@ -43,12 +43,14 @@ class RegAuthStore extends Store {
                     required: true,
                     count_words: 1,
                     no_digits: true,
+                    max_len: 20,
                 },
                 "last_name": {
                     type: "text",
                     required: true,
                     count_words: 1,
                     no_digits: true,
+                    max_len: 20,
                 },
                 "email": {
                     type: "text",
@@ -88,8 +90,8 @@ class RegAuthStore extends Store {
                 },
                 "password": {
                     type: "password",
-                    required: true,
-                    password: true,
+                    // required: true,
+                    // password: true,
                 },
             }
         }
@@ -122,35 +124,39 @@ class RegAuthStore extends Store {
     }
 
     async sendForm() {
-        this.form_data['role'] = this.view.role;
+        const send_form_data = {};
+        Object.assign(send_form_data, this.form_data);
+        send_form_data['role'] = this.view.role;
         if (this.view.form_type == FORM_TYPES.reg) {
-            delete this.form_data['repeat_password'];
+            delete send_form_data['repeat_password'];
             console.log(this.form_data);
             try {
                 const resp = await APIConnector.post(
                     BACKEND_SERVER_URL + '/users',
-                    this.form_data,
+                    send_form_data,
                 );
                 this.form_data = null;
                 router.goToLink('/');
-                console.log(resp.status);
+                // console.log(resp.status);
+                return true;
             } catch (err) {
+                this.form_error = "Аккаунт с данной почтой уже существует";
                 console.error(err);
+                return false;
             }
         } else {
-            console.log(this.form_data);
-            this.view.render();
             try {
                 const resp = await APIConnector.post(
                     BACKEND_SERVER_URL + '/session',
-                    this.form_data,
+                    send_form_data,
                 );
                 this.form_data = null;
                 router.goToLink('/');
-                console.log(resp.status);
+                return true;
             } catch (err) {
-                this.form_error = "Ошибка!";
+                this.form_error = "Неверный логин или пароль";
                 console.error(err);
+                return false;
             }
         }
 

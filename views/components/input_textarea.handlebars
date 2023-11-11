@@ -1,6 +1,6 @@
 <label class="input {{class.block}} {{#if error}} input_error {{/if}}" for="{{obj.name}}">
-  <div class="input__title {{class.title}}">{{obj.title}}</div>
-  <textarea class="{{class.input}} input__field input_textarea" autocomplete="off" rows="{{rows}}" name="{{obj.name}}" placeholder="{{ obj.placeholder }}" {{{attributes}}}>{{value}}</textarea>
+  <div class="input__title {{class.title}} common-text common-text--medium">{{obj.title}}</div>
+  <textarea class="{{class.input}} input__field input_textarea common-text common-text--medium" autocomplete="off" rows="{{rows}}" name="{{obj.name}}" placeholder="{{ obj.placeholder }}" {{{attributes}}}>{{value}}</textarea>
   {{#if error}} 
   <div class="input_error__msg">{{error}}</div>
   {{/if}}

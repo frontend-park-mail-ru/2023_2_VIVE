@@ -1,9 +1,17 @@
 <div class="view">
     <div>
         <div class="link-btn complex-btn link-btn_blue-without-bd">
-            <img class="view__btn-arrow" src="../../../public/images/img/arrow_left_outline_20-01.png">
-            <div class="common-text common-text--medium text-dodger-blue">
-                Назад к вакансиям
+            <div class="resv__nav">
+                {{> link-btn text="Назад к списку вакансий" href="/vacs"
+                class="resv__nav__link js-nav-link link-btn_transp"
+                class_text = "text-dodger-blue"
+                svg_pos="before"
+                svg='<svg class="resv__nav__link__svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                viewBox="0 0 16 16" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M6.47007 3.21985C6.61225 3.08737 6.80029 3.01524 6.9946 3.01867C7.1889 3.0221 7.37428 3.10081 7.51169 3.23822C7.64911 3.37564 7.72782 3.56102 7.73125 3.75532C7.73468 3.94963 7.66255 4.13767 7.53007 4.27985L4.56007 7.24985H13.2501C13.449 7.24985 13.6397 7.32886 13.7804 7.46952C13.9211 7.61017 14.0001 7.80093 14.0001 7.99985C14.0001 8.19876 13.9211 8.38952 13.7804 8.53018C13.6397 8.67083 13.449 8.74985 13.2501 8.74985H4.56007L7.53007 11.7198C7.60376 11.7885 7.66286 11.8713 7.70385 11.9633C7.74485 12.0553 7.76689 12.1546 7.76866 12.2553C7.77044 12.356 7.75192 12.4561 7.7142 12.5494C7.67647 12.6428 7.62033 12.7277 7.54911 12.7989C7.47789 12.8701 7.39306 12.9262 7.29967 12.964C7.20628 13.0017 7.10625 13.0202 7.00555 13.0184C6.90485 13.0167 6.80553 12.9946 6.71353 12.9536C6.62153 12.9126 6.53873 12.8535 6.47007 12.7798L2.22007 8.52985C2.07962 8.38922 2.00073 8.1986 2.00073 7.99985C2.00073 7.8011 2.07962 7.61047 2.22007 7.46985L6.47007 3.21985Z"
+                    fill="#0496FF" />
+                </svg>'}}
             </div>
         </div>
         <div class="view__field">
@@ -37,7 +45,7 @@
                     </div>
                     <div class="vacancie__btns">
                         {{#iff role '==' 'employer'}}
-                            <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
+                            <div class="text-dodger-blue setting-inpute__button common-text common-text--medium d-none"
                             data-name="refactoring">
                                 Редактировать
                             </div>

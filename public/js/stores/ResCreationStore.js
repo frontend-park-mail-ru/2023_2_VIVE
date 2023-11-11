@@ -132,14 +132,12 @@ class ResCreationStore extends Store {
         // form_data = Object.assign(form_data, {
         //     "profession_name": "programmist",
         // });
-        console.log(form_data);
         try {
             const resp = await APIConnector.post(
                 BACKEND_SERVER_URL + '/current_user/cvs',
                 form_data,
             );
             router.goToLink('/profile/resumes');
-            console.log(resp.status);
         } catch (err) {
             console.error(err);
         }

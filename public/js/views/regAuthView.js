@@ -49,7 +49,9 @@ export default class regAuthView extends View {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (regAuthStore.checkForm(getFormObject(new FormData(form)))) {
-        regAuthStore.sendForm();
+        if (!await regAuthStore.sendForm()) {
+          this.render();
+        }
       } else {
         this.render();
       }

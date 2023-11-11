@@ -36,12 +36,20 @@ export default class profileView extends View {
     const cancelButtons = document.querySelectorAll('[data-name="cancel-changing"]');
     const sendButtons = document.querySelectorAll('[data-name="send-form"]');
     const buttonsWithVacancyId = document.querySelectorAll('[vacancy-id]');
+    const buttonsWithResumeId = document.querySelectorAll('[resume-id]');
 
     // Добавить обработчик событий для каждой кнопки
     buttonsWithVacancyId.forEach(button => {
       button.addEventListener('click',() => {
         const vacId = button.getAttribute('vacancy-id');
         router.goToLink(`/vacancy/${vacId}`)
+      });
+    });
+
+    buttonsWithResumeId.forEach(button => {
+      button.addEventListener('click', () => {
+        const resId = button.getAttribute('resume-id');
+        router.goToLink(`/resume/${resId}`);
       });
     });
     
