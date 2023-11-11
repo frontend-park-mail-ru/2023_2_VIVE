@@ -10,6 +10,10 @@ export default class profileView extends View {
     this.state = 'settings';
     this.data = {};
     this.user = {};
+    this.allStatus = {
+      'searching': 'Доступно для просмотра',
+      'not searching': 'Скрыто для просмотра',
+    }
   }
 
   /**
@@ -104,6 +108,16 @@ export default class profileView extends View {
     }
   }
 
+  async getUserResumes() {
+    try {
+      const resp = await APIConnector.get(BACKEND_SERVER_URL + "/current_user/cvs");
+      const data = await resp.json();
+      return data;
+    } catch(err) {
+      return undefined;
+    }
+  }
+
   async updateInnerData(url) {
     this.user = await User.getUser();
 
@@ -118,6 +132,8 @@ export default class profileView extends View {
 
     if (this.state == 'vacancies') {
       this.data = await this.getUserVacancies();
+    } else if (this.state == 'resumes') {
+      this.data = await this.getUserResumes();
     }
 
     return true;

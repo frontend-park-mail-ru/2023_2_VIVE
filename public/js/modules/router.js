@@ -28,7 +28,6 @@ class Router {
       '/app_reg': 'appReg',
       '/emp_reg': 'empReg',
       '/resume_creation': 'resCreation',
-      '/resume_view': 'resView',
       '/profile': 'profile',
       '/profile/settings': 'profile',
       '/profile/resumes': 'profile',
@@ -37,6 +36,7 @@ class Router {
       '/vacancy/:id': 'vacancy',
       '/vacancy/:id/description': 'vacancy',
       '/vacancy/:id/responses': 'vacancy',
+      '/resume/:id': 'resView',
       '/vacs': 'vacs',
     };
 
@@ -164,10 +164,15 @@ class Router {
             return null;
           } 
         } else if (url.startsWith('/profile')) {
-          if (!(await this.setDataUrlToProfile(url))) {
-            return null;
+            if (!(await this.setDataUrlToProfile(url))) {
+              return null;
+            }
+        } else if (url.startsWith('/resume')) {
+            const id = await this.setResumeIdToView(url);
+            if (id <= 0) {
+              return null;
+            }
           }
-        }
 
         return route;
       }
@@ -189,6 +194,21 @@ class Router {
   }
 
   async setDataUrlToProfile(url) {
+    const view = this.objs[this.routes[url]];
+    return await view.updateInnerData(url);
+  }
+
+  async setResumeIdToView(url) {
+    const idMatch = url.match(/\d+/);
+    const id = idMatch ? parseInt(idMatch[0]) : null;
+    if (!isNaN(id)) {
+      const view = this.objs[this.routes['/resume/:id']];
+      if (!(await view.updateInnerData({'id': id}))) {
+        return -1;
+      } else {
+        return id; 
+      }
+    }
     const view = this.objs[this.routes[url]];
     return await view.updateInnerData(url);
   }

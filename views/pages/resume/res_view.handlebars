@@ -4,7 +4,8 @@
     <div class="resv">
       <div class="resv__nav">
         {{> link-btn text="К списку моих резюме"
-        class="resv__nav__link link-btn_transp link-btn_text_blue link-btn_pd-med"
+        class="resv__nav__link link-btn_transp"
+        class_text = "text-dodger-blue"
         svg_pos="before"
         svg='<svg class="resv__nav__link__svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
           viewBox="0 0 16 16" fill="none">
@@ -19,7 +20,7 @@
             <div class="resv__data__main mb-20">
               <div>
                 <div class="resv__text_big mb-15">
-                  Web-разработчик
+                  {{data.name}}
                 </div>
                 <div class="resv__text_med mb-20">
                   Иванов Иван Иванович
@@ -86,8 +87,7 @@
                   Информация о себе
                 </div>
                 <div class="resv__text_sm">
-                  Я хороший парень, ответственный, быстро учусь.
-                  Мое портфолио можно посмотреть по ссылке: example.com
+                  {{data.description}}
                 </div>
               </div>
             </div>
@@ -118,8 +118,14 @@
             {{> link-btn text="Удалить резюме"
             class="resv__params__actions__delete link-btn_text_red link-btn_pd-sm d-block"}}
           </div>
-          {{> link-btn text="Доступно для просмотра"
-          class="resv__params__view link-btn_transp-box-green link-btn_pd-sm link-btn_bd-rad-med d-block"}}
+
+          {{#iff data.status '==' 'searching'}}
+            {{> link-btn text="Доступно для просмотра"
+            class="resv__params__view resume__status resume__status--avaliable"}}
+          {{else}}
+            {{> link-btn text="Скрыто для просмотра"
+            class="resv__params__view resume__status resume__status--hidden"}}
+          {{/iff}}
         </div>
       </div>
     </div>

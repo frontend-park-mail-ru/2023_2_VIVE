@@ -4,10 +4,15 @@
   </div>
   <div class="resumes__blocks">
     <div class="resumes__main-blocks">
+      {{#each data}}
       <div class="resume">
         <div class="resume__job-type">
-          <div class="resume__job-name header-text header-text--second text-dark-title">Web-разработчик</div>
-          <div class="resume__status resume__status--avaliable">Доступно для просмотра</div>
+          <div class="resume__job-name header-text header-text--second text-dark-title">{{this.name}}</div>
+          {{#iff this.status '==' 'searching'}}
+            <div class="resume__status resume__status--avaliable">Доступно для просмотра</div>
+          {{else}}
+            <div class="resume__status resume__status--hidden">Скрыто для просмотра</div>
+          {{/iff}}
         </div>
         <div class="resume__statistic">
           <div class="resume__statistic-text header-text header-text--third text-dark-title">Статистика</div>
@@ -31,6 +36,7 @@
           </div>
         </div>
       </div>
+      {{/each}}
     </div>
     <div class="resume__form-create">
       <a href="/resume_creation"
