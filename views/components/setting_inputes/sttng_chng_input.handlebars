@@ -1,0 +1,13 @@
+<div class="changing-inpute__field">
+    <div class="setting-inpute__main-text header-text header-text--first">
+        {{input.title}}
+    </div>
+    <input class="changing-inpute__label common-text common-text--medium text-dark-title {{#if error}}changing-inpute__error{{/if}}" 
+    name="{{input.name}}" 
+    type="{{input.type}}" 
+    placeholder="{{input.placeholder}}" 
+    value="{{#if data}}{{data}}{{else}}{{#iff input.name '==' 'email'}}{{user.email}}{{else iff input.name '==' 'last-name'}}{{user.last_name}}{{else iff input.name '==' 'first-name'}}{{user.first_name}}{{else}}{{/iff}}{{/if}}">
+    {{#if error}} 
+    <div class="input_error__msg" style="max-width: 450px;">{{error}}</div>
+    {{/if}}
+</div>

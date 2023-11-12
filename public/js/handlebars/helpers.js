@@ -20,6 +20,10 @@ export function registerHelpers() {
     });
     return isOk;
   });
+
+  Handlebars.registerHelper('isOdd', function(value) {
+    return value % 2 !== 0;
+  });
   
   Handlebars.registerHelper('object', function({hash}) {
     return hash;

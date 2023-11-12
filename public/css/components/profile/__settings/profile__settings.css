@@ -131,6 +131,10 @@
     background: var(--forms-background-normal);
 }
 
+.changing-inpute__error {
+    border: 2px solid var(--main-error-red);
+}
+
 .changing-inpute__btns {
     display: flex;
     width: 670px;

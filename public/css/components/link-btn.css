@@ -58,6 +58,7 @@
   gap: 5px;
   border-radius: 10px;
   cursor: pointer;
+  background-color: unset;
   border: 1px solid var(--buttons-blue-primary-default);
 }
 
