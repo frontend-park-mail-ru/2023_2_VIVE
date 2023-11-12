@@ -1,5 +1,5 @@
 import { Constraints, validateForm } from '../modules/constraints.js';
-import ResCreationStore from '../stores/ResCreationStore.js';
+import resStore from '../stores/ResStore.js';
 import User from '../stores/UserStore.js';
 import { getFormObject, getMetaPlusDataObj } from '../utils.js';
 import View from './view.js';
@@ -7,13 +7,26 @@ import View from './view.js';
 export default class resCreationView extends View {
   constructor() {
     super();
-    this.form_data = {};
-    this.errors = {};
-    this.form_error = null;
+  }
+
+  get page() {
+    return resStore.page;
   }
 
   get page_data() {
-    return ResCreationStore.getPageData();
+    return resStore.page_data;
+  }
+
+  get form_data() {
+    return resStore.form_data;
+  }
+
+  get page_errors() {
+    return resStore.errors;
+  }
+
+  get page_funcs() {
+    return resStore.page_funcs;
   }
   /**
    * Асинхронный метод для отображения страницы
@@ -22,45 +35,32 @@ export default class resCreationView extends View {
     super.render();
     const template = Handlebars.templates['res_creation'];
 
-    document.querySelector('main').innerHTML = template({
-      // user: await User.getUser(),
-      page: ResCreationStore.page,
-      errors: this.errors,
-      data: this.form_data,
-      page_data: this.page_data,
-      form_error: this.form_error,
-    });
+    document.querySelector('main').innerHTML = template(resStore.getContext());
 
     this.addEventListeners();
     this.addEventListenersToPage();
   }
 
-  save() {
-    const cur_data = getFormObject(new FormData(this.form));
-    Object.assign(this.form_data, cur_data);
-    this.form_error = null;
-    return cur_data
-  }
-
-  saveAndCheck() {
-    const cur_data = this.save();
-    const meta = ResCreationStore.pageFormFieldsMeta();
-    const temp = getMetaPlusDataObj(meta, cur_data);
-    return validateForm(temp);
-  }
 
   addEventListeners() {
     this.form = document.querySelector('.rescr__form')
+
+    const form_input_btns = document.querySelectorAll('.res__form__input');
+    form_input_btns.forEach(form_input => {
+      form_input.addEventListener('blur', event => {
+        if (resStore.saveInput(form_input.name, form_input.value)) {
+          this.render();
+        }
+      })
+    })
+
     const save_cont_btn = document.querySelector('.js-rescr-save-continue');
     if (save_cont_btn) {
       save_cont_btn.addEventListener('click', event => {
         event.preventDefault();
-
-        this.errors = this.saveAndCheck();
-        if (Object.keys(this.errors).length === 0) {
-          ResCreationStore.page++;
+        if (resStore.saveFormAndContinue(getFormObject(new FormData(this.form)))) {
+          this.render();
         }
-        this.render();
       })
     }
 
@@ -68,9 +68,9 @@ export default class resCreationView extends View {
     if (back_btn) {
       back_btn.addEventListener('click', event => {
         event.preventDefault();
-        this.save();
-        ResCreationStore.page--;
-        this.render();
+        if (resStore.prevForm()) {
+          this.render();
+        }
       })
     }
 
@@ -78,44 +78,101 @@ export default class resCreationView extends View {
     if (submit_btn) {
       submit_btn.addEventListener('click', async event => {
         event.preventDefault();
-
-        this.errors = this.saveAndCheck();
-        if (Object.keys(this.errors).length === 0) {
-          this.form_error = await ResCreationStore.sendForm(this.form_data);
-          if (this.form_error) {
+        if (resStore.saveForm(getFormObject(new FormData(this.form)))) {
+          this.render();
+        } else {
+          if (resStore.sendForms()) {
             this.render();
           }
-          this.form_data = null;
-        } else {
-          this.render();
         }
       })
     }
   }
 
   addEventListenersToPage() {
-    if (ResCreationStore.page == 3) {
+    if (this.page == 1) {
+      const gender_btns = document.querySelectorAll(".js-gender");
+      gender_btns.forEach(gender =>
+        gender.addEventListener('change', event => {
+          event.preventDefault();
+          if (resStore.saveInput(gender.name, gender.value)) {
+            this.render();
+          }
+        })
+      )
+    }
+    if (this.page == 2) {
+      const edu_level_btns = document.querySelectorAll(".js-education-level");
+      edu_level_btns.forEach(edu_level =>
+        edu_level.addEventListener('change', event => {
+          event.preventDefault();
+          if (resStore.eduPageIsEdu(edu_level.value)) {
+            this.render();
+          }
+        })
+      )
+
+      if (this.form_data.institutions.length > 0) {
+        const add_inst = document.querySelector(".js-add-institute");
+        add_inst.addEventListener('click', event => {
+          event.preventDefault();
+          if (resStore.eduPageAddForm()) {
+            this.render();
+          }
+        })
+
+        if (this.form_data.institutions.length > 1) {
+          const del_inst_btns = document.querySelectorAll(".js-del-institute");
+          del_inst_btns.forEach(del_inst => {
+            del_inst.addEventListener('click', event => {
+              event.preventDefault();
+              if (resStore.eduPageDelForm(del_inst.dataset.num)) {
+                this.render();
+              }
+            })
+          })
+        }
+      }
+    }
+    else if (this.page == 3) {
       const is_exp = document.querySelector(".js-name-is-experience");
-      is_exp.checked = this.page_data.is_exp;
       is_exp.addEventListener('change', event => {
-        this.page_data.is_exp = is_exp.checked;
-        this.save();
-        this.render();
+        if (resStore.expPageIsExp(is_exp.checked)) {
+          this.render();
+        }
       })
       if (this.page_data.is_exp) {
-        this.addListenersToExpForm();
+        if (this.form_data.companies.length > 0) {
+          const add_company = document.querySelector(".js-add-company");
+          add_company.addEventListener('click', event => {
+            event.preventDefault();
+            if (resStore.expPageAddForm()) {
+              this.render();
+            }
+          })
+
+          if (this.form_data.companies.length > 1) {
+            const del_company_btns = document.querySelectorAll(".js-del-company");
+            del_company_btns.forEach(del_company => {
+              del_company.addEventListener('click', event => {
+                event.preventDefault();
+                if (resStore.expPageDelForm(del_company.dataset.num)) {
+                  this.render();
+                }
+              })
+            })
+          }
+        }
+
+        const is_end_date_btns = document.querySelectorAll(".js-name-is-expirience_end_date");
+        is_end_date_btns.forEach(is_end_date => {
+          is_end_date.addEventListener('change', event => {
+            if (resStore.expPageIsEndDate(is_end_date.dataset.num, is_end_date.checked)) {
+              this.render();
+            }
+          })
+        })
       }
     }
   }
-
-  addListenersToExpForm() {
-    const is_end_date = document.querySelector(".js-name-is-expirience_end_date");
-    is_end_date.checked = !this.page_data.is_end_date;
-    is_end_date.addEventListener('change', event => {
-      this.page_data.is_end_date = !is_end_date.checked;
-      this.save();
-      this.render();
-    })
-  }
-
 }

@@ -1,4 +1,4 @@
-<{{#if href}}a href="{{href}}" {{else}}button{{/if}} class="link-btn {{class}}" {{#each data}} data-{{key}}="{{value}}"
+<{{#if href}}a href="{{href}}" {{else}}button{{/if}} class="link-btn {{class}}" {{#each data}} data-{{@key}}={{this}}
   {{/each}}>
 
   {{#if svg_pos}}

@@ -33,8 +33,9 @@ export function registerHelpers() {
     return arr.reduce((partialSum, a) => partialSum + a, 0);
   });
 
-  Handlebars.registerHelper('concat', function (str1, str2) {
-    return str1 + str2;
+  Handlebars.registerHelper('concat', function () {
+    const args = Array.from(arguments).slice(0, arguments.length - 1);
+    return args.reduce((sum, current) => sum + current, "");
   });
 
   function checkCondition(v1, operator, v2) {

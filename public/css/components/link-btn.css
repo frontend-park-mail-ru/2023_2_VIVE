@@ -200,6 +200,11 @@
   color:#0496FF;
 }
 
+.link-btn_text_blue:hover {
+  color: #063452;
+}
+
+
 .link-btn_text_red {
   color: #EF4A3C;
 }

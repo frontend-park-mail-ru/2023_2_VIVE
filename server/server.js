@@ -1,7 +1,7 @@
 'use strict';
 // import router from '../public/js/router/router.js';
 
-const FRONTEND_SERVER_PORT = 8082;
+const FRONTEND_SERVER_PORT = 8085;
 
 const express = require('express');
 const exphbs = require('express-handlebars');

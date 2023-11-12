@@ -1,6 +1,6 @@
-<label class="input {{class.block}} {{#if error}} input_error {{/if}}" for="{{obj.name}}">
+<label class="input {{class.block}} {{#if error}} input_error {{/if}}">
   <div class="input__title {{class.title}}">{{obj.title}}</div>
-  <input class="{{class.input}} input__field common-text common-text--medium" autocomplete="off" type="{{#if obj.type}}{{obj.type}}{{else}}text{{/if}}" name="{{obj.name}}" id="{{ obj.name }}" placeholder="{{ obj.placeholder }}" value="{{value}}" {{{attributes}}}>
+  <input class="{{class.input}} input__field common-text common-text--medium" autocomplete="off" type="{{#if obj.type}}{{obj.type}}{{else}}text{{/if}}" name="{{name}}" placeholder="{{ obj.placeholder }}" value="{{value}}" {{{attributes}}}>
   {{#if error}} 
   <div class="input_error__msg">{{error}}</div>
   {{/if}}

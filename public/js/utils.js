@@ -9,10 +9,14 @@ export function getHrefFromLink(aTag) {
 }
 
 export function getMetaPlusDataObj(meta_obj, data_obj) {
+  const res_obj = {};
   for (const key in data_obj) {
-    meta_obj[key]["data"] = data_obj[key];
+    if (key in meta_obj) {
+      res_obj[key] = meta_obj[key];
+      Object.assign(res_obj[key], { "data": data_obj[key] })
+    }
   }
-  return meta_obj;
+  return res_obj;
 }
 
 /**

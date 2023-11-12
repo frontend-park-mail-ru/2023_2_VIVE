@@ -1,0 +1,370 @@
+import { BACKEND_SERVER_URL } from '../../../config/config.js';
+import APIConnector from '../modules/APIConnector.js';
+import { validateForm } from '../modules/constraints.js';
+import router from '../modules/router.js';
+import { getFormObject, getMetaPlusDataObj, isObjEmpty } from '../utils.js';
+import Store from './Store.js';
+
+class ResStore extends Store {
+    constructor() {
+        super();
+        this.clear();
+    }
+
+    clear() {
+        this.page = 1;
+        this.pages_errors = [
+            {},
+            {
+                "institutions": [],
+            },
+            {
+                "companies": [],
+            },
+            {},
+        ]
+        this.pages_data = [
+            {},
+            {
+
+            },
+            {
+                is_exp: false,
+                is_end_date: [],
+            },
+            {},
+        ];
+        this.form_data = {
+            "gender": "male",
+            "education_level": "nothing",
+            "institutions": [],
+            "companies": [],
+        };
+    }
+
+    get page_data() {
+        return this.pages_data[this.page - 1];
+    }
+
+    get page_errors() {
+        return this.pages_errors[this.page - 1];
+    }
+
+    pageFormFieldsMeta() {
+        return [{
+            "profession_name": {
+                type: "text",
+                required: true,
+            },
+            "first_name": {
+                type: "text",
+                required: true,
+                count_words: 1,
+                no_digits: true,
+            },
+            "last_name": {
+                type: "text",
+                required: true,
+                count_words: 1,
+                no_digits: true,
+            },
+            "middle_name": {
+                type: "text",
+                // count_words: 1,
+                no_digits: true,
+            },
+            "gender": {
+                type: "radio",
+                required: true,
+                data: "",
+            },
+            "birthday": {
+                type: "date",
+                required: true,
+                digits: true,
+            },
+            "city": {
+                type: "text",
+                required: true,
+            },
+        },
+        {
+            "education_level": {
+                type: "radio",
+                required: true,
+                data: "",
+            },
+            "name": {
+                type: "text",
+                required: true,
+            },
+            "major_field": {
+                type: "text",
+                required: true,
+            },
+            "graduation_year": {
+                type: "text",
+                required: true,
+                digits: true,
+            },
+        },
+        {
+            "name": {
+                type: "text",
+                required: true,
+            },
+            "job_position": {
+                type: "text",
+                required: true,
+            },
+            "start_date": {
+                type: "date",
+                required: true,
+            },
+            "end_date": {
+                type: "date",
+                required: true,
+            },
+            "description": {
+                type: "text",
+                required: true,
+            }
+        },
+        {
+            "description": {
+                type: "text",
+                required: true,
+            },
+        },
+        ][this.page - 1];
+    }
+
+    loadResume(id) {
+        this.form_data = {
+            "profession_name": "Программист",
+            "first_name": "Илья",
+            "last_name": "Алешин",
+            "middle_name": "Дмитриевич",
+            "birthday": "2003-05-18",
+            "city": "Москва",
+            "gender": "male",
+            "education_level": "higher",
+            "institutions": [
+                {
+                    "name": "Лицей 1571",
+                    "major_field": "математика",
+                    "graduation_year": "2025"
+                },
+                {
+                    "name": "Лицей ниу вшэ",
+                    "major_field": "физика",
+                    "graduation_year": "2030"
+                }
+            ],
+            "companies": [
+                {
+                    "name": "ВК",
+                    "job_position": "Главный",
+                    "start_date": "0013-03-21",
+                    "end_date": "0023-04-23",
+                    "description": "крутой"
+                },
+                {
+                    "name": "яндекс",
+                    "job_position": "очень важный",
+                    "start_date": "0423-03-04",
+                    "description": "очень крутой"
+                }
+            ],
+            "description": "люблю пельмени и вареники"
+        }
+    }
+
+    loadPage(page) {
+        if (page == 3) {
+            this.loadExp();
+        }
+    }
+
+    loadExp() {
+        this.page_data.is_exp = this.form_data['companies'].length != 0;
+        this.form_data['companies'].forEach(function(company) {
+            console.log(this);
+            this.page_data.is_end_date.push(company['end_date'] != undefined);
+        }.bind(this));
+    }
+
+    getContext() {
+        return {
+            // user: await User.getUser(),
+            user: {
+                role: 'applicant',
+            },
+            page: this.page,
+            errors: this.page_errors,
+            data: this.form_data,
+            page_data: this.page_data,
+            form_error: this.form_error,
+        };
+    }
+
+
+    // ================ Education 
+
+    eduPageIsEdu(edu_value) {
+        const is_dif = this.form_data["education_level"] != edu_value;
+        if (this.form_data["education_level"] == 'nothing') {
+            this.eduPageAddForm();
+        } else if (edu_value == 'nothing') {
+            this.eduPageClear();
+        }
+        this.form_data["education_level"] = edu_value;
+        return is_dif;
+    }
+
+    eduPageAddForm() {
+        this.form_data["institutions"].push({});
+        this.page_errors["institutions"].push({});
+        return true;
+    }
+
+    eduPageDelForm(num) {
+        this.form_data["institutions"].splice(num, 1);
+        this.page_errors["institutions"].splice(num, 1);
+        return true;
+    }
+
+    eduPageClear() {
+        this.form_data["institutions"] = [];
+        this.page_errors["institutions"] = [];
+    }
+
+    // ============ Expirience
+
+    expPageIsExp(is_exp) {
+        this.page_data.is_exp = is_exp;
+        if (!is_exp) {
+            this.expPageClear();
+        } else {
+            this.expPageAddForm();
+        }
+        return true;
+    }
+
+    expPageAddForm() {
+        this.page_data.is_end_date.push(false);
+        this.form_data["companies"].push({});
+        this.page_errors["companies"].push({});
+        return true;
+    }
+
+    expPageDelForm(num) {
+        this.page_data.is_end_date.splice(num, 1);
+        this.form_data["companies"].splice(num, 1);
+        this.page_errors["companies"].splice(num, 1);
+        return true;
+    }
+
+    expPageClear() {
+        this.page_data.is_end_date = [];
+        this.form_data["companies"] = [];
+        this.page_errors["companies"] = [];
+        return true;
+    }
+
+    expPageIsEndDate(num, is_end_date) {
+        this.page_data.is_end_date[num] = is_end_date;
+        return true
+    }
+
+    // ============ nav 
+
+    prevForm() {
+        this.page--;
+        return true;
+    }
+
+
+    // ============ Save, check, send
+
+    saveInput(input_name, input_value) {
+        const arr = input_name.split('#')
+        const name = arr[0];
+        let data = this.form_data;
+        let errors = this.page_errors;
+        for (let i = 1; i < arr.length; i += 2) {
+            data = data[arr[i]][arr[i + 1]];
+            errors = errors[arr[i]][arr[i + 1]];
+        }
+        data[name] = input_value;
+
+        const validate_obj = {};
+        validate_obj[name] = input_value;
+        const error = validateForm(getMetaPlusDataObj(this.pageFormFieldsMeta(), validate_obj));
+        if (!isObjEmpty(error)) {
+            Object.assign(errors, error);
+            return true
+        } else if (errors[name]) {
+            delete errors[name];
+            return true;
+        }
+        return false;
+    }
+
+    saveForm(form_data) {
+        let is_render = false;
+        for (const key in form_data) {
+            if (this.saveInput(key, form_data[key])) {
+                is_render = true;
+            }
+        }
+        return is_render;
+    }
+
+    saveFormAndContinue(form_data) {
+        if (!this.saveForm(form_data)) {
+            this.page++;
+        }
+        return true;
+    }
+
+    async sendForms() {
+        console.log("sending...");
+        console.log(this.form_data);
+        
+        // try {
+        //     const resp = await APIConnector.post(
+        //         BACKEND_SERVER_URL + '/current_user/cvs',
+        //         sending_form,
+        //     );
+        //     router.goToLink('/profile/resumes');
+        // } catch (err) {
+        //     console.error(err);
+        // }
+
+        this.clear(); 
+    }
+
+
+    //================================================
+
+        // async updateInnerData(data) {
+    //     try {
+    //         const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/current_user/cvs/${data['id']}`);
+    //         this.data = await resp.json();
+    //         return true;
+    //     } catch (err) {
+    //         return false;
+    //     }
+    // }
+
+
+    
+
+
+
+
+}
+
+const resStore = new ResStore();
+export default resStore;

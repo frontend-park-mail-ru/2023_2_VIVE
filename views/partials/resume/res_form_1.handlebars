@@ -14,6 +14,7 @@
   input="res__form__input forms-placeholder"
   block="res__form__field"
   )
+  name=this.name
   error=(lookup ../errors this.name))}}
 
   {{/each}}
@@ -29,6 +30,7 @@
       text=this.text
       class=(object
       block="mr-10"
+      input="js-gender"
       )
       attrs=(object
       name="gender"
@@ -55,6 +57,7 @@
   input="res__form__input forms-placeholder"
   block="res__form__field"
   )
+  name=this.name
   value=(lookup ../data this.name)
   error=(lookup ../errors this.name))}}
 

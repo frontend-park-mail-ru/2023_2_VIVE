@@ -9,10 +9,19 @@
     attrs=(ifs page_data.is_exp (object checked="true") (object)))}}
   </label>
 
-  {{#if page_data.is_exp }}
+  {{#each data.companies }}
+
+  {{#iff ../data.companies.length '>' 1}}
+  {{> link-btn (object
+  text="- Удалить место работы"
+  class="js-del-company res__form_edu__add link-btn_text_red"
+  data=(object num=@index)
+  )}}
+
+  {{/iff}}
 
   {{#each (array
-  (object title="В какой компании вы работали" name="organization_name" placeholder="Компания")
+  (object title="В какой компании вы работали" name="name" placeholder="Компания")
   (object title="На какой должности" name="job_position" placeholder="Должность")
   (object title="Начало работы" name="start_date" type="date")
   )}}
@@ -23,13 +32,14 @@
   title="res__form__input__title"
   input="res__form__input forms-placeholder"
   )
-  error=(lookup ../errors this.name)
-  value=(lookup ../data this.name)
+  name=(concat this.name '#' "companies" '#' @../index)
+  error=(lookup (lookup ../../errors.companies @../index) this.name)
+  value=(lookup ../this this.name)
   )}}
 
   {{/each}}
 
-  {{#if page_data.is_end_date }}
+  {{#if (lookup ../page_data.is_end_date @index) }}
 
   {{#each (array
   (object title="Год окончания" name="end_date" placeholder="Год окончания" type="date")
@@ -41,26 +51,28 @@
   title="res__form__input__title"
   input="js-name-expirience_end_date res__form__input forms-placeholder"
   )
-  error=(lookup ../errors this.name)
-  value=(lookup ../data this.name)
+  name=(concat this.name '#' "companies" '#' @../index)
+  error=(lookup (lookup ../../errors.companies @../index) this.name)
+  value=(lookup ../this this.name)
   )}}
 
   {{/each}}
 
   {{/if}}
 
-
   <label class="res__form__field form__label_flex">
     {{> input_checkbox (object
-    text="По настоящее время"
+    text="Добавить дату окончания"
     class=(object
     input="js-name-is-expirience_end_date"
     )
-    attrs=(ifs page_data.is_end_date (object checked="true") (object)))}}
+    data=(object num=@index)
+    attrs=(ifs (lookup ../page_data.is_end_date @index) (object checked="true") (object)))}}
   </label>
 
   {{#each (array
-  (object title="Расскажите о ваших обязанностях и достижениях" name="expirience_description" placeholder="Достижения и обязанности"))}}
+  (object title="Расскажите о ваших обязанностях и достижениях" name="description" placeholder="Достижения и
+  обязанности"))}}
 
   {{> input (object obj=this
   class=(object
@@ -68,12 +80,24 @@
   title="res__form__input__title"
   input="res__form__input forms-placeholder"
   )
-  error=(lookup ../errors this.name)
-  value=(lookup ../data this.name)
+  name=(concat this.name '#' "companies" '#' @../index)
+  error=(lookup (lookup ../../errors.companies @../index) this.name)
+  value=(lookup ../this this.name)
   )}}
 
   {{/each}}
 
-  {{/if}}
+  {{#iff @index '<' (sum (array ../data.companies.length -1))}} <div class="res__form_edu__splitter">
+</div>{{/iff}}
+
+{{/each}}
+
+{{#iff data.companies.length '>=' 1}}
+{{> link-btn (object
+text="+ Добавить место работы"
+class="js-add-company res__form_edu__add link-btn_text_blue"
+)}}
+{{/iff}}
+
 
 </div>

@@ -2,6 +2,7 @@
   <div class="res__form__input__title">Уровень образования</div>
   <div class="res__form__field">
     {{#each (array
+    (object text="Нет образования" value="nothing")
     (object text="Среднее" value="secondary")
     (object text="Среднее специальное" value="special_secondary")
     (object text="Неоконченное высшее" value="unfinished_higher")
@@ -16,11 +17,13 @@
     attrs=(object
     name="education_level"
     value=this.value
+
     )
-    checked=(iffs (lookup ../data "education_level") '==' this.value true false)
     class=(object
     block="res__form__input_radio_field"
+    input="js-education-level"
     )
+    checked=(iffs (lookup ../data "education_level") '==' this.value true false)
     error=(lookup ../errors "education_level")
     )}}
 
@@ -30,22 +33,48 @@
     {{/if}}
   </div>
 
+  {{#each data.institutions }}
+
+  {{#iff ../data.institutions.length '>' 1}}
+  {{> link-btn (object
+  text="- Удалить учебное заведение"
+  class="js-del-institute res__form_edu__add link-btn_text_red"
+  data=(object num=@index)
+  )}}
+
+  {{/iff}}
+
   {{#each (array
-  (object title="Учебное заведение" name="education_institution_name" placeholder="Учебное заведение")
+  (object title="Учебное заведение" name="name" placeholder="Учебное заведение")
   (object title="Специализация" name="major_field" placeholder="Специализация")
   (object title="Год окончания" name="graduation_year" placeholder="Год окончания")
   )}}
 
+  {{lookup ../../errors.institutions this.name}}
+
   {{> input (object obj=this
+  name=(concat this.name '#' "institutions" '#' @../index)
   class=(object
   block="res__form__field"
   input="res__form__input forms-placeholder"
   title="res__form__input__title"
   )
-  error=(lookup ../errors this.name)
-  value=(lookup ../data this.name)
+  error=(lookup (lookup ../../errors.institutions @../index) this.name)
+  value=(lookup ../this this.name)
   )}}
 
   {{/each}}
+
+  {{#iff @index '<' (sum (array ../data.institutions.length -1))}} <div class="res__form_edu__splitter">
+</div>{{/iff}}
+
+{{/each}}
+
+{{#iff data.institutions.length '>=' 1}}
+{{> link-btn (object
+text="+ Добавить учебное заведение"
+class="js-add-institute res__form_edu__add link-btn_text_blue"
+)}}
+{{/iff}}
 
 </div>

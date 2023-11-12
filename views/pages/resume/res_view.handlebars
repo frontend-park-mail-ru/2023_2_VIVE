@@ -16,11 +16,22 @@
       </div>
       <div class="resv__data">
         <div class="resv__data__list">
+
+
+
+
+
+
+
+
           <div class="resv__data__item">
+
+          {{> res_form_1 (object errors=errors data=data page_data=page_data)}}
+
             <div class="resv__data__main mb-20">
               <div>
                 <div class="resv__text_big mb-15">
-                  {{data.name}}
+                  Профессия
                 </div>
                 <div class="resv__text_med mb-20">
                   Иванов Иван Иванович
@@ -31,11 +42,36 @@
               </div>
               <img class="resv__data__main__avatar" src="../../../public/images/profile.png" alt="">
             </div>
-            {{!-- {{> link-btn text="Редактировать"
-            class="resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}} --}}
+            {{> link-btn text="Редактировать"
+            data=(object page=1)
+            class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}}
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div class="resv__data__item">
-            <div class="resv__data__main mb-20">
+            {{> res_form_2 (object errors=errors data=data page_data=page_data)}}
+            {{!-- <div class="resv__data__main mb-20">
               <div>
                 <div class="resv__text_big mb-15">
                   Высшее образование
@@ -53,11 +89,15 @@
                   Экономика и финансы
                 </div>
               </div>
-            </div>
-            {{!-- {{> link-btn text="Редактировать"
-            class="resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}} --}}
+            </div> --}}
+            {{> link-btn text="Редактировать" 
+            data=(object page=2)
+            class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}}
           </div>
+
+
           <div class="resv__data__item">
+            {{> res_form_3 (object errors=errors data=data page_data=page_data)}}
             <div class="resv__data__main mb-20">
               <div>
                 <div class="resv__text_big mb-15">
@@ -77,24 +117,36 @@
                 </div>
               </div>
             </div>
-            {{!-- {{> link-btn text="Редактировать"
-            class="resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}} --}}
+            {{> link-btn text="Редактировать"
+            class="resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}}
           </div>
+
+
+
+
           <div class="resv__data__item">
+            
+          {{> res_form_4 (object errors=errors data=data page_data=page_data)}}
             <div class="resv__data__main mb-20">
               <div>
                 <div class="resv__text_big mb-20">
                   Информация о себе
                 </div>
                 <div class="resv__text_sm">
-                  {{data.description}}
+                  Описание
                 </div>
               </div>
             </div>
-            {{!-- {{> link-btn text="Редактировать"
-            class="resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}} --}}
+            {{> link-btn text="Редактировать"
+            class="resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm d-block"}}
           </div>
         </div>
+
+
+
+
+
+
 
         <div class="resv__params">
           <div class="resv__params__item resv__text_sm mb-20">
