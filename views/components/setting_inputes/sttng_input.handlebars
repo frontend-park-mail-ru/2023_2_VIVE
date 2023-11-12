@@ -1,0 +1,19 @@
+<div class="setting-inpute {{#if data}}ch-i__d-none{{/if}}" data-name="{{obj.data-name}}">
+    <div class="setting-inpute__main-text header-text header-text--first">
+    {{obj.title}}
+    </div>
+    <div class="settings-inpute__field">
+        <div class="common-text common-text--medium --text-dark-regular">
+            {{#iff obj.value '==' 'full-name'}}
+            {{user.last_name}} {{user.first_name}}
+            {{else iff obj.value '==' 'email'}}
+            {{user.email}}
+            {{else}}
+            ***************
+            {{/iff}}
+        </div>
+    </div>
+    <div class="text-dodger-blue link-btn-blue" data-name="changing" type="{{obj.type}}">
+        <div class="common-text common-text--medium">Изменить</div>
+    </div>
+</div>
