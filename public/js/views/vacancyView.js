@@ -28,6 +28,7 @@ export default class profileView extends View {
         const showResponsesButton = document.querySelector('[data-name="responses"]');
         const showDescriptionButton = document.querySelector('[data-name="description"]');
         const refactorMainButton = document.querySelector('[data-name="refactoring"]');
+        const refactorDescButton = document.querySelector('[data-name="desc-refactoring"]');
         const cancelRefactoring = document.querySelector('[data-name="cancel-refactoring"]');
         const sendRefactoringButton = document.querySelector('[data-name="send-refactoring"]');
 
