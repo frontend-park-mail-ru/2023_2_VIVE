@@ -1,7 +1,17 @@
-<div class="double-input">
-    <div class="input__title {{class_title}}">{{obj.title}}</div>
+<label class="double-input {{#if error_first}}input_error{{else if error_second}}input_error{{/if}}">
+    <div class="input__title {{class.class}}">{{obj.title}}</div>
     <div class="dobule-input__inputes">
-        <input class="input__field {{obj.class}}" placeholder="{{ obj.placeholderFirst }}" name="{{obj.nameOn}}">
-        <input class="input__field {{obj.class}}" placeholder="{{ obj.placeholderSecond }}" name="{{obj.nameTo}}">
+        <div class="dobule-input__inputes-frame">
+                <input class="input__field {{obj.class}}" placeholder="{{ obj.first.placeholder }}" name="{{obj.first.name}}" value="{{value_one}}">
+                {{#if error_first}} 
+                <div class="input_error__msg">{{error_first}}</div>
+                {{/if}}
+        </div>
+        <div class="dobule-input__inputes-frame">
+            <input class="input__field {{obj.class}}" placeholder="{{ obj.second.placeholder }}" name="{{obj.second.name}}" value="{{value_second}}">
+            {{#if error_second}} 
+            <div class="input_error__msg">{{error_second}}</div>
+            {{/if}}
+        </div>
     </div>
-</div>
+</label>

@@ -86,6 +86,7 @@ class Router {
    * @returns {Promise<void>} - Промис, который разрешается, когда навигация успешно завершена (URL существует)
    */
   async goToLink(url) {
+    url = (url == '/') ? '/vacs' : url;
     await this.urlWork(url);
     history.pushState(null, null, url);
   }
@@ -100,8 +101,6 @@ class Router {
 
   async urlWork(url) {
     this.deleteLastRender();
-
-    url = (url == '/') ? '/vacs' : url;
 
     const matchedRoute = await this.parsingUrlOnMathced(url);
     if (!matchedRoute) {

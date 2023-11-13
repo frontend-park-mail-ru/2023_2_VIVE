@@ -1,12 +1,15 @@
-<div class="full-job-info">
+<div class="full-job-info {{#if data}}d-none{{/if}}">
     {{#if vacancy.description}}
     <div class="common-text common-text--regular">
-    {{vacancy.description}}
+    {{{vacancy.description}}}
     </div>
-    {{#iff role '==' 'employer'}}
-        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium d-none">
+    {{#iff user.role '==' 'employer'}}
+    {{#iff user.employer_id '==' vacancy.employer_id}}
+        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
+        data-name="desc-refactoring">
             Редактировать подробное описание
         </div>
+    {{/iff}}
     {{/iff}}
     {{/if}}
         {{!-- <div class="full-job-info__main-text">

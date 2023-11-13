@@ -1,0 +1,46 @@
+{{#iff user.employer_id '==' vacancy.employer_id}}
+<div class="full-job-info__refactor {{#if data}}{{else}}d-none{{/if}}">
+    {{#each (array
+    (object 
+    name="description"
+    placeholder="Описание"
+    title="Введите описание")
+    )}}
+
+    {{#if ../data.description}}
+        {{> input_textarea (object obj=this
+        rows=15
+        class=(object
+        block="res__form__field"
+        title="res__form__input__title header-text header-text--fourth text-form-active"
+        input="res__form__input forms-placeholder"
+        )
+        error=(lookup ../errors 'description')
+        value=../data.description
+        )}}
+    {{else}}
+        {{> input_textarea (object obj=this
+        rows=15
+        class=(object
+        block="res__form__field"
+        title="res__form__input__title header-text header-text--fourth text-form-active"
+        input="res__form__input forms-placeholder"
+        )
+        error=(lookup ../errors this.name)
+        value=../vacancy.description
+        )}}
+    {{/if}}
+
+    {{/each}}
+    <div class="vacancie-refactor__btns">
+        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
+        data-name="cancel-desc-refactoring">
+            Отменить изменения
+        </div>
+        <div class="text-light-title setting-inpute__button setting-inpute__button--primary common-text common-text--medium"
+        data-name="send-desc-refactoring">
+            Сохранить изменения
+        </div>
+    </div>
+</div>
+{{/iff}}
