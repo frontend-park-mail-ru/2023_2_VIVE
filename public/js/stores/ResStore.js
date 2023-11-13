@@ -362,57 +362,19 @@ class ResStore extends Store {
     }
 
     async getResume(id) {
-        console.log("...id:", id);
-        return {
-            "profession_name": "Программист",
-            "first_name": "Илья",
-            "last_name": "Алешин",
-            "middle_name": "Дмитриевич",
-            "birthday": "2003-05-18",
-            "city": "Москва",
-            "gender": "male",
-            "education_level": "higher",
-            "institutions": [
-                {
-                    "name": "Лицей 1571",
-                    "major_field": "математика",
-                    "graduation_year": "2025"
-                },
-                {
-                    "name": "Лицей ниу вшэ",
-                    "major_field": "физика",
-                    "graduation_year": "2030"
-                }
-            ],
-            "companies": [
-                {
-                    "name": "ВК",
-                    "job_position": "Главный",
-                    "start_date": "0013-03-21",
-                    "end_date": "0023-04-23",
-                    "description": "крутой"
-                },
-                {
-                    "name": "яндекс",
-                    "job_position": "очень важный",
-                    "start_date": "0423-03-04",
-                    "description": "очень крутой"
-                }
-            ],
-            "description": "люблю пельмени и вареники"
-        }
-        // try {
-        //     const resp = await APIConnector.get(
-        //         BACKEND_SERVER_URL + '/current_user/cvs/' + id);
-        //     const data = await resp.json();
-        //     console.log("received(resume): ", data);
-        //     return data;
-        //     // router.goToLink('/resume/'+data.id);
-        // } catch (err) {
+        console.log("...id:", id); 
+        try {
+            const resp = await APIConnector.get(
+                BACKEND_SERVER_URL + '/current_user/cvs/' + id);
+            const data = await resp.json();
+            console.log("received(resume): ", data);
+            return data;
+            // router.goToLink('/resume/'+data.id);
+        } catch (err) {
             
-        //     console.error(err);
-        //     return {};
-        // }
+            console.error(err);
+            return {};
+        }
     }
 
     get final_data() {
