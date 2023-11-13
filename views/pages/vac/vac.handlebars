@@ -18,11 +18,14 @@
             <div class="view__main">
                 {{> vac_refactoring 
                 vacancy=vacancy
+                user=user
                 errors=(lookup errors 'main')
+                data=(lookup errors 'data-main')
                 }}
                 {{> vac_title
                 user=user
                 vacancy=vacancy
+                data=(lookup errors 'data-main')
                 }}
                 {{#iff user.role '==' 'employer'}}
                     {{#iff state '==' 'description'}}

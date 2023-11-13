@@ -12,7 +12,6 @@ class VacancyStore extends Store {
         this.state = 'description';
         this.vacancy = {};
         this.errors = {};
-        this.form_error = null;
     }
 
     pageFormFieldMeta(type) {
@@ -68,7 +67,6 @@ class VacancyStore extends Store {
                     Object.assign(this.errors["data-" + type], { [key]: form[key] });
                 }
             }
-            console.log(this.errors);
             return false;
         }
     }
@@ -103,8 +101,6 @@ class VacancyStore extends Store {
             if ("salary_upper_bound" in newVacancyData) {
                 newVacancyData["salary_upper_bound"] = Number(newVacancyData["salary_upper_bound"]);
             }
-
-            console.log(newVacancyData);
 
             try {
                 const resp = await APIConnector.put(

@@ -7,6 +7,10 @@ export function registerHelpers() {
     return num1 - num2;
   });
 
+  Handlebars.registerHelper('or', function(a, b, options) {
+    return a || b ? options.fn(this) : options.inverse(this);
+  });
+
   Handlebars.registerHelper('and', function() {
     const arr = Array.from(arguments).slice(0, arguments.length-1);
     console.log(arr);

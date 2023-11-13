@@ -1,4 +1,4 @@
-<div class="vacancie">
+<div class="vacancie {{#if data}}d-none{{/if}}">
     <div class="header-text header-text--first text-dark-title">
         {{vacancy.name}}
     </div>
@@ -25,7 +25,7 @@
         </div>
     </div>
         {{#iff user.role '==' 'employer'}}
-        {{!-- {{#iff user.id '==' vacancy.employer_id}} --}}
+        {{#iff user.employer_id '==' vacancy.employer_id}}
             <div class="vacancie__btns">
                 <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
                 data-name="refactoring">
@@ -38,7 +38,7 @@
                     Просмотреть описание
                 </div>
             </div>
-        {{!-- {{/iff}} --}}
+        {{/iff}}
         {{else iff user.role '==' 'applicant'}}
             <div class="vacancie__btns">
                 <div class="text-dodger-blue setting-inpute__button common-text common-text--medium">
