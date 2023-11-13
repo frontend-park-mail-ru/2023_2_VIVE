@@ -12,6 +12,7 @@
         error=(lookup ../errors this.name)
         class=(object class="res__form__input__title header-text header-text--fourth text-form-active")
         )}}
+        
         {{/each}}
 
         {{#each (array
@@ -36,16 +37,15 @@
             <div class="vacancie-refactor__input-radio">
             {{#each 
             (array
-            (object text="Не выбирать" value="-1")
-            (object text="Нет опыта" value="0")
-            (object text="От 1 года и до 3-х лет" value="1")
-            (object text="От 3-х до 6-ти лет" value="2")
-            (object text="Более 6 лет" value="3")
+            (object text="Не выбирать" value="none")
+            (object text="Нет опыта" value="no_experience")
+            (object text="От 1 года и до 3-х лет" value="one_three_years")
+            (object text="От 3-х до 6-ти лет" value="three_six_years")
+            (object text="Более 6 лет" value="six_more_years")
             )
             }}
 
-            {{#if @root.vacancy.experience_lower_bound}}
-                {{#iff this.value '==' @root.vacancy.experience_lower_bound}}
+            {{#iff this.value '==' @root.vacancy.experience}}
                 {{> input_radio (object text=this.text
                 attrs=(object
                 name="experience"
@@ -57,7 +57,7 @@
                 input="js-education-level"
                 )
                 )}}
-                {{else}}
+            {{else}}
                 {{> input_radio (object text=this.text
                 attrs=(object
                 name="experience"
@@ -69,33 +69,7 @@
                 input="js-education-level"
                 )
                 )}}
-                {{/iff}}
-            {{else}}
-                {{#iff this.value '==' '-1'}}
-                {{> input_radio (object text=this.text
-                attrs=(object
-                name="experience"
-                value=this.value
-                checked='checked'
-                )
-                class=(object
-                block="res__form__input__title header-text header-text--fourth text-form-active"
-                input="js-education-level"
-                )
-                )}}
-                {{else}}
-                {{> input_radio (object text=this.text
-                attrs=(object
-                name="experience"
-                value=this.value
-                )
-                class=(object
-                block="res__form__input__title header-text header-text--fourth text-form-active"
-                input="js-education-level"
-                )
-                )}}
-                {{/iff}}
-            {{/if}}
+            {{/iff}}
 
             {{/each}}
             </div>
@@ -106,7 +80,7 @@
             <div class="vacancie-refactor__input-radio">
             {{#each 
             (array
-            (object text="Не выбирать" value="-1")
+            (object text="Не выбирать" value="none")
             (object text="Полная занятость" value="full-time")
             (object text="Частичная занятость" value="part-time")
             (object text="Проектная работа или разовое задание" value="one-time")
@@ -115,8 +89,7 @@
             )
             }}
 
-            {{#if @root.vacancy.employment}}
-                {{#iff this.value '==' @root.vacancy.employment}}
+            {{#iff this.value '==' @root.vacancy.employment}}
                 {{> input_radio (object text=this.text
                 attrs=(object
                 name="employment"
@@ -128,32 +101,7 @@
                 input="js-education-level"
                 )
                 )}}
-                {{else}}
-                {{> input_radio (object text=this.text
-                attrs=(object
-                name="employment"
-                value=this.value
-                )
-                class=(object
-                block="res__form__input__title header-text header-text--fourth text-form-active"
-                input="js-education-level"
-                )
-                )}}
-                {{/iff}}
             {{else}}
-                {{#iff this.value '==' '-1'}}
-                {{> input_radio (object text=this.text
-                attrs=(object
-                name="employment"
-                value=this.value
-                checked='checked'
-                )
-                class=(object
-                block="res__form__input__title header-text header-text--fourth text-form-active"
-                input="js-education-level"
-                )
-                )}}
-                {{else}}
                 {{> input_radio (object text=this.text
                 attrs=(object
                 name="employment"
@@ -164,8 +112,7 @@
                 input="js-education-level"
                 )
                 )}}
-                {{/iff}}
-            {{/if}}
+            {{/iff}}
 
             {{/each}}
             </div>
@@ -183,6 +130,7 @@
         error=(lookup ../errors this.name)
         class=(object class="res__form__input__title header-text header-text--fourth text-form-active")
         )}}
+
         {{/each}}
     </div>
     <div class="vacancie-refactor__btns">

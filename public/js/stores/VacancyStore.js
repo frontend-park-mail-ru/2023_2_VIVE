@@ -1,6 +1,7 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import { validateForm } from '../modules/constraints.js';
+import router from '../modules/router.js';
 import { getMetaPlusDataObj, isObjEmpty } from '../utils.js';
 import Store from "./Store.js";
 
@@ -88,9 +89,37 @@ class VacancyStore extends Store {
 
     async sendData(form, type) {
         if (type === 'main') {
+            let newVacancyData = { ...this.vacancy};
+
+            for (const key in form) {
+                newVacancyData[key] = form[key];
+            }
+
+            if ("salary_lower_bound" in newVacancyData) {
+                newVacancyData["salary_lower_bound"] = Number(newVacancyData["salary_lower_bound"]);
+            }
+
+            if ("salary_upper_bound" in newVacancyData) {
+                newVacancyData["salary_upper_bound"] = Number(newVacancyData["salary_upper_bound"]);
+            }
+
+            console.log(newVacancyData);
+
+            try {
+                const resp = await APIConnector.put(
+                    BACKEND_SERVER_URL + '/vacancies/' + newVacancyData["id"],
+                    newVacancyData,
+                );
+
+                router.goToLink("/vacancy/" + newVacancyData["id"]);
+                return true;
+            } catch (error) {
+                console.log(error);
+                return false;
+            }
 
         } else {
-
+            return false;
         }
     }
 

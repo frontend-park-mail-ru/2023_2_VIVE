@@ -1,7 +1,4 @@
-import { BACKEND_SERVER_URL } from '../../../config/config.js';
-import APIConnector from '../modules/APIConnector.js';
 import router from '../modules/router.js';
-import User from '../stores/UserStore.js';
 import vacancyStore from '../stores/VacancyStore.js';
 import View from './view.js';
 
