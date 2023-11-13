@@ -36,8 +36,7 @@ class Router {
       '/vacancy/:id': 'vacancy',
       '/vacancy/:id/description': 'vacancy',
       '/vacancy/:id/responses': 'vacancy',
-      // '/resume/:id': 'resView',
-      '/resume_view': 'resView',
+      '/resume/:id': 'resView',
       '/vacs': 'vacs',
     };
 
@@ -63,7 +62,7 @@ class Router {
     '/profile/resumes', 
     '/profile/responses', 
     '/vacancy/:id/responses',
-    // '/resume_creation',
+    '/resume_creation',
     ];
 
     this.denyWithAuth = [

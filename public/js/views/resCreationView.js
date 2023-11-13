@@ -40,7 +40,10 @@ export default class resCreationView extends View {
     this.addEventListeners();
     this.addEventListenersToPage();
   }
-
+  
+  remove() {
+    resStore.clear();
+  }
 
   addEventListeners() {
     this.form = document.querySelector('.rescr__form')

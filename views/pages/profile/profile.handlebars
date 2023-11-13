@@ -49,7 +49,7 @@
     {{else iff state '==' 'responses'}}
     {{> profile_responses}}
     {{else iff state '==' 'resumes'}}
-    {{> profile_resumes}}
+    {{> profile_resumes (object data=data)}}
     {{else iff state '==' 'vacancies'}}
     {{> profile_vacs }}
     {{else}}

@@ -26,12 +26,17 @@ export default class resViewView extends View {
     return resStore.errors;
   }
 
+  async updateInnerData(url_data) {
+    // url_data = {id:12};
+    return await resStore.loadResume(url_data.id);
+
+  }
+
   /**
    * Асинхронный метод для отображения страницы
    */
-  async render(url_data) {
-    url_data = {id:1};
-    resStore.loadResume(url_data.id);
+  async render() {
+    
     this.rerender();
   }
 
@@ -41,6 +46,10 @@ export default class resViewView extends View {
     document.querySelector('main').innerHTML = template(resStore.getContext());
 
     this.addEventListeners();
+  }
+
+  remove() {
+    resStore.clear();
   }
 
   addEventListeners() {
