@@ -3,8 +3,8 @@
     <div class="common-text common-text--regular">
     {{vacancy.description}}
     </div>
-    {{#iff role '==' 'employer'}}
-        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium d-none">
+    {{#iff user.role '==' 'employer'}}
+        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium">
             Редактировать подробное описание
         </div>
     {{/iff}}

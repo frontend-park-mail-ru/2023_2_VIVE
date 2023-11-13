@@ -45,6 +45,14 @@ x
   gap: 3px;
 }
 
+.dobule-input__inputes-frame {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+}
+
 .dobule-input__inputes {
   display: flex;
   align-items: flex-end;

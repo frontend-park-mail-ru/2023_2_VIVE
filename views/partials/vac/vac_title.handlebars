@@ -1,0 +1,54 @@
+<div class="vacancie">
+    <div class="header-text header-text--first text-dark-title">
+        {{vacancy.name}}
+    </div>
+    <div class="vacancie__additional-info">
+        <div class="add-info">
+            <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
+            <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.salary_lower_bound}}{{#if vacancy.salary_upper_bound}}от {{vacancy.salary_lower_bound}} до {{vacancy.salary_upper_bound}} тыс. рублей{{else}}от {{vacancy.salary_lower_bound}} тыс. рублей{{/if}}{{else if vacancy.salary_upper_bound}}до {{vacancy.salary_upper_bound}} тыс. рублей{{else}}Не указана{{/if}}</div>
+        </div>
+        <div class="add-info">
+            <img class="add-info__img" src="../../../../../public/images/img/stars_20.png">
+            <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.experience_lower_bound}}{{#if vacancy.experience_upper_bound}}{{vacancy.experience_lower_bound}}-{{vacancy.experience_upper_bound}} года{{else}}{{vacancy.salary_lower_bound}} года{{/if}}{{else if vacancy.experience_upper_bound}}{{vacancy.experience_upper_bound}} года{{else}}Не указана{{/if}}</div>
+        </div>
+        <div class="add-info">
+            <img class="add-info__img" src="../../../../../public/images/img/clock_outline_20.png">
+            <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.employment}}{{vacancy.employment}}{{else}}Не указано{{/if}}</div>
+        </div>
+        <div class="add-info">
+            <img class="add-info__img" src="../../../../../public/images/img/location_map_outline_20.png">
+            <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.location}}{{vacancy.location}}{{else}}Не указано{{/if}}</div>
+        </div>
+        <div class="add-info">
+            <img class="add-info__img" src="../../../../../public/images/img/calendar_check_outline_20.png">
+            <div class="common-text common-text--medium text-dark-regular">2 дня</div>
+        </div>
+    </div>
+    <div class="vacancie__btns">
+        {{#iff user.role '==' 'employer'}}
+            <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
+            data-name="refactoring">
+                Редактировать
+            </div>
+            <div class="link-btn link-btn_blue-without-bd  common-text common-text--medium {{#iff state '==' 'responses'}}d-none{{/iff}}" data-name="responses">
+                Просмотреть отклики
+            </div>
+            <div class="link-btn link-btn_blue-without-bd common-text common-text--medium {{#iff state '==' 'description'}}d-none{{/iff}}" data-name="description">
+                Просмотреть описание
+            </div>
+        {{else iff user.role '==' 'applicant'}}
+            <div class="text-dodger-blue setting-inpute__button common-text common-text--medium">
+                Откликнуться
+            </div>
+            <div class="link-btn-blue--bg common-text common-text--medium text-light-title">
+                Задать вопрос
+            </div>
+            <div class="text-dodger-blue setting-inpute__button common-text common-text--medium">
+                <img class="add-info__img" src="../../../public/images/img/heart_settings_outline_20-01.png">
+            </div>
+            <div class="text-dodger-blue setting-inpute__button common-text common-text--medium">
+                <img class="add-info__img" src="../../../public/images/img/hide_outline_20-01.png">
+            </div>
+        {{/iff}}
+    </div>
+</div>
