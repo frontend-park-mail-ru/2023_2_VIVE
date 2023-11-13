@@ -48,7 +48,7 @@ export default class resCreationView extends View {
     const form_input_btns = document.querySelectorAll('.res__form__input');
     form_input_btns.forEach(form_input => {
       form_input.addEventListener('blur', event => {
-        if (resStore.saveInput(form_input.name, form_input.value)) {
+        if (resStore.checkAndSaveInput(form_input.name, form_input.value)) {
           this.render();
         }
       })
@@ -90,18 +90,18 @@ export default class resCreationView extends View {
   }
 
   addEventListenersToPage() {
-    if (this.page == 1) {
+    if (this.page == 0) {
       const gender_btns = document.querySelectorAll(".js-gender");
       gender_btns.forEach(gender =>
         gender.addEventListener('change', event => {
           event.preventDefault();
-          if (resStore.saveInput(gender.name, gender.value)) {
+          if (resStore.checkAndSaveInput(gender.name, gender.value)) {
             this.render();
           }
         })
       )
     }
-    if (this.page == 2) {
+    if (this.page == 1) {
       const edu_level_btns = document.querySelectorAll(".js-education-level");
       edu_level_btns.forEach(edu_level =>
         edu_level.addEventListener('change', event => {
@@ -134,7 +134,7 @@ export default class resCreationView extends View {
         }
       }
     }
-    else if (this.page == 3) {
+    else if (this.page == 2) {
       const is_exp = document.querySelector(".js-name-is-experience");
       is_exp.addEventListener('change', event => {
         if (resStore.expPageIsExp(is_exp.checked)) {

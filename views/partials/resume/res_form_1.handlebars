@@ -1,66 +1,80 @@
 <div class="form">
-
-  {{#each (array
-  (object title="Профессия" name="profession_name" placeholder="Профессия")
-  (object title="Имя" name="first_name" placeholder="Имя" )
-  (object title="Фамилия" name="last_name" placeholder="Фамилия")
-  (object title="Отчество" name="middle_name" placeholder="Отчество")
-  )}}
-
-  {{> input (object obj=this
-  value=(lookup ../data this.name)
-  class=(object
-  title="res__form__input__title"
-  input="res__form__input forms-placeholder"
-  block="res__form__field"
-  )
-  name=this.name
-  error=(lookup ../errors this.name))}}
-
-  {{/each}}
-
+  <div class="res__form__input__title">Уровень образования</div>
   <div class="res__form__field">
-    <div class="res__form__input__title">Пол</div>
-    <div class=" res__form__input_radio_flex">
-      {{#each (array
-      (object text="Мужской" value="male")
-      (object text="Женский" value="female")
-      )}}
-      {{> input_radio (object
-      text=this.text
-      class=(object
-      block="mr-10"
-      input="js-gender"
-      )
-      attrs=(object
-      name="gender"
-      value=this.value 
-      )
-      checked=(iffs (lookup ../data "gender") '==' this.value true false)
-      error=(lookup ../errors "gender"))}}
-      {{/each}}
-    </div>
-    {{#if (lookup errors "gender")}}
-    <div class="input_error__msg">{{lookup errors "gender"}}</div>
+    {{#each (array
+    (object text="Нет образования" value="nothing")
+    (object text="Среднее" value="secondary")
+    (object text="Среднее специальное" value="special_secondary")
+    (object text="Неоконченное высшее" value="unfinished_higher")
+    (object text="Высшее" value="higher")
+    (object text="Бакалавр" value="bachelor")
+    (object text="Магистр" value="master")
+    (object text="Кандидат наук" value="candidate")
+    (object text="Доктор наук" value="doctor")
+    )}}
+
+    {{> input_radio (object text=this.text
+    attrs=(object
+    name="education_level"
+    value=this.value
+
+    )
+    class=(object
+    block="res__form__input_radio_field"
+    input="js-education-level"
+    )
+    checked=(iffs (lookup ../data "education_level") '==' this.value true false)
+    error=(lookup ../errors "education_level")
+    )}}
+
+    {{/each}}
+    {{#if (lookup errors "education_level")}}
+    <div class="input_error__msg">{{lookup errors "education_level"}}</div>
     {{/if}}
   </div>
 
+  {{#each data.institutions }}
 
-  {{#each (array
-  (object title="Дата рождения" name="birthday" type="date")
-  (object title="Город" name="city" placeholder="Город")
+  {{#iff ../data.institutions.length '>' 1}}
+  {{> link-btn (object
+  text="- Удалить учебное заведение"
+  class="js-del-institute res__form_edu__add link-btn_text_red"
+  data=(object num=@index)
   )}}
 
+  {{/iff}}
+
+  {{#each (array
+  (object title="Учебное заведение" name="name" placeholder="Учебное заведение")
+  (object title="Специализация" name="major_field" placeholder="Специализация")
+  (object title="Год окончания" name="graduation_year" placeholder="Год окончания")
+  )}}
+
+  {{lookup ../../errors.institutions this.name}}
+
   {{> input (object obj=this
+  name=(concat this.name '#' "institutions" '#' @../index)
   class=(object
-  title="res__form__input__title"
-  input="res__form__input forms-placeholder"
   block="res__form__field"
+  input="res__form__input forms-placeholder"
+  title="res__form__input__title"
   )
-  name=this.name
-  value=(lookup ../data this.name)
-  error=(lookup ../errors this.name))}}
+  error=(lookup (lookup ../../errors.institutions @../index) this.name)
+  value=(lookup ../this this.name)
+  )}}
 
   {{/each}}
+
+  {{#iff @index '<' (sum (array ../data.institutions.length -1))}} <div class="res__form_edu__splitter">
+</div>{{/iff}}
+
+{{/each}}
+
+{{#iff data.institutions.length '>=' 1}}
+{{> link-btn (object
+text="+ Добавить учебное заведение"
+class="js-add-institute res__form_edu__add link-btn_text_blue"
+)}}
+{{/iff}}
 
 </div>

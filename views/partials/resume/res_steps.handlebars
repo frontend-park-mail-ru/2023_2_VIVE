@@ -1,14 +1,14 @@
 <div class="rescr__steps">
   {{#each steps}}
   {{#if @index}}
-  <svg class="rescr__steps__splitter {{#iff @index '<' ../page}} rescr__steps__splitter_done {{/iff}}" xmlns="http://www.w3.org/2000/svg" width="23" height="89" viewBox="0 0 23 89"
+  <svg class="rescr__steps__splitter {{#iff @index '<=' ../page}} rescr__steps__splitter_done {{/iff}}" xmlns="http://www.w3.org/2000/svg" width="23" height="89" viewBox="0 0 23 89"
     fill="none">
     <path
       d="M10.4393 88.0607C11.0251 88.6464 11.9749 88.6464 12.5607 88.0607L22.1066 78.5147C22.6924 77.9289 22.6924 76.9792 22.1066 76.3934C21.5208 75.8076 20.5711 75.8076 19.9853 76.3934L11.5 84.8787L3.01472 76.3934C2.42893 75.8076 1.47919 75.8076 0.893398 76.3934C0.307611 76.9792 0.307611 77.9289 0.893398 78.5147L10.4393 88.0607ZM10 0L10 87H13L13 0L10 0Z"
       fill="#E3E3E3" />
   </svg>
   {{/if}}
-  <div class="rescr__steps__item {{#iff @index '<' ../page}} rescr__steps__item_done {{/iff}}">
+  <div class="rescr__steps__item {{#iff @index '<=' ../page}} rescr__steps__item_done {{/iff}}">
     <div class="rescr__steps__item__number">
       {{sum (array @index 1)}}
     </div>

@@ -1,103 +1,18 @@
-<div class="form">
-
-  <label class="res__form__field form__label_flex">
-    {{> input_checkbox (object
-    text="У меня есть опыт работы"
-    class=(object
-    input="js-name-is-experience"
-    )
-    attrs=(ifs page_data.is_exp (object checked="true") (object)))}}
-  </label>
-
-  {{#each data.companies }}
-
-  {{#iff ../data.companies.length '>' 1}}
-  {{> link-btn (object
-  text="- Удалить место работы"
-  class="js-del-company res__form_edu__add link-btn_text_red"
-  data=(object num=@index)
-  )}}
-
-  {{/iff}}
-
-  {{#each (array
-  (object title="В какой компании вы работали" name="name" placeholder="Компания")
-  (object title="На какой должности" name="job_position" placeholder="Должность")
-  (object title="Начало работы" name="start_date" type="date")
-  )}}
-
-  {{> input (object obj=this
-  class=(object
-  block="res__form__field"
-  title="res__form__input__title"
-  input="res__form__input forms-placeholder"
-  )
-  name=(concat this.name '#' "companies" '#' @../index)
-  error=(lookup (lookup ../../errors.companies @../index) this.name)
-  value=(lookup ../this this.name)
-  )}}
-
-  {{/each}}
-
-  {{#if (lookup ../page_data.is_end_date @index) }}
-
-  {{#each (array
-  (object title="Год окончания" name="end_date" placeholder="Год окончания" type="date")
-  )}}
-
-  {{> input (object obj=this
-  class=(object
-  block="res__form__field"
-  title="res__form__input__title"
-  input="js-name-expirience_end_date res__form__input forms-placeholder"
-  )
-  name=(concat this.name '#' "companies" '#' @../index)
-  error=(lookup (lookup ../../errors.companies @../index) this.name)
-  value=(lookup ../this this.name)
-  )}}
-
-  {{/each}}
-
-  {{/if}}
-
-  <label class="res__form__field form__label_flex">
-    {{> input_checkbox (object
-    text="Добавить дату окончания"
-    class=(object
-    input="js-name-is-expirience_end_date"
-    )
-    data=(object num=@index)
-    attrs=(ifs (lookup ../page_data.is_end_date @index) (object checked="true") (object)))}}
-  </label>
-
-  {{#each (array
-  (object title="Расскажите о ваших обязанностях и достижениях" name="description" placeholder="Достижения и
-  обязанности"))}}
-
-  {{> input (object obj=this
-  class=(object
-  block="res__form__field"
-  title="res__form__input__title"
-  input="res__form__input forms-placeholder"
-  )
-  name=(concat this.name '#' "companies" '#' @../index)
-  error=(lookup (lookup ../../errors.companies @../index) this.name)
-  value=(lookup ../this this.name)
-  )}}
-
-  {{/each}}
-
-  {{#iff @index '<' (sum (array ../data.companies.length -1))}} <div class="res__form_edu__splitter">
-</div>{{/iff}}
-
-{{/each}}
-
-{{#iff data.companies.length '>=' 1}}
-{{> link-btn (object
-text="+ Добавить место работы"
-class="js-add-company res__form_edu__add link-btn_text_blue"
+{{#each (array
+(object 
+name="description"
+placeholder="Расскажите о своих качествах, знаниях, увлечениях, которые , как вам кажется, будут полезны работодателю"
+title="Расскажите немного о себе (ваше хобби, личные качества, любая дополнительная информация)")
 )}}
-{{/iff}}
 
-
-</div>
+{{> input_textarea (object obj=this
+rows=15
+class=(object
+block="res__form__field"
+title="res__form__input__title"
+input="res__form__input forms-placeholder"
+)
+error=(lookup ../errors this.name)
+value=(lookup ../data this.name)
+)}}
+{{/each}}

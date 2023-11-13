@@ -12,7 +12,16 @@ class ResStore extends Store {
     }
 
     clear() {
-        this.page = 1;
+        this.page = 0;
+        //========== Edit =======
+        this.is_edit = [
+            false,
+            false,
+            false,
+            false,
+        ]
+
+        //=======================
         this.pages_errors = [
             {},
             {
@@ -34,20 +43,34 @@ class ResStore extends Store {
             },
             {},
         ];
-        this.form_data = {
-            "gender": "male",
-            "education_level": "nothing",
-            "institutions": [],
-            "companies": [],
-        };
+        this.forms_data = [
+            {
+                "gender": "male",
+            },
+            {
+                "education_level": "nothing",
+                "institutions": [],
+            },
+            {
+                "companies": [],
+            },
+            {
+            }
+        ];
+
+        
+    }
+
+    get form_data() {
+        return this.forms_data[this.page];
     }
 
     get page_data() {
-        return this.pages_data[this.page - 1];
+        return this.pages_data[this.page];
     }
 
     get page_errors() {
-        return this.pages_errors[this.page - 1];
+        return this.pages_errors[this.page];
     }
 
     pageFormFieldsMeta() {
@@ -136,63 +159,10 @@ class ResStore extends Store {
                 required: true,
             },
         },
-        ][this.page - 1];
+        ][this.page];
     }
 
-    loadResume(id) {
-        this.form_data = {
-            "profession_name": "Программист",
-            "first_name": "Илья",
-            "last_name": "Алешин",
-            "middle_name": "Дмитриевич",
-            "birthday": "2003-05-18",
-            "city": "Москва",
-            "gender": "male",
-            "education_level": "higher",
-            "institutions": [
-                {
-                    "name": "Лицей 1571",
-                    "major_field": "математика",
-                    "graduation_year": "2025"
-                },
-                {
-                    "name": "Лицей ниу вшэ",
-                    "major_field": "физика",
-                    "graduation_year": "2030"
-                }
-            ],
-            "companies": [
-                {
-                    "name": "ВК",
-                    "job_position": "Главный",
-                    "start_date": "0013-03-21",
-                    "end_date": "0023-04-23",
-                    "description": "крутой"
-                },
-                {
-                    "name": "яндекс",
-                    "job_position": "очень важный",
-                    "start_date": "0423-03-04",
-                    "description": "очень крутой"
-                }
-            ],
-            "description": "люблю пельмени и вареники"
-        }
-    }
 
-    loadPage(page) {
-        if (page == 3) {
-            this.loadExp();
-        }
-    }
-
-    loadExp() {
-        this.page_data.is_exp = this.form_data['companies'].length != 0;
-        this.form_data['companies'].forEach(function(company) {
-            console.log(this);
-            this.page_data.is_end_date.push(company['end_date'] != undefined);
-        }.bind(this));
-    }
 
     getContext() {
         return {
@@ -205,6 +175,10 @@ class ResStore extends Store {
             data: this.form_data,
             page_data: this.page_data,
             form_error: this.form_error,
+
+            //========editing
+            is_edit: this.is_edit,
+            forms_data: this.forms_data,
         };
     }
 
@@ -230,6 +204,8 @@ class ResStore extends Store {
 
     eduPageDelForm(num) {
         this.form_data["institutions"].splice(num, 1);
+        console.log(this.page)
+        console.log(this.page_errors);
         this.page_errors["institutions"].splice(num, 1);
         return true;
     }
@@ -287,16 +263,13 @@ class ResStore extends Store {
 
     // ============ Save, check, send
 
-    saveInput(input_name, input_value) {
+    checkInput(input_name, input_value) {
         const arr = input_name.split('#')
         const name = arr[0];
-        let data = this.form_data;
         let errors = this.page_errors;
         for (let i = 1; i < arr.length; i += 2) {
-            data = data[arr[i]][arr[i + 1]];
             errors = errors[arr[i]][arr[i + 1]];
         }
-        data[name] = input_value;
 
         const validate_obj = {};
         validate_obj[name] = input_value;
@@ -311,10 +284,27 @@ class ResStore extends Store {
         return false;
     }
 
+    saveInput(input_name, input_value) {
+        const arr = input_name.split('#')
+        const name = arr[0];
+        let data = this.form_data;
+        for (let i = 1; i < arr.length; i += 2) {
+            data = data[arr[i]][arr[i + 1]];
+        }
+        data[name] = input_value;
+    }
+
+    checkAndSaveInput(input_name, input_value) {
+        const is_render = this.checkInput(input_name, input_value);
+        this.saveInput(input_name, input_value);
+        
+        return is_render
+    }
+
     saveForm(form_data) {
         let is_render = false;
         for (const key in form_data) {
-            if (this.saveInput(key, form_data[key])) {
+            if (this.checkAndSaveInput(key, form_data[key])) {
                 is_render = true;
             }
         }
@@ -330,8 +320,12 @@ class ResStore extends Store {
 
     async sendForms() {
         console.log("sending...");
-        console.log(this.form_data);
-        
+        const sending_form = {};
+        for (const form_data of this.forms_data) {
+            Object.assign(sending_form, form_data);
+        }
+        console.log(sending_form);
+        //TODO
         // try {
         //     const resp = await APIConnector.post(
         //         BACKEND_SERVER_URL + '/current_user/cvs',
@@ -342,13 +336,14 @@ class ResStore extends Store {
         //     console.error(err);
         // }
 
-        this.clear(); 
+
+        // this.clear();
     }
 
 
-    //================================================
+    //==================== EDITING ============================
 
-        // async updateInnerData(data) {
+    // async updateInnerData(data) {
     //     try {
     //         const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/current_user/cvs/${data['id']}`);
     //         this.data = await resp.json();
@@ -358,10 +353,110 @@ class ResStore extends Store {
     //     }
     // }
 
+    loadResume(id) {
+        this.finals_data = [];
+        for (let i = 0; i < this.forms_data.length; ++i) {
+            this.forms_data[i] = {
+                "profession_name": "Программист",
+                "first_name": "Илья",
+                "last_name": "Алешин",
+                "middle_name": "Дмитриевич",
+                "birthday": "2003-05-18",
+                "city": "Москва",
+                "gender": "male",
+                "education_level": "higher",
+                "institutions": [
+                    {
+                        "name": "Лицей 1571",
+                        "major_field": "математика",
+                        "graduation_year": "2025"
+                    },
+                    {
+                        "name": "Лицей ниу вшэ",
+                        "major_field": "физика",
+                        "graduation_year": "2030"
+                    }
+                ],
+                "companies": [
+                    {
+                        "name": "ВК",
+                        "job_position": "Главный",
+                        "start_date": "0013-03-21",
+                        "end_date": "0023-04-23",
+                        "description": "крутой"
+                    },
+                    {
+                        "name": "яндекс",
+                        "job_position": "очень важный",
+                        "start_date": "0423-03-04",
+                        "description": "очень крутой"
+                    }
+                ],
+                "description": "люблю пельмени и вареники"
+            }
+            this.finals_data.push({});
+            Object.assign(this.finals_data[i], this.forms_data[i]);
+            
+        }
+        
+    }
 
-    
+    get final_data() {
+        return this.finals_data[this.page];
+    }
 
+    loadPage() {
+        if (this.page == 1) {
+            this.loadEdu()
+        }
+        if (this.page == 2) {
+            this.loadExp();
+        }
+    }
 
+    loadEdu() {
+        console.log(this.page_errors);
+        this.form_data['institutions'].forEach(function (inst) {
+            this.page_errors['institutions'].push({});
+        }.bind(this));
+        console.log(this.pages_errors);
+    }
+
+    loadExp() {
+        this.page_data.is_exp = this.form_data['companies'].length != 0;
+        this.form_data['companies'].forEach(function (company) {
+            this.page_data.is_end_date.push(company['end_date'] != undefined);
+            this.page_errors['companies'].push({});
+        }.bind(this));
+    }
+
+    changeMode() {
+        if (!this.is_edit[this.page]) {
+            this.loadPage();
+        } else {
+            Object.assign(this.form_data, this.final_data);
+        }
+        this.is_edit[this.page] = !this.is_edit[this.page];
+        return true;
+    }
+
+    saveEdit(form_data) {
+        const is_render = this.saveForm(form_data);
+        if (is_render) {
+            return true;
+        } else {
+            Object.assign(this.final_data, this.form_data);
+            this.sendEdit();
+        }
+        return true;
+    }
+
+    sendEdit() {
+        console.log("sending edit...");
+        console.log(this.final_data);
+        //TODO
+        this.changeMode();
+    }
 
 
 }
