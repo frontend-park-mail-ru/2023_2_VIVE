@@ -65,6 +65,10 @@ class ResStore extends Store {
         return this.forms_data[this.page];
     }
 
+    set form_data(val) {
+        this.forms_data[this.page] = val;
+    }
+
     get page_data() {
         return this.pages_data[this.page];
     }
@@ -350,32 +354,73 @@ class ResStore extends Store {
         }
         
         for (let i = 0; i < this.forms_data.length; ++i) {
-            Object.assign(this.forms_data[i], resume);
+            this.forms_data[i] = structuredClone(resume);
             this.finals_data.push({});
-            Object.assign(this.finals_data[i], this.forms_data[i]);
-            
+            this.finals_data[i] = structuredClone(this.forms_data[i]);
         }
         return true;
     }
 
     async getResume(id) {
         console.log("...id:", id);
-        try {
-            const resp = await APIConnector.get(
-                BACKEND_SERVER_URL + '/current_user/cvs/' + id);
-            const data = await resp.json();
-            console.log("received(resume): ", data);
-            return data;
-            // router.goToLink('/resume/'+data.id);
-        } catch (err) {
-            
-            console.error(err);
-            return {};
+        return {
+            "profession_name": "Программист",
+            "first_name": "Илья",
+            "last_name": "Алешин",
+            "middle_name": "Дмитриевич",
+            "birthday": "2003-05-18",
+            "city": "Москва",
+            "gender": "male",
+            "education_level": "higher",
+            "institutions": [
+                {
+                    "name": "Лицей 1571",
+                    "major_field": "математика",
+                    "graduation_year": "2025"
+                },
+                {
+                    "name": "Лицей ниу вшэ",
+                    "major_field": "физика",
+                    "graduation_year": "2030"
+                }
+            ],
+            "companies": [
+                {
+                    "name": "ВК",
+                    "job_position": "Главный",
+                    "start_date": "0013-03-21",
+                    "end_date": "0023-04-23",
+                    "description": "крутой"
+                },
+                {
+                    "name": "яндекс",
+                    "job_position": "очень важный",
+                    "start_date": "0423-03-04",
+                    "description": "очень крутой"
+                }
+            ],
+            "description": "люблю пельмени и вареники"
         }
+        // try {
+        //     const resp = await APIConnector.get(
+        //         BACKEND_SERVER_URL + '/current_user/cvs/' + id);
+        //     const data = await resp.json();
+        //     console.log("received(resume): ", data);
+        //     return data;
+        //     // router.goToLink('/resume/'+data.id);
+        // } catch (err) {
+            
+        //     console.error(err);
+        //     return {};
+        // }
     }
 
     get final_data() {
         return this.finals_data[this.page];
+    }
+
+    set final_data(val) {
+        this.finals_data[this.page] = val
     }
 
     loadPage() {
@@ -408,7 +453,7 @@ class ResStore extends Store {
         if (!this.is_edit[this.page]) {
             this.loadPage();
         } else {
-            Object.assign(this.form_data, this.final_data);
+            this.form_data = structuredClone(this.final_data);
         }
         this.is_edit[this.page] = !this.is_edit[this.page];
         return true;
@@ -419,7 +464,7 @@ class ResStore extends Store {
         if (is_render) {
             return true;
         } else {
-            Object.assign(this.final_data, this.form_data);
+            this.final_data = structuredClone(this.form_data);
             this.sendEdit();
         }
         return true;
