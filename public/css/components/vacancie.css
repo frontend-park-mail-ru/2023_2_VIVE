@@ -87,3 +87,7 @@
     gap: 5px;
     align-self: stretch;
 }
+
+.full-job-info__refactor {
+    width: 100%;
+}

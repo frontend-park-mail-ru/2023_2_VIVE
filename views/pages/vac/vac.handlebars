@@ -29,7 +29,14 @@
                 }}
                 {{#iff user.role '==' 'employer'}}
                     {{#iff state '==' 'description'}}
+                    {{>vac_desc_refactoring
+                    user=user
+                    vacancy=vacancy
+                    errors=(lookup errors 'desc')
+                    data=(lookup errors 'data-desc')
+                    }}
                     {{> vac_description
+                    data=(lookup errors 'data-desc')
                     }}
                     {{else iff state '==' 'responses'}}
                     {{> vac_responses}}

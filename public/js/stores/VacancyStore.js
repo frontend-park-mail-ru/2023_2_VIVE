@@ -86,36 +86,31 @@ class VacancyStore extends Store {
         this.state = state;
     }
 
-    async sendData(form, type) {
-        if (type === 'main') {
-            let newVacancyData = { ...this.vacancy};
+    async sendData(form) {
+        let newVacancyData = { ...this.vacancy};
 
-            for (const key in form) {
-                newVacancyData[key] = form[key];
-            }
+        for (const key in form) {
+            newVacancyData[key] = form[key];
+        }
 
-            if ("salary_lower_bound" in newVacancyData) {
-                newVacancyData["salary_lower_bound"] = Number(newVacancyData["salary_lower_bound"]);
-            }
+        if ("salary_lower_bound" in newVacancyData) {
+            newVacancyData["salary_lower_bound"] = Number(newVacancyData["salary_lower_bound"]);
+        }
 
-            if ("salary_upper_bound" in newVacancyData) {
-                newVacancyData["salary_upper_bound"] = Number(newVacancyData["salary_upper_bound"]);
-            }
+        if ("salary_upper_bound" in newVacancyData) {
+            newVacancyData["salary_upper_bound"] = Number(newVacancyData["salary_upper_bound"]);
+        }
 
-            try {
-                const resp = await APIConnector.put(
-                    BACKEND_SERVER_URL + '/vacancies/' + newVacancyData["id"],
-                    newVacancyData,
-                );
+        try {
+            const resp = await APIConnector.put(
+                BACKEND_SERVER_URL + '/vacancies/' + newVacancyData["id"],
+                newVacancyData,
+            );
 
-                router.goToLink("/vacancy/" + newVacancyData["id"]);
-                return true;
-            } catch (error) {
-                console.log(error);
-                return false;
-            }
-
-        } else {
+            router.goToLink("/vacancy/" + newVacancyData["id"]);
+            return true;
+        } catch (error) {
+            console.log(error);
             return false;
         }
     }

@@ -1,7 +1,7 @@
-<div class="full-job-info">
+<div class="full-job-info {{#if data}}d-none{{/if}}">
     {{#if vacancy.description}}
     <div class="common-text common-text--regular">
-    {{vacancy.description}}
+    {{{vacancy.description}}}
     </div>
     {{#iff user.role '==' 'employer'}}
     {{#iff user.employer_id '==' vacancy.employer_id}}
