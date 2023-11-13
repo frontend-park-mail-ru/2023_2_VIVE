@@ -4,9 +4,11 @@
     {{vacancy.description}}
     </div>
     {{#iff user.role '==' 'employer'}}
+    {{#iff user.id '==' vacancy.employer_id}}
         <div class="text-dodger-blue setting-inpute__button common-text common-text--medium">
             Редактировать подробное описание
         </div>
+    {{/iff}}
     {{/iff}}
     {{/if}}
         {{!-- <div class="full-job-info__main-text">

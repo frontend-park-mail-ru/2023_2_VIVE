@@ -5,16 +5,12 @@
                 <input class="input__field {{obj.class}}" placeholder="{{ obj.first.placeholder }}" name="{{obj.first.name}}" value="{{value_one}}">
                 {{#if error_first}} 
                 <div class="input_error__msg">{{error_first}}</div>
-                {{else if error_second}}
-                <div class="input_error__msg">{{error_second}}</div>
                 {{/if}}
         </div>
         <div class="dobule-input__inputes-frame">
             <input class="input__field {{obj.class}}" placeholder="{{ obj.second.placeholder }}" name="{{obj.second.name}}" value="{{value_second}}">
-            {{#if error_first}} 
-                <div class="input_error__msg">{{error_first}}</div>
-                {{else if error_second}}
-                <div class="input_error__msg">{{error_second}}</div>
+            {{#if error_second}} 
+            <div class="input_error__msg">{{error_second}}</div>
             {{/if}}
         </div>
     </div>

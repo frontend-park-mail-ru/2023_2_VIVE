@@ -149,7 +149,7 @@ export const Constraints = {
   // Constraint on the field value that must be less than another field value
   less_than: {
     check: (ctx, fieldToCheckName, fieldToCompare) => {
-      return ctx[fieldToCheckName] <= ctx[fieldToCompare]
+      return Number(ctx[fieldToCheckName]) <= Number(ctx[fieldToCompare])
         ? null
         : [fieldToCheckName];
     },
@@ -161,7 +161,7 @@ export const Constraints = {
   // Constraint on the field value that must be greater than another field value
   greater_than: {
     check: (ctx, fieldToCheckName, fieldToCompare) => {
-      return ctx[fieldToCheckName] >= ctx[fieldToCompare]
+      return Number(ctx[fieldToCheckName]) >= Number(ctx[fieldToCompare])
         ? null
         : [fieldToCheckName];
     },

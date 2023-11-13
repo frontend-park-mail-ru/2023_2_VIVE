@@ -29,6 +29,7 @@ class VacancyStore extends Store {
                 "salary_upper_bound": {
                     type: "text",
                     only_digits: true,
+                    greater_than: "salary_lower_bound",
                 },
                 "experience": {
                     type: "radio",

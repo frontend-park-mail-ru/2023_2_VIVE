@@ -55,6 +55,6 @@ x
 
 .dobule-input__inputes {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 18px;
 }
