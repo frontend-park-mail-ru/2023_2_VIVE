@@ -12,7 +12,7 @@
             obj=this
             name=this.name
             error=(lookup ../errors this.name)
-            class=(object class="res__form__input__title header-text header-text--fourth text-form-active")
+            class=(object title="res__form__input__title header-text header-text--fourth text-form-active")
             )}}
         {{else}}
             {{> input (object
@@ -20,7 +20,7 @@
             obj=this
             name=this.name
             error=(lookup ../errors this.name)
-            class=(object class="res__form__input__title header-text header-text--fourth text-form-active")
+            class=(object title="res__form__input__title header-text header-text--fourth text-form-active")
             )}}
         {{/if}}
         
@@ -206,7 +206,7 @@
             name=this.name
             value=../data.location
             error=(lookup ../errors this.name)
-            class=(object class="res__form__input__title header-text header-text--fourth text-form-active")
+            class=(object title="res__form__input__title header-text header-text--fourth text-form-active")
             )}}
         {{else}}
             {{> input (object 
@@ -214,7 +214,7 @@
             name=this.name
             value=@root.vacancy.location
             error=(lookup ../errors this.name)
-            class=(object class="res__form__input__title header-text header-text--fourth text-form-active")
+            class=(object title="res__form__input__title header-text header-text--fourth text-form-active")
             )}}
         {{/if}}
 
