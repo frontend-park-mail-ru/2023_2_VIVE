@@ -1,0 +1,22 @@
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text-down {
+    border-radius: 6px;
+    background-color: var(--main-background-grey);
+    padding: 3px;
+    position: absolute;
+    top: 35px;
+    left: -170%;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.tooltip:hover .tooltip-text-down {
+    visibility: visible;
+    opacity: 1;
+
+}

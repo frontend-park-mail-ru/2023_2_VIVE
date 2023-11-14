@@ -4,7 +4,7 @@
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="header-text header-text--first text-light-title">{{ user.last_name }} {{ user.first_name }} {{ user.third_name }} {{#iff user.role '==' 'applicant'}}(Соискатель){{else iff user.role '==' 'employer'}}(Работодатель){{/iff}}</div>
+                    <div class="header-text header-text--first text-light-title">{{ user.last_name }} {{ user.first_name }} {{ user.third_name }}</div>
                     <div class="secondary-text text-light-regular">{{ user.email }}</div>
                 </div>
                 {{#iff user.role '==' 'applicant'}}
@@ -37,7 +37,10 @@
                     {{#iff user.role '==' 'applicant'}}
                     <img src="../../../public/images/img/profile_28-01.png" class="profile__role-img">
                     {{else iff user.role '==' 'employer'}}
-                    <img src="../../../public/images/img/briefcase_outline_28-01.png" class="profile__role-img">
+                    <div class="tooltip">
+                        <img src="../../../public/images/img/briefcase_outline_28-01.png" class="profile__role-img">
+                        <span class="tooltip-text-down common-text common-text-medium text-dark-title">{{#iff user.role '==' 'applicant'}}Соискатель{{else iff user.role '==' 'employer'}}Работодатель{{/iff}}</span>
+                    </div>
                     {{/iff}}
                 </div>
             </div>
