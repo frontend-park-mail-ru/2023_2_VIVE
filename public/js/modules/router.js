@@ -59,13 +59,13 @@ class Router {
     };
 
     this.authoriziedNeed = [
-    '/resCreation', 
+    '/resume_creation', 
     '/profile', 
-    '/profile/settings', 
     '/profile/resumes', 
-    '/profile/responses', 
+    '/profile/settings', 
+    '/profile/responses',
+    '/profile/vacancies', 
     '/vacancy/:id/responses',
-    '/resume_creation',
     '/response/:id',
     ];
 
@@ -113,12 +113,6 @@ class Router {
       return;
     }
 
-    const redirect = await this.needRedirect(matchedRoute);
-    if ('redirect' in redirect) {
-      router.goToLink(redirect['redirect']);
-      return;
-    }
-
     this.render(matchedRoute);
   }
 
@@ -161,24 +155,30 @@ class Router {
       const routeRegex = new RegExp(`^${route.replace(/:\w+/g, '(\\d+)')}(#)?$`);
       if (routeRegex.test(url)) {
         
-        if (url.startsWith('/vacancy')) {
-          const id = await this.getVacancyId(url);
-          if (id <= 0) {
-            return null;
-          } 
-        } else if (url.startsWith('/profile')) {
-            if (!(await this.setDataUrlToProfile(url))) {
-              return null;
-            }
-        } else if (url.startsWith('/resume') && (url[7] != '_')) {
-            const id = await this.setResumeIdToView(url);
+        const redirect = await this.needRedirect(route);
+        if (!('redirect' in redirect)) {
+          if (url.startsWith('/vacancy')) {
+            const id = await this.getVacancyId(url);
             if (id <= 0) {
               return null;
+            } 
+          } else if (url.startsWith('/profile')) {
+              if (!(await this.setDataUrlToProfile(url))) {
+                return null;
+              }
+          } else if (url.startsWith('/resume') && (url[7] != '_')) {
+              const id = await this.setResumeIdToView(url);
+              if (id <= 0) {
+                return null;
+              }
+          } else  if (url.startsWith('/response')) {
+            if (!await this.setVacancyIdToResponse(url)) {
+              return null;
             }
-        } else  if (url.startsWith('/response')) {
-          if (!await this.setVacancyIdToResponse(url)) {
-            return null;
           }
+        } else {
+          router.goToLink(redirect['redirect']);
+          return;
         }
 
         return route;

@@ -129,7 +129,9 @@ class VacancyStore extends Store {
             if (cvIds) {
                 for (const cv of cvIds) {
                     const cvId = cv.cv_id;
-                    this.responses.push(await this.getData(`/cv/${cvId}`));
+                    data = await this.getData(`/cv/${cvId}`);
+                    data.profession_name = data.profession_name.slice(0, 50) + "...";
+                    this.responses.push(data);
                 }
             }
 
