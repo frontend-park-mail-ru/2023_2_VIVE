@@ -293,7 +293,6 @@ class ResStore extends Store {
             data = data[arr[i]][arr[i + 1]];
         }
         data[name] = input_value;
-        data['status'] = 'edited';
     }
 
     checkAndSaveInput(input_name, input_value) {
