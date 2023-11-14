@@ -11,6 +11,7 @@ class VacancyStore extends Store {
         this.user = {};
         this.state = 'description';
         this.vacancy = {};
+        this.responses = [];
         this.errors = {};
     }
 
@@ -73,8 +74,11 @@ class VacancyStore extends Store {
 
     getContext() {
         const errors = this.errors;
+        const responses = this.responses;
         this.errors = {};
+        this.responses = [];
         return {
+            responses: responses,
             errors: errors,
             state: this.state,
             user: this.user,
@@ -120,6 +124,15 @@ class VacancyStore extends Store {
             const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/vacancies/${data['id']}`);
             this.vacancy = await this.getData(`/vacancies/${data['id']}`);
             this.user = await this.getData("/current_user");
+
+            const cvIds = await this.getData(`/vacancies/${data['id']}/applicants`);
+            if (cvIds) {
+                for (const cv of cvIds) {
+                    const cvId = cv.cv_id;
+                    this.responses.push(await this.getData(`/cv/${cvId}`));
+                }
+            }
+
             return true;
         } catch(err) {
             return false;

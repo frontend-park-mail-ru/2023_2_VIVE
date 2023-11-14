@@ -9,6 +9,7 @@ import vacsView from '../views/vacsView.js';
 import profileView from '../views/profileView.js';
 import vacancyView from '../views/vacancyView.js';
 import regAuthView from '../views/regAuthView.js'
+import responseView from '../views/responseView.js';
 
 /**
  * Класс Router для управления навигацией по сайту
@@ -37,10 +38,12 @@ class Router {
       '/vacancy/:id/description': 'vacancy',
       '/vacancy/:id/responses': 'vacancy',
       '/resume/:id': 'resView',
+      '/response/:id': 'responseView',
       '/vacs': 'vacs',
     };
 
     this.objs = {
+      responseView: new responseView(),
       vacs: new vacsView(),
       resCreation: new resCreationView(),
       resView: new resViewView(),
@@ -63,6 +66,7 @@ class Router {
     '/profile/responses', 
     '/vacancy/:id/responses',
     '/resume_creation',
+    '/response/:id',
     ];
 
     this.denyWithAuth = [
@@ -171,12 +175,29 @@ class Router {
             if (id <= 0) {
               return null;
             }
+        } else  if (url.startsWith('/response')) {
+          if (!await this.setVacancyIdToResponse(url)) {
+            return null;
           }
+        }
 
         return route;
       }
     }
     return null;
+  }
+
+  async setVacancyIdToResponse(url) {
+    const idMatch = url.match(/\d+/);
+    const id = idMatch ? parseInt(idMatch[0]) : null;
+    if (!isNaN(id)) {
+      const view = this.objs[this.routes['/response/:id']];
+      if (!await view.updateInnerData({'id': id})) {
+        return false
+      } else {
+        return true;
+      }
+    }
   }
 
   async getVacancyId(url) {

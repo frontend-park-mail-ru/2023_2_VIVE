@@ -4,10 +4,11 @@
   </div>
   <div class="resumes__blocks">
     <div class="resumes__main-blocks">
+      {{log data}}
       {{#each data}}
       <div class="resume">
         <div class="resume__job-type">
-          <div class="resume__job-name header-text header-text--second text-dark-title">{{this.name}}</div>
+          <div class="resume__job-name header-text header-text--second text-dark-title">{{this.profession_name}}</div>
           {{#iff this.status '==' 'searching'}}
             <div class="resume__status resume__status--avaliable">Доступно для просмотра</div>
           {{else}}

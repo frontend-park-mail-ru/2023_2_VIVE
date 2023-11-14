@@ -76,9 +76,9 @@
             </div>
             <div class="vacs__list__item__feed">
               <div class="vacs__list__item__feed__respond">
-                {{> link-btn (object text="Откликнуться"
-                class="vacs__list__item__feed__respond__btn common-text common-text--medium link-btn-blue--bg text-light-title"
-                )}}
+                <a href="/response/{{this.id}}" class="js-nav-link text-light-title link-btn-blue--bg common-text common-text--medium">
+                    Откликнуться
+                </a>
               </div>
               <div class="vacs__list__item__feed__fav">
                 {{> link-btn (object
