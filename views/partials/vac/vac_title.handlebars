@@ -41,10 +41,10 @@
         {{/iff}}
         {{else iff user.role '==' 'applicant'}}
             <div class="vacancie__btns">
-                <div class="text-dodger-blue setting-inpute__button common-text common-text--medium">
+                <a href="/response/{{vacancy.id}}" class="js-nav-link text-light-title link-btn-blue--bg common-text common-text--medium">
                     Откликнуться
-                </div>
-                <div class="link-btn-blue--bg common-text common-text--medium text-light-title cursor-not-allowed">
+                </a>
+                <div class="text-dodger-blue link-btn-blue common-text common-text--medium cursor-not-allowed">
                     Задать вопрос
                 </div>
                 <div class="text-dodger-blue setting-inpute__button common-text common-text--medium cursor-not-allowed">
