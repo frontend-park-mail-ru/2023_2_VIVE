@@ -14,6 +14,7 @@ class ResponseStore extends Store {
 
     getContext() {
         const form_error = this.form_error;
+        this.form_error = null;
         return {
             form_error: form_error,
             vacancy: this.vacancy,
