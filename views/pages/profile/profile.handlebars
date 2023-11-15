@@ -34,14 +34,14 @@
         <div class="profile__filled-container">
             <div class="profile__role-big-frame">
                 <div class="profile__roles-frame">
-                    {{#iff user.role '==' 'applicant'}}
-                    <img src="../../../public/images/img/profile_28-01.png" class="profile__role-img">
-                    {{else iff user.role '==' 'employer'}}
                     <div class="tooltip">
+                        {{#iff user.role '==' 'applicant'}}
+                        <img src="../../../public/images/img/profile_28-01.png" class="profile__role-img">
+                        {{else iff user.role '==' 'employer'}}
                         <img src="../../../public/images/img/briefcase_outline_28-01.png" class="profile__role-img">
-                        <span class="tooltip-text-down common-text common-text-medium text-dark-title">{{#iff user.role '==' 'applicant'}}Соискатель{{else iff user.role '==' 'employer'}}Работодатель{{/iff}}</span>
+                        {{/iff}}
+                        <span class="tooltip-text-down tooltip-text-down__profile common-text common-text-medium text-dark-title">{{#iff user.role '==' 'applicant'}}Соискатель{{else iff user.role '==' 'employer'}}Работодатель{{/iff}}</span>
                     </div>
-                    {{/iff}}
                 </div>
             </div>
         </div>
