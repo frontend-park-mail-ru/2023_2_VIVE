@@ -8,14 +8,24 @@ class VacsStore extends Store {
     constructor() {
         super();
         this.vacs = [];
+        this.sorted = false;
     }
 
     async getContext() {
-        let vacancies = await this.getVacancies();
-        vacancies = this.processVacanciesData(vacancies);
         return {
             user: await User.getUser(),
-            data: vacancies
+            sorted: this.sorted,
+            data: this.vacs
+        }
+    }
+
+    async updateInnerData() {
+        try {
+            this.vacs = this.sortVacanciesByDateToOld(await this.getVacancies());
+            this.vacs = this.processVacanciesData(this.vacs);
+            return true;
+        } catch(error) {
+            return false;
         }
     }
 
@@ -30,6 +40,27 @@ class VacsStore extends Store {
         });
 
         return vacancies;
+    }
+
+    sortVacancies() {
+        if (this.sorted) {
+            this.vacs = this.sortVacanciesByDateToOld(this.vacs);
+        } else {
+            this.vacs = this.sortVacanciesByDateToNew(this.vacs);
+        }
+        this.sorted = !this.sorted;
+    }
+
+    sortVacanciesByDateToNew(vacancies) {
+        return vacancies.sort(function(a, b) {
+            return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+        });
+    }
+
+    sortVacanciesByDateToOld(vacancies) {
+        return vacancies.sort(function(a, b) {
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        });
     }
 
     async getVacancies() {

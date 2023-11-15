@@ -31,6 +31,7 @@ export default class vacsView extends View {
 
     const buttonListView = document.querySelector('[data-name="list-view"]');
     const buttonBlockView = document.querySelector('[data-name="block-view"]');
+    const sortingDateButton = document.querySelector('[name="sorting-date-btn"]');
 
     buttonListView.addEventListener('click', () => {
       if (this.block_type != 'list') {
@@ -44,6 +45,11 @@ export default class vacsView extends View {
         this.block_type = 'block';
         this.render();
       }
+    });
+
+    sortingDateButton.addEventListener('click', () => {
+      vacsStore.sortVacancies();
+      this.render();
     });
   }
 
@@ -103,5 +109,9 @@ export default class vacsView extends View {
     descriptionText.forEach(description => {
       description.innerText = description.innerText.substring(0, 300) + "...";
     })
+  }
+
+  async updateInnerData(data) {
+    return vacsStore.updateInnerData();
   }
 }

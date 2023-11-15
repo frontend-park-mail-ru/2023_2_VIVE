@@ -91,7 +91,9 @@
   margin-bottom: 35px;
 }
 
-
+.vacs__sorted_icon-on {
+  transform: rotate(180deg);
+}
 
 
 .vacs__list__item__feed {
