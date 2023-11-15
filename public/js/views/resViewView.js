@@ -80,10 +80,10 @@ export default class resViewView extends View {
     const forms = document.querySelectorAll('.js-edit-form');
     // console.log(forms[])
     forms.forEach(form => {
-      form.addEventListener('submit', event => {
+      form.addEventListener('submit', async event => {
         event.preventDefault();
         resStore.page = form.dataset.page;
-        if (resStore.saveEdit(getFormObject(new FormData(form)))) {
+        if (await resStore.saveEdit(getFormObject(new FormData(form)))) {
           this.rerender();
         }
       })

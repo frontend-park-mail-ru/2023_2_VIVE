@@ -1,7 +1,3 @@
-import { BACKEND_SERVER_URL } from '../../../config/config.js';
-import APIConnector from '../modules/APIConnector.js'
-import footerView from '../views/footerView.js';
-import menuView from '../views/menuView.js';
 import page404View from '../views/page404View.js';
 import resCreationView from '../views/resCreationView.js';
 import resViewView from '../views/resViewView.js';
@@ -10,6 +6,8 @@ import profileView from '../views/profileView.js';
 import vacancyView from '../views/vacancyView.js';
 import regAuthView from '../views/regAuthView.js'
 import responseView from '../views/responseView.js';
+
+import UserStore from '../stores/UserStore.js';
 
 /**
  * Класс Router для управления навигацией по сайту
@@ -53,20 +51,18 @@ class Router {
       empReg: new regAuthView('reg', 'employer'),
       profile: new profileView(),
       vacancy: new vacancyView(),
-      menu: new menuView(),
-      footer: new footerView(),
       page404: new page404View(),
     };
 
     this.authoriziedNeed = [
-    '/resCreation', 
-    '/profile', 
-    '/profile/settings', 
-    '/profile/resumes', 
-    '/profile/responses', 
-    '/vacancy/:id/responses',
-    '/resume_creation',
-    '/response/:id',
+      '/resCreation',
+      '/profile',
+      '/profile/settings',
+      '/profile/resumes',
+      '/profile/responses',
+      '/vacancy/:id/responses',
+      '/resume_creation',
+      '/response/:id',
     ];
 
     this.denyWithAuth = [
@@ -95,13 +91,6 @@ class Router {
     history.pushState(null, null, url);
   }
 
-  /**
-   * Получение текущего URL
-   * @returns {String}
-   */
-  get curUrl() {
-    return this.lastUrl;
-  }
 
   async urlWork(url) {
     this.deleteLastRender();
@@ -119,6 +108,8 @@ class Router {
       return;
     }
 
+    await UserStore.updateUser();
+
     this.render(matchedRoute);
   }
 
@@ -126,31 +117,25 @@ class Router {
     if (this.prevView) {
       this.prevView.remove();
     }
-    this.objs['menu'].remove();
-    this.objs['footer'].remove();
   }
 
   render(url) {
     if (url) {
-      this.objs['menu'].render();
-      this.objs['footer'].render();
       this.prevView = this.objs[this.routes[url]];
     } else {
       if (this.prevView) {
         this.prevView.clear();
       }
-      this.objs['menu'].clear();
-      this.objs['footer'].clear();
       this.prevView = this.objs['page404'];
     }
     this.prevView.render();
   }
 
   async needRedirect(url) {
-    if (this.denyWithAuth.includes(url) && await this.authCheck()) {
-      return {'redirect': '/vacs'};
-    } else if (this.authoriziedNeed.includes(url) && !(await this.authCheck())) {
-      return {'redirect': '/app_auth'};
+    if (this.denyWithAuth.includes(url) && await UserStore.isLoggedIn()) {
+      return { 'redirect': '/vacs' };
+    } else if (this.authoriziedNeed.includes(url) && !(await UserStore.isLoggedIn())) {
+      return { 'redirect': '/app_auth' };
     } else {
       return {};
     }
@@ -160,22 +145,22 @@ class Router {
     for (const route in this.routes) {
       const routeRegex = new RegExp(`^${route.replace(/:\w+/g, '(\\d+)')}(#)?$`);
       if (routeRegex.test(url)) {
-        
+
         if (url.startsWith('/vacancy')) {
           const id = await this.getVacancyId(url);
           if (id <= 0) {
             return null;
-          } 
+          }
         } else if (url.startsWith('/profile')) {
-            if (!(await this.setDataUrlToProfile(url))) {
-              return null;
-            }
+          if (!(await this.setDataUrlToProfile(url))) {
+            return null;
+          }
         } else if (url.startsWith('/resume') && (url[7] != '_')) {
-            const id = await this.setResumeIdToView(url);
-            if (id <= 0) {
-              return null;
-            }
-        } else  if (url.startsWith('/response')) {
+          const id = await this.setResumeIdToView(url);
+          if (id <= 0) {
+            return null;
+          }
+        } else if (url.startsWith('/response')) {
           if (!await this.setVacancyIdToResponse(url)) {
             return null;
           }
@@ -192,7 +177,7 @@ class Router {
     const id = idMatch ? parseInt(idMatch[0]) : null;
     if (!isNaN(id)) {
       const view = this.objs[this.routes['/response/:id']];
-      if (!await view.updateInnerData({'id': id})) {
+      if (!await view.updateInnerData({ 'id': id })) {
         return false
       } else {
         return true;
@@ -205,10 +190,10 @@ class Router {
     const id = idMatch ? parseInt(idMatch[0]) : null;
     if (!isNaN(id)) {
       const view = this.objs[this.routes['/vacancy/:id']];
-      if (!(await view.updateInnerData({'id': id}))) {
+      if (!(await view.updateInnerData({ 'id': id }))) {
         return -1;
       } else {
-        return id; 
+        return id;
       }
     }
   }
@@ -223,29 +208,29 @@ class Router {
     const id = idMatch ? parseInt(idMatch[0]) : null;
     if (!isNaN(id)) {
       const view = this.objs[this.routes['/resume/:id']];
-      if (!(await view.updateInnerData({'id': id}))) {
+      if (!(await view.updateInnerData({ 'id': id }))) {
         return -1;
       } else {
-        return id; 
+        return id;
       }
     }
     const view = this.objs[this.routes[url]];
     return await view.updateInnerData(url);
   }
 
-  async authCheck() {
-    try {
-      const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/session`);
-      return true;
-    } catch(err) {
-      const statusCode = err.status.StatusCode;
-      if (statusCode > 500) {
-        throw new Error("INTERNAL ERROR");
-      } else {
-        return false;
-      }
-    }
-  }
+  // async authCheck() {
+  //   try {
+  //     const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/session`);
+  //     return true;
+  //   } catch(err) {
+  //     const statusCode = err.status.StatusCode;
+  //     if (statusCode > 500) {
+  //       throw new Error("INTERNAL ERROR");
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+  // }
 }
 
 const router = new Router();

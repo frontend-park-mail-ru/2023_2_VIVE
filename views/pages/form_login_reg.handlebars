@@ -19,8 +19,8 @@
         <span class="ms-10 {{#iff role '==' ROLES.app}}text-dark-regular{{else}}text-dark-title{{/iff}}">Работодатель</span>
       </div>
 
-      {{#if form_error }}
-      <div class="form__error">{{form_error}}</div>
+      {{#if error }}
+      <div class="form__error">{{error}}</div>
       {{/if}}
 
       {{!-- inputs: --}}
@@ -56,10 +56,11 @@
       {{> input (object obj=this
       class=(object
       block="reg_auth__form__field"
+      input="reg_auth__input"
       )
       name=this.name
       value=(lookup ../data this.name)
-      error=(lookup ../errors this.name)
+      error=(lookup ../form_errors this.name)
       )}}
 
       {{/each}}

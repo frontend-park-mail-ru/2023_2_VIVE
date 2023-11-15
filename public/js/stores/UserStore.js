@@ -6,24 +6,57 @@ import Store from './Store.js';
 class UserStore extends Store {
     constructor() {
         super();
+        this.login = false;
+        this.user = false;
     }
 
-    async isLoggedIn() {
-        try {
-            let resp = await APIConnector.get(BACKEND_SERVER_URL + '/session');
-            return resp.ok;
-        } catch (err) {
-            return false;
+    ROLES = {
+        app: 'applicant',
+        emp: 'employer',
+    }
+
+    async updateUser() {
+        await this.reqLogin();
+        if (this.login) {
+            await this.reqUser();
+        } else {
+            this.user = undefined;
         }
     }
 
-    async getUser() {
+    async reqLogin() {
+        try {
+            let resp = await APIConnector.get(BACKEND_SERVER_URL + '/session');
+            this.login = resp.ok;
+        } catch (err) {
+            this.login = false;
+        }
+    }
+
+    async reqUser() {
         try {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + "/current_user");
-            const data = await resp.json();
-            return data;
+            this.user = await resp.json();
         } catch (err) {
-            return undefined;
+            this.user = undefined;
+        }
+    }
+
+    async isLoggedIn() {
+        return this.login;
+    }
+    
+    async getUser() {
+        return this.user;
+    }
+
+    async logout() {
+        try {
+            const resp = await APIConnector.delete(BACKEND_SERVER_URL + '/session');
+            return resp.ok;
+        } catch (err) {
+            console.error(err);
+            return false;
         }
     }
 

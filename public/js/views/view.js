@@ -17,8 +17,9 @@ export default class View {
     */
     addEventListeners() {
         const links = document.querySelectorAll('.js-nav-link');
+        
         links.forEach(link => {
-            link.addEventListener('click', event => {
+            link.addEventListener('click', async event => {
                 event.preventDefault();
                 router.goToLink(getHrefFromLink(link))
             })
