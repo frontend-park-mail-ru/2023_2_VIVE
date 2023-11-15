@@ -5,19 +5,27 @@
     <div class="vacancie__additional-info">
         <div class="add-info">
             <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
-            <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.salary_lower_bound}}{{#if vacancy.salary_upper_bound}}от {{vacancy.salary_lower_bound}} до {{vacancy.salary_upper_bound}} тыс. рублей{{else}}от {{vacancy.salary_lower_bound}} тыс. рублей{{/if}}{{else if vacancy.salary_upper_bound}}до {{vacancy.salary_upper_bound}} тыс. рублей{{else}}Не указана{{/if}}</div>
+            <div class="common-text common-text--medium text-dark-regular" name="vacancy-salary">
+                {{vacancy.salary_view}}
+            </div>
         </div>
         <div class="add-info">
             <img class="add-info__img" src="../../../../../public/images/img/stars_20.png">
-            <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.experience_lower_bound}}{{#if vacancy.experience_upper_bound}}{{vacancy.experience_lower_bound}}-{{vacancy.experience_upper_bound}} года{{else}}{{vacancy.salary_lower_bound}} года{{/if}}{{else if vacancy.experience_upper_bound}}{{vacancy.experience_upper_bound}} года{{else}}Не указана{{/if}}</div>
+            <div class="common-text common-text--medium text-dark-regular" name="vacancy-experience">
+                {{vacancy.experience_view}}
+            </div>
         </div>
         <div class="add-info">
             <img class="add-info__img" src="../../../../../public/images/img/clock_outline_20.png">
-            <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.employment}}{{vacancy.employment}}{{else}}Не указано{{/if}}</div>
+            <div class="common-text common-text--medium text-dark-regular" name="vacancy-employment">
+                {{vacancy.employment_view}}
+            </div>
         </div>
         <div class="add-info">
             <img class="add-info__img" src="../../../../../public/images/img/location_map_outline_20.png">
-            <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.location}}{{vacancy.location}}{{else}}Не указано{{/if}}</div>
+            <div class="common-text common-text--medium text-dark-regular" name="vacancy-location">
+                {{vacancy.location}}
+            </div>
         </div>
         <div class="add-info">
             <img class="add-info__img" src="../../../../../public/images/img/calendar_check_outline_20.png">
@@ -39,7 +47,7 @@
                 </div>
             </div>
         {{/iff}}
-        {{else iff user.role '==' 'applicant'}}
+        {{else}}
             <div class="vacancie__btns">
                 <a href="/response/{{vacancy.id}}" class="js-nav-link text-light-title link-btn-blue--bg common-text common-text--medium">
                     Откликнуться

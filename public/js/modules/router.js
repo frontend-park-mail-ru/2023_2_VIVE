@@ -173,7 +173,8 @@ class Router {
               }
           } else  if (url.startsWith('/response')) {
             if (!await this.setVacancyIdToResponse(url)) {
-              return null;
+              router.goToLink('/resume_creation');
+              return;
             }
           }
         } else {
