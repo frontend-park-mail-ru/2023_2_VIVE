@@ -63,7 +63,7 @@ export default class vacCreationView extends mainView {
     if (submit_btn) {
       submit_btn.addEventListener('click', async event => {
         event.preventDefault();
-        if (vacancyStore.checkAndSendForm(getFormObject(new FormData(form)))) {
+        if (await vacancyStore.checkAndSendForm(getFormObject(new FormData(form)))) {
           this.rerender();
         }
       })

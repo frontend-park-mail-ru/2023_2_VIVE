@@ -234,20 +234,30 @@ class VacancyStore extends Store {
         return true;
     }
 
-    checkAndSendForm(form_data) {
+    async checkAndSendForm(form_data) {
         if (this.isValidFormData(form_data)) {
             Object.assign(this.form_data, form_data);
-            return this.sendForm();
+            return await this.sendForm();
         }
         return true;
     }
 
-    sendForm() {
+    async sendForm() {
         console.log("sending...");
         console.log(this.form_data);
+        try {
+            const resp = await APIConnector.post(
+                BACKEND_SERVER_URL + '/vacancies',
+                this.form_data,
+            );
+            console.log(resp);
+            this.clear();
+            // router.goToLink('/');        
+        } catch(error) {
+            console.log(error);
+            return false;
+        }
     }
-
-
 }
 
 const vacancyStore = new VacancyStore();
