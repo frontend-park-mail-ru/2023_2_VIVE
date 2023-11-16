@@ -254,20 +254,16 @@ class VacancyStore extends Store {
     }
 
 
-    checkAndSaveInput(input_name, input_value) {
-        if (!this.cur_input) {
-            this.cur_input = {};
-        }
-        this.cur_input['name'] = input_name;
-        this.cur_input['value'] = input_value;
+    checkAndSaveInput(input_node) {
+        this.cur_input = input_node;
 
-        this.form_data[input_name] = input_value;
+        this.form_data[input_node.name] = input_node.value;
 
         // const validate_obj = {};
         // validate_obj[input_name] = input_value;
 
         const errors = validateForm(getMetaPlusDataObj(this.pageFormFieldMeta(), this.form_data));
-        console.log(errors);
+
         this.form_errors = {};
         if (!isObjEmpty(errors)) {
             Object.assign(this.form_errors, errors);
@@ -309,7 +305,7 @@ class VacancyStore extends Store {
             this.clear();
             // router.goToLink('/');        
         } catch(error) {
-            console.log(error);
+            console.error(error);
             return false;
         }
     }

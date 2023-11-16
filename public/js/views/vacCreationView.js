@@ -23,8 +23,8 @@ export default class vacCreationView extends mainView {
       const cur_input = document.querySelector('[name=' + vacancyStore.cur_input.name + ']');
       if (cur_input) {
         cur_input.focus();
-        cur_input.select();
-        window.getSelection().collapseToEnd();
+        const cursor_pos = vacancyStore.cur_input.selectionStart;
+        cur_input.setSelectionRange(cursor_pos, cursor_pos);
       }
     }
 
@@ -33,7 +33,7 @@ export default class vacCreationView extends mainView {
     const form_input_btns = document.querySelectorAll('.res__form__input');
     form_input_btns.forEach(form_input => {
       form_input.addEventListener('input', event => {
-        if (vacancyStore.checkAndSaveInput(form_input.name, form_input.value)) {
+        if (vacancyStore.checkAndSaveInput(form_input)) {
           this.rerender();
         }
       })
