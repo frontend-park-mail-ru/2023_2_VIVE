@@ -5,9 +5,16 @@
     </div>
     {{#iff user.role '==' 'employer'}}
     {{#iff user.employer_id '==' vacancy.employer_id}}
-        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
-        data-name="desc-refactoring">
-            Редактировать подробное описание
+        <div class="vacancy__desc-btns">
+            <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
+            data-name="desc-refactoring">
+                Редактировать подробное описание
+            </div>
+            <div class="setting__delete-btn" data-name="delete-account" style="cursor:not-allowed;">
+                <div class="common-text common-text--medium text-error-regular">
+                    Удалить вакансию
+                </div>
+            </div>
         </div>
     {{/iff}}
     {{/iff}}

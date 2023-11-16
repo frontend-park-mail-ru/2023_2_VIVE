@@ -91,3 +91,9 @@
 .full-job-info__refactor {
     width: 100%;
 }
+
+.vacancy__desc-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
