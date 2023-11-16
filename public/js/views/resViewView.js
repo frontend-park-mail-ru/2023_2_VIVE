@@ -36,6 +36,7 @@ export default class resViewView extends View {
    * Асинхронный метод для отображения страницы
    */
   async render() {
+    await super.render();
     
     this.rerender();
   }

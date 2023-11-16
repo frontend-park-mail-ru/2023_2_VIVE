@@ -10,7 +10,7 @@ export default class mainView extends View {
        * Асинхронный метод для отображения меню
        */
     async render() {
-        super.render();
+        await super.render();
         
         document.querySelector('header').innerHTML = Handlebars.partials['header']({ user: await User.getUser() });
         document.querySelector('footer').innerHTML = Handlebars.partials['footer']({ user: await User.getUser() });

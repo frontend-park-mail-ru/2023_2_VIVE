@@ -8,6 +8,8 @@ export default class responseView extends View {
     }
 
     async render() {
+        await super.render();
+        
         // eslint-disable-next-line no-undef
         const template = Handlebars.templates['response'];
         document.querySelector('main').innerHTML = template(responseStore.getContext());

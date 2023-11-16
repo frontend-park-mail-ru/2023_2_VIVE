@@ -11,6 +11,8 @@ export default class profileView extends View {
    * Асинхронный метод для отображения страницы
    */
   async render() {
+    await super.render();
+    
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['profile'];
     document.querySelector('main').innerHTML = template(profileStore.getContext());

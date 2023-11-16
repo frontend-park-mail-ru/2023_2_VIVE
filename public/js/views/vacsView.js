@@ -1,12 +1,12 @@
 
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
-import View from './view.js';
+import mainView from './mainView.js';
 
-export default class vacsView extends View {
+export default class vacsView extends mainView {
 
   async render() {
-    super.render();
+    await super.render();
     const data = await this.getVacancies();
 
     // eslint-disable-next-line no-undef

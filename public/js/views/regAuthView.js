@@ -24,7 +24,7 @@ export default class regAuthView extends mainView {
      * Основной метод класса, который отображает все необходимое после открытия страницы
      */
     async render() {
-        super.render();
+        await super.render();
         regAuthStore.sendView(this);
 
         const template = Handlebars.templates['form_login_reg'];

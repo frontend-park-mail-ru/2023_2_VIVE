@@ -1,8 +1,8 @@
 import router from '../modules/router.js';
 import vacancyStore from '../stores/VacancyStore.js';
-import View from './view.js';
+import mainView from './mainView.js';
 
-export default class profileView extends View {
+export default class profileView extends mainView {
     constructor() {
         super();
     }
@@ -11,6 +11,8 @@ export default class profileView extends View {
      * Асинхронный метод для отображения страницы
      */
     async render() {
+        await super.render();
+        
         // eslint-disable-next-line no-undef
         const template = Handlebars.templates['vac'];
         document.querySelector('main').innerHTML = template(vacancyStore.getContext());

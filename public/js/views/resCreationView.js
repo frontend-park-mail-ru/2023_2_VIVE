@@ -32,7 +32,8 @@ export default class resCreationView extends View {
    * Асинхронный метод для отображения страницы
    */
   async render() {
-    super.render();
+    await super.render();
+    
     const template = Handlebars.templates['res_creation'];
 
     document.querySelector('main').innerHTML = template(resStore.getContext());
