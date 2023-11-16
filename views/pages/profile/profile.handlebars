@@ -4,7 +4,7 @@
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="header-text header-text--first text-light-title">{{ user.last_name }} {{ user.first_name }} {{ user.third_name }} {{#iff user.role '==' 'applicant'}}(Соискатель){{else iff user.role '==' 'employer'}}(Работодатель){{/iff}}</div>
+                    <div class="header-text header-text--first text-light-title">{{ user.last_name }} {{ user.first_name }} {{ user.third_name }}</div>
                     <div class="secondary-text text-light-regular">{{ user.email }}</div>
                 </div>
                 {{#iff user.role '==' 'applicant'}}
@@ -34,11 +34,14 @@
         <div class="profile__filled-container">
             <div class="profile__role-big-frame">
                 <div class="profile__roles-frame">
-                    {{#iff user.role '==' 'applicant'}}
-                    <img src="../../../public/images/img/profile_28-01.png" class="profile__role-img">
-                    {{else iff user.role '==' 'employer'}}
-                    <img src="../../../public/images/img/briefcase_outline_28-01.png" class="profile__role-img">
-                    {{/iff}}
+                    <div class="tooltip">
+                        {{#iff user.role '==' 'applicant'}}
+                        <img src="../../../public/images/img/profile_28-01.png" class="profile__role-img">
+                        {{else iff user.role '==' 'employer'}}
+                        <img src="../../../public/images/img/briefcase_outline_28-01.png" class="profile__role-img">
+                        {{/iff}}
+                        <span class="tooltip-text-down tooltip-text-down__profile common-text common-text-medium text-dark-title">{{#iff user.role '==' 'applicant'}}Соискатель{{else iff user.role '==' 'employer'}}Работодатель{{/iff}}</span>
+                    </div>
                 </div>
             </div>
         </div>

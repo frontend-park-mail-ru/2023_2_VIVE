@@ -175,9 +175,15 @@ class Router {
               }
           } else  if (url.startsWith('/response')) {
             if (!await this.setVacancyIdToResponse(url)) {
+              router.goToLink('/resume_creation');
+              return;
+            }
+          } else if (url.startsWith('/vacs')) {
+            if (!await this.updateVacanciesList()) {
               return null;
             }
           }
+          
         } else {
           router.goToLink(redirect['redirect']);
           return;
@@ -187,6 +193,15 @@ class Router {
       }
     }
     return null;
+  }
+
+  async updateVacanciesList() {
+    const view = this.objs[this.routes['/vacs']];
+    if (!await view.updateInnerData({})) {
+      return false
+    } else {
+      return true;
+    }
   }
 
   async setVacancyIdToResponse(url) {

@@ -77,12 +77,67 @@ class VacancyStore extends Store {
         const responses = this.responses;
         this.errors = {};
         this.responses = [];
+        this.vacancy.salary_view = this.processVacanciesSalary(this.vacancy);
+        this.vacancy.employment_view = this.processVacanciesEmployment(this.vacancy);
+        this.vacancy.experience_view = this.processVacanciesExperience(this.vacancy);
         return {
             responses: responses,
             errors: errors,
             state: this.state,
             user: this.user,
             vacancy: this.vacancy,
+        }
+    }
+
+    processVacanciesSalary(vacancy) {
+        if (vacancy.salary_lower_bound && vacancy.salary_upper_bound) {
+            return `От ${vacancy.salary_lower_bound} до ${vacancy.salary_upper_bound} рублей`;
+        } else if (vacancy.salary_lower_bound) {
+            return `От ${vacancy.salary_lower_bound} рублей`;
+        } else if (vacancy.salary_upper_bound) {
+            return `До ${vacancy.salary_upper_bound} рублей`;
+        } else {
+            return 'Не указано';
+        }
+    }
+
+    processVacanciesEmployment(vacancy) {
+        if (!vacancy.employment) {
+            return 'Не указано';
+        }
+
+        switch (vacancy.employment) {
+            case 'full-time':
+                return 'Полная занятость';
+            case 'part-time':
+                return 'Частичная занятость';
+            case 'one-time':
+                return 'Разовая работа или проект';
+            case 'volunteering':
+                return 'Волонтерство';
+            case 'internship':
+                return 'Стажировка';
+            default:
+                return 'Не указано';
+        }
+    }
+
+    processVacanciesExperience(vacancy) {
+        if (!vacancy.experience) {
+            return 'Не указано';
+        }
+
+        switch (vacancy.experience) {
+            case 'no_experience':
+                return 'Без опыта';
+            case 'one_three_years':
+                return 'От 1 до 3-х лет';
+            case 'three_six_years':
+                return 'От 3-х до 6-ти лет';
+            case 'six_more_years':
+                return 'Более 6-ти лет';
+            default:
+                return 'Не указано';
         }
     }
 

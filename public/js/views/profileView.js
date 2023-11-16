@@ -51,10 +51,7 @@ export default class profileView extends mainView {
 
     cancelButtons.forEach(button => {
       button.addEventListener('click', () => {
-        const changingBlock = button.parentNode.parentNode;
-        const defaultBlock = changingBlock.nextElementSibling;
-        changingBlock.classList.add('ch-i__d-none');
-        defaultBlock.classList.remove('ch-i__d-none');
+        router.goToLink('/profile/settings');
       });
     });
 

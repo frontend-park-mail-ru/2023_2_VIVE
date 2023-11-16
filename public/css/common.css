@@ -13,6 +13,7 @@
 @import url("components/response.css");
 @import url("components/resume.css");
 @import url("components/vacancie.css");
+@import url("components/tooltip.css");
 
 @import url("components/profile/profile.css");
 
@@ -83,6 +84,10 @@
 
 .mr-10 {
   margin-right: 10px;
+}
+
+.br-10 {
+  border-radius: 10px;
 }
 
 .cursor-pointer {

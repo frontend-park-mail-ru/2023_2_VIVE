@@ -1,3 +1,4 @@
+@import url("__blocks/vacs__blocks.css");
 @import url("filters.css");
 @import url("creation.css");
 @import url("vaccr-form.css");
@@ -92,7 +93,9 @@
   margin-bottom: 35px;
 }
 
-
+.vacs__sorted_icon-on {
+  transform: rotate(180deg);
+}
 
 
 .vacs__list__item__feed {

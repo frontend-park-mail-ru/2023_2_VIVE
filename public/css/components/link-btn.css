@@ -113,6 +113,69 @@
   color: var(--mono-blue-dark-blue);
 }
 
+/* SVG */
+
+.link-svg_blue {
+  background-color: var(--buttons-blue-primary-default);
+}
+
+.link-svg_blue svg path {
+  fill: var(--text-light-title);
+}
+
+.link-svg_blue:hover {
+  border: 1px solid var(--buttons-blue-primary-default);
+  background-color: unset;
+  transition: background-color 0.5s ease;
+}
+
+.link-svg_blue:hover svg path{
+  fill: var(--text-dodger-blue);
+  transition: fill 0.5s ease;
+}
+
+.link-svg_blue:active {
+  background-color: var(--buttons-blue-primary-default);
+  transition: background-color 0.5s ease;
+}
+
+.link-svg_blue:active svg path{
+  fill: var(--text-light-title);
+  transition: fill 0.5s ease;
+}
+
+.link-svg_blue--bg {
+  border: 1px solid var(--buttons-blue-primary-default);
+  background-color: unset;
+}
+
+.link-svg_blue--bg svg path {
+  fill: var(--text-dodger-blue);
+}
+
+.link-svg_blue--bg:hover {
+  background-color: var(--buttons-blue-primary-default);
+  transition: background-color 0.5s ease;
+}
+
+.link-svg_blue--bg:hover svg path{
+  fill: var(--text-light-title);
+  transition: fill 0.5s ease;
+}
+
+.link-svg_blue--bg:active {
+  border: 1px solid var(--buttons-blue-primary-default);
+  background-color: unset;
+  transition: background-color 0.5s ease;
+}
+
+.link-svg_blue--bg:active svg path{
+  fill: var(--text-dodger-blue);
+  transition: fill 0.5s ease;
+}
+
+/* END SVG */
+
 /* transp-box-blue */
 
 .link-btn_transp-box-blue {
