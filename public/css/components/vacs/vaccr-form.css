@@ -1,11 +1,9 @@
-@import url("res-form.css");
-
-.rescr__form {
+.vaccr__form {
   width: 500px;
   background-color: transparent;
 }
 
-.rescr__form__title {
+.vaccr__form__title {
   color: #333333;
   font-size: 24px;
   font-weight: 600;
@@ -13,14 +11,8 @@
   margin: 0px 0px 35px 0px;
 }
 
-.rescr__form__step__title {
+.vaccr__form__step__title {
   font-size: 20px;
   line-height: 26px;
   margin: 0px 0px 25px 0px;
 }
-
-.rescr__form__actions_0 {
-  justify-content: end;
-}
-
-

@@ -8,6 +8,7 @@ import regAuthView from '../views/regAuthView.js'
 import responseView from '../views/responseView.js';
 
 import UserStore from '../stores/UserStore.js';
+import vacCreationView from '../views/vacCreationView.js';
 
 /**
  * Класс Router для управления навигацией по сайту
@@ -32,6 +33,7 @@ class Router {
       '/profile/resumes': 'profile',
       '/profile/vacancies': 'profile',
       '/profile/responses': 'profile',
+      '/vac_creation': 'vacCreation',
       '/vacancy/:id': 'vacancy',
       '/vacancy/:id/description': 'vacancy',
       '/vacancy/:id/responses': 'vacancy',
@@ -51,11 +53,12 @@ class Router {
       empReg: new regAuthView('reg', 'employer'),
       profile: new profileView(),
       vacancy: new vacancyView(),
+      vacCreation: new vacCreationView(),
       page404: new page404View(),
     };
 
     this.authoriziedNeed = [
-      '/resCreation',
+      '/resume_creation',
       '/profile',
       '/profile/settings',
       '/profile/resumes',

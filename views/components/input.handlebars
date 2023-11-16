@@ -1,5 +1,5 @@
 <label class="input {{class.block}} {{#if error}} input_error {{/if}}">
-  <div class="input__title {{class.title}}">{{obj.title}}</div>
+  {{#if obj.title}}<div class="input__title {{class.title}}">{{obj.title}}</div>{{/if}}
   <input class="{{class.input}} input__field common-text common-text--medium" autocomplete="off" type="{{#if obj.type}}{{obj.type}}{{else}}text{{/if}}" name="{{name}}" placeholder="{{ obj.placeholder }}" {{#if value}}value="{{value}}"{{/if}} {{{attributes}}}>
   {{#if error}} 
   <div class="input_error__msg">{{error}}</div>

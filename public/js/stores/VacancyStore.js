@@ -16,7 +16,7 @@ class VacancyStore extends Store {
     }
 
     pageFormFieldMeta(type) {
-        if (type === 'main') {
+        if (type === 'main' || this.page == 0) {
             return {
                 "name": {
                     type: "text",
@@ -159,6 +159,93 @@ class VacancyStore extends Store {
             return undefined;
         }
     }
+
+
+    //===============Creation=================
+
+    clear() {
+        this.page = 0;
+        this.form_data = {
+            "experience": "<1",
+            "employment": "<1",
+        };
+        this.form_errors = {};
+        this.error = "";
+        this.cur_input = undefined;
+    }
+
+    formSteps() {
+        return [
+            "Основная информация",
+            "Подробная информация о вакансии",
+        ]
+    }
+
+    getCreationContext() {
+        return {
+            page: this.page,
+            steps: this.formSteps(),
+            data: this.form_data,
+            form_errors: this.form_errors,
+        }
+
+    }
+
+    prevForm() {
+        this.page--;
+        return true;
+    }
+
+
+    checkAndSaveInput(input_name, input_value) {
+        if (!this.cur_input) {
+            this.cur_input = {};
+        }
+        this.cur_input['name'] = input_name;
+        this.cur_input['value'] = input_value;
+
+        this.form_data[input_name] = input_value;
+
+        // const validate_obj = {};
+        // validate_obj[input_name] = input_value;
+
+        const errors = validateForm(getMetaPlusDataObj(this.pageFormFieldMeta(), this.form_data));
+        console.log(errors);
+        this.form_errors = {};
+        if (!isObjEmpty(errors)) {
+            Object.assign(this.form_errors, errors);
+        }
+        return true;
+    }
+
+
+    isValidFormData(form_data) {
+        const errors = validateForm(getMetaPlusDataObj(this.pageFormFieldMeta(), form_data));
+        Object.assign(this.form_errors, errors);
+        return isObjEmpty(errors);
+    }
+
+    saveFormAndContinue(form_data) {
+        if (this.isValidFormData(form_data)) {
+            this.page++;
+        }
+        return true;
+    }
+
+    checkAndSendForm(form_data) {
+        if (this.isValidFormData(form_data)) {
+            Object.assign(this.form_data, form_data);
+            return this.sendForm();
+        }
+        return true;
+    }
+
+    sendForm() {
+        console.log("sending...");
+        console.log(this.form_data);
+    }
+
+
 }
 
 const vacancyStore = new VacancyStore();

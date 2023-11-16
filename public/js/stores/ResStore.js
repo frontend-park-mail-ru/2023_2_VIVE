@@ -58,7 +58,7 @@ class ResStore extends Store {
             }
         ];
 
-        
+
     }
 
     get form_data() {
@@ -75,6 +75,15 @@ class ResStore extends Store {
 
     get page_errors() {
         return this.pages_errors[this.page];
+    }
+
+    formSteps() {
+        return [
+            "Основная информация",
+            "Информация об образовании",
+            "Информация об опыте работы",
+            "Информация о Вас",
+        ]
     }
 
     pageFormFieldsMeta() {
@@ -172,7 +181,7 @@ class ResStore extends Store {
     getContext() {
         return {
             // user: await User.getUser(),
-            
+            steps: this.formSteps(),
             page: this.page,
             errors: this.page_errors,
             data: this.form_data,
@@ -298,7 +307,7 @@ class ResStore extends Store {
     checkAndSaveInput(input_name, input_value) {
         const is_render = this.checkInput(input_name, input_value);
         this.saveInput(input_name, input_value);
-        
+
         return is_render
     }
 
@@ -335,9 +344,9 @@ class ResStore extends Store {
             const data = await resp.json();
             console.log("received: ", data);
             this.clear();
-            router.goToLink('/resume/'+data.id);
+            router.goToLink('/resume/' + data.id);
         } catch (err) {
-            
+
             console.error(err);
         }
     }
@@ -347,12 +356,12 @@ class ResStore extends Store {
 
     async loadResume(id) {
         this.finals_data = [];
-        
+
         const resume = await this.getResume(id);
         if (isObjEmpty(resume)) {
             return false;
         }
-        
+
         for (let i = 0; i < this.forms_data.length; ++i) {
             this.forms_data[i] = structuredClone(resume);
             this.finals_data.push({});
@@ -362,7 +371,7 @@ class ResStore extends Store {
     }
 
     async getResume(id) {
-        console.log("...id:", id); 
+        console.log("...id:", id);
         try {
             const resp = await APIConnector.get(
                 BACKEND_SERVER_URL + '/current_user/cvs/' + id);
@@ -440,7 +449,7 @@ class ResStore extends Store {
         }
         return true;
     }
-    
+
 
 }
 
