@@ -58,7 +58,7 @@ class ResStore extends Store {
             }
         ];
 
-        
+
     }
 
     get form_data() {
@@ -75,6 +75,15 @@ class ResStore extends Store {
 
     get page_errors() {
         return this.pages_errors[this.page];
+    }
+
+    formSteps() {
+        return [
+            "Основная информация",
+            "Информация об образовании",
+            "Информация об опыте работы",
+            "Информация о Вас",
+        ]
     }
 
     pageFormFieldsMeta() {
@@ -172,7 +181,7 @@ class ResStore extends Store {
     getContext() {
         return {
             // user: await User.getUser(),
-            
+            steps: this.formSteps(),
             page: this.page,
             errors: this.page_errors,
             data: this.form_data,
@@ -293,13 +302,12 @@ class ResStore extends Store {
             data = data[arr[i]][arr[i + 1]];
         }
         data[name] = input_value;
-        data['status'] = 'edited';
     }
 
     checkAndSaveInput(input_name, input_value) {
         const is_render = this.checkInput(input_name, input_value);
         this.saveInput(input_name, input_value);
-        
+
         return is_render
     }
 
@@ -336,9 +344,9 @@ class ResStore extends Store {
             const data = await resp.json();
             console.log("received: ", data);
             this.clear();
-            router.goToLink('/resume/'+data.id);
+            router.goToLink('/resume/' + data.id);
         } catch (err) {
-            
+
             console.error(err);
         }
     }
@@ -348,11 +356,12 @@ class ResStore extends Store {
 
     async loadResume(id) {
         this.finals_data = [];
+
         const resume = await this.getResume(id);
         if (isObjEmpty(resume)) {
             return false;
         }
-        
+
         for (let i = 0; i < this.forms_data.length; ++i) {
             this.forms_data[i] = structuredClone(resume);
             this.finals_data.push({});
@@ -362,16 +371,16 @@ class ResStore extends Store {
     }
 
     async getResume(id) {
-        console.log("...id:", id); 
+        console.log("...id:", id);
         try {
             const resp = await APIConnector.get(
                 BACKEND_SERVER_URL + '/current_user/cvs/' + id);
             const data = await resp.json();
+            this.resume_id = id;
             console.log("received(resume): ", data);
             return data;
             // router.goToLink('/resume/'+data.id);
         } catch (err) {
-            
             console.error(err);
             return {};
         }
@@ -395,12 +404,9 @@ class ResStore extends Store {
     }
 
     loadEdu() {
-        console.log(this.page_errors);
-        console.log(this.form_data);
         this.form_data['institutions'].forEach(function (inst) {
             this.page_errors['institutions'].push({});
         }.bind(this));
-        console.log(this.pages_errors);
     }
 
     loadExp() {
@@ -421,22 +427,27 @@ class ResStore extends Store {
         return true;
     }
 
-    saveEdit(form_data) {
+    async saveEdit(form_data) {
         const is_render = this.saveForm(form_data);
         if (is_render) {
             return true;
         } else {
             this.final_data = structuredClone(this.form_data);
-            this.sendEdit();
+            return await this.sendEdit();
         }
-        return true;
     }
 
-    sendEdit() {
+    async sendEdit() {
         console.log("sending edit...");
         console.log(this.final_data);
-        //TODO
-        this.changeMode();
+        try {
+            const resp = await APIConnector.put(
+                BACKEND_SERVER_URL + '/current_user/cvs/' + this.resume_id, this.final_data);
+            this.changeMode();
+        } catch (err) {
+            console.error(err);
+        }
+        return true;
     }
 
 

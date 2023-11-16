@@ -1,14 +1,8 @@
 <section class="rescr-section">
   <div class="column-wrapper">
     <div class="rescr">
-      {{#with (object steps=(array
-      "Основная информация"
-      "Информация об образовании"
-      "Информация об опыте работы"
-      "Информация о Вас"))}}
-      {{> rescr_form (object page=../page steps=steps errors=../errors data=../data page_data=../page_data form_error=../form_error)}}
-      {{> res_steps (object page=../page steps=steps)}}
-      {{/with}}
+      {{> rescr_form }}
+      {{> form_steps }}
     </div>
   </div>
 </section>

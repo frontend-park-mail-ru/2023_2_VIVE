@@ -1,13 +1,15 @@
 import router from '../modules/router.js';
 import responseStore from '../stores/responseStore.js';
-import View from './view.js';
+import mainView from './mainView.js';
 
-export default class responseView extends View {
+export default class responseView extends mainView {
     constructor() {
         super();
     }
 
     async render() {
+        await super.render();
+        
         // eslint-disable-next-line no-undef
         const template = Handlebars.templates['response'];
         document.querySelector('main').innerHTML = template(responseStore.getContext());

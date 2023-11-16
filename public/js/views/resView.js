@@ -1,11 +1,8 @@
-import { BACKEND_SERVER_URL } from '../../../config/config.js';
-import APIConnector from '../modules/APIConnector.js';
 import resStore from '../stores/ResStore.js';
-import User from '../stores/UserStore.js';
 import { getFormObject } from '../utils.js';
-import View from './view.js';
+import mainView from './mainView.js';
 
-export default class resViewView extends View {
+export default class resView extends mainView {
   constructor() {
     super();
   }
@@ -27,7 +24,6 @@ export default class resViewView extends View {
   }
 
   async updateInnerData(url_data) {
-    // url_data = {id:12};
     return await resStore.loadResume(url_data.id);
 
   }
@@ -36,7 +32,8 @@ export default class resViewView extends View {
    * Асинхронный метод для отображения страницы
    */
   async render() {
-    
+    await super.render();
+
     this.rerender();
   }
 
@@ -80,10 +77,10 @@ export default class resViewView extends View {
     const forms = document.querySelectorAll('.js-edit-form');
     // console.log(forms[])
     forms.forEach(form => {
-      form.addEventListener('submit', event => {
+      form.addEventListener('submit', async event => {
         event.preventDefault();
         resStore.page = form.dataset.page;
-        if (resStore.saveEdit(getFormObject(new FormData(form)))) {
+        if (await resStore.saveEdit(getFormObject(new FormData(form)))) {
           this.rerender();
         }
       })

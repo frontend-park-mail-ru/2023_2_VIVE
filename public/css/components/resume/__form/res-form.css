@@ -2,6 +2,12 @@
 
 .res__form__field {
   margin-bottom: 20px;
+  width: 100%;
+}
+
+.res__form__field_flex {
+  display: flex;
+  gap: 20px;
 }
 
 .res__form__input {
@@ -11,6 +17,10 @@
 .res__form__input__title {
   font-size: 15px;
   margin-bottom: 7px;
+}
+
+.res__form__input_radio {
+  
 }
 
 .res__form__input_radio_field {

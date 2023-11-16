@@ -1,0 +1,118 @@
+<div class="form">
+
+  {{!-- =========================== --}}
+
+  {{#each (array
+  (object title="Название вакансии" name="name" placeholder="Название вакансии")
+  )}}
+
+  {{> input (object obj=this
+  value=(lookup ../data this.name)
+  class=(object
+  title="res__form__input__title"
+  input="res__form__input forms-placeholder"
+  block="res__form__field"
+  )
+  name=this.name
+  error=(lookup ../errors this.name))}}
+  {{/each}}
+
+  {{!-- ========================= --}}
+
+  <div class="res__form__field">
+    <div class="res__form__input__title">Предпологаемый уровень дохода ₽</div>
+      <div class="res__form__field_flex">
+        {{#each (array
+        (object name="salary_lower_bound" placeholder="От")
+        (object name="salary_upper_bound" placeholder="До")
+        )}}
+
+        {{> input (object obj=this
+        value=(lookup ../data this.name)
+        class=(object
+        title="res__form__input__title"
+        input="res__form__input forms-placeholder"
+        )
+        name=this.name
+        error=(lookup ../errors this.name))}}
+        {{/each}}
+      </div>
+    </div>
+  {{!-- ========================= --}}
+
+  <div class="res__form__field">
+    <div class="res__form__input__title">Требуемый опыт</div>
+    <div class=" res__form__input_radio">
+      {{#each (array
+      (object text="Нет опыта" value="<1") 
+      (object text="От 1 года до 3-х лет" value=">1<3" ) 
+      (object text="От 3-х лет до 6 лет" value=">3<6" ) 
+      (object text="более 6 лет" value=">6" ) )}} 
+      {{> input_radio (object
+        text=this.text
+        class=(object
+        block="mb-10"
+        input="res__form__input"
+        )
+        attrs=(object
+        name="experience"
+        value=this.value
+        )
+        checked=(iffs (lookup ../data "experience") '==' this.value true false)
+        error=(lookup ../errors "experience"))}}
+        {{/each}}
+    </div>
+    {{#if (lookup errors "experience")}}
+    <div class="input_error__msg">{{lookup errors "experience"}}</div>
+    {{/if}}
+  </div>
+
+  {{!-- ================================== --}}
+
+  <div class="res__form__field">
+    <div class="res__form__input__title">Занятость</div>
+    <div class=" res__form__input_radio">
+      {{#each (array
+      (object text="Полная занятость" value="<1") 
+      (object text="Частичная занятость" value=">1<3" ) 
+      (object text="Проектная работа или разовое задание" value=">3<6" ) 
+      (object text="Волонтерство" value=">6" )
+      (object text="Стажировка" value=">7" ) )}} 
+      {{> input_radio (object
+        text=this.text
+        class=(object
+        block="mb-10"
+        input="res__form__input"
+        )
+        attrs=(object
+        name="employment"
+        value=this.value
+        )
+        checked=(iffs (lookup ../data "employment") '==' this.value true false)
+        error=(lookup ../errors "employment"))}}
+        {{/each}}
+    </div>
+    {{#if (lookup errors "employment")}}
+    <div class="input_error__msg">{{lookup errors "employment"}}</div>
+    {{/if}}
+  </div>
+
+  {{!-- ================================== --}}
+
+  {{#each (array
+  (object title="Расположение" name="location" placeholder="Расположение")
+  )}}
+
+  {{> input (object obj=this
+  class=(object
+  title="res__form__input__title"
+  input="res__form__input forms-placeholder"
+  block="res__form__field"
+  )
+  name=this.name
+  value=(lookup ../data this.name)
+  error=(lookup ../errors this.name))}}
+
+  {{/each}}
+
+</div>

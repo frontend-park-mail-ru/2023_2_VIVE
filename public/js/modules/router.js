@@ -1,15 +1,14 @@
-import { BACKEND_SERVER_URL } from '../../../config/config.js';
-import APIConnector from '../modules/APIConnector.js'
-import footerView from '../views/footerView.js';
-import menuView from '../views/menuView.js';
 import page404View from '../views/page404View.js';
 import resCreationView from '../views/resCreationView.js';
-import resViewView from '../views/resViewView.js';
+import resView from '../views/resView.js';
 import vacsView from '../views/vacsView.js';
 import profileView from '../views/profileView.js';
 import vacancyView from '../views/vacancyView.js';
 import regAuthView from '../views/regAuthView.js'
 import responseView from '../views/responseView.js';
+
+import UserStore from '../stores/UserStore.js';
+import vacCreationView from '../views/vacCreationView.js';
 
 /**
  * Класс Router для управления навигацией по сайту
@@ -34,6 +33,7 @@ class Router {
       '/profile/resumes': 'profile',
       '/profile/vacancies': 'profile',
       '/profile/responses': 'profile',
+      '/vac_creation': 'vacCreation',
       '/vacancy/:id': 'vacancy',
       '/vacancy/:id/description': 'vacancy',
       '/vacancy/:id/responses': 'vacancy',
@@ -46,15 +46,14 @@ class Router {
       responseView: new responseView(),
       vacs: new vacsView(),
       resCreation: new resCreationView(),
-      resView: new resViewView(),
+      resView: new resView(),
       appAuth: new regAuthView('auth', 'applicant'),
       empAuth: new regAuthView('auth', 'employer'),
       appReg: new regAuthView('reg', 'applicant'),
       empReg: new regAuthView('reg', 'employer'),
       profile: new profileView(),
       vacancy: new vacancyView(),
-      menu: new menuView(),
-      footer: new footerView(),
+      vacCreation: new vacCreationView(),
       page404: new page404View(),
     };
 
@@ -95,21 +94,21 @@ class Router {
     history.pushState(null, null, url);
   }
 
-  /**
-   * Получение текущего URL
-   * @returns {String}
-   */
-  get curUrl() {
-    return this.lastUrl;
-  }
 
   async urlWork(url) {
     this.deleteLastRender();
 
     const matchedRoute = await this.parsingUrlOnMathced(url);
     if (!matchedRoute) {
-      this.prevView = this.objs['page404'];
-      this.prevView.render();
+      this.render404();
+      return;
+    }
+
+    await UserStore.updateUser();
+
+    const redirect = await this.needRedirect(matchedRoute);
+    if ('redirect' in redirect) {
+      router.goToLink(redirect['redirect']);
       return;
     }
 
@@ -120,31 +119,34 @@ class Router {
     if (this.prevView) {
       this.prevView.remove();
     }
-    this.objs['menu'].remove();
-    this.objs['footer'].remove();
   }
 
-  render(url) {
-    if (url) {
-      this.objs['menu'].render();
-      this.objs['footer'].render();
-      this.prevView = this.objs[this.routes[url]];
-    } else {
-      if (this.prevView) {
-        this.prevView.clear();
-      }
-      this.objs['menu'].clear();
-      this.objs['footer'].clear();
-      this.prevView = this.objs['page404'];
+  clearLastRender() {
+    if (this.prevView) {
+      this.prevView.clear();
     }
+  }
+
+  render404() {
+    this.clearLastRender();
+    this.prevView = this.objs['page404'];
     this.prevView.render();
   }
 
+  render(url) {
+    if (this.routes[url]) {
+      this.prevView = this.objs[this.routes[url]];
+      this.prevView.render();
+    } else {
+      this.render404();
+    }
+  }
+
   async needRedirect(url) {
-    if (this.denyWithAuth.includes(url) && await this.authCheck()) {
-      return {'redirect': '/vacs'};
-    } else if (this.authoriziedNeed.includes(url) && !(await this.authCheck())) {
-      return {'redirect': '/app_auth'};
+    if (this.denyWithAuth.includes(url) && await UserStore.isLoggedIn()) {
+      return { 'redirect': '/vacs' };
+    } else if (this.authoriziedNeed.includes(url) && !(await UserStore.isLoggedIn())) {
+      return { 'redirect': '/app_auth' };
     } else {
       return {};
     }
@@ -192,7 +194,7 @@ class Router {
     const id = idMatch ? parseInt(idMatch[0]) : null;
     if (!isNaN(id)) {
       const view = this.objs[this.routes['/response/:id']];
-      if (!await view.updateInnerData({'id': id})) {
+      if (!await view.updateInnerData({ 'id': id })) {
         return false
       } else {
         return true;
@@ -205,10 +207,10 @@ class Router {
     const id = idMatch ? parseInt(idMatch[0]) : null;
     if (!isNaN(id)) {
       const view = this.objs[this.routes['/vacancy/:id']];
-      if (!(await view.updateInnerData({'id': id}))) {
+      if (!(await view.updateInnerData({ 'id': id }))) {
         return -1;
       } else {
-        return id; 
+        return id;
       }
     }
   }
@@ -223,29 +225,29 @@ class Router {
     const id = idMatch ? parseInt(idMatch[0]) : null;
     if (!isNaN(id)) {
       const view = this.objs[this.routes['/resume/:id']];
-      if (!(await view.updateInnerData({'id': id}))) {
+      if (!(await view.updateInnerData({ 'id': id }))) {
         return -1;
       } else {
-        return id; 
+        return id;
       }
     }
     const view = this.objs[this.routes[url]];
     return await view.updateInnerData(url);
   }
 
-  async authCheck() {
-    try {
-      const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/session`);
-      return true;
-    } catch(err) {
-      const statusCode = err.status.StatusCode;
-      if (statusCode > 500) {
-        throw new Error("INTERNAL ERROR");
-      } else {
-        return false;
-      }
-    }
-  }
+  // async authCheck() {
+  //   try {
+  //     const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/session`);
+  //     return true;
+  //   } catch(err) {
+  //     const statusCode = err.status.StatusCode;
+  //     if (statusCode > 500) {
+  //       throw new Error("INTERNAL ERROR");
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+  // }
 }
 
 const router = new Router();

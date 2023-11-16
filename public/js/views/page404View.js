@@ -2,13 +2,10 @@ import View from './view.js';
 
 export default class page404View extends View {
     async render() {
-        super.render();
-        this.compileTemplates();
-        this.addEventListeners();
-    }
+        await super.render();
 
-    compileTemplates() {
         document.querySelector('main').innerHTML = Handlebars.templates['page404']();
+        this.addEventListeners();
     }
 
     addEventListeners() {
@@ -17,6 +14,6 @@ export default class page404View extends View {
     
     remove() {
         super.remove();
-        document.querySelector('main').innerHTML = "";
+        // document.querySelector('main').innerHTML = "";
     }
 }
