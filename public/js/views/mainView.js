@@ -1,8 +1,5 @@
-import { BACKEND_SERVER_URL } from '../../../config/config.js';
-import APIConnector from '../modules/APIConnector.js';
 import router from '../modules/router.js';
 import User from '../stores/UserStore.js';
-import { getHrefFromLink } from '../utils.js';
 import View from './view.js';
 
 export default class mainView extends View {

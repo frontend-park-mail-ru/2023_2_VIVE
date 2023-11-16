@@ -91,7 +91,7 @@ class VacancyStore extends Store {
     }
 
     async sendData(form) {
-        let newVacancyData = { ...this.vacancy};
+        let newVacancyData = { ...this.vacancy };
 
         for (const key in form) {
             newVacancyData[key] = form[key];
@@ -134,7 +134,7 @@ class VacancyStore extends Store {
             }
 
             return true;
-        } catch(err) {
+        } catch (err) {
             return false;
         }
     }
@@ -144,7 +144,18 @@ class VacancyStore extends Store {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + url);
             const data = await resp.json();
             return data;
-        } catch(err) {
+        } catch (err) {
+            return undefined;
+        }
+    }
+
+    async getAllVacancies() {
+        try {
+            const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies');
+            const data = await resp.json();
+            return data;
+        } catch (err) {
+            console.error(err);
             return undefined;
         }
     }

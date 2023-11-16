@@ -372,7 +372,6 @@ class ResStore extends Store {
             return data;
             // router.goToLink('/resume/'+data.id);
         } catch (err) {
-            
             console.error(err);
             return {};
         }
@@ -396,12 +395,9 @@ class ResStore extends Store {
     }
 
     loadEdu() {
-        console.log(this.page_errors);
-        console.log(this.form_data);
         this.form_data['institutions'].forEach(function (inst) {
             this.page_errors['institutions'].push({});
         }.bind(this));
-        console.log(this.pages_errors);
     }
 
     loadExp() {

@@ -1,8 +1,4 @@
-import { BACKEND_SERVER_URL } from '../../../config/config.js';
-import APIConnector from '../modules/APIConnector.js';
-import router from '../modules/router.js';
-import { getHrefFromLink, getFormObject } from '../utils.js';
-import View from './view.js';
+import { getFormObject } from '../utils.js';
 import mainView from './mainView.js';
 import regAuthStore from '../stores/RegAuthStore.js';
 

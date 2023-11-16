@@ -14,5 +14,6 @@ export default class page404View extends View {
     
     remove() {
         super.remove();
+        // document.querySelector('main').innerHTML = "";
     }
 }

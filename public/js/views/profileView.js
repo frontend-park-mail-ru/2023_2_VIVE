@@ -1,8 +1,8 @@
 import router from '../modules/router.js';
 import profileStore from '../stores/profileStore.js';
-import View from './view.js';
+import mainView from './mainView.js';
 
-export default class profileView extends View {
+export default class profileView extends mainView {
   constructor() {
     super();
   }
@@ -24,6 +24,8 @@ export default class profileView extends View {
    * Метод, добавляющий обработчики событий на страницу
    */
   addEventListeners() {
+    super.addEventListeners();
+    
     const profileButtons = document.querySelectorAll('.profile__btn');
     const settingButtons = document.querySelectorAll('[data-name="changing"]');
     const cancelButtons = document.querySelectorAll('[data-name="cancel-changing"]');

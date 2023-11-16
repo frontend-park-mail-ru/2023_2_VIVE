@@ -1,6 +1,6 @@
 import page404View from '../views/page404View.js';
 import resCreationView from '../views/resCreationView.js';
-import resViewView from '../views/resViewView.js';
+import resView from '../views/resView.js';
 import vacsView from '../views/vacsView.js';
 import profileView from '../views/profileView.js';
 import vacancyView from '../views/vacancyView.js';
@@ -44,7 +44,7 @@ class Router {
       responseView: new responseView(),
       vacs: new vacsView(),
       resCreation: new resCreationView(),
-      resView: new resViewView(),
+      resView: new resView(),
       appAuth: new regAuthView('auth', 'applicant'),
       empAuth: new regAuthView('auth', 'employer'),
       appReg: new regAuthView('reg', 'applicant'),
@@ -97,18 +97,17 @@ class Router {
 
     const matchedRoute = await this.parsingUrlOnMathced(url);
     if (!matchedRoute) {
-      this.prevView = this.objs['page404'];
-      this.prevView.render();
+      this.render404();
       return;
     }
+
+    await UserStore.updateUser();
 
     const redirect = await this.needRedirect(matchedRoute);
     if ('redirect' in redirect) {
       router.goToLink(redirect['redirect']);
       return;
     }
-
-    await UserStore.updateUser();
 
     this.render(matchedRoute);
   }
@@ -119,16 +118,25 @@ class Router {
     }
   }
 
-  render(url) {
-    if (url) {
-      this.prevView = this.objs[this.routes[url]];
-    } else {
-      if (this.prevView) {
-        this.prevView.clear();
-      }
-      this.prevView = this.objs['page404'];
+  clearLastRender() {
+    if (this.prevView) {
+      this.prevView.clear();
     }
+  }
+
+  render404() {
+    this.clearLastRender();
+    this.prevView = this.objs['page404'];
     this.prevView.render();
+  }
+
+  render(url) {
+    if (this.routes[url]) {
+      this.prevView = this.objs[this.routes[url]];
+      this.prevView.render();
+    } else {
+      this.render404();
+    }
   }
 
   async needRedirect(url) {

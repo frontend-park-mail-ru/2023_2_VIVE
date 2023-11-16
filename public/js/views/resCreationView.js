@@ -1,13 +1,8 @@
-import { Constraints, validateForm } from '../modules/constraints.js';
 import resStore from '../stores/ResStore.js';
-import User from '../stores/UserStore.js';
-import { getFormObject, getMetaPlusDataObj } from '../utils.js';
-import View from './view.js';
+import { getFormObject } from '../utils.js';
+import mainView from './mainView.js';
 
-export default class resCreationView extends View {
-  constructor() {
-    super();
-  }
+export default class resCreationView extends mainView {
 
   get page() {
     return resStore.page;
@@ -33,7 +28,7 @@ export default class resCreationView extends View {
    */
   async render() {
     await super.render();
-    
+
     const template = Handlebars.templates['res_creation'];
 
     document.querySelector('main').innerHTML = template(resStore.getContext());
@@ -41,12 +36,14 @@ export default class resCreationView extends View {
     this.addEventListeners();
     this.addEventListenersToPage();
   }
-  
+
   remove() {
     resStore.clear();
   }
 
   addEventListeners() {
+    super.addEventListeners();
+
     this.form = document.querySelector('.rescr__form')
 
     const form_input_btns = document.querySelectorAll('.res__form__input');

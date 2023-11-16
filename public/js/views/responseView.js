@@ -1,8 +1,8 @@
 import router from '../modules/router.js';
 import responseStore from '../stores/responseStore.js';
-import View from './view.js';
+import mainView from './mainView.js';
 
-export default class responseView extends View {
+export default class responseView extends mainView {
     constructor() {
         super();
     }
