@@ -44,10 +44,11 @@
     <div class="res__form__input__title">Требуемый опыт</div>
     <div class=" res__form__input_radio">
       {{#each (array
-      (object text="Нет опыта" value="<1") 
-      (object text="От 1 года до 3-х лет" value=">1<3" ) 
-      (object text="От 3-х лет до 6 лет" value=">3<6" ) 
-      (object text="более 6 лет" value=">6" ) )}} 
+      (object text="Не указывать" value="none") 
+      (object text="Нет опыта" value="no_experience") 
+      (object text="От 1 года до 3-х лет" value="one_three_years" ) 
+      (object text="От 3-х лет до 6 лет" value="three_six_years" ) 
+      (object text="более 6 лет" value="six_more_years" ) )}} 
       {{> input_radio (object
         text=this.text
         class=(object
@@ -73,11 +74,12 @@
     <div class="res__form__input__title">Занятость</div>
     <div class=" res__form__input_radio">
       {{#each (array
-      (object text="Полная занятость" value="<1") 
-      (object text="Частичная занятость" value=">1<3" ) 
-      (object text="Проектная работа или разовое задание" value=">3<6" ) 
-      (object text="Волонтерство" value=">6" )
-      (object text="Стажировка" value=">7" ) )}} 
+      (object text="Не указывать" value="none") 
+      (object text="Полная занятость" value="full-time") 
+      (object text="Частичная занятость" value="part-time" ) 
+      (object text="Проектная работа или разовое задание" value="one-time" ) 
+      (object text="Волонтерство" value="volunteering" )
+      (object text="Стажировка" value="internship" ) )}} 
       {{> input_radio (object
         text=this.text
         class=(object
@@ -96,6 +98,43 @@
     <div class="input_error__msg">{{lookup errors "employment"}}</div>
     {{/if}}
   </div>
+
+  {{!-- ================================== --}}
+
+  <div class="res__form__input__title">Уровень образования</div>
+  <div class="res__form__field">
+    {{#each (array
+    (object text="Нет образования" value="nothing")
+    (object text="Среднее" value="secondary")
+    (object text="Среднее специальное" value="special_secondary")
+    (object text="Неоконченное высшее" value="unfinished_higher")
+    (object text="Высшее" value="higher")
+    (object text="Бакалавр" value="bachelor")
+    (object text="Магистр" value="master")
+    (object text="Кандидат наук" value="candidate")
+    (object text="Доктор наук" value="doctor")
+    )}}
+
+    {{> input_radio (object text=this.text
+    attrs=(object
+    name="education_type"
+    value=this.value
+
+    )
+    class=(object
+    block="res__form__input_radio_field"
+    input="js-education-level res__form__input"
+    )
+    checked=(iffs (lookup ../data "education_type") '==' this.value true false)
+    error=(lookup ../errors "education_type")
+    )}}
+
+    {{/each}}
+    {{#if (lookup errors "education_type")}}
+    <div class="input_error__msg">{{lookup errors "education_type"}}</div>
+    {{/if}}
+  </div>
+
 
   {{!-- ================================== --}}
 

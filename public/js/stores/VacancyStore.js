@@ -223,8 +223,9 @@ class VacancyStore extends Store {
     clear() {
         this.page = 0;
         this.form_data = {
-            "experience": "<1",
-            "employment": "<1",
+            "experience": "none",
+            "employment": "none",
+            "education_type": "nothing",
         };
         this.form_errors = {};
         this.error = "";
@@ -293,17 +294,23 @@ class VacancyStore extends Store {
         return true;
     }
 
+    beforeSending() {
+        this.form_data['salary_lower_bound'] = Number(this.form_data['salary_lower_bound']);
+        this.form_data['salary_upper_bound'] = Number(this.form_data['salary_upper_bound']);
+    }
+
     async sendForm() {
         console.log("sending...");
         console.log(this.form_data);
+        this.beforeSending();
         try {
             const resp = await APIConnector.post(
                 BACKEND_SERVER_URL + '/vacancies',
                 this.form_data,
             );
-            console.log(resp);
+            const data = await resp.json();
             this.clear();
-            // router.goToLink('/');        
+            router.goToLink('/vacancy/' + data.id);        
         } catch(error) {
             console.error(error);
             return false;

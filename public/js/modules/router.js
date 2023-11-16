@@ -143,9 +143,9 @@ class Router {
   }
 
   async needRedirect(url) {
-    if (this.denyWithAuth.includes(url) && await UserStore.isLoggedIn()) {
+    if (this.denyWithAuth.includes(url) && UserStore.isLoggedIn()) {
       return { 'redirect': '/vacs' };
-    } else if (this.authoriziedNeed.includes(url) && !(await UserStore.isLoggedIn())) {
+    } else if (this.authoriziedNeed.includes(url) && !(UserStore.isLoggedIn())) {
       return { 'redirect': '/app_auth' };
     } else {
       return {};

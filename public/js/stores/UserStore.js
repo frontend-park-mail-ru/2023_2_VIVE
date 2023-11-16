@@ -42,11 +42,11 @@ class UserStore extends Store {
         }
     }
 
-    async isLoggedIn() {
+    isLoggedIn() {
         return this.login;
     }
     
-    async getUser() {
+    getUser() {
         return this.user;
     }
 
