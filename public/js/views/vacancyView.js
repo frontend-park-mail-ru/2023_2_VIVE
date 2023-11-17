@@ -35,6 +35,7 @@ export default class profileView extends mainView {
         const cancelDescRefactoring = document.querySelector('[data-name="cancel-desc-refactoring"]');
         const sendRefactoringButton = document.querySelector('[data-name="send-refactoring"]');
         const sendDescRefactoringButton = document.querySelector('[data-name="send-desc-refactoring"]');
+        const deleteVacancyButton = document.querySelector('[data-name="delete-vacancy"]');
 
         if (showDescriptionButton) {
             showDescriptionButton.addEventListener('click', () => {
@@ -78,6 +79,37 @@ export default class profileView extends mainView {
                 const descInfo = document.querySelector('.full-job-info');
                 refactoringDescForm.classList.add('d-none');
                 descInfo.classList.remove('d-none');
+            });
+        }
+
+        if (deleteVacancyButton) {
+            deleteVacancyButton.addEventListener('click', (e) => {
+                const template = Handlebars.templates['confirm_action'];
+                document.querySelector('main').innerHTML += template({'action': 'vacancy-del'});
+                
+                const confirmActionFrame = document.querySelector('.confirm-action__frame');
+                const cancelAction = document.querySelectorAll('[data-name="cancel-action"]');
+                const confirmAction = document.querySelector('[data-name="confirm-action"]');
+
+                confirmActionFrame.addEventListener('click',(event) => {
+                    if (!event.target.matches('.confirm-action__field')) {
+                        this.render();
+                    }
+                })
+        
+                cancelAction.forEach(action =>
+                    action.addEventListener('click', () => {
+                        this.render();
+                    })
+                )
+
+                confirmAction.addEventListener('click', async () => {
+                    if  (await vacancyStore.deleteVacancie()) {
+                        router.goToLink('/profile/vacancies');
+                    } else {
+                        this.render();
+                    }
+                })
             });
         }
 

@@ -294,6 +294,18 @@ class VacancyStore extends Store {
         return true;
     }
 
+    async deleteVacancie() {
+        try {
+            const resp = await APIConnector.delete(
+                BACKEND_SERVER_URL + `/vacancies/${this.vacancy.id}`,
+            );
+            return true;
+        } catch(error) {
+            console.log(error);
+            return false;
+        }
+    }
+
     beforeSending() {
         this.form_data['salary_lower_bound'] = Number(this.form_data['salary_lower_bound']);
         this.form_data['salary_upper_bound'] = Number(this.form_data['salary_upper_bound']);

@@ -7,7 +7,7 @@
   padding-top: 15px;
   padding-bottom: 15px;
   box-shadow: -2px 14px 39px -28px #948f8f;
-  z-index: 100;
+  z-index: 10;
 }
 
 .navbar,
