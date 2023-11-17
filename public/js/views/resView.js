@@ -197,11 +197,36 @@ export default class resView extends mainView {
         })
 
       }
-
-
-
     })
 
+    const deleteResumeButton = document.querySelector('[data-name="delete-resume"]');
+    if (deleteResumeButton) {
+      deleteResumeButton.addEventListener('click', (e) => {
+        const template = Handlebars.templates['confirm_action'];
+        document.querySelector('main').innerHTML += template({'action': 'resume-del'});
+        
+        const confirmActionFrame = document.querySelector('.confirm-action__frame');
+        const cancelAction = document.querySelectorAll('[data-name="cancel-action"]');
+        const confirmAction = document.querySelector('[data-name="confirm-action"]');
 
+        confirmActionFrame.addEventListener('click',(event) => {
+            if (!event.target.matches('.confirm-action__field')) {
+                this.rerender();
+            }
+        })
+
+        cancelAction.forEach(action =>
+            action.addEventListener('click', () => {
+                this.rerender();
+            })
+        )
+
+        confirmAction.addEventListener('click', async () => {
+            if (!await resStore.deleteResume()) {
+              this.rerender();
+            }
+        })
+      });
+    }
   }
 }

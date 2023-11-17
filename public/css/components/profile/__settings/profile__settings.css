@@ -96,6 +96,15 @@
     align-items: center;
     gap: 5px;
     cursor: pointer;
+    color: var(--text-error-regular);
+}
+
+.setting__delete-btn:hover {
+    color: #cd463a;
+}
+
+.setting__delete-btn:active {
+    color: #eb4536;
 }
 
 .changing-inpute {

@@ -216,8 +216,11 @@
               fill="#0496FF" />
           </g>
         </svg>'}}
-        {{> link-btn text="Удалить резюме"
-        class="resv__params__actions__delete link-btn_text_red link-btn_pd-sm d-none"}}
+        <div class="setting__delete-btn" data-name="delete-resume">
+            <div class="common-text common-text--medium">
+                Удалить резюме
+            </div>
+        </div>
       </div>
 
       {{#iff data.status '==' 'searching'}}
