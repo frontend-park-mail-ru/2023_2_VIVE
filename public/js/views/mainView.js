@@ -1,4 +1,4 @@
-import router from '../modules/router.js';
+import router from "../modules/router/router.js";
 import User from '../stores/UserStore.js';
 import View from './view.js';
 

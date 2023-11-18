@@ -1,6 +1,6 @@
 import { registerHelpers } from './handlebars/helpers.js';
-import router from './modules/router.js';
+import router from './modules/router/router.js';
 
 registerHelpers();
 
-router.goToLink(window.location.pathname);
+router.start();

@@ -1,7 +1,7 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import { Constraints, validateForm } from '../modules/constraints.js';
-import router from '../modules/router.js';
+import router from "../modules/router/router.js";
 import { getMetaPlusDataObj, isObjEmpty } from '../utils.js';
 import regAuthView from '../views/regAuthView.js';
 import UserStore from './UserStore.js'

@@ -1,7 +1,7 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import { validateForm } from '../modules/constraints.js';
-import router from '../modules/router.js';
+import router from "../modules/router/router.js";
 import { getMetaPlusDataObj, isObjEmpty } from '../utils.js';
 import Store from "./Store.js";
 
@@ -74,14 +74,14 @@ class VacancyStore extends Store {
 
     getContext() {
         const errors = this.errors;
-        const responses = this.responses;
+        // const responses = this.responses;
         this.errors = {};
-        this.responses = [];
+        // this.responses = [];
         this.vacancy.salary_view = this.processVacanciesSalary(this.vacancy);
         this.vacancy.employment_view = this.processVacanciesEmployment(this.vacancy);
         this.vacancy.experience_view = this.processVacanciesExperience(this.vacancy);
         return {
-            responses: responses,
+            responses: this.responses,
             errors: errors,
             state: this.state,
             user: this.user,
@@ -179,6 +179,7 @@ class VacancyStore extends Store {
             const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/vacancies/${data['id']}`);
             this.vacancy = await this.getData(`/vacancies/${data['id']}`);
             this.user = await this.getData("/current_user");
+            this.responses = [];
 
             const cvIds = await this.getData(`/vacancies/${data['id']}/applicants`);
             if (cvIds) {

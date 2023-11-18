@@ -1,4 +1,4 @@
-import router from '../modules/router.js';
+import router from "../modules/router/router.js";
 import { getHrefFromLink } from '../utils.js';
 
 export default class View {

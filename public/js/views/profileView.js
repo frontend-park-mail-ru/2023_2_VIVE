@@ -1,4 +1,4 @@
-import router from '../modules/router.js';
+import router from "../modules/router/router.js";
 import profileStore from '../stores/profileStore.js';
 import mainView from './mainView.js';
 
