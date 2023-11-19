@@ -6,8 +6,10 @@ import resCreationView from "../../views/resCreationView.js"
 import vacancyView from "../../views/vacancyView.js"
 import vacCreationView from "../../views/vacCreationView.js"
 import responseView from "../../views/responseView.js"
+import page404View from '../../views/page404View.js';
 
 const urls = [
+    {url: '/page404', view: new page404View()},
     {url: '/vacs', view: new vacsView()},
     {url: '/app_auth', deny_with_auth: true, view: new regAuthView('auth', 'applicant')},
     {url: '/emp_auth', deny_with_auth: true, view: new regAuthView('auth', 'employer')},

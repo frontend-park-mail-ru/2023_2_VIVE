@@ -3,4 +3,10 @@ import router from './modules/router/router.js';
 
 registerHelpers();
 
-router.start();
+try {
+    router.start();
+} catch(error) {
+    console.log(error);
+}
+
+router.goToLink(window.location.pathname);
