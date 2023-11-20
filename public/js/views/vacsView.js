@@ -85,7 +85,9 @@ export default class vacsView extends mainView {
     });
 
     descriptionText.forEach(description => {
+      if (description.innerText.length > 400) {
       description.innerText = description.innerText.substring(0, 400) + "...";
+      }
     })
   }
 
@@ -107,7 +109,9 @@ export default class vacsView extends mainView {
     });
 
     descriptionText.forEach(description => {
+      if (description.innerText.length > 300) {
       description.innerText = description.innerText.substring(0, 300) + "...";
+      }
     })
   }
 
