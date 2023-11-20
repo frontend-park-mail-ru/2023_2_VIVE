@@ -1,3 +1,5 @@
+import { BACKEND_SERVER_URL } from "../../../../config/config.js";
+import APIConnector from "../APIConnector.js";
 import urls from "./urls.js";
 
 const UrlParams = {
@@ -13,7 +15,7 @@ const StatusCode = {
     'NEED_AUTH': 100,
     'DENY_AUTH': 101,
     'DENY_APPLICANT': 102,
-    'DENY_EMPLOYER': 103
+    'DENY_EMPLOYER': 103,
 }
 
 const isValidParam = (param) => {
@@ -45,11 +47,13 @@ class Router {
                 console.log(error);
             }
         });
+        this.popStateCheck();
     }
 
-    async goToLink(path) {
-        path = (path == '/') ? '/vacs' : path;
-        await this.urlWork(path);
+    async goToLink(url) {
+        url = (url == '/') ? '/vacs' : url;
+        await this.urlWork(url);
+        history.pushState({url: url}, null, url);
     }
 
     back() {
@@ -73,20 +77,29 @@ class Router {
         }
     }
 
+    popStateCheck() {
+        window.addEventListener('popstate', (e) => {
+            this.urlWork(e.state.url);
+        });
+    }
+
     async urlWork(path) {
+        this.deleteLastRender();
         for (const element of urls) {
             const url = element[UrlParams.URL];
             const routeRegex = new RegExp(`^${url.replace(/:\w+/g, '(\\d+)')}(#)?$`);
             if (routeRegex.test(path)) {
                 const status = await this.paramsWork(element);
                 if (status != null) {
-                    console.log(status);
+                    this.statusProccesing(status);
                     return;
                 }
 
                 if (!await this.updateInnerData(url, path)) {
-                    console.log(error);
+                    this.render404();
+                    return;
                 }
+
                 this.render(url);
             }
         }
@@ -100,6 +113,77 @@ class Router {
             return false;
         }
         return true;
+    }
+
+    statusProccesing(status) {
+        switch(status) {
+            case StatusCode.DENY_AUTH:
+                this.goToLink('/vacs');
+                break;
+            case StatusCode.NEED_AUTH:
+            case StatusCode.DENY_APPLICANT:
+            case StatusCode.DENY_EMPLOYER:
+                this.goToLink('/app_auth');
+                break;
+            default:
+                throw Error("Unexpected status")
+        }
+    }
+
+    async paramsWork(url) {
+        for (const el in url) {
+            switch(el) {
+                case UrlParams.DENY_WITH_AUTH:
+                    if (await this.authCheck()) {
+                        return StatusCode.DENY_AUTH;
+                    }
+                    break;
+                case UrlParams.LOGIN_REQUIRED:
+                    if (!await this.authCheck()) {
+                        return StatusCode.NEED_AUTH;
+                    }
+                    break;
+                case UrlParams.FOR_APPLICANT:
+                    const appRole = await this.getRole();
+                    if (appRole === null) {
+                        return StatusCode.NEED_AUTH;
+                    } else if (appRole === 'employer') {
+                        return StatusCode.DENY_EMPLOYER;
+                    }
+                    break;
+                case UrlParams.FOR_EMPLOYER:
+                    const empRole = await this.getRole();
+                    if (empRole === null) {
+                        return StatusCode.NEED_AUTH;
+                    } else if (empRole === 'applicant') {
+                        return StatusCode.DENY_APPLICANT;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return null;
+    }
+
+    async authCheck() {
+        try {
+            const resp = await APIConnector.get(BACKEND_SERVER_URL + "/current_user");
+            return true;
+        } catch(error) {
+            return false;
+        }
+    }
+
+    async getRole() {
+        try {
+            const resp = await APIConnector.get(BACKEND_SERVER_URL + "/current_user");
+            const user = await resp.json();
+            return user.role;
+        } catch(error) {
+            return null;
+        }
     }
 
     deleteLastRender() {
@@ -122,61 +206,6 @@ class Router {
 
     render(url) {
         this.prevView.render();
-    }
-
-    async paramsWork(url) {
-        for (const el in url) {
-            switch(el) {
-                case UrlParams.DENY_WITH_AUTH:
-                    if (await this.authCheck()) {
-                        return {code: StatusCode.DENY_AUTH};
-                    }
-                    break;
-                case UrlParams.LOGIN_REQUIRED:
-                    if (!await this.authCheck()) {
-                        return {code: StatusCode.NEED_AUTH};
-                    }
-                    break;
-                case UrlParams.FOR_APPLICANT:
-                    const role = await this.getRole();
-                    if (role === null) {
-                        return {code: StatusCode.NEED_AUTH};
-                    } else if (role === 'employer') {
-                        return {code: StatusCode.DENY_EMPLOYER};
-                    }
-                    break;
-                case UrlParams.FOR_EMPLOYER:
-                    role = await this.getRole();
-                    if (role === null) {
-                        return {code: StatusCode.NEED_AUTH};
-                    } else if (role === 'applicant') {
-                        return {code: StatusCode.DENY_APPLICANT};
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        return null;
-    }
-
-    async authCheck() {
-        try {
-            const resp = await APIConnector.get(BACKEND_SERVER_URL + "/current_user");
-            return true;
-        } catch(error) {
-            return false;
-        }
-    }
-
-    async getRole() {
-        try {
-            const user = await APIConnector.get(BACKEND_SERVER_URL + "/current_user");
-            return user.role;
-        } catch(error) {
-            return null;
-        }
     }
     
     isValidUrlObject(urlObject) {

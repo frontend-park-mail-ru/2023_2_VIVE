@@ -28,6 +28,7 @@
                     </div>
                 </div>
             </div>
+            {{#if resumes}}
             <div class="response-page__select-block">
                 {{#if form_error }}
                 <div class="form__error">{{form_error}}</div>
@@ -51,6 +52,11 @@
                     Отправить отклик
                 </div>
             </div>
+            {{else}}
+            <span class="header-text header-text--second text-form-active" style="display: flex; gap: 5px">
+                Упс... Кажется у вас еще нет резюме. Давайте <a href="/resume/creation" class="js-nav-link link-btn link-btn_blue-without-bd">создадим</a> его!
+            </span>
+            {{/if}}
         </div>
         <div class="view-company">
             <img class="view-company__img" src="../../../public/images/img/vk-company.png">

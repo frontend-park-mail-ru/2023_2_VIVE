@@ -144,10 +144,11 @@ class ProfileStore extends Store {
         }
     }
 
-    async updateInnerData(url) {
+    async updateInnerData(data) {
+        await super.updateInnerData();
         this.user = await this.updateData("/current_user");
     
-        const parts = url.split('/');
+        const parts = data.url.split('/');
         this.state = parts[2] ? parts[2] : 'settings';
     
         if ((this.state == 'resumes' || this.state == 'responses') && this.user.role == 'employer') {

@@ -175,11 +175,24 @@ class VacancyStore extends Store {
     }
 
     async updateInnerData(data) {
+        await super.updateInnerData();
         try {
             const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/vacancies/${data['id']}`);
             this.vacancy = await this.getData(`/vacancies/${data['id']}`);
             this.user = await this.getData("/current_user");
             this.responses = [];
+
+            switch(data.url.split('/').slice(1)[2]) {
+                case 'responses':
+                    this.setState('responses');
+                    break;
+                case 'description':
+                case undefined:
+                    this.setState('description');
+                    break;
+                default:
+                    break;
+            }
 
             const cvIds = await this.getData(`/vacancies/${data['id']}/applicants`);
             if (cvIds) {

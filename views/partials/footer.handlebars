@@ -7,12 +7,12 @@
       </div>
       <div>
         {{#iff user.role '==' 'applicant' }}
-          {{> link-btn (object href="/resume_creation" text="Создать резюме"
+          {{> link-btn (object href="/resume/creation" text="Создать резюме"
           class="js-nav-link footer__btn link-btn_orange"
           class_text="common-text common-text--medium")}}
         {{else}}
-          {{> link-btn (object href="" text="Создать вакансию"
-          class="js-nav-link footer__btn link-btn_orange cursor-not-allowed"
+          {{> link-btn (object href="/vacancy/creation" text="Создать вакансию"
+          class="js-nav-link footer__btn link-btn_orange"
           class_text="common-text common-text--medium")}}
         {{/iff}}
       </div>
