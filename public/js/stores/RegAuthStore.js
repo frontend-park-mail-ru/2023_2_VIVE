@@ -69,6 +69,16 @@ class RegAuthStore extends Store {
         }
         return this.forms_data[this.view.form_type][this.view.role];
     }
+
+    set form_errors(value) {
+        if (!this.forms_errors[this.view.form_type]) {
+            this.forms_errors[this.view.form_type] = {};
+        }
+        if (!this.forms_errors[this.view.form_type][this.view.role]) {
+            this.forms_errors[this.view.form_type][this.view.role] = {};
+        }
+        this.forms_errors[this.view.form_type][this.view.role] = value;
+    }
     
 
     pageFormFieldsMeta() {
@@ -165,7 +175,7 @@ class RegAuthStore extends Store {
     }
 
     checkAndSendForm(form_data) {
-        Object.assign(this.form_errors, validateForm(getMetaPlusDataObj(this.pageFormFieldsMeta(), form_data)));
+        this.form_errors = validateForm(getMetaPlusDataObj(this.pageFormFieldsMeta(), form_data));
         Object.assign(this.form_data, form_data);
 
         if (isObjEmpty(this.form_errors)) {
