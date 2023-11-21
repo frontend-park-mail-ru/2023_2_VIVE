@@ -37,8 +37,8 @@ export default class resView extends mainView {
     this.rerender();
   }
 
-  rerender() {
-    super.render();
+  async rerender() {
+    await super.render();
     const template = Handlebars.templates['res_view'];
     document.querySelector('main').innerHTML = template(resStore.getContext());
 

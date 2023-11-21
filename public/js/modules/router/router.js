@@ -103,6 +103,8 @@ class Router {
                 this.render(url);
             }
         }
+
+        this.render404();
     }
 
     async updateInnerData(url, facUrl) {

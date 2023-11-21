@@ -4,6 +4,7 @@ import { validateForm } from '../modules/constraints.js';
 import router from "../modules/router/router.js";
 import { getFormObject, getMetaPlusDataObj, isObjEmpty } from '../utils.js';
 import Store from './Store.js';
+import User from './UserStore.js';
 
 class ResStore extends Store {
     constructor() {
@@ -180,7 +181,7 @@ class ResStore extends Store {
 
     getContext() {
         return {
-            // user: await User.getUser(),
+            user: User.getUser(),
             steps: this.formSteps(),
             page: this.page,
             errors: this.page_errors,
@@ -373,8 +374,14 @@ class ResStore extends Store {
     async getResume(id) {
         console.log("...id:", id);
         try {
-            const resp = await APIConnector.get(
-                BACKEND_SERVER_URL + '/current_user/cvs/' + id);
+            let resp = null;
+            if (User.getUser().role === User.ROLES.app) {
+                resp = await APIConnector.get(
+                    BACKEND_SERVER_URL + '/current_user/cvs/' + id);
+            } else if (User.getUser().role === User.ROLES.emp) {
+                resp = await APIConnector.get(
+                    BACKEND_SERVER_URL + '/cv/' + id);
+            }
             const data = await resp.json();
             this.resume_id = id;
             console.log("received(resume): ", data);

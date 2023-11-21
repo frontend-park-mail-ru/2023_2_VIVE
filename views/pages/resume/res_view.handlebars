@@ -43,10 +43,12 @@
               <img class="resv__data__main__avatar" src="../../../public/images/profile.png" alt="">
             </div>
             {{/with}}
+            {{#iff user.role '==' 'applicant'}}
             {{> link-btn text="Редактировать"
             data=(object page=0)
             class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
             d-block"}}
+            {{/iff}}
             {{/if}}
           </div>
 
@@ -114,10 +116,12 @@
             </div>
           </div>
           {{/with}}
+          {{#iff user.role '==' 'applicant'}}
           {{> link-btn text="Редактировать"
           data=(object page=1)
           class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
           d-block"}}
+          {{/iff}}
           {{/if}}
         </div>
 
@@ -154,11 +158,13 @@
           </div>
         </div>
         {{/with}}
+        {{#iff user.role '==' 'applicant'}}
         {{> link-btn text="Редактировать"
         data=(object page=2)
         class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
         d-block"
         }}
+        {{/iff}}
         {{/if}}
       </div>
 
@@ -181,11 +187,13 @@
           </div>
         </div>
         {{/with}}
+        {{#iff user.role '==' 'applicant'}}
         {{> link-btn text="Редактировать"
         data=(object page=3)
         class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
         d-block"
         }}
+        {{/iff}}
         {{/if}}
       </div>
     </div>
@@ -201,6 +209,7 @@
         Резюме обновлено 01.11.23
       </div>
       <div class="resv__params__actions mb-20">
+        {{#iff user.role '==' 'applicant'}}
         {{> link-btn
         class="resv__params__actions__print link-btn_transp-box-blue link-btn_pd-sm link-btn_bd-rad-sm
         link-btn_semi-bold d-block"
@@ -221,6 +230,7 @@
                 Удалить резюме
             </div>
         </div>
+        {{/iff}}
       </div>
 
       {{#iff data.status '==' 'searching'}}
