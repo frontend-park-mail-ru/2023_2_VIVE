@@ -3,10 +3,12 @@
 }
 
 .resv__nav__link {
+  align-items: center;
   padding-left: 0;
 }
 
 .resv__nav__link__svg {
+  align-items: center;
   margin-right: 5px;
 }
 
