@@ -145,7 +145,6 @@ class ProfileStore extends Store {
     }
 
     async updateInnerData(data) {
-        await super.updateInnerData();
         this.user = await this.updateData("/current_user");
     
         const parts = data.url.split('/');

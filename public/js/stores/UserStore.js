@@ -1,11 +1,13 @@
 import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import router from "../modules/router/router.js";
+import Store from './Store.js';
 
-class UserStore {
+class UserStore extends Store {
     constructor() {
+        super();
         this.login = false;
-        this.user = false;
+        this.user = null;
     }
 
     ROLES = {
@@ -18,7 +20,7 @@ class UserStore {
         if (this.login) {
             await this.reqUser();
         } else {
-            this.user = undefined;
+            this.user = null;
         }
     }
 
@@ -36,7 +38,7 @@ class UserStore {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + "/current_user");
             this.user = await resp.json();
         } catch (err) {
-            this.user = undefined;
+            this.user = null;
         }
     }
 

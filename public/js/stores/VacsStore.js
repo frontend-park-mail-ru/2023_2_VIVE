@@ -20,7 +20,6 @@ class VacsStore extends Store {
     }
 
     async updateInnerData() {
-        await super.updateInnerData();
         try {
             this.vacs = this.sortVacanciesByDateToOld(await this.getVacancies());
             this.vacs = this.processVacanciesData(this.vacs);

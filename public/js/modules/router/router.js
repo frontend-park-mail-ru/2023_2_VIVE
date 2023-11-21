@@ -1,4 +1,5 @@
 import { BACKEND_SERVER_URL } from "../../../../config/config.js";
+import User from "../../stores/UserStore.js";
 import APIConnector from "../APIConnector.js";
 import urls from "./urls.js";
 
@@ -85,6 +86,7 @@ class Router {
 
     async urlWork(path) {
         this.deleteLastRender();
+        await User.updateUser();
         for (const element of urls) {
             const url = element[UrlParams.URL];
             const routeRegex = new RegExp(`^${url.replace(/:\w+/g, '(\\d+)')}(#)?$`);
@@ -134,28 +136,26 @@ class Router {
         for (const el in url) {
             switch(el) {
                 case UrlParams.DENY_WITH_AUTH:
-                    if (await this.authCheck()) {
+                    if (User.isLoggedIn()) {
                         return StatusCode.DENY_AUTH;
                     }
                     break;
                 case UrlParams.LOGIN_REQUIRED:
-                    if (!await this.authCheck()) {
+                    if (!User.isLoggedIn()) {
                         return StatusCode.NEED_AUTH;
                     }
                     break;
                 case UrlParams.FOR_APPLICANT:
-                    const appRole = await this.getRole();
-                    if (appRole === null) {
+                    if (User.getUser() === null) {
                         return StatusCode.NEED_AUTH;
-                    } else if (appRole === 'employer') {
+                    } else if (User.getUser().role === 'employer') {
                         return StatusCode.DENY_EMPLOYER;
                     }
                     break;
                 case UrlParams.FOR_EMPLOYER:
-                    const empRole = await this.getRole();
-                    if (empRole === null) {
+                    if (User.getUser() === null) {
                         return StatusCode.NEED_AUTH;
-                    } else if (empRole === 'applicant') {
+                    } else if (User.getUser().role === 'applicant') {
                         return StatusCode.DENY_APPLICANT;
                     }
                     break;
@@ -165,25 +165,6 @@ class Router {
         }
 
         return null;
-    }
-
-    async authCheck() {
-        try {
-            const resp = await APIConnector.get(BACKEND_SERVER_URL + "/current_user");
-            return true;
-        } catch(error) {
-            return false;
-        }
-    }
-
-    async getRole() {
-        try {
-            const resp = await APIConnector.get(BACKEND_SERVER_URL + "/current_user");
-            const user = await resp.json();
-            return user.role;
-        } catch(error) {
-            return null;
-        }
     }
 
     deleteLastRender() {

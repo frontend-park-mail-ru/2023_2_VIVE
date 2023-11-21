@@ -175,7 +175,6 @@ class VacancyStore extends Store {
     }
 
     async updateInnerData(data) {
-        await super.updateInnerData();
         try {
             const resp = await APIConnector.get(`${BACKEND_SERVER_URL}/vacancies/${data['id']}`);
             this.vacancy = await this.getData(`/vacancies/${data['id']}`);
