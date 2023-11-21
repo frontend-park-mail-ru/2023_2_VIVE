@@ -1,6 +1,4 @@
-import { BACKEND_SERVER_URL } from "../../../../config/config.js";
 import User from "../../stores/UserStore.js";
-import APIConnector from "../APIConnector.js";
 import urls from "./urls.js";
 
 const UrlParams = {
@@ -98,8 +96,8 @@ class Router {
                 }
 
                 if (!await this.updateInnerData(url, path)) {
-                    this.render404();
-                    return;
+                    // this.render404();
+                    // return;
                 }
 
                 this.render(url);
@@ -120,11 +118,11 @@ class Router {
     statusProccesing(status) {
         switch(status) {
             case StatusCode.DENY_AUTH:
+            case StatusCode.DENY_APPLICANT:
+            case StatusCode.DENY_EMPLOYER:
                 this.goToLink('/vacs');
                 break;
             case StatusCode.NEED_AUTH:
-            case StatusCode.DENY_APPLICANT:
-            case StatusCode.DENY_EMPLOYER:
                 this.goToLink('/app_auth');
                 break;
             default:
