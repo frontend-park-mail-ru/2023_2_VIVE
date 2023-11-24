@@ -61,15 +61,19 @@ export default class mainView extends View {
                 }
             });
 
-            const vacancySearch = document.querySelector('[name="resume-search"]');
-            const resumeSearch = document.querySelector('[name="vacancy-search"]');
+            const resumeSearch = document.querySelector('[name="resume-search"]');
+            const vacancySearch = document.querySelector('[name="vacancy-search"]');
 
-            vacancySearch.addEventListener('click', () => {
+            resumeSearch.addEventListener('click', () => {
+                resumeSearch.classList.add('dropdown-search__item_active');
+                vacancySearch.classList.remove('dropdown-search__item_active');
                 this.search_type = SEARCH_TYPE.RESUME;
                 searchType.innerHTML = 'Резюме';
             })
 
-            resumeSearch.addEventListener('click', () => {
+            vacancySearch.addEventListener('click', () => {
+                vacancySearch.classList.add('dropdown-search__item_active');
+                resumeSearch.classList.remove('dropdown-search__item_active');
                 this.search_type = SEARCH_TYPE.VACANCY;
                 searchType.innerHTML = 'Вакансия';
             });
