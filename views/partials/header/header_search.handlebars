@@ -1,0 +1,28 @@
+<div class="navbar__search-field">
+    <div class="search__variants">
+        <div class="dropdown" style="display: flex; align-items:center;" name="search-dropdown">
+            <div class="common-text common-text--medium text-dark-title" name="search-type">
+                Вакансия
+            </div>
+            <svg name="search-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <g mask="url(#mask0_2059_11716)">
+                    <path d="M10 12.6916L5 7.94165L6.16667 6.83331L10 10.475L13.8333 6.83331L15 7.94165L10 12.6916Z" fill="#5E5E5E"/>
+                </g>
+            </svg>
+            <div class="dropdown__content-search d-none">
+                <div class="dropdown-search__item cursor-pointer {{#iff search_type '==' 'resume'}}dropdown-search__item_active{{/iff}}" name="resume-search">
+                    <div class="common-text common-text--medium text-dark-title">Резюме</div>
+                </div>
+                <div class="dropdown-search__item cursor-pointer {{#iff search_type '==' 'vacancy'}}dropdown-search__item_active{{/iff}}" name="vacancy-search">
+                    <div class="common-text common-text--medium text-dark-title">Вакансия</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input class="search__input common-text common-text--medium text-dark-regular" type="text" placeholder="Поиск...">
+    <div class="search__srch-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M16.5349 15.1207L20.7071 19.2929C21.0976 19.6834 21.0976 20.3166 20.7071 20.7071C20.3166 21.0976 19.6834 21.0976 19.2929 20.7071L15.1207 16.5349C13.9055 17.4545 12.3914 18 10.75 18C6.74594 18 3.5 14.7541 3.5 10.75C3.5 6.74594 6.74594 3.5 10.75 3.5C14.7541 3.5 18 6.74594 18 10.75C18 12.3914 17.4545 13.9055 16.5349 15.1207ZM10.75 16C13.6495 16 16 13.6495 16 10.75C16 7.8505 13.6495 5.5 10.75 5.5C7.8505 5.5 5.5 7.8505 5.5 10.75C5.5 13.6495 7.8505 16 10.75 16Z" fill="#F7F7F7"/>
+        </svg>
+    </div>
+</div>

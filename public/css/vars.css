@@ -16,6 +16,7 @@
 
   /* CARD BACK COLORS */
   --card-back-default: rgba(210, 224, 234, 0.37);
+  --card-back-default-no-em: rgb(236, 241, 245);
   --card-back-hover: rgba(4, 150, 255, 0.11);
   /* END CARD BACK COLORS */
   
