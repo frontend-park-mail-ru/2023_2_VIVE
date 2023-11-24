@@ -37,3 +37,9 @@
     margin-left: 20px;
   }
 }
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}

@@ -1,9 +1,3 @@
-{{> header_left (object links=(array
-(object href="/profile/resumes" text="Мои резюме")
-(object href="/profile/responses" text="Отклики")
-(object href="/vacs" text="Вакансии")
-))}}
-
 <div class="navbar__right">
   <div class="navbar__item">
     {{> link-btn (object href="/resume/creation" text="Создать резюме"
@@ -30,6 +24,6 @@
     </svg>
     ')}}
   </div>
-  {{> header_drop}}
+  {{> header_profile_drop}}
 </div>
 

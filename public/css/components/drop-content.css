@@ -6,8 +6,6 @@
 .dropdown__content {
   position: absolute;
   top: calc(100% + 20px);
-  left: 100%;
-  transform: translateX(-100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,6 +16,15 @@
   background: var(--main--eror-white);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   z-index: 1;
+}
+
+.dropdown__content-left {
+  transform: translateX(-100%);
+  left: 100%;
+}
+
+.dropdown__content-add-info {
+  top: calc(100% + 27px);
 }
 
 .dropdown__item {
@@ -56,4 +63,8 @@
   padding: 10px;
   border: none;
   cursor: pointer;
+}
+
+.navbar__item__drp-menu.minus path {
+  d: path("M3 12C3 12.8284 3.67158 13.5 4.5 13.5H19.5C20.3284 13.5 21 12.8284 21 12C21 11.1716 20.3284 10.5 19.5 10.5H4.5C3.67158 10.5 3 11.1716 3 12Z");
 }
