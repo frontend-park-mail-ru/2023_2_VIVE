@@ -10,11 +10,6 @@ export default class csatpollView extends View {
 
     addEventListeners() {
         super.addEventListeners();
-
-        const closeBtn = document.querySelector('.js-close-poll');
-        closeBtn.addEventListener('click', event => {
-            
-        });
     }
     
     remove() {
