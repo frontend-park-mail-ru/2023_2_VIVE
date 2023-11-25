@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="csat-stat__comments">
-                {{#iff this.cur_iter_comment '==' '0'}}
+                {{!-- {{#iff this.cur_iter_comment '==' '0'}}
                 {{else}}
                 <svg class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
                     <mask id="mask0_2163_15609" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="46" height="46">
@@ -69,9 +69,11 @@
                         <path d="M21.125 34.25L9.875 23L21.125 11.75L23.75 14.375L15.1719 23L23.75 31.625L21.125 34.25ZM33.5 34.25L22.25 23L33.5 11.75L36.125 14.375L27.5469 23L36.125 31.625L33.5 34.25Z" fill="#1C1B1F"/>
                     </g>
                 </svg>
-                {{/iff}}
+                {{/iff}} --}}
+                {{#each this.comments}}
                 <textarea class="csat-stat__textarea" disabled>{{this.comment}}</textarea>
-                {{#if this.end_comments}}
+                {{/each}}
+                {{!-- {{#if this.end_comments}}
                 {{else}}
                 <svg class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="47" height="46" viewBox="0 0 47 46" fill="none">
                     <mask id="mask0_2163_15611" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="47" height="46">
@@ -81,7 +83,7 @@
                         <path d="M18.8527 23L10.084 14.1833L12.7673 11.5L24.2673 23L12.7673 34.5L10.084 31.8167L18.8527 23ZM31.5027 23L22.734 14.1833L25.4173 11.5L36.9173 23L25.4173 34.5L22.734 31.8167L31.5027 23Z" fill="#1C1B1F"/>
                     </g>
                 </svg>
-                {{/if}}
+                {{/if}} --}}
             </div>
         </div>
     </div>
