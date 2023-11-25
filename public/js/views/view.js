@@ -1,4 +1,5 @@
 import router from "../modules/router/router.js";
+import User from '../stores/UserStore.js';
 import { getHrefFromLink } from '../utils.js';
 
 export default class View {
@@ -10,6 +11,12 @@ export default class View {
    * Асинхронный метод для отображения страницы
    */
     async render() {
+        if (User.isLoggedIn()) {
+            const poll_block = document.querySelector('.poll');
+            if (poll_block.innerHTML == '') {
+                poll_block.innerHTML = '<iframe class="js-csat-poll poll__iframe" src="/csatpoll" frameborder="0"></iframe>';
+            }
+        }
     }
 
     /**
@@ -17,7 +24,7 @@ export default class View {
     */
     addEventListeners() {
         const links = document.querySelectorAll('.js-nav-link');
-        
+
         links.forEach(link => {
             link.addEventListener('click', async event => {
                 event.preventDefault();
@@ -44,6 +51,6 @@ export default class View {
     }
 
     clear() {
-        
+
     }
 }

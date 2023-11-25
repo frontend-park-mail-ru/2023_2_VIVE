@@ -101,6 +101,7 @@ class Router {
                 }
 
                 this.render(url);
+                return;
             }
         }
 

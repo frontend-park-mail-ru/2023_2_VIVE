@@ -6,7 +6,8 @@ import resCreationView from "../../views/resCreationView.js"
 import vacancyView from "../../views/vacancyView.js"
 import vacCreationView from "../../views/vacCreationView.js"
 import responseView from "../../views/responseView.js"
-import page404View from '../../views/page404View.js';
+import page404View from '../../views/page404View.js'
+import csatpollView from '../../views/csatpollView.js'
 
 const urls = [
     {url: '/page404', view: new page404View()},
@@ -27,5 +28,6 @@ const urls = [
     {url: '/vacancy/:id/responses', login_required: true, for_employer: true, view: new vacancyView()},
     {url: '/vacancy/creation', login_required: true, for_employer: true, view: new vacCreationView()},
     {url: '/vacancy/:id/response', login_required: true, for_applicant: true, view: new responseView()},
+    {url: '/csatpoll', login_required: true, view: new csatpollView()},
 ];
 export default urls;

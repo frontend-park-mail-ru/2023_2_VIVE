@@ -1,15 +1,20 @@
 import View from './view.js';
 
-export default class page404View extends View {
+export default class csatpollView extends View {
     async render() {
         await super.render();
-        throw new Error('hello');
-        document.querySelector('main').innerHTML = Handlebars.templates['page404']();
+
+        document.querySelector('.container').innerHTML = Handlebars.templates['csatpoll']();
         this.addEventListeners();
     }
 
     addEventListeners() {
         super.addEventListeners();
+
+        const closeBtn = document.querySelector('.js-close-poll');
+        closeBtn.addEventListener('click', event => {
+            
+        });
     }
     
     remove() {
