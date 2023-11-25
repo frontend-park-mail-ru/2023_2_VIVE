@@ -1,3 +1,5 @@
+import APIConnector from '../modules/APIConnector.js';
+import User from '../stores/UserStore.js';
 import csatStore from '../stores/csatStore.js';
 import View from './view.js';
 
@@ -13,9 +15,7 @@ export default class csatpollView extends View {
         super.addEventListeners();
         const closeBtn = document.querySelector('.js-close-poll');
         closeBtn.addEventListener('click', event => {
-            const winpar = window.parent;
-            winpar.postMessage('close', 'http://212.233.90.231:8085');
-
+            window.parent.postMessage('close', 'http://212.233.90.231:8085');
         });
 
 
@@ -27,7 +27,7 @@ export default class csatpollView extends View {
     starsListener() {
         const stars = document.querySelectorAll('.csat__star');
 
-        stars.forEach(function(star) {
+        stars.forEach(function (star) {
             star.addEventListener('mouseover', () => {
                 const starId = star.id;
                 for (let i = 0; i < starId; i++) {
@@ -36,7 +36,7 @@ export default class csatpollView extends View {
             });
         });
 
-        stars.forEach(function(star) {
+        stars.forEach(function (star) {
             star.addEventListener('mouseout', () => {
                 const starId = star.id;
                 for (let i = 0; i < starId; i++) {
@@ -45,7 +45,7 @@ export default class csatpollView extends View {
             });
         });
 
-        stars.forEach(function(star) {
+        stars.forEach(function (star) {
             star.addEventListener('click', () => {
                 const starId = star.id;
                 for (let i = 0; i < starId; i++) {
@@ -63,6 +63,9 @@ export default class csatpollView extends View {
 
                 const nextBtn = document.querySelector('[name="next"]');
                 nextBtn.classList.remove('d-none');
+
+                //сохранение кликнутой звезды
+                csatStore.setStars(star.id);
             });
         });
     }
@@ -71,22 +74,26 @@ export default class csatpollView extends View {
         const nextBtn = document.querySelector('[name="next"]');
 
         const textarea = document.querySelector('.csat__textarea');
-        console.log(textarea.value);
-
-        nextBtn.addEventListener('click', () => {
-            csatStore.sendForm({textare: textarea});
-            this.render();
-        });
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                csatStore.setComment(textarea.value);
+                csatStore.sendForm();
+                csatStore.nextQuestion();
+                this.render();
+            });
+        }
     }
 
     skipBtnListener() {
         const skipBtn = document.querySelector('[name="skip"]');
-        skipBtn.addEventListener('click', () => {
-            csatStore.nextQuestion();
-            this.render();
-        });
+        if (skipBtn) {
+            skipBtn.addEventListener('click', () => {
+                csatStore.nextQuestion();
+                this.render();
+            });
+        }
     }
-    
+
     remove() {
         super.remove();
         // document.querySelector('main').innerHTML = "";

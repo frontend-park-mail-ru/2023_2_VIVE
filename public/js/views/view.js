@@ -1,5 +1,7 @@
+import { FRONTEND_POLL_SERVER_PORT } from '../../../config/config.js';
 import router from "../modules/router/router.js";
 import User from '../stores/UserStore.js';
+import csatStore from '../stores/csatStore.js';
 import { getHrefFromLink } from '../utils.js';
 
 export default class View {
@@ -15,7 +17,7 @@ export default class View {
         if (poll_block) { // то есть если мы находимся во внешнем окне, а не в iframe
             if (User.isLoggedIn()) {
                 if (poll_block.innerHTML == '') {
-                    poll_block.innerHTML = '<iframe class="js-csat-poll poll__iframe" src="http://212.233.90.231:8086/csatpoll" frameborder="0"></iframe>';
+                    poll_block.innerHTML = '<iframe class="js-csat-poll poll__iframe" src="http://212.233.90.231:' + FRONTEND_POLL_SERVER_PORT + '/csatpoll" frameborder="0"></iframe>';
                 }
             } else {
                 if (poll_block.innerHTML != '') {
@@ -23,9 +25,12 @@ export default class View {
                 }
             }
         }
-        window.addEventListener('message', event=> {
-            if (event.data == 'close') {
-                poll_block.innerHTML = '';
+        window.addEventListener('message', event => {
+            if (event.origin == 'http://212.233.90.231:8086') {
+                if (event.data == 'close') {
+                    poll_block.innerHTML = '';
+                }
+                csatStore.sendFormFromMain(event.data);
             }
         })
     }

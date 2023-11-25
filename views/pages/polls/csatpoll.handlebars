@@ -5,6 +5,8 @@
         </svg>
     </div>
     <div class="csat__main-frame">
+        {{#if end}} Спасибо! 
+        {{else}}
         <div class="csat__question-frame">
             <div class="csat__question common-text common-text--regular">
                 {{question}}
@@ -22,11 +24,10 @@
             <div class="d-none text-light-title link-btn-blue--bg common-text common-text--medium" name="next">
                 Далее
             </div>
-            {{#if end}}
             <div class="text-dodger-blue link-btn-blue common-text common-text--medium" name="skip">
                 Пропустить
             </div>
-            {{/if}}
         </div>
+        {{/if}}
     </div>
 </div>
