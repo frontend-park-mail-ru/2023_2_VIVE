@@ -6,6 +6,7 @@
 }
 
 .csat-stat__frames {
+    width: 650px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,6 +15,7 @@
 
 .csat-stat__block {
     display: flex;
+    width: 100%;
     padding: 30px;
     flex-direction: column;
     align-items: flex-start;
