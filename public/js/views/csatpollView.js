@@ -5,10 +5,18 @@ import View from './view.js';
 
 export default class csatpollView extends View {
     async render() {
-        await super.render();
+        // await super.render();
 
+        console.log(csatStore.getContext());
+        await csatStore.setQuestions();
         document.querySelector('.main__poll').innerHTML = Handlebars.templates['csatpoll'](csatStore.getContext());
         this.addEventListeners();
+        // console.log(window.location.href);
+        // window.addEventListener('message', event => {
+        //     console.log(event.data);
+        //     csatStore.setQuestions(event.data);
+        //     this.render();
+        // })
     }
 
     addEventListeners() {
