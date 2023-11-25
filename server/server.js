@@ -1,7 +1,7 @@
 'use strict';
 
-const FRONTEND_SERVER_PORT = 8085;
-const FRONTEND_POLL_SERVER_PORT = 8086;
+const FRONTEND_SERVER_PORT = 8083;
+const FRONTEND_POLL_SERVER_PORT = 8084;
 
 const express = require('express');
 const exphbs = require('express-handlebars');
