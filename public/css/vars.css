@@ -106,6 +106,10 @@
   --buttons-photo-hover: #EBEDEB70;
   --buttons-photo-hover: #DEDEDE80;
   /* END BUTTON COLORS */
+
+  /* PHOTO BLOCKS */
+  --photo-hover: rgba(235, 237, 235, 0.70);
+  /* END PHOTO BLOCKS */
 }
 
 .forms-placeholder {

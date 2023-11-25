@@ -1,0 +1,81 @@
+.csat {
+    display: flex;
+    width: 350px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+
+    border-radius: 10px;
+    background: var(--photo-hover);
+}
+
+.csat__exit-frame {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.csat__main-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    align-self: stretch;
+}
+
+.csat__question-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.csat__question {
+    display: flex;
+    padding: 0px 5px;
+    align-items: center;
+    align-self: stretch;
+}
+
+.csat__stars {
+    display: flex;
+    padding: 0px 5px;
+    align-items: center;
+    gap: 5px;
+    align-self: stretch;
+}
+
+.csat__star_clicked path {
+    fill: var(--buttons-orange-primary-default);
+}
+
+.csat__star path {
+    fill: var(--buttons-blue-secondary-active);
+}
+
+.csat__star_active path {
+    fill: var(--buttons-orange-primary-default);
+}
+
+.csat__btn-frame {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.csat__textarea {
+    display: flex;
+    padding: 10px;
+    height: 120px;
+    align-items: flex-start;
+    align-self: stretch;
+    resize: none;
+    border: 0px;
+
+    border-radius: 10px;
+    background: var(--forms-background-disabled);
+}

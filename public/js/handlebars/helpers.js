@@ -51,6 +51,15 @@ export function registerHelpers() {
     return args.reduce((sum, current) => sum + current, "");
   });
 
+  Handlebars.registerHelper('times', function(n, block) {
+    let accum = '';
+    for (let i = 0; i < n; ++i) {
+      const id = `${i + 1}`;
+      accum += block.fn({ index: i, id });
+    }
+    return accum;
+  });
+
   function checkCondition(v1, operator, v2) {
     switch (operator) {
       case '==':
