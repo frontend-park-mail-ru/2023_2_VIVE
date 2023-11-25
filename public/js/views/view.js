@@ -24,6 +24,11 @@ export default class View {
                 }
             }
         }
+        window.addEventListener('message', event=> {
+            if (event.data == 'close') {
+                poll_block.innerHTML = '';
+            }
+        })
     }
 
     /**

@@ -10,7 +10,12 @@ export default class csatpollView extends View {
 
     addEventListeners() {
         super.addEventListeners();
-        // console.log("hello!")
+        const closeBtn = document.querySelector('.js-close-poll');
+        closeBtn.addEventListener('click', event => {
+            const winpar = window.parent;
+            winpar.postMessage('close', 'http://212.233.90.231:8085');
+
+        });
     }
     
     remove() {
