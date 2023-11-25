@@ -28,6 +28,6 @@ const urls = [
     {url: '/vacancy/:id/responses', login_required: true, for_employer: true, view: new vacancyView()},
     {url: '/vacancy/creation', login_required: true, for_employer: true, view: new vacCreationView()},
     {url: '/vacancy/:id/response', login_required: true, for_applicant: true, view: new responseView()},
-    {url: '/csatpoll', login_required: true, view: new csatpollView()},
+    {url: '/csatpoll', view: new csatpollView()},
 ];
 export default urls;

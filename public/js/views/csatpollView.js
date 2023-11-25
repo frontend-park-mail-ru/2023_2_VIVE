@@ -4,12 +4,13 @@ export default class csatpollView extends View {
     async render() {
         await super.render();
 
-        document.querySelector('.container').innerHTML = Handlebars.templates['csatpoll']();
+        document.querySelector('main').innerHTML = Handlebars.templates['csatpoll']();
         this.addEventListeners();
     }
 
     addEventListeners() {
         super.addEventListeners();
+        // console.log("hello!")
     }
     
     remove() {

@@ -13,16 +13,15 @@ export default class View {
    */
     async render() {
         const poll_block = document.querySelector('.poll');
-        console.log('render view');
-        if (!pollStore.isclose) {
-            pollStore.isclose = true;
-            // console.log(window.parent.location.href, window.location.href);
-            if (poll_block.innerHTML == '') {
-                poll_block.innerHTML = '<iframe class="js-csat-poll poll__iframe" src="http://212.233.90.231:8086/csatpoll" frameborder="0"></iframe>';
-            }
-        } else {
-            if (poll_block.innerHTML != '') {
-                poll_block.innerHTML = '';
+        if (poll_block) { // то есть если мы находимся во внешнем окне, а не в iframe
+            if (User.isLoggedIn()) {
+                if (poll_block.innerHTML == '') {
+                    poll_block.innerHTML = '<iframe class="js-csat-poll poll__iframe" src="http://212.233.90.231:8086/csatpoll" frameborder="0"></iframe>';
+                }
+            } else {
+                if (poll_block.innerHTML != '') {
+                    poll_block.innerHTML = '';
+                }
             }
         }
     }
@@ -39,21 +38,6 @@ export default class View {
                 router.goToLink(getHrefFromLink(link))
             })
         })
-
-        // const iframe = document.querySelector('.js-csat-poll');
-        // if (iframe) { // если iframe только у внешней страницы
-        //     console.log(iframe)
-        //     iframe.contentWindow.addEventListener('load', event => {
-        //         const ifrdoc = iframe.contentWindow.document;
-        //         console.log(ifrdoc);
-        //         console.log(window.parent.location.href);
-        //         const closeBtn = document.querySelector('.js-close-poll')
-        //         console.log(closeBtn);
-        //         closeBtn.addEventListener('click', event => {
-        //             console.log('click');
-        //         })
-        //     })
-        // }
     }
 
     // eslint-disable-next-line no-unused-vars
