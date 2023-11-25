@@ -1,0 +1,30 @@
+.emp-vacs__frame {
+    display: flex;
+    width: 1190px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.emp-vacs__main-frame {
+    display: flex;
+    width: 1190px;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+.emp-vacs__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex: 1 0 0;
+}
+
+.emp-vacs__filters {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    flex-shrink: 0;
+}

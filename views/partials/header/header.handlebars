@@ -2,6 +2,7 @@
   <div class="column-wrapper">
     <div class="navbar">
       <div class="navbar__item navbar__logo">
+        {{> header_info_drop}}
         {{> link-btn (object 
         href="/"
         class="js-nav-link navbar__item__btn"
@@ -13,6 +14,9 @@
           </svg>'
         )}}
       </div>
+
+      {{> header_search}}
+
       {{#if user}}
       
       {{#iff user.role '==' 'applicant'}}

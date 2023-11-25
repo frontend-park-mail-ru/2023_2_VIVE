@@ -1,17 +1,17 @@
 <div class="dropdown">
     <div class="navbar__item">
-      <img class="cursor-pointer dropdown__padd-btn" src="../../public/images/img/more_28-01.png" style="width: 36px; height: 36px; flex-shrink: 0;">
+      <img class="cursor-pointer dropdown__padd-btn" name="drop-btn-profile" src="../../public/images/img/more_28-01.png" style="width: 36px; height: 36px; flex-shrink: 0;">
     </div>
-    <div class="dropdown__content d-none">
-      <div class="dropdown__item cursor-pointer" name="profile">
+    <div class="dropdown__content dropdown__content-left dropdown__content__profile d-none">
+      <div class="dropdown__item cursor-pointer">
         <img class="dropdown__img" src="../../public/images/img/profile_28-01.png">
-        <div class="common-text common-text--medium text-dodger-blue">Профиль</div>
+        <a href="/profile" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Профиль</a>
       </div>
-      <div class="dropdown__item cursor-pointer" name="settings">
+      <div class="dropdown__item cursor-pointer">
         <img class="dropdown__img" src="../../public/images/img/settings_outline_28-01.png">
-        <div class="common-text common-text--medium text-dodger-blue">Настройки</div>
+        <a href="/profile/settings" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue"> Настройки</a>
       </div>
-      <div class="dropdown__item cursor-not-allowed" name="switch">
+      <div class="dropdown__item cursor-pointer" name="switch">
         <img class="dropdown__img" src="../../public/images/img/refresh_outline_28-01.png">
         <div class="common-text common-text--medium text-dodger-blue">Сменить роль</div>
       </div>

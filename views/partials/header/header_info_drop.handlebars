@@ -1,0 +1,44 @@
+<div class="dropdown">
+    <div class="navbar__item">
+        <svg class="navbar__item__drp-menu" name="drop-btn-add" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 1C18.075 1 23 5.925 23 12C23 18.075 18.075 23 12 23C5.925 23 1 18.075 1 12C1 5.925 5.925 1 12 1ZM12 6C11.7348 6 11.4804 6.10536 11.2929 6.29289C11.1054 6.48043 11 6.73478 11 7V11H7C6.75507 11 6.51866 11.09 6.33563 11.2527C6.15259 11.4155 6.03566 11.6397 6.007 11.883L6 12C6 12.2652 6.10536 12.5196 6.29289 12.7071C6.48043 12.8946 6.73478 13 7 13H11V17C11 17.2449 11.09 17.4813 11.2527 17.6644C11.4155 17.8474 11.6397 17.9643 11.883 17.993L12 18C12.2652 18 12.5196 17.8946 12.7071 17.7071C12.8946 17.5196 13 17.2652 13 17V13H17C17.2449 13 17.4813 12.91 17.6644 12.7473C17.8474 12.5845 17.9643 12.3603 17.993 12.117L18 12C18 11.7348 17.8946 11.4804 17.7071 11.2929C17.5196 11.1054 17.2652 11 17 11H13V7C13 6.75507 12.91 6.51866 12.7473 6.33563C12.5845 6.15259 12.3603 6.03566 12.117 6.007L12 6Z" fill="#0496FF"/>
+        </svg>
+    </div>
+    <div class="dropdown__content dropdown__content-add-info d-none">
+        {{#if user}}
+      
+        {{#iff user.role '==' 'applicant'}}
+            <div class="dropdown__item cursor-pointer">
+                <a href="/profile/resumes" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Мои резюме</a>
+            </div>
+            <div class="dropdown__item cursor-pointer">
+                <a href="/profile/responses" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Отклики</a>
+            </div>
+            <div class="dropdown__item cursor-pointer">
+                <a href="/vacs" class="js-nav-link common-text link-btn common-text--medium text-dodger-blue">Вакансии</a>
+            </div>
+        {{else}}
+            <div class="dropdown__item cursor-pointer">
+                <a href="/profile/vacancies" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Мои вакансии</a>
+            </div>
+            <div class="dropdown__item cursor-pointer">
+                <a href="#" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Соискатели</a>
+            </div>
+            <div class="dropdown__item cursor-pointer">
+                <a href="/vacs" class="js-nav-link common-text link-btn common-text--medium text-dodger-blue">Вакансии</a>
+            </div>
+        {{/iff}}
+
+        {{else}}
+            <div class="dropdown__item cursor-pointer">
+                <a href="#" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">О нас</a>
+            </div>
+            <div class="dropdown__item cursor-pointer">
+                <a href="#" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Соискатели</a>
+            </div>
+            <div class="dropdown__item cursor-pointer">
+                <a href="/vacs" class="js-nav-link common-text link-btn common-text--medium text-dodger-blue">Вакансии</a>
+            </div>
+        {{/if}}
+    </div>
+</div>
