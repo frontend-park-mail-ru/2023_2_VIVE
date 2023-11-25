@@ -1,0 +1,62 @@
+.csat-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.csat-stat__frames {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.csat-stat__block {
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+
+    border-radius: 30px;
+    background: var(--card-back-default);
+}
+
+.csat-stat__question {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+}
+
+.csat-stat__statistic {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    align-self: stretch;
+}
+
+.csat-stat__value {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    align-self: stretch;
+}
+
+.csat-stat__comments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.csat-stat__textarea {
+    display: flex;
+    width: 350px;
+    height: 200px;
+    flex-direction: column;
+    align-items: flex-start;
+    resize: none;
+}

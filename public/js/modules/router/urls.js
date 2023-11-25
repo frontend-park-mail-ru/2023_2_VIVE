@@ -9,8 +9,10 @@ import vacCreationView from "../../views/vacCreationView.js"
 import responseView from "../../views/responseView.js"
 import page404View from '../../views/page404View.js'
 import csatView from '../../views/csatView.js'
+import csatStatView from '../../views/csatStatView.js'
 
 const urls = [
+    {url: '/csat/statistic', login_required: true, view: new csatStatView()},
     {url: '/csat', view: new csatView()},
     {url: '/page404', view: new page404View()},
     {url: '/vacs', view: new vacsView()},

@@ -1,3 +1,5 @@
+@import url("stat/csat-stat.css");
+
 .csat {
     display: flex;
     width: 350px;
