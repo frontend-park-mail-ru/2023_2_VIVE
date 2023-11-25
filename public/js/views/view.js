@@ -1,5 +1,4 @@
 import router from "../modules/router/router.js";
-import pollStore from '../stores/PollStore.js';
 import User from '../stores/UserStore.js';
 import { getHrefFromLink } from '../utils.js';
 
