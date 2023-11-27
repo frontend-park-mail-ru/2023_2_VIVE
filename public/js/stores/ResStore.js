@@ -470,6 +470,19 @@ class ResStore extends Store {
             return false;
         }
     }
+
+    async getResumes() {
+        // try {
+        //     const resp = await APIConnector.get(
+        //         BACKEND_SERVER_URL + `/current_user/cvs/${this.resume_id}`,
+        //     );
+        //     router.goToLink('/profile/resumes');
+        //     return true;
+        // } catch(error) {
+        //     console.log(error);
+        //     return false;
+        // }
+    }
 }
 
 const resStore = new ResStore();
