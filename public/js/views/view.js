@@ -28,7 +28,7 @@ export default class View {
             }
         }
         window.addEventListener('message', async event => {
-            if (event.origin == 'http://212.233.90.231:8086') {
+            if (event.origin == 'http://212.233.90.231:' + FRONTEND_POLL_SERVER_PORT) {
                 if (event.data == 'close') {
                     poll_block.innerHTML = '';
                 }

@@ -1,3 +1,4 @@
+import { FRONTEND_POLL_SERVER_PORT, FRONTEND_SERVER_PORT } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import User from '../stores/UserStore.js';
 import csatStore from '../stores/csatStore.js';
@@ -23,7 +24,7 @@ export default class csatpollView extends View {
         super.addEventListeners();
         const closeBtn = document.querySelector('.js-close-poll');
         closeBtn.addEventListener('click', event => {
-            window.parent.postMessage('close', 'http://212.233.90.231:8085');
+            window.parent.postMessage('close', 'http://212.233.90.231:' + FRONTEND_SERVER_PORT);
         });
 
 
