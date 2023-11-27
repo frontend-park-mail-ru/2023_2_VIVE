@@ -13,34 +13,34 @@ export default class View {
    * Асинхронный метод для отображения страницы
    */
     async render() {
-        const poll_block = document.querySelector('.poll');
-        if (poll_block) { // то есть если мы находимся во внешнем окне, а не в iframe
-            if (User.isLoggedIn()) {
-                if (poll_block.innerHTML == '') {
+        // const poll_block = document.querySelector('.poll');
+        // if (poll_block) { // то есть если мы находимся во внешнем окне, а не в iframe
+        //     if (User.isLoggedIn()) {
+        //         if (poll_block.innerHTML == '') {
                     
-                    poll_block.innerHTML = '<iframe class="js-csat-poll poll__iframe" src="http://212.233.90.231:' + FRONTEND_POLL_SERVER_PORT + '/csatpoll" frameborder="0"></iframe>';
-                    // console.log(await csatStore.getQuestionsFromMain());
-                }
-            } else {
-                if (poll_block.innerHTML != '') {
-                    poll_block.innerHTML = '';
-                }
-            }
-        }
-        window.addEventListener('message', async event => {
-            if (event.origin == 'http://212.233.90.231:8086') {
-                if (event.data == 'close') {
-                    poll_block.innerHTML = '';
-                }
-                if (event.data == 'get') {
-                    // console.log(JSON.stringify(await csatStore.getQuestionsFromMain()))
-                    window.frames[0].postMessage("hello", 'http://212.233.90.231:' + FRONTEND_POLL_SERVER_PORT);
-                }
-                if (event.data == 'send') {
-                    csatStore.sendFormFromMain(event.data);
-                }
-            }
-        })
+        //             poll_block.innerHTML = '<iframe class="js-csat-poll poll__iframe" src="http://127.0.0.1:' + FRONTEND_POLL_SERVER_PORT + '/csatpoll" frameborder="0"></iframe>';
+        //             // console.log(await csatStore.getQuestionsFromMain());
+        //         }
+        //     } else {
+        //         if (poll_block.innerHTML != '') {
+        //             poll_block.innerHTML = '';
+        //         }
+        //     }
+        // }
+        // window.addEventListener('message', async event => {
+        //     if (event.origin == 'http://212.233.90.231:8086') {
+        //         if (event.data == 'close') {
+        //             poll_block.innerHTML = '';
+        //         }
+        //         if (event.data == 'get') {
+        //             // console.log(JSON.stringify(await csatStore.getQuestionsFromMain()))
+        //             window.frames[0].postMessage("hello", 'http://212.233.90.231:' + FRONTEND_POLL_SERVER_PORT);
+        //         }
+        //         if (event.data == 'send') {
+        //             csatStore.sendFormFromMain(event.data);
+        //         }
+        //     }
+        // })
     }
 
     /**
