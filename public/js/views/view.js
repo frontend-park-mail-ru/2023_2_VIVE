@@ -52,7 +52,10 @@ export default class View {
         links.forEach(link => {
             link.addEventListener('click', async event => {
                 event.preventDefault();
-                router.goToLink(getHrefFromLink(link))
+                if (!event['processed']) {
+                    router.goToLink(getHrefFromLink(link))
+                    event['processed'] = true;
+                }
             })
         })
     }

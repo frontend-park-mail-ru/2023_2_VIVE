@@ -61,15 +61,10 @@
             {{/iff}}
           </div>
         </div>
-        {{#iff block_type '==' 'list'}}
           {{> vacs_list
           user=user
-          data=data}}
-        {{else iff block_type '==' 'block'}}
-          {{> vacs_block
-          user=user
-          data=data}}
-        {{/iff}}
+          data=data
+          block_type=block_type}}
       </div>
     </div>
 

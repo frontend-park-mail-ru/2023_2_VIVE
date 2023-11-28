@@ -8,23 +8,20 @@
   box-sizing: border-box;
 }
 
-html {
-  height: 100%;
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
-body {
+.container {
   display: flex;
-  margin: 0;
-  padding: 0;
   height: 100%;
+  width: 100%;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   gap: 30px;
-}
-
-.container {
-  width: 100%;
 }
 
 header {
@@ -32,9 +29,6 @@ header {
 }
 
 main {
-  margin-top: 50px;
-  height: auto !important;
-  height: 100%;
   width: 100%;
   padding: 60px 0px;
 }

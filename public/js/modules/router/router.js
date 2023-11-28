@@ -52,6 +52,7 @@ class Router {
     async goToLink(url) {
         url = (url == '/') ? '/vacs' : url;
         await this.urlWork(url);
+        console.log(window.location.pathname)
         history.pushState({url: url}, null, url);
     }
 

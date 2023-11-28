@@ -4,7 +4,7 @@ export function isObjEmpty(obj) {
 }
 
 export function getHrefFromLink(aTag) {
-  const splittedHref = aTag.href.split(aTag.host);
+  const splittedHref = aTag.getAttribute('href').split(aTag.host);
   return splittedHref[splittedHref.length - 1];
 }
 

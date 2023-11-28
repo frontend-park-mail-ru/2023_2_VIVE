@@ -18,6 +18,7 @@
 .vacs__block__params {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
 }
 
 .vacs__block__params__sorted__btn {
@@ -45,19 +46,55 @@
 /* vacs list */
 
 .vacs__list {
-  list-style-type: none;
-  padding: 0;
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.vacs__list_list {}
+
+.vacs__list_block {
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* align-content: stretch; */
 }
 
 /* vac */
 
 .vacs__list__item {
+  /* all: initial; */
+  color: inherit;
+  text-decoration: inherit;
+
+  display: block;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0px 0px 40px -30px gray;
   background-color: #eaeff2;
-  margin-bottom: 40px;
+
+  flex-grow: 1;
+
+  transition: box-shadow 0.2s;
 }
+
+.vacs__list__item_list {
+  width: 100%;
+}
+
+.vacs__list__item_block {
+  max-width: calc((100% - 30px) / 2);
+}
+
+.vacs__list__item:hover {
+  box-shadow: 0px 0px 40px -30px black;
+}
+
+.vacs__list__item:active {
+  box-shadow: 0px 0px 40px -30px rgb(165, 165, 165);
+}
+
+
+/* description */
 
 .vacs__list__item__desc__main {
   display: flex;
