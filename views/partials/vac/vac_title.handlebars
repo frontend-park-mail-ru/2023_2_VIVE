@@ -5,26 +5,41 @@
     <div class="vacancie__additional-info">
         <div class="add-info">
             <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
-            <div class="common-text common-text--medium text-dark-regular" name="vacancy-salary">
-                {{vacancy.salary_view}}
+            <div class="tooltip">
+                <div class="common-text common-text--medium text-dark-regular" name="vacancy-salary">
+                    {{vacancy.salary_view}}
+                </div>
+                <span class="tooltip-text-down tooltip-text-down__vacancy">Зарплата: {{vacancy.salary_view}}</span>
             </div>
         </div>
         <div class="add-info">
             <img class="add-info__img" src="../../../../../public/images/img/stars_20.png">
-            <div class="common-text common-text--medium text-dark-regular" name="vacancy-experience">
-                {{vacancy.experience_view}}
+            <div class="tooltip">
+                <div class="common-text common-text--medium text-dark-regular" name="vacancy-experience">
+                    {{vacancy.experience_view}}
+                </div>
+                <span class="tooltip-text-down tooltip-text-down__vacancy">Требуемый опыт:
+                    {{vacancy.experience_view}}</span>
             </div>
         </div>
         <div class="add-info">
             <img class="add-info__img" src="../../../../../public/images/img/clock_outline_20.png">
-            <div class="common-text common-text--medium text-dark-regular" name="vacancy-employment">
-                {{vacancy.employment_view}}
+            <div class="tooltip">
+                <div class="common-text common-text--medium text-dark-regular" name="vacancy-employment">
+                    {{vacancy.employment_view}}
+                </div>
+                <span class="tooltip-text-down tooltip-text-down__vacancy">Занятость:
+                    {{vacancy.employment_view}}</span>
             </div>
         </div>
         <div class="add-info">
             <img class="add-info__img" src="../../../../../public/images/img/location_map_outline_20.png">
-            <div class="common-text common-text--medium text-dark-regular" name="vacancy-location">
-                {{vacancy.location}}
+            <div class="tooltip">
+                <div class="common-text common-text--medium text-dark-regular" name="vacancy-location">
+                    {{vacancy.location}}
+                </div>
+                <span class="tooltip-text-down tooltip-text-down__vacancy">Расположение:
+                    {{vacancy.location}}</span>
             </div>
         </div>
         <div class="add-info">

@@ -8,19 +8,42 @@
                 <div class="vacancie__additional-info">
                     <div class="add-info">
                         <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
-                        <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.salary_lower_bound}}{{#if vacancy.salary_upper_bound}}от {{vacancy.salary_lower_bound}} до {{vacancy.salary_upper_bound}} тыс. рублей{{else}}от {{vacancy.salary_lower_bound}} тыс. рублей{{/if}}{{else if vacancy.salary_upper_bound}}до {{vacancy.salary_upper_bound}} тыс. рублей{{else}}Не указана{{/if}}</div>
+                        <div class="tooltip">
+                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-salary">
+                                {{vacancy.salary_view}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Зарплата: {{vacancy.salary_view}}</span>
+                        </div>
                     </div>
                     <div class="add-info">
                         <img class="add-info__img" src="../../../../../public/images/img/stars_20.png">
-                        <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.experience_lower_bound}}{{#if vacancy.experience_upper_bound}}{{vacancy.experience_lower_bound}}-{{vacancy.experience_upper_bound}} года{{else}}{{vacancy.salary_lower_bound}} года{{/if}}{{else if vacancy.experience_upper_bound}}{{vacancy.experience_upper_bound}} года{{else}}Не указана{{/if}}</div>
+                        <div class="tooltip">
+                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-experience">
+                                {{vacancy.experience_view}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Требуемый опыт:
+                                {{vacancy.experience_view}}</span>
+                        </div>
                     </div>
                     <div class="add-info">
                         <img class="add-info__img" src="../../../../../public/images/img/clock_outline_20.png">
-                        <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.employment}}{{vacancy.employment}}{{else}}Не указано{{/if}}</div>
+                        <div class="tooltip">
+                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-employment">
+                                {{vacancy.employment_view}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Занятость:
+                                {{vacancy.employment_view}}</span>
+                        </div>
                     </div>
                     <div class="add-info">
                         <img class="add-info__img" src="../../../../../public/images/img/location_map_outline_20.png">
-                        <div class="common-text common-text--medium text-dark-regular">{{#if vacancy.location}}{{vacancy.location}}{{else}}Не указано{{/if}}</div>
+                        <div class="tooltip">
+                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-location">
+                                {{vacancy.location}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Расположение:
+                                {{vacancy.location}}</span>
+                        </div>
                     </div>
                     <div class="add-info">
                         <img class="add-info__img" src="../../../../../public/images/img/calendar_check_outline_20.png">
@@ -58,19 +81,19 @@
             </span>
             {{/if}}
         </div>
-        <div class="view-company">
+          <a href="/vacancies/profile/{{vacancy.employer_id}}" class="js-nav-link view-company">
             <img class="view-company__img" src="../../../public/images/img/vk-company.png">
             <div class="view-company__main-info">
                 <div class="header-text header-text--first text-dark-title">
-                    VK
+                    {{organization}}
                 </div>
                 <div class="view-company__location">
                     <img class="view-company__location-img" src="../../../public/images/img/location_map_outline_20.png">
                     <div class="common-text common-text--medium text-dark-regular">
-                        Москва
+                        {{vacancy.location}}
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>

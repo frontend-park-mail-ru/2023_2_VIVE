@@ -100,13 +100,20 @@ export function registerHelpers() {
       : options.inverse(this);
   });
 
+  Handlebars.registerHelper('strtoarray', function (str) {
+    return str.split('\u000A');
+  });
+
   Handlebars.registerHelper('arraytostr', function (arr) {
     let res = '';
-    // if (arr !== undefined) {
+    if (arr !== undefined) {
+      if (typeof arr === "string") {
+        arr = arr.split(' ');
+      }
       arr.forEach(element => {
         res += element + ' ';  
       });
-    // }
+    }
     return res;
   });
 }

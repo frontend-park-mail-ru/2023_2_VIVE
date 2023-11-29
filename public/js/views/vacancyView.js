@@ -172,7 +172,38 @@ export default class profileView extends mainView {
                 }
             });
         }
+
+        const salaryInfo = document.querySelectorAll('[name="vacancy-salary"]');
+        const experienceInfo = document.querySelectorAll('[name="vacancy-experience"]');
+        const employmentInfo = document.querySelectorAll('[name="vacancy-employment"]');
+        const locationInfo = document.querySelectorAll('[name="vacancy-location"]');
+
+        salaryInfo.forEach(salary => {
+            if (salary.innerText.length > 10) {
+                salary.innerText = salary.innerText.substring(0, 10) + "...";
+            }
+        });
+    
+        experienceInfo.forEach(experience => {
+            if (experience.innerText.length > 10) {
+                experience.innerText = experience.innerText.substring(0, 10) + "...";
+            }
+        });
+    
+        employmentInfo.forEach(employment => {
+            if (employment.innerText.length > 10) {
+                employment.innerText = employment.innerText.substring(0, 10) + "...";
+            }
+        });
+    
+        locationInfo.forEach(location => {
+            if (location.innerText.length > 10) {
+                location.innerText = location.innerText.substring(0, 10) + "...";
+            }
+        });
     }
+
+
 
     getSelectedRadioValue(selector) {
         const selectedRadio = document.querySelector(`${selector}:checked`);

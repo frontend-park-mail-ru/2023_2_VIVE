@@ -118,11 +118,10 @@
 }
 
 .vacs__list__item__company-logo img {
-  height: 100%;
-  width: 100%;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
 }
-
-
 
 .vacs__list__item__company-name {
   margin-top: 0;
