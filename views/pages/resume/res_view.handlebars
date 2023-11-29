@@ -36,7 +36,11 @@
                   {{iffs data.gender '==' 'male' 'Мужской' 'Женский'}}, {{data.birthday}}, {{data.city}}
                 </div>
               </div>
-              <img class="resv__data__main__avatar" src="../../../public/images/profile.png" alt="">
+              
+              <a {{#if ../is_my_resume}} href="/profile/resumes" {{else}} href="/resumes/profile/{{data.applicant_id}}"
+                {{/if}} class="js-nav-link">
+                <img class="resv__data__main__avatar" src="../../../public/images/profile.png" alt="">
+              </a>
             </div>
             {{/with}}
             {{#if is_my_resume}}
