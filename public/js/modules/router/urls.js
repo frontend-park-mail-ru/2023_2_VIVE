@@ -19,7 +19,7 @@ const urls = [
     {url: '/emp_auth', deny_with_auth: true, view: new regAuthView('auth', 'employer')},
     {url: '/app_reg', deny_with_auth: true, view: new regAuthView('reg', 'applicant')},
     {url: '/emp_reg', deny_with_auth: true, view: new regAuthView('reg', 'employer')},
-    {url: '/vacancies/profile', view: new empVacs()},
+    {url: '/vacancies/profile/:id', view: new empVacs()},
     {url: '/profile', login_required: true, view: new profileView()},
     {url: '/profile/resumes', login_required: true, for_applicant: true, view: new profileView()},
     {url: '/profile/settings', login_required: true, view: new profileView()},

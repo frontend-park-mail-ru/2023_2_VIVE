@@ -314,6 +314,9 @@ class ResStore extends Store {
 
     saveForm(form_data) {
         let is_render = false;
+        if ('skills' in form_data) {
+            form_data['skills'] = form_data['skills'].split(' ');
+        }
         for (const key in form_data) {
             if (this.checkAndSaveInput(key, form_data[key])) {
                 is_render = true;
