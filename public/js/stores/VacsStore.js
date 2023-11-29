@@ -30,6 +30,7 @@ class VacsStore extends Store {
 
     async updateInnerData(data) {
         this.qObj = this.parseQueryToDict(data['urlObj'].searchParams);
+        console.log(this.qObj);
         
         try {
             this.vacs = this.sortVacanciesByDateToOld(await this.getVacancies());
@@ -75,10 +76,21 @@ class VacsStore extends Store {
     }
 
     async getVacancies() {
+        console.log(this.qObj);
+        this.qObj['page_num'] = 1;
+        this.qObj['results_per_page'] = 10; 
+        if (!this.qObj['q']) {
+            this.qObj['q'] = '';
+        }
+
+        const q_str = decodeURIComponent(new URLSearchParams(this.qObj).toString());
         try {
-            const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies');
+            console.log('Отправляемый запрос:', q_str);
+            const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies/search' + '?' + q_str);
             const data = await resp.json();
-            return data;
+            console.log(data);
+            console.log(data['vacancies']['list']);
+            return data['vacancies']['list'];
         } catch (err) {
             console.error(err);
             return undefined;

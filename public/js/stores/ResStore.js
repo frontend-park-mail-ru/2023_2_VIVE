@@ -375,6 +375,7 @@ class ResStore extends Store {
         console.log("...id:", id);
         try {
             let resp = null;
+            
             if (User.getUser().role === User.ROLES.app) {
                 resp = await APIConnector.get(
                     BACKEND_SERVER_URL + '/current_user/cvs/' + id);
@@ -486,23 +487,39 @@ class ResStore extends Store {
     }
 
     async getResumes() {
-        return [
-            {
-                'id': 1,
-                'profession_name': 'WEB разработчик',
-                'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, consequuntur blanditiis. Animi impedit harum saepe voluptates laudantium! Numquam error porro repellendus, atque possimus repudiandae! Excepturi laboriosam fuga aut sit neque.'
-            }
-        ]
-        // try {
-        //     const resp = await APIConnector.get(
-        //         BACKEND_SERVER_URL + `/current_user/cvs/${this.resume_id}`,
-        //     );
-        //     router.goToLink('/profile/resumes');
-        //     return true;
-        // } catch(error) {
-        //     console.log(error);
-        //     return false;
-        // }
+        try {
+            const resp = await APIConnector.get(
+                BACKEND_SERVER_URL + `/current_user/cvs/${this.resume_id}`,
+            );
+            router.goToLink('/profile/resumes');
+            return true;
+        } catch(error) {
+            console.log(error);
+            return false;
+        }
+    }
+
+    async getAllResumes() {
+        console.log(this.qObj);
+        this.qObj['page_num'] = 1;
+        this.qObj['results_per_page'] = 10; 
+        if (!this.qObj['q']) {
+            this.qObj['q'] = '';
+        }
+
+        const q_str = decodeURIComponent(new URLSearchParams(this.qObj).toString());
+        try {
+            const resp = await APIConnector.get(
+                BACKEND_SERVER_URL + `/cvs/search?` + q_str,
+            );
+            const data = await resp.json();
+            console.log(data);
+            // console.log(data['vacancies']['list']);
+            return data['list'];
+        } catch(error) {
+            console.log(error);
+            return undefined;
+        }
     }
 }
 

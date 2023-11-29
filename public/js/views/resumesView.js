@@ -18,7 +18,7 @@ class resumesView extends mainView {
     document.querySelector('main').innerHTML = template(
       {
         'block_type': this.block_type,
-        'resumes': await resStore.getResumes(), 
+        'resumes': await resStore.getAllResumes(), 
         'qObj': resStore.qObj,
       }
     );
