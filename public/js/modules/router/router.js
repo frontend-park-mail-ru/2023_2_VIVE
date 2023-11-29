@@ -56,11 +56,11 @@ class Router {
     }
 
     back() {
-
+        history.back();
     }
 
     forward() {
-
+        history.forward();
     }
 
     // HELPER FUNCTIONS

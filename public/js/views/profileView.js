@@ -72,7 +72,8 @@ export default class profileView extends mainView {
     });
   }
 
-  async updateInnerData(url) {
-    return profileStore.updateInnerData(url);
+  async updateInnerData(data) {
+    console.log(data);
+    return profileStore.updateInnerData(data);
   }
 }

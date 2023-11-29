@@ -11,6 +11,7 @@ import responseView from "../../views/responseView.js"
 import page404View from '../../views/page404View.js'
 import csatStatView from '../../views/csatStatView.js'
 import csatpollView from '../../views/csatpollView.js'
+import appResumes from '../../views/appResumesView.js'
 
 const urls = [
     {url: '/csat/statistic', login_required: true, view: new csatStatView()},
@@ -23,6 +24,7 @@ const urls = [
     {url: '/emp_reg', deny_with_auth: true, view: new regAuthView('reg', 'employer')},
     {url: '/vacancies/profile/:id', view: new empVacs()},
     {url: '/profile', login_required: true, view: new profileView()},
+    {url: '/resumes/profile/:id', view: new appResumes()},
     {url: '/profile/resumes', login_required: true, for_applicant: true, view: new profileView()},
     {url: '/profile/settings', login_required: true, view: new profileView()},
     {url: '/profile/responses', login_required: true, for_applicant: true, view: new profileView()},

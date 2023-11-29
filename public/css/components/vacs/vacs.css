@@ -106,6 +106,7 @@
 }
 
 .vacs__list__item__company-logo {
+  display: block;
   margin-right: 25px;
 }
 

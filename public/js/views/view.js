@@ -58,6 +58,18 @@ export default class View {
                 }
             })
         })
+
+        const links_back = document.querySelectorAll('.js-nav-link-back');
+
+        links_back.forEach(link => {
+            link.addEventListener('click', async event => {
+                event.preventDefault();
+                if (!event['processed']) {
+                    router.back();
+                    event['processed'] = true;
+                }
+            })
+        })
     }
 
     // eslint-disable-next-line no-unused-vars
