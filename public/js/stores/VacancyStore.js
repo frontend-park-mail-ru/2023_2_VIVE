@@ -178,7 +178,7 @@ class VacancyStore extends Store {
 
     async updateInnerData(data) {
         try {
-            this.vacancy = (await this.getData(`/vacancies/${data.id}`));
+            this.vacancy = (await this.getData(`/vacancies/${data.id}`)).vacancy;
             this.organization = (await this.getData(`/vacancies/${data['id']}`)).organization_name;
             this.user = await this.getData("/current_user");
             this.responses = [];
