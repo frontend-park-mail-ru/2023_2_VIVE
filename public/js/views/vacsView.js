@@ -65,8 +65,8 @@ export default class vacsView extends mainView {
     const descriptionText = document.querySelectorAll('[name="vacancy-description"]');
 
     salaryInfo.forEach(salary => {
-      if (salary.innerText.length > 10) {
-        salary.innerText = salary.innerText.substring(0, 10) + "...";
+      if (salary.innerText.length > 25) {
+        salary.innerText = salary.innerText.substring(0, 25) + "...";
       }
     });
 
@@ -92,7 +92,7 @@ export default class vacsView extends mainView {
       if (description.innerText.length > 400) {
       description.innerText = description.innerText.substring(0, 400) + "...";
       }
-    })
+    });
   }
 
   BlockEventListeners() {
@@ -101,14 +101,14 @@ export default class vacsView extends mainView {
     const descriptionText = document.querySelectorAll('[name="vacancy-description"]');
 
     salaryInfo.forEach(salary => {
-      if (salary.innerText.length > 10) {
-        salary.innerText = salary.innerText.substring(0, 10) + "...";
+      if (salary.innerText.length > 15) {
+        salary.innerText = salary.innerText.substring(0, 15) + "...";
       }
     });
 
     locationInfo.forEach(location => {
-      if (location.innerText.length > 10) {
-        location.innerText = location.innerText.substring(0, 10) + "...";
+      if (location.innerText.length > 8) {
+        location.innerText = location.innerText.substring(0, 8) + "...";
       }
     });
 

@@ -100,6 +100,10 @@ export function registerHelpers() {
       : options.inverse(this);
   });
 
+  Handlebars.registerHelper('strtoarray', function (str) {
+    return str.split('\u000A');
+  });
+
   Handlebars.registerHelper('arraytostr', function (arr) {
     let res = '';
     // if (arr !== undefined) {

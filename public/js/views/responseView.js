@@ -40,6 +40,35 @@ export default class responseView extends mainView {
                 router.goToLink('/vacs');
             }
         });
+
+        const salaryInfo = document.querySelectorAll('[name="vacancy-salary"]');
+        const experienceInfo = document.querySelectorAll('[name="vacancy-experience"]');
+        const employmentInfo = document.querySelectorAll('[name="vacancy-employment"]');
+        const locationInfo = document.querySelectorAll('[name="vacancy-location"]');
+
+        salaryInfo.forEach(salary => {
+            if (salary.innerText.length > 15) {
+                salary.innerText = salary.innerText.substring(0, 15) + "...";
+            }
+        });
+    
+        experienceInfo.forEach(experience => {
+            if (experience.innerText.length > 10) {
+                experience.innerText = experience.innerText.substring(0, 10) + "...";
+            }
+        });
+    
+        employmentInfo.forEach(employment => {
+            if (employment.innerText.length > 10) {
+                employment.innerText = employment.innerText.substring(0, 10) + "...";
+            }
+        });
+    
+        locationInfo.forEach(location => {
+            if (location.innerText.length > 10) {
+                location.innerText = location.innerText.substring(0, 10) + "...";
+            }
+        });
     }    
 
     async updateInnerData(data) {

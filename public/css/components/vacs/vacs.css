@@ -109,6 +109,12 @@
   margin-right: 25px;
 }
 
+.vacs__list__item__company-logo img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
 .vacs__list__item__company-name {
   margin-top: 0;
   color: #333333;

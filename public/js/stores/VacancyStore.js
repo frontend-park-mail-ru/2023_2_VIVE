@@ -92,12 +92,14 @@ class VacancyStore extends Store {
     }
 
     processVacanciesSalary(vacancy) {
+        const formatSalary = (amount) => new Intl.NumberFormat('ru-RU').format(amount);
+
         if (vacancy.salary_lower_bound && vacancy.salary_upper_bound) {
-            return `От ${vacancy.salary_lower_bound} до ${vacancy.salary_upper_bound} рублей`;
+            return `От ${formatSalary(vacancy.salary_lower_bound)} до ${formatSalary(vacancy.salary_upper_bound)} рублей`;
         } else if (vacancy.salary_lower_bound) {
-            return `От ${vacancy.salary_lower_bound} рублей`;
+            return `От ${formatSalary(vacancy.salary_lower_bound)} рублей`;
         } else if (vacancy.salary_upper_bound) {
-            return `До ${vacancy.salary_upper_bound} рублей`;
+            return `До ${formatSalary(vacancy.salary_upper_bound)} рублей`;
         } else {
             return 'Не указано';
         }
