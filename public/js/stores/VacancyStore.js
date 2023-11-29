@@ -13,6 +13,7 @@ class VacancyStore extends Store {
         this.vacancy = {};
         this.responses = [];
         this.errors = {};
+        this.organization = null;
     }
 
     pageFormFieldMeta(type) {
@@ -86,6 +87,7 @@ class VacancyStore extends Store {
             state: this.state,
             user: this.user,
             vacancy: this.vacancy,
+            organization: this.organization
         }
     }
 
@@ -176,7 +178,8 @@ class VacancyStore extends Store {
 
     async updateInnerData(data) {
         try {
-            this.vacancy = await this.getData(`/vacancies/${data['id']}`);
+            this.vacancy = (await this.getData(`/vacancies/${data['id']}`)).vacancy;
+            this.organization = (await this.getData(`/vacancies/${data['id']}`)).organization_name;
             this.user = await this.getData("/current_user");
             this.responses = [];
 
