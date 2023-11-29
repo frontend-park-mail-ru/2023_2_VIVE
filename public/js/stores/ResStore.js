@@ -169,6 +169,9 @@ class ResStore extends Store {
             }
         },
         {
+            "skills": {
+                type: "text",
+            },
             "description": {
                 type: "text",
                 required: true,
@@ -198,7 +201,7 @@ class ResStore extends Store {
 
     isMyResume() {
         const user = User.getUser();
-        if (user && user['applicant_id'] && user['applicant_id'] == this.resume['applicant_id']) {
+        if (user && this.resume && user['applicant_id'] && user['applicant_id'] == this.resume['applicant_id']) {
             return true;
         }
         return false;
@@ -324,7 +327,11 @@ class ResStore extends Store {
     saveForm(form_data) {
         let is_render = false;
         if ('skills' in form_data) {
-            form_data['skills'] = form_data['skills'].split(' ');
+            if (form_data['skills'].length === 0) {
+                form_data['skills'] = [];
+            } else {
+                form_data['skills'] = form_data['skills'].split(' ');
+            }
         }
         for (const key in form_data) {
             if (this.checkAndSaveInput(key, form_data[key])) {

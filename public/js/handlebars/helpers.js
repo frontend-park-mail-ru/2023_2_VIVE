@@ -99,5 +99,16 @@ export function registerHelpers() {
       ? options.fn(this)
       : options.inverse(this);
   });
+
+  Handlebars.registerHelper('arraytostr', function (arr) {
+    let res = '';
+    // if (arr !== undefined) {
+      arr.forEach(element => {
+        res += element + ' ';  
+      });
+    // }
+    return res;
+  });
 }
+
 registerHelpers();

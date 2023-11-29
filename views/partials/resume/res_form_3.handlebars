@@ -2,6 +2,8 @@
  (object title="Введите ваши навыки (через пробел)" name="skills" placeholder="Навыки")
 )}}
 
+{{log (lookup ../data this.name)}}
+
 {{> input (object obj=this
   class=(object
   title="res__form__input__title"
@@ -9,7 +11,7 @@
   block="res__form__field"
   )
   name=this.name
-  value=(lookup ../data this.name)
+  value=(arraytostr (lookup ../data this.name))
   error=(lookup ../errors this.name))}}
 
 {{/each}}

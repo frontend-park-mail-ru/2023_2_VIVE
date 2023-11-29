@@ -25,7 +25,7 @@ class ResponseStore extends Store {
 
     async updateInnerData(data) {
         try {
-            this.vacancy = await this.getData(`/vacancies/${data['id']}`);
+            this.vacancy = (await this.getData(`/vacancies/${data['id']}`)).vacancy;
             this.resumes = await this.getData("/current_user/cvs");
             this.user = await this.getData("/current_user");
             return true;
