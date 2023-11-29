@@ -1,6 +1,7 @@
+import empVacsStore from '../stores/empVacs.Store.js';
 import mainView from './mainView.js';
 
-export default class profileView extends mainView {
+export default class empVacs extends mainView {
     constructor() {
         super();
     }
@@ -10,9 +11,13 @@ export default class profileView extends mainView {
         await super.render();
 
         const template = Handlebars.templates['empVacs'];
-        document.querySelector('main').innerHTML = template();
+        document.querySelector('main').innerHTML = template(empVacsStore.getContext());
 
         this.addEventListeners();
+    }
+
+    async updateInnerData(data) {
+        return empVacsStore.updateInnerData(data);
     }
 
     addEventListeners() {
