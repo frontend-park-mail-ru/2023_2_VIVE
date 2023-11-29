@@ -179,6 +179,20 @@
         <div class="resv__data__main mb-20">
           <div>
             <div class="resv__text_big mb-20">
+              Навыки
+            </div>
+            <div class="resv__text_sm" style="display: flex;">
+              {{#each data.skills}}
+              <div class="tag-container">
+              {{this}}
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        <div class="resv__data__main mb-20">
+          <div>
+            <div class="resv__text_big mb-20">
               Информация о себе
             </div>
             <div class="resv__text_sm">
@@ -197,10 +211,6 @@
         {{/if}}
       </div>
     </div>
-
-
-
-
 
 
 
