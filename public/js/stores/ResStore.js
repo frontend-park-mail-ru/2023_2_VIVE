@@ -471,7 +471,28 @@ class ResStore extends Store {
         }
     }
 
+    parseQueryToDict(qParams) {
+        const qObj = {};
+        for (const key of qParams.keys()) {
+            qObj[key] = qParams.get(key);
+        }
+        return qObj;
+    }
+
+    updateInnerData(data) {
+        this.qObj = this.parseQueryToDict(data['urlObj'].searchParams);
+
+        console.log(this.qObj);
+    }
+
     async getResumes() {
+        return [
+            {
+                'id': 1,
+                'profession_name': 'WEB разработчик',
+                'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, consequuntur blanditiis. Animi impedit harum saepe voluptates laudantium! Numquam error porro repellendus, atque possimus repudiandae! Excepturi laboriosam fuga aut sit neque.'
+            }
+        ]
         // try {
         //     const resp = await APIConnector.get(
         //         BACKEND_SERVER_URL + `/current_user/cvs/${this.resume_id}`,

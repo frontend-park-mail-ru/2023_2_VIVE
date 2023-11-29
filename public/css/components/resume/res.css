@@ -4,3 +4,8 @@
 @import url("__form/res-form.css");
 @import url("__steps/res-steps.css");
 @import url("__view/res-view.css");
+
+
+.cvs__block__params {
+    justify-content: flex-end !important; 
+}

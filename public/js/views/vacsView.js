@@ -7,6 +7,10 @@ export default class vacsView extends mainView {
     this.block_type = 'list';
   }
 
+  async updateInnerData(data) {
+    return vacsStore.updateInnerData(data);
+  }
+
   async render() {
     await super.render();
 
@@ -113,10 +117,6 @@ export default class vacsView extends mainView {
       description.innerText = description.innerText.substring(0, 300) + "...";
       }
     })
-  }
-
-  async updateInnerData(data) {
-    return vacsStore.updateInnerData();
   }
 
   clear() {

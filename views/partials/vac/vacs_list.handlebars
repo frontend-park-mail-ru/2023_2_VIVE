@@ -69,16 +69,6 @@
             </h3>
             <p class="vacs__list__item__desc__prev" name="vacancy-description">
                 {{{this.description}}}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima veniam earum, laudantium pariatur
-                obcaecati deserunt autem perferendis unde neque laboriosam cumque, non architecto fuga ipsum, eos
-                praesentium? Ipsam, eos fuga?
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil pariatur ab, rerum eveniet dolore illo
-                enim delectus, aliquid quidem ipsum sequi accusamus laboriosam quisquam eius aperiam placeat. Veniam,
-                libero nostrum.
-
-
-
-
             </p>
         </div>
         {{#iff ../user.role '==' 'employer'}}
@@ -86,10 +76,10 @@
         <div class="vacs__list__item__feed">
             <div class="vacs__list__item__feed__respond">
                 <object>
-                <a href="/vacancy/{{this.id}}/response"
-                    class="js-nav-link text-light-title link-btn-blue--bg common-text common-text--medium">
-                    Откликнуться
-                </a>
+                    <a href="/vacancy/{{this.id}}/response"
+                        class="js-nav-link text-light-title link-btn-blue--bg common-text common-text--medium">
+                        Откликнуться
+                    </a>
                 </object>
             </div>
             <div class="vacs__list__item__feed__fav">

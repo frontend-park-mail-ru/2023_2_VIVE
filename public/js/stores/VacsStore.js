@@ -15,16 +15,27 @@ class VacsStore extends Store {
         return {
             user: await User.getUser(),
             sorted: this.sorted,
-            data: this.vacs
+            data: this.vacs,
+            qObj: this.qObj,
         }
     }
 
-    async updateInnerData() {
+    parseQueryToDict(qParams) {
+        const qObj = {};
+        for (const key of qParams.keys()) {
+            qObj[key] = qParams.get(key);
+        }
+        return qObj;
+    }
+
+    async updateInnerData(data) {
+        this.qObj = this.parseQueryToDict(data['urlObj'].searchParams);
+        
         try {
             this.vacs = this.sortVacanciesByDateToOld(await this.getVacancies());
             this.vacs = this.processVacanciesData(this.vacs);
             return true;
-        } catch(error) {
+        } catch (error) {
             return false;
         }
     }
@@ -33,7 +44,7 @@ class VacsStore extends Store {
         vacancies.forEach(vacancy => {
             const salary = vacancyStore.processVacanciesSalary(vacancy);
             delete vacancy.salary_lower_bound; delete vacancy.salary_upper_bound;
-            Object.assign(vacancy, {['salary']: salary});
+            Object.assign(vacancy, { ['salary']: salary });
             vacancy.employment = vacancyStore.processVacanciesEmployment(vacancy);
             vacancy.experience = vacancyStore.processVacanciesExperience(vacancy);
             vacancy.location = vacancy.location ? vacancy.location : 'Не указано';
@@ -52,25 +63,25 @@ class VacsStore extends Store {
     }
 
     sortVacanciesByDateToNew(vacancies) {
-        return vacancies.sort(function(a, b) {
+        return vacancies.sort(function (a, b) {
             return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
         });
     }
 
     sortVacanciesByDateToOld(vacancies) {
-        return vacancies.sort(function(a, b) {
+        return vacancies.sort(function (a, b) {
             return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
     }
 
     async getVacancies() {
         try {
-          const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies');
-          const data = await resp.json();
-          return data;
+            const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies');
+            const data = await resp.json();
+            return data;
         } catch (err) {
-          console.error(err);
-          return undefined;
+            console.error(err);
+            return undefined;
         }
     }
 }

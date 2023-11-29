@@ -7,10 +7,15 @@
 .vacs {
   display: flex;
   justify-content: space-between;
+  gap: 50px;
+}
+
+.vacs_query {
+  margin-bottom: 20px;
 }
 
 .vacs__block {
-  width: 80vw;
+  width: 80%;
 }
 
 /* params */
