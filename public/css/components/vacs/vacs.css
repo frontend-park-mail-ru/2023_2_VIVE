@@ -106,14 +106,23 @@
 }
 
 .vacs__list__item__company-logo {
+  border-radius: 10px;
   box-sizing: border-box;
   display: block;
   margin-right: 25px;
+  transition: transform .3s;
 }
 
-/* .vacs__list__item__company-logo:hover {
-  border: 1px solid black;
-} */
+.vacs__list__item__company-logo:hover {
+  transform: scale(1.05, 1.05);
+}
+
+.vacs__list__item__company-logo img {
+  height: 100%;
+  width: 100%;
+}
+
+
 
 .vacs__list__item__company-name {
   margin-top: 0;
