@@ -19,10 +19,6 @@
 
 
 
-
-
-
-
           <div class="resv__data__item">
             {{#if (lookup is_edit 0)}}
             {{> res_form_edit (object page=0 errors=errors data=(lookup forms_data 0) page_data=page_data)}}
@@ -43,12 +39,12 @@
               <img class="resv__data__main__avatar" src="../../../public/images/profile.png" alt="">
             </div>
             {{/with}}
-            {{#iff user.role '==' 'applicant'}}
+            {{#if is_my_resume}}
             {{> link-btn text="Редактировать"
             data=(object page=0)
             class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
             d-block"}}
-            {{/iff}}
+            {{/if}}
             {{/if}}
           </div>
 
@@ -83,14 +79,14 @@
             <div class="resv__data__main mb-20">
               <div>
 
-                {{#with (object level=(object 
+                {{#with (object level=(object
                 nothing="Нет образования"
                 secondary="Среднее"
                 special_secondary="Среднее специальное"
                 unfinished_higher="Неоконченное высшее"
                 higher="Высшее"
                 bachelor="Бакалавр"
-                master="Магистр" 
+                master="Магистр"
                 candidate="Кандидат наук"
                 doctor="Доктор наук"
                 ))}}
@@ -116,12 +112,12 @@
             </div>
           </div>
           {{/with}}
-          {{#iff user.role '==' 'applicant'}}
+          {{#if is_my_resume }}
           {{> link-btn text="Редактировать"
           data=(object page=1)
           class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
           d-block"}}
-          {{/iff}}
+          {{/if}}
           {{/if}}
         </div>
 
@@ -158,13 +154,13 @@
           </div>
         </div>
         {{/with}}
-        {{#iff user.role '==' 'applicant'}}
+        {{#if is_my_resume }}
         {{> link-btn text="Редактировать"
         data=(object page=2)
         class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
         d-block"
         }}
-        {{/iff}}
+        {{/if}}
         {{/if}}
       </div>
 
@@ -184,7 +180,7 @@
             <div class="resv__text_sm" style="display: flex;">
               {{#each data.skills}}
               <div class="tag-container">
-              {{this}}
+                {{this}}
               </div>
               {{/each}}
             </div>
@@ -201,13 +197,13 @@
           </div>
         </div>
         {{/with}}
-        {{#iff user.role '==' 'applicant'}}
+        {{#if is_my_resume}}
         {{> link-btn text="Редактировать"
         data=(object page=3)
         class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
         d-block"
         }}
-        {{/iff}}
+        {{/if}}
         {{/if}}
       </div>
     </div>
@@ -219,7 +215,7 @@
         Резюме обновлено 01.11.23
       </div>
       <div class="resv__params__actions mb-20">
-        {{#iff user.role '==' 'applicant'}}
+        {{#if is_my_resume }}
         {{> link-btn
         class="resv__params__actions__print link-btn_transp-box-blue link-btn_pd-sm link-btn_bd-rad-sm
         link-btn_semi-bold d-block"
@@ -236,11 +232,11 @@
           </g>
         </svg>'}}
         <div class="setting__delete-btn" data-name="delete-resume">
-            <div class="common-text common-text--medium">
-                Удалить резюме
-            </div>
+          <div class="common-text common-text--medium">
+            Удалить резюме
+          </div>
         </div>
-        {{/iff}}
+        {{/if}}
       </div>
 
       {{#iff data.status '==' 'searching'}}

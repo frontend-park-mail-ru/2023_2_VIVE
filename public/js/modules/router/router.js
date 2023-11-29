@@ -82,7 +82,15 @@ class Router {
         });
     }
 
+    getPrefUrl() {
+        return window.location.protocol + '//' + window.location.host;
+    }
+
     async urlWork(path) {
+        const urlObj = new URL(this.getPrefUrl() + path);
+        
+        path = urlObj.pathname;
+
         this.deleteLastRender();
         await User.updateUser();
         for (const element of urls) {
@@ -95,7 +103,7 @@ class Router {
                     return;
                 }
 
-                if (!await this.updateInnerData(url, path)) {
+                if (!await this.updateInnerData(url, urlObj)) {
                     // this.render404();
                     // return;
                 }
@@ -108,11 +116,17 @@ class Router {
         this.render404();
     }
 
-    async updateInnerData(url, facUrl) {
+    async updateInnerData(url, urlObj) {
+        const facUrl = urlObj.pathname;
         const idMatch = facUrl.match(/\d+/);
         const id = idMatch ? parseInt(idMatch[0]) : null;
         this.prevView = urls.find(urlObject => urlObject.url === url).view;
-        if (!await this.prevView.updateInnerData({url: facUrl, 'id': id})) {
+        if (!await this.prevView.updateInnerData(
+            {
+                url: facUrl, 
+                'id': id, 
+                urlObj: urlObj,
+            })) {
             return false;
         }
         return true;

@@ -9,4 +9,4 @@ try {
     console.log(error);
 }
 
-router.goToLink(window.location.pathname);
+router.goToLink(window.location.pathname + window.location.search);

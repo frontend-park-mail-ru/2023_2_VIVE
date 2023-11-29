@@ -192,7 +192,16 @@ class ResStore extends Store {
             //========editing
             is_edit: this.is_edit,
             forms_data: this.forms_data,
+            is_my_resume: this.isMyResume(),
         };
+    }
+
+    isMyResume() {
+        const user = User.getUser();
+        if (user && user['applicant_id'] && user['applicant_id'] == this.resume['applicant_id']) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -361,13 +370,13 @@ class ResStore extends Store {
     async loadResume(id) {
         this.finals_data = [];
 
-        const resume = await this.getResume(id);
-        if (isObjEmpty(resume)) {
+        this.resume = await this.getResume(id);
+        if (isObjEmpty(this.resume)) {
             return false;
         }
 
         for (let i = 0; i < this.forms_data.length; ++i) {
-            this.forms_data[i] = structuredClone(resume);
+            this.forms_data[i] = structuredClone(this.resume);
             this.finals_data.push({});
             this.finals_data[i] = structuredClone(this.forms_data[i]);
         }
@@ -375,21 +384,14 @@ class ResStore extends Store {
     }
 
     async getResume(id) {
-        console.log("...id:", id);
         try {
-            let resp = null;
-            if (User.getUser().role === User.ROLES.app) {
-                resp = await APIConnector.get(
-                    BACKEND_SERVER_URL + '/current_user/cvs/' + id);
-            } else if (User.getUser().role === User.ROLES.emp) {
-                resp = await APIConnector.get(
-                    BACKEND_SERVER_URL + '/cv/' + id);
-            }
+            const resp = await APIConnector.get(
+                BACKEND_SERVER_URL + '/cv/' + id);
+            
             const data = await resp.json();
-            this.resume_id = id;
+            
             console.log("received(resume): ", data);
             return data;
-            // router.goToLink('/resume/'+data.id);
         } catch (err) {
             console.error(err);
             return {};
@@ -452,7 +454,7 @@ class ResStore extends Store {
         console.log(this.final_data);
         try {
             const resp = await APIConnector.put(
-                BACKEND_SERVER_URL + '/current_user/cvs/' + this.resume_id, this.final_data);
+                BACKEND_SERVER_URL + '/current_user/cvs/' + this.resume.id, this.final_data);
             this.changeMode();
         } catch (err) {
             console.error(err);
@@ -464,13 +466,63 @@ class ResStore extends Store {
     async deleteResume() {
         try {
             const resp = await APIConnector.delete(
-                BACKEND_SERVER_URL + `/current_user/cvs/${this.resume_id}`,
+                BACKEND_SERVER_URL + `/current_user/cvs/${this.resume.id}`,
             );
             router.goToLink('/profile/resumes');
             return true;
         } catch(error) {
             console.log(error);
             return false;
+        }
+    }
+
+    parseQueryToDict(qParams) {
+        const qObj = {};
+        for (const key of qParams.keys()) {
+            qObj[key] = qParams.get(key);
+        }
+        return qObj;
+    }
+
+    updateInnerData(data) {
+        this.qObj = this.parseQueryToDict(data['urlObj'].searchParams);
+
+        console.log(this.qObj);
+    }
+
+    async getResumes() {
+        try {
+            const resp = await APIConnector.get(
+                BACKEND_SERVER_URL + `/current_user/cvs/${this.resume.id}`,
+            );
+            router.goToLink('/profile/resumes');
+            return true;
+        } catch(error) {
+            console.log(error);
+            return false;
+        }
+    }
+
+    async getAllResumes() {
+        console.log(this.qObj);
+        this.qObj['page_num'] = 1;
+        this.qObj['results_per_page'] = 10; 
+        if (!this.qObj['q']) {
+            this.qObj['q'] = '';
+        }
+
+        const q_str = decodeURIComponent(new URLSearchParams(this.qObj).toString());
+        try {
+            const resp = await APIConnector.get(
+                BACKEND_SERVER_URL + `/cvs/search?` + q_str,
+            );
+            const data = await resp.json();
+            console.log(data);
+            // console.log(data['vacancies']['list']);
+            return data['list'];
+        } catch(error) {
+            console.log(error);
+            return undefined;
         }
     }
 }

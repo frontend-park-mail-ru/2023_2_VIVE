@@ -1,5 +1,6 @@
 import empVacs from "../../views/empVacs.js"
 import vacsView from "../../views/vacsView.js"
+import resumesView from "../../views/resumesView.js"
 import regAuthView from "../../views/regAuthView.js"
 import profileView from "../../views/profileView.js"
 import resView from "../../views/resView.js"
@@ -15,6 +16,7 @@ const urls = [
     {url: '/csat/statistic', login_required: true, view: new csatStatView()},
     {url: '/page404', view: new page404View()},
     {url: '/vacs', view: new vacsView()},
+    {url: '/resumes', view: new resumesView()},
     {url: '/app_auth', deny_with_auth: true, view: new regAuthView('auth', 'applicant')},
     {url: '/emp_auth', deny_with_auth: true, view: new regAuthView('auth', 'employer')},
     {url: '/app_reg', deny_with_auth: true, view: new regAuthView('reg', 'applicant')},

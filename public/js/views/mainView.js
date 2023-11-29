@@ -1,24 +1,23 @@
 import router from "../modules/router/router.js";
+import searchStore from '../stores/SearchStore.js';
 import User from '../stores/UserStore.js';
+import { getFormObject } from '../utils.js';
 import View from './view.js';
 
-const SEARCH_TYPE = {
-    VACANCY: 'vacancy',
-    RESUME: 'resune'
-};
 
 export default class mainView extends View {
-    constructor() {
-        super();
-        this.search_type = SEARCH_TYPE.VACANCY;
-    }
     /**
        * Асинхронный метод для отображения меню
        */
     async render() {
         await super.render();
+
         
-        document.querySelector('header').innerHTML = Handlebars.partials['header']({ user: await User.getUser(), search_type: this.search_type });
+        document.querySelector('header').innerHTML = Handlebars.partials['header'](
+            { 
+                user: await User.getUser(), 
+                search_type: searchStore.getType() 
+            });
         document.querySelector('footer').innerHTML = Handlebars.partials['footer']({ user: await User.getUser() });
     }
 
@@ -67,16 +66,32 @@ export default class mainView extends View {
             resumeSearch.addEventListener('click', () => {
                 resumeSearch.classList.add('dropdown-search__item_active');
                 vacancySearch.classList.remove('dropdown-search__item_active');
-                this.search_type = SEARCH_TYPE.RESUME;
+                searchStore.setResume();
                 searchType.innerHTML = 'Резюме';
             })
 
             vacancySearch.addEventListener('click', () => {
                 vacancySearch.classList.add('dropdown-search__item_active');
                 resumeSearch.classList.remove('dropdown-search__item_active');
-                this.search_type = SEARCH_TYPE.VACANCY;
+                searchStore.setVacancy();
                 searchType.innerHTML = 'Вакансия';
             });
+        }
+
+        const form = document.querySelector('.js-search-form');
+        if (form) {
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                const q = getFormObject(new FormData(form))['q'].trim();
+                const data = {
+                    'q': q,
+                }
+                const searchParams = new URLSearchParams(data);
+                const input_field = form.elements['q'];
+                input_field.value = '';
+                const main_link = (searchStore.getType() == searchStore.SEARCH_TYPE.RESUME) ? '/resumes' : '/vacs';
+                router.goToLink(main_link + '?' + searchParams.toString());
+            })
         }
     }
 
