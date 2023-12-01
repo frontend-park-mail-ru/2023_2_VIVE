@@ -125,31 +125,35 @@ export default class mainView extends View {
                 }
             });
             
-            const switchBtn = document.querySelector('[name="switch"]');
-            const leaveBtn = document.querySelector('[name="leave"]');
+            const switchBtn = document.querySelectorAll('[name="switch"]');
+            const leaveBtn = document.querySelectorAll('[name="leave"]');
 
-            switchBtn.addEventListener('click', async (e) => {
-                e.preventDefault();
-                try {
-                    await User.logout();
-                    if (User.getUser().role === User.ROLES.app) {
-                        router.goToLink('/app_auth');
-                    } else {
-                        router.goToLink('/emp_auth');
+            switchBtn.forEach(element => {
+                element.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        await User.logout();
+                        if (User.getUser().role === User.ROLES.app) {
+                            router.goToLink('/app_auth');
+                        } else {
+                            router.goToLink('/emp_auth');
+                        }
+                    } catch (err) {
+                        console.error('logout: ', err);
                     }
-                } catch (err) {
-                    console.error('logout: ', err);
-                }
+                });
             });
 
-            leaveBtn.addEventListener('click', async (e) => {
-                e.preventDefault();
-                try {
-                    await User.logout();
-                    router.goToLink('/');
-                } catch (err) {
-                    console.error('logout: ', err);
-                }
+            leaveBtn.forEach(element => {
+                element.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        await User.logout();
+                        router.goToLink('/');
+                    } catch (err) {
+                        console.error('logout: ', err);
+                    }
+                });
             });
         }
     }

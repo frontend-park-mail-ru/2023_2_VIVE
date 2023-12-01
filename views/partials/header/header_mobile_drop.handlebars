@@ -1,0 +1,71 @@
+<div class="dropdown navbar-mobile">
+    <div class="navbar__item">
+      <svg class="cursor-pointer dropdown__padd-btn" name="drop-btn-mobile"  xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <mask id="mask0_1083_3840" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
+          <rect width="40" height="40" fill="#D9D9D9"/>
+        </mask>
+        <g mask="url(#mask0_1083_3840)">
+          <path d="M5 30V27.2223H35V30H5ZM5 21.3889V18.6111H35V21.3889H5ZM5 12.7778V10H35V12.7778H5Z" fill="#0496FF"/>
+        </g>
+      </svg>
+    </div>
+    <div class="dropdown__content dropdown__content-left dropdown__content__mobile d-none">
+    {{#if user}}
+        {{#iff user.role '==' 'applicant'}}
+        <div class="dropdown__item cursor-pointer">
+            <a href="/profile/resumes" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Мои резюме</a>
+        </div>
+        <div class="dropdown__item cursor-pointer">
+            <a href="/resumes" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Соискатели</a>
+        </div>
+        <div class="dropdown__item cursor-pointer">
+            <a href="/vacs" class="js-nav-link common-text link-btn common-text--medium text-dodger-blue">Вакансии</a>
+        </div>
+        {{else}}
+        <div class="dropdown__item cursor-pointer">
+            <a href="/profile/vacancies" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Мои вакансии</a>
+        </div>
+        <div class="dropdown__item cursor-pointer">
+            <a href="/resumes" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Соискатели</a>
+        </div>
+        <div class="dropdown__item cursor-pointer">
+            <a href="/vacs" class="js-nav-link common-text link-btn common-text--medium text-dodger-blue">Вакансии</a>
+        </div>
+        {{/iff}}
+        <div class="dropdown__item cursor-pointer">
+            <img class="dropdown__img" src="../../public/images/img/profile_28-01.png">
+            <a href="/profile" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Профиль</a>
+        </div>
+        <div class="dropdown__item cursor-pointer">
+            <img class="dropdown__img" src="../../public/images/img/settings_outline_28-01.png">
+            <a href="/profile/settings" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue"> Настройки</a>
+        </div>
+        <div class="dropdown__item cursor-pointer" name="switch">
+            <img class="dropdown__img" src="../../public/images/img/refresh_outline_28-01.png">
+            <div class="common-text common-text--medium text-dodger-blue">Сменить роль</div>
+        </div>
+        <div class="dropdown__item cursor-pointer"  name="leave">
+            <img class="dropdown__img" src="../../public/images/img/door_arrow_left_outline_28-01.png">
+            <div class="common-text common-text--medium text-dodger-blue">Выход из аккаунта</div>
+        </div>
+    {{else}}
+        <div class="dropdown__item cursor-pointer">
+            <a href="#" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">О нас</a>
+        </div>
+        <div class="dropdown__item cursor-pointer">
+            <a href="/resumes" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Соискатели</a>
+        </div>
+        <div class="dropdown__item cursor-pointer">
+            <a href="/vacs" class="js-nav-link common-text link-btn common-text--medium text-dodger-blue">Вакансии</a>
+        </div>
+        <div class="dropdown__item cursor-pointer">
+            <img class="dropdown__img" src="../../public/images/img/arrow_right_outline_20-01.png">
+            <a href="/app_auth" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Уже есть аккаунт</a>
+        </div>
+        <div class="dropdown__item cursor-pointer">
+            <img class="dropdown__img" src="../../public/images/img/add_alt_20-01.png">
+            <a href="/app_reg" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Зарегистрироваться</a>
+        </div>
+    {{/if}}
+    </div>
+</div>
