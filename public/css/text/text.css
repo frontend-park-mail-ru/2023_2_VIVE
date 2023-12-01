@@ -3,9 +3,32 @@
 
 .common-text {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
     font-style: normal;
     line-height: 25px
+}
+
+@media (min-width: 320px) {
+    .common-text {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .common-text {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .common-text {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 2520px) {
+    .common-text {
+        font-size: 18px;
+    }
 }
 
 .common-text--regular {
