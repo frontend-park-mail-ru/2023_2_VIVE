@@ -31,6 +31,7 @@ export default class mainView extends View {
         this.profileDropListener();
         this.searchTypeListener();
         this.mobileDropListener();
+        this.mobileSearchListener();
     }
 
     searchTypeListener() {
@@ -80,6 +81,70 @@ export default class mainView extends View {
         }
 
         const form = document.querySelector('.js-search-form');
+        if (form) {
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                const q = getFormObject(new FormData(form))['q'].trim();
+                const data = {
+                    'q': q,
+                }
+                const searchParams = new URLSearchParams(data);
+                const input_field = form.elements['q'];
+                input_field.value = '';
+                const main_link = (searchStore.getType() == searchStore.SEARCH_TYPE.RESUME) ? '/resumes' : '/vacs';
+                router.goToLink(main_link + '?' + searchParams.toString());
+            })
+        }
+    }
+
+    mobileSearchListener() {
+        const searchDropdownMobile = document.querySelector('[name="search-dropdown-mobile"]');
+        const searchContentDropdownMobile = document.querySelector('.dropdown__content-search-mobile');
+        const searchSvgIconMobile = document.querySelector('[name="search-svg-icon-mobile"]');
+        const searchTypeMobile = document.querySelector('[name="search-type-mobile"]');
+
+
+        if (searchDropdownMobile) {
+            searchDropdownMobile.addEventListener('click', function(event) {
+                const isContentVisible = !searchContentDropdownMobile.classList.contains('d-none');
+
+                if (isContentVisible) {
+                    searchSvgIconMobile.classList.remove('rotate-180');
+                    searchContentDropdownMobile.classList.add('d-none');
+                } else {
+                    searchSvgIconMobile.classList.add('rotate-180');
+                    searchContentDropdownMobile.classList.remove('d-none');
+                }
+
+                event.stopPropagation();
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!searchContentDropdownMobile.contains(event.target) && !searchDropdownMobile.contains(event.target)) {
+                    searchSvgIconMobile.classList.remove('rotate-180');
+                    searchContentDropdownMobile.classList.add('d-none');
+                }
+            });
+
+            const resumeSearchMobile = document.querySelector('[name="resume-search-mobile"]');
+            const vacancySearchMobile = document.querySelector('[name="vacancy-search-mobile"]');
+
+            resumeSearchMobile.addEventListener('click', () => {
+                resumeSearchMobile.classList.add('dropdown-search__item_active');
+                vacancySearchMobile.classList.remove('dropdown-search__item_active');
+                searchStore.setResume();
+                searchTypeMobile.innerHTML = 'Резюме';
+            })
+
+            vacancySearchMobile.addEventListener('click', () => {
+                vacancySearchMobile.classList.add('dropdown-search__item_active');
+                resumeSearchMobile.classList.remove('dropdown-search__item_active');
+                searchStore.setVacancy();
+                searchTypeMobile.innerHTML = 'Вакансия';
+            });
+        }
+
+        const form = document.querySelector('.js-search-form-mobile');
         if (form) {
             form.addEventListener('submit', event => {
                 event.preventDefault();
@@ -159,31 +224,51 @@ export default class mainView extends View {
     }
     
     mobileDropListener() {
-        const mobileDropdown = document.querySelector('[name="drop-btn-mobile"]');
-        const mobileContentDropdown = document.querySelector('.dropdown__content__mobile');
-        if (mobileDropdown) {
-            mobileDropdown.addEventListener('click', ()=> {
-                const isContentVisible = !mobileContentDropdown.classList.contains('d-none');
+        const mobileDropdown = document.querySelectorAll('[name="drop-btn-mobile"]');
+        const mobileContentDropdown = document.querySelectorAll('.dropdown__content__mobile');
+
+        for (let i = 0; i < mobileDropdown.length; i++) {
+            mobileDropdown[i].addEventListener('click', ()=> {
+                const isContentVisible = !mobileContentDropdown[i].classList.contains('d-none');
 
                 if (isContentVisible) {
-                    mobileDropdown.classList.remove('dropdown__img--rotate');
-                    mobileDropdown.classList.add('dropdown__img--rotate-secondary');
-                    mobileContentDropdown.classList.add('d-none');
+                    mobileDropdown[i].classList.remove('dropdown__img--rotate');
+                    mobileDropdown[i].classList.add('dropdown__img--rotate-secondary');
+                    mobileContentDropdown[i].classList.add('d-none');
                 } else {
-                    mobileDropdown.classList.remove('dropdown__img--rotate-secondary');
-                    mobileDropdown.classList.add('dropdown__img--rotate');
-                    mobileContentDropdown.classList.remove('d-none');
+                    mobileDropdown[i].classList.remove('dropdown__img--rotate-secondary');
+                    mobileDropdown[i].classList.add('dropdown__img--rotate');
+                    mobileContentDropdown[i].classList.remove('d-none');
                 }
             });
 
             document.addEventListener('click', function (event) {
-                if (!mobileContentDropdown.contains(event.target) && !mobileDropdown.contains(event.target)) {
-                    mobileDropdown.classList.remove('dropdown__img--rotate');
-                    mobileDropdown.classList.add('dropdown__img--rotate-secondary');
-                    mobileContentDropdown.classList.add('d-none');
+                if (!mobileContentDropdown[i].contains(event.target) && !mobileDropdown[i].contains(event.target)) {
+                    mobileDropdown[i].classList.remove('dropdown__img--rotate');
+                    mobileDropdown[i].classList.add('dropdown__img--rotate-secondary');
+                    mobileContentDropdown[i].classList.add('d-none');
                 }
             });
-        }        
+        }
+
+        const paddingSearchBtn = document.querySelector('[name="paddint-search-btn"]');
+        const searchContentMobile = document.querySelector('.navbar__search-mobile');
+
+        paddingSearchBtn.addEventListener('click', ()=> {
+            const isContentVisible = !searchContentMobile.classList.contains('d-none');
+
+            if (isContentVisible) {
+                searchContentMobile.classList.add('d-none');
+            } else {
+                searchContentMobile.classList.remove('d-none');
+            }
+
+            document.addEventListener('click', function (event) {
+                if (!searchContentMobile.contains(event.target) && !paddingSearchBtn.contains(event.target)) {
+                    searchContentMobile.classList.add('d-none');
+                }
+            });
+        });
     }
 
     profileDropListener() {

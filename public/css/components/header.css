@@ -45,6 +45,12 @@
   .navbar-mobile {
     display: flex;
   }
+  .navbar-section {
+    display: none;
+  }
+  .navbar-section-mobile {
+    display: block;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -58,6 +64,12 @@
     display: none;
   }
   .navbar-mobile {
+    display: none;
+  }
+  .navbar-section {
+    display: block;
+  }
+  .navbar-section-mobile {
     display: none;
   }
 }
@@ -74,6 +86,16 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+}
+
+.navbar__search-mobile {
+  position: absolute;
+  top: 60px;
+  left: 30px;
+}
+
+.navbar__search-mobile input {
+  width: 40vw;
 }
 
 .search__variants {
