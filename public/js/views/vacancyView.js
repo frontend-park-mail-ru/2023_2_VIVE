@@ -179,8 +179,8 @@ export default class profileView extends mainView {
         const locationInfo = document.querySelectorAll('[name="vacancy-location"]');
 
         salaryInfo.forEach(salary => {
-            if (salary.innerText.length > 10) {
-                salary.innerText = salary.innerText.substring(0, 10) + "...";
+            if (salary.innerText.length > 20) {
+                salary.innerText = salary.innerText.substring(0, 20) + "...";
             }
         });
     

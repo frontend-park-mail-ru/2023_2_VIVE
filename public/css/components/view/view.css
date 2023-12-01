@@ -2,9 +2,7 @@
 
 .view {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
 .view__btn-arrow {

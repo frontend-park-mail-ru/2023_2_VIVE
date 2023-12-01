@@ -1,6 +1,6 @@
 .vacancie {
     display: flex;
-    width: 790px;
+    width: 100%;
     padding: 40px;
     flex-direction: column;
     align-items: flex-start;
@@ -9,10 +9,43 @@
     background: var(--card-back-default);
 }
 
-.vacancie__additional-info {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
+@media (min-width: 160px) {
+    .vacancie__additional-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .vacancie__btns {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    .vacancie__btns__additional {
+        display: flex;
+        gap: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .vacancie__additional-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .vacancie__btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    }
+    .vacancie__btns__additional {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    }
 }
 
 .add-info {
@@ -36,13 +69,6 @@
     flex-wrap: wrap;
     border-radius: 30px;
     background: var(--card-back-default); 
-}
-
-.vacancie__btns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
 }
 
 .vacancie-refactor {
