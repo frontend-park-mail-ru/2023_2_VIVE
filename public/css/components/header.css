@@ -106,7 +106,19 @@
 
 @media (min-width: 1024px) {
   .search__input {
-    width: 30vw;
+    width: 25vw;
+  }
+}
+
+@media (min-width: 1440px) {
+  .search__input {
+    width: 20vw;
+  }
+}
+
+@media (min-width: 2520px) {
+  .search__input {
+    width: 15vw;
   }
 }
 
