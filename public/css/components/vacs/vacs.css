@@ -81,8 +81,6 @@
   justify-content: space-between;
 }
 
-.vacs__list_list {}
-
 .vacs__list_block {
   flex-direction: row;
   flex-wrap: wrap;

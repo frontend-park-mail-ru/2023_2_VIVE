@@ -5,20 +5,30 @@
 }
 
 .footer__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border-bottom: 1px solid var(--main-background-grey);
+  padding-bottom: 10px;
   margin-bottom: 15px;
 }
 
-.footer__text {
-  font-family: 'Acumin', sans-serif;
-  font-weight: bold;
-  color: var(--main-background-grey);
-  margin: 0px 0px;
+@media (min-width: 0) {
+  .footer__top {
+    display: flex;
+    flex-direction: column;
+    gap: 15px
+  }
+  .footer-create-btn {
+    display: none;
+  }
 }
 
-.footer__text__company-name {
-  margin-bottom: 10px;
+@media (min-width: 1080px) {
+  .footer__top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-create-btn {
+    display: block;
+  }
 }

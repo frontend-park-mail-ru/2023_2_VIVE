@@ -1,11 +1,11 @@
 <div class="footer">
   <div class="column-wrapper">
     <div class="footer__top">
-      <div>
-        <p class="big-text text-light-title" style="line-height: 10px;">{{#iff user.role '==' 'applicant' }}Найди работу{{else}}Постройте свой идеальный{{/iff}}</p>
-        <p class="big-text text-light-title" style="line-height: 10px;">{{#iff user.role '==' 'applicant'}}Своей мечты здесь{{else}}Коллектив с нами{{/iff}}</p>
+      <div class="footer-main-text">
+        <div class="big-text text-light-title">{{#iff user.role '==' 'applicant' }}Найди работу{{else}}Постройте свой идеальный{{/iff}}</div>
+        <div class="big-text text-light-title">{{#iff user.role '==' 'applicant'}}Своей мечты здесь{{else}}Коллектив с нами{{/iff}}</div>
       </div>
-      <div>
+      <div class="footer-create-btn">
         {{#iff user.role '==' 'applicant' }}
           {{> link-btn (object href="/resume/creation" text="Создать резюме"
           class="js-nav-link footer__btn link-btn_orange"
