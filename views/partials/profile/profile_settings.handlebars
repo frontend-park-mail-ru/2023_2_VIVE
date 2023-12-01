@@ -42,9 +42,9 @@
         obj=this
         user=../user
         inputs = (array
-        (object title='Фамилия' name='last-name' type='text' placeholder='Фамилия')
-        (object title='Имя' name='first-name' type='text' placeholder='Имя')
-        (object title='Пароль' name='password' type='password' placeholder='Пароль')
+        (object title='Фамилия' name='last-name' type='text')
+        (object title='Имя' name='first-name' type='text')
+        (object title='Пароль' name='password' type='password')
         )
         data=(lookup ../errors 'data-last-name')
         errors=(lookup ../errors 'last-name')
@@ -54,8 +54,8 @@
         obj=this
         user=../user
         inputs = (array
-        (object title='Новая почта' name='email' type='text' placeholder='Почта')
-        (object title='Пароль' name='password' type='password' placeholder='Пароль')
+        (object title='Новая почта' name='email' type='text')
+        (object title='Пароль' name='password' type='password')
         )
         errors=(lookup ../errors 'email')
         data=(lookup ../errors 'data-email')
@@ -65,9 +65,9 @@
         obj=this
         user=../user
         inputs = (array
-        (object title='Старый пароль' name='password' type='password' placeholder='Почта')
-        (object title='Новый пароль' name='new_password' type='password' placeholder='Пароль')
-        (object title='Повторите пароль' name='repeat_password' type='password' placeholder='Пароль')
+        (object title='Старый пароль' name='password' type='password')
+        (object title='Новый пароль' name='new_password' type='password')
+        (object title='Повторите пароль' name='repeat_password' type='password')
         )
         errors=(lookup ../errors 'password')
         data=(lookup ../errors 'data-password')

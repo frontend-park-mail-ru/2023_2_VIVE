@@ -31,17 +31,20 @@
 @media (min-width: 1024px) {
     .vacancie__additional-info {
         display: flex;
+        flex-direction: row;
         align-items: flex-start;
         gap: 20px;
     }
     .vacancie__btns {
         display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
         gap: 30px;
     }
     .vacancie__btns__additional {
         display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
         gap: 30px;

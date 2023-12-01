@@ -13,47 +13,48 @@
         class="common-text common-text--medium link-btn-blue--bg text-light-title")}}
     </div> --}}
     <!-- Checkbox buttons -->
-    <div class="vacs__filter">
-        <div class="vacs__filter__name">
-            Образование
+    <div class="vacs__filters-frame">
+        <div class="vacs__filter">
+            <div class="vacs__filter__name">
+                Образование
+            </div>
+            <ul class="vacs__filter__list">
+                <li class="vacs__filter__list__item">
+                    <label class="vacs__filter__list__item__label">
+                        {{> input_checkbox }}
+                        <span>Среднее</span>
+                    </label>
+                </li>
+                <li class="vacs__filter__list__item">
+                    <label class="vacs__filter__list__item__label">
+                        {{> input_checkbox }}
+                        <span>Среднее специальное</span>
+                    </label>
+                </li>
+            </ul>
         </div>
-        <ul class="vacs__filter__list">
-            <li class="vacs__filter__list__item">
-                <label class="vacs__filter__list__item__label">
-                    {{> input_checkbox }}
-                    <span>Среднее</span>
-                </label>
-            </li>
-            <li class="vacs__filter__list__item">
-                <label class="vacs__filter__list__item__label">
-                    {{> input_checkbox }}
-                    <span>Среднее специальное</span>
-                </label>
-            </li>
-
-        </ul>
-    </div>
-    <!-- Radio buttons -->
-    <div class="vacs__filter">
-        <ul class="vacs__filter__list">
+        <!-- Radio buttons -->
+        <div class="vacs__filter">
             <div class="vacs__filter__name">
                 Пол
             </div>
-            <li class="vacs__filter__list__item">
-                {{> input_radio (object text="Не имеет значения"
-                attrs=(object
-                name="gender"
-                )
-                class_label="vacs__filter__list__item__label") }}
-            </li>
-            <li class="vacs__filter__list__item">
-                {{> input_radio (object text="Мужской"
-                attrs=(object
-                name="gender"
-                )
-                class_label="vacs__filter__list__item__label") }}
-            </li>
-        </ul>
+            <ul class="vacs__filter__list">
+                <li class="vacs__filter__list__item">
+                    {{> input_radio (object text="Не имеет значения"
+                    attrs=(object
+                    name="gender"
+                    )
+                    class_label="vacs__filter__list__item__label") }}
+                </li>
+                <li class="vacs__filter__list__item">
+                    {{> input_radio (object text="Мужской"
+                    attrs=(object
+                    name="gender"
+                    )
+                    class_label="vacs__filter__list__item__label") }}
+                </li>
+            </ul>
+        </div>
     </div>
 
 </aside>
