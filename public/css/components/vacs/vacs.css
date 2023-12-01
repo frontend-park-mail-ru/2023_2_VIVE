@@ -4,10 +4,31 @@
 @import url("vaccr-form.css");
 @import url("emp-vacs.css");
 
-.vacs {
-  display: flex;
-  justify-content: space-between;
-  gap: 50px;
+@media (min-width: 0) {
+  .vacs {
+    display: block;
+  }
+  .vacs__filters-frame {
+    display: flex;
+    gap: 40px;
+  }
+  .vacs__block__params__view {
+    display: none;
+  }
+}
+
+@media (min-width: 1080px) {
+  .vacs {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+  }
+  .vacs__filters-frame {
+    display: block;
+  }
+  .vacs__block__params__view {
+    display: flex;
+  }
 }
 
 .vacs_query {
@@ -32,10 +53,6 @@
   background-color: transparent;
   border: none;
   outline: none;
-}
-
-.vacs__block__params__view {
-  display: flex;
 }
 
 .vacs__block__params__view__left {
