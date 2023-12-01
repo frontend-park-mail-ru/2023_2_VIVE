@@ -1,5 +1,10 @@
 <div class="vacs__list {{#iff ../block_type '==' 'list'}} vacs__list_list {{else}} vacs__list_block {{/iff}}">
 
+    {{#iff data.length '==' '0'}}
+        <div class="header-text header-text--second text-dark-title">
+            На данный момент нет ни одной вакансии :(
+        </div>
+    {{else}}
     {{#each data}}
     <a href="/vacancy/{{this.id}}"
         class="js-nav-link vacs__list__item {{#iff ../block_type '==' 'list'}} vacs__list__item_list {{else}} vacs__list__item_block {{/iff}}">
@@ -96,4 +101,5 @@
         {{/iff}}
     </a>
     {{/each}}
+    {{/iff}}
 </div>

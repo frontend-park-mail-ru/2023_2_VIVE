@@ -30,6 +30,7 @@ export default class mainView extends View {
         this.addDropListener();
         this.profileDropListener();
         this.searchTypeListener();
+        this.mobileDropListener();
     }
 
     searchTypeListener() {
@@ -151,6 +152,34 @@ export default class mainView extends View {
                 }
             });
         }
+    }
+    
+    mobileDropListener() {
+        const mobileDropdown = document.querySelector('[name="drop-btn-mobile"]');
+        const mobileContentDropdown = document.querySelector('.dropdown__content__mobile');
+        if (mobileDropdown) {
+            mobileDropdown.addEventListener('click', ()=> {
+                const isContentVisible = !mobileContentDropdown.classList.contains('d-none');
+
+                if (isContentVisible) {
+                    mobileDropdown.classList.remove('dropdown__img--rotate');
+                    mobileDropdown.classList.add('dropdown__img--rotate-secondary');
+                    mobileContentDropdown.classList.add('d-none');
+                } else {
+                    mobileDropdown.classList.remove('dropdown__img--rotate-secondary');
+                    mobileDropdown.classList.add('dropdown__img--rotate');
+                    mobileContentDropdown.classList.remove('d-none');
+                }
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!mobileContentDropdown.contains(event.target) && !mobileDropdown.contains(event.target)) {
+                    mobileDropdown.classList.remove('dropdown__img--rotate');
+                    mobileDropdown.classList.add('dropdown__img--rotate-secondary');
+                    mobileContentDropdown.classList.add('d-none');
+                }
+            });
+        }        
     }
 
     profileDropListener() {
