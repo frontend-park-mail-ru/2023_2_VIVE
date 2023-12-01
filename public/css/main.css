@@ -95,16 +95,23 @@ footer {
   }
 }
 
-@media (min-width: 3060px) {
+@media (min-width: 3600px) {
   .column-wrapper {
     padding-left: 33vw;
     padding-right: 33vw;
   }
 }
 
-@media (min-width: 3240px) {
+@media (min-width: 4096px) {
   .column-wrapper {
     padding-left: 35vw;
     padding-right: 35vw;
+  }
+}
+
+@media (min-width: 5000px) {
+  .column-wrapper {
+    padding-left: 37vw;
+    padding-right: 37vw;
   }
 }
