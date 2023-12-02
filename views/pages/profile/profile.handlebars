@@ -1,30 +1,44 @@
 <div class="profile">
     <div class="d-flex profile__header profile__header--background--default-hh">
-        <img class="profile_image" src="../../../public/images/img/buttersss.jpg" alt="profile-logo">
+        <div class="push__error push__error_deactive">Hello</div>
+
+        <form class="js-avatar-form profile__upload" enctype="multipart/form-data">
+            <label for="user-avatar">
+                <img class="js-avatar-image profile__upload__image" src="../../../public/images/img/buttersss.jpg" alt="profile-logo">
+            </label>
+            <input class="js-avatar-input profile__upload__input" type="file" id="user-avatar"
+            accept="image/jpg, image/jpeg, image/gif, image/png">
+        </form>
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="header-text header-text--first text-light-title">{{ user.last_name }} {{ user.first_name }} {{ user.third_name }}</div>
+                    <div class="header-text header-text--first text-light-title">{{ user.last_name }} {{ user.first_name
+                        }} {{ user.third_name }}</div>
                     <div class="secondary-text text-light-regular">{{ user.email }}</div>
                 </div>
                 {{#iff user.role '==' 'applicant'}}
                 <div class="profile__switch-btns">
-                    <div class="profile__btn {{#iff state '==' 'settings'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}" data-name="settings">
+                    <div class="profile__btn {{#iff state '==' 'settings'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}"
+                        data-name="settings">
                         <div class="common-text common-text--bold">Настройки</div>
                     </div>
-                    <div class="profile__btn {{#iff state '==' 'responses'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}" data-name="responses">
+                    <div class="profile__btn {{#iff state '==' 'responses'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}"
+                        data-name="responses">
                         <div class="common-text common-text--bold">Отклики</div>
                     </div>
-                    <div class="profile__btn {{#iff state '==' 'resumes'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}" data-name="resumes">
+                    <div class="profile__btn {{#iff state '==' 'resumes'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}"
+                        data-name="resumes">
                         <div class="common-text common-text--bold">Резюме</div>
                     </div>
                 </div>
                 {{else iff user.role '==' 'employer'}}
                 <div class="profile__switch-btns">
-                    <div class="profile__btn {{#iff state '==' 'settings'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}" data-name="settings">
+                    <div class="profile__btn {{#iff state '==' 'settings'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}"
+                        data-name="settings">
                         <div class="common-text common-text--bold">Настройки</div>
                     </div>
-                    <div class="profile__btn {{#iff state '==' 'vacancies'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}" data-name="vacancies">
+                    <div class="profile__btn {{#iff state '==' 'vacancies'}}profile__btn--active text-dodger-blue{{else}}text-light-title{{/iff}}"
+                        data-name="vacancies">
                         <div class="common-text common-text--bold">Вакансии</div>
                     </div>
                 </div>
@@ -40,13 +54,16 @@
                         {{else iff user.role '==' 'employer'}}
                         <img src="../../../public/images/img/briefcase_outline_28-01.png" class="profile__role-img">
                         {{/iff}}
-                        <span class="tooltip-text-down tooltip-text-down__profile common-text common-text-medium text-dark-title">{{#iff user.role '==' 'applicant'}}Соискатель{{else iff user.role '==' 'employer'}}Работодатель{{/iff}}</span>
+                        <span
+                            class="tooltip-text-down tooltip-text-down__profile common-text common-text-medium text-dark-title">{{#iff
+                            user.role '==' 'applicant'}}Соискатель{{else iff user.role '=='
+                            'employer'}}Работодатель{{/iff}}</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     {{#iff state '==' 'settings'}}
     {{> profile_settings}}
     {{else iff state '==' 'responses'}}

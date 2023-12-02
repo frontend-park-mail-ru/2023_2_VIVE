@@ -8,10 +8,16 @@
 }
 
 .profile__header--background--default-hh {
+    position: relative;
     background: linear-gradient(to bottom, var(--main-dodger-blue) 50%, var(--mono-blue-dark-blue) 50%);
 }
 
-.profile_image {
+.profile__upload__input {
+    display: none;
+}
+
+.profile__upload__image {
+    cursor: pointer;
     width: 198px;
     height: 198px;
     justify-content: center;

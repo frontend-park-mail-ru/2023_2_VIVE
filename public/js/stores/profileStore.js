@@ -58,7 +58,7 @@ class ProfileStore extends Store {
                     type: "password",
                     required: true,
                     password: true,
-                    password_repeat: "repeat_password",   
+                    password_repeat: "repeat_password",
                 },
                 "repeat_password": {
                     type: "password",
@@ -73,7 +73,7 @@ class ProfileStore extends Store {
                     type: "paswword",
                     required: true,
                 }
-        })
+            })
     }
 
     getContext() {
@@ -84,17 +84,17 @@ class ProfileStore extends Store {
         return {
             form_error: formError,
             errors: errorsFields,
-            state: this.state, 
-            user: this.user, 
+            state: this.state,
+            user: this.user,
             data: this.data
         }
     }
-    
+
     getDataObj(meta_obj, data_obj) {
         for (const key in data_obj) {
-          if (data_obj[key].value !== undefined) {
-            meta_obj[data_obj[key].name]["data"] = data_obj[key].value;
-          }
+            if (data_obj[key].value !== undefined) {
+                meta_obj[data_obj[key].name]["data"] = data_obj[key].value;
+            }
         }
         return meta_obj;
     }
@@ -117,8 +117,8 @@ class ProfileStore extends Store {
     }
 
     async sendData(fields) {
-        let newDataUser = { ...this.user};
-        
+        let newDataUser = { ...this.user };
+
         delete newDataUser['repeat_password'];
 
         fields.forEach(input => {
@@ -127,41 +127,54 @@ class ProfileStore extends Store {
 
         try {
             const resp = await APIConnector.put(
-              BACKEND_SERVER_URL + '/current_user',
-              newDataUser,
+                BACKEND_SERVER_URL + '/current_user',
+                newDataUser,
             );
-  
+
             this.form_error = null;
             this.errors = {};
 
 
             router.goToLink(`/profile/settings`);
             return true;
-  
+
         } catch (error) {
             this.form_error = 'Неверный пароль';
             return false;
         }
     }
 
+    async sendAvatar(base64_str) {
+        try {
+            const resp = await APIConnector.post(
+                BACKEND_SERVER_URL + '/current_user', base64_str
+            );
+
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
+
     async updateInnerData(data) {
         this.user = await this.updateData("/current_user");
-    
+
         const parts = data.url.split('/');
         this.state = parts[2] ? parts[2] : 'settings';
-    
+
         if ((this.state == 'resumes' || this.state == 'responses') && this.user.role == 'employer') {
-          return false;
+            return false;
         } else if (this.state == 'vacancies' && this.user.role == 'applicant') {
-          return false;
+            return false;
         }
-    
+
         if (this.state == 'vacancies') {
             this.data = await this.updateData("/vacancies/current_user");
         } else if (this.state == 'resumes') {
             this.data = await this.updateData("/current_user/cvs");
         }
-    
+
         return true;
     }
 
@@ -170,7 +183,7 @@ class ProfileStore extends Store {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + url);
             const data = await resp.json();
             return data;
-        } catch(err) {
+        } catch (err) {
             return undefined;
         }
     }

@@ -5,6 +5,7 @@ import mainView from './mainView.js';
 export default class profileView extends mainView {
   constructor() {
     super();
+    this.errorTimeoutsId = [];
   }
 
   /**
@@ -12,7 +13,7 @@ export default class profileView extends mainView {
    */
   async render() {
     await super.render();
-    
+
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['profile'];
     document.querySelector('main').innerHTML = template(profileStore.getContext());
@@ -25,12 +26,12 @@ export default class profileView extends mainView {
    */
   addEventListeners() {
     super.addEventListeners();
-    
+
     const profileButtons = document.querySelectorAll('.profile__btn');
     const settingButtons = document.querySelectorAll('[data-name="changing"]');
     const cancelButtons = document.querySelectorAll('[data-name="cancel-changing"]');
     const sendButtons = document.querySelectorAll('[data-name="send-form"]');
-    
+
     profileButtons.forEach(button => {
       button.addEventListener('click', () => {
         const buttonName = button.getAttribute('data-name');
@@ -66,10 +67,65 @@ export default class profileView extends mainView {
             this.render();
           }
         } else {
-            this.render();
+          this.render();
         }
       });
     });
+
+    // Загрузка аватарок
+
+
+
+    const avatar_input = document.querySelector('.js-avatar-input');
+    const avatar_img = document.querySelector('.js-avatar-image');
+    const max_size = 2097152; // 2MB
+    // const max_size = 1;
+    avatar_input.addEventListener('change', (event) => {
+      const file = avatar_input.files[0];
+      console.log(`размер изображения: ${file.size / 1024 / 1024} MB`);
+      if (file.size > max_size) {
+        this.setError(`Размер файла не должен превышать ${max_size / 1024 / 1024} MB`);
+      } else {
+
+        let reader = new FileReader();
+
+        reader.readAsDataURL(file);
+
+        reader.onload = async () => {
+          console.log(reader.result);
+          const base64_str = reader.result;
+
+          if (!await profileStore.sendAvatar(base64_str)) {
+            this.setError('Ошибка сохранения изображения')
+          } else {
+            avatar_img.src = base64_str;
+          }
+        };
+
+        reader.onerror = function () {
+          this.setError(reader.error);
+        };
+      }
+    })
+
+  }
+
+  setError(message) {
+    const push_error = document.querySelector('.push__error');
+
+    this.errorTimeoutsId.forEach((errorTimeOutId) => {
+      clearTimeout(errorTimeOutId);
+    })
+
+    push_error.innerHTML = message;
+    push_error.classList.add('push__error_active');
+    push_error.classList.remove('push__error_deactive')
+
+    this.errorTimeoutsId.push(setTimeout(() => {
+      push_error.classList.add('push__error_deactive');
+      push_error.classList.remove('push__error_active')
+      this.errorTimeoutsId.pop();
+    }, 3000));
   }
 
   async updateInnerData(data) {
