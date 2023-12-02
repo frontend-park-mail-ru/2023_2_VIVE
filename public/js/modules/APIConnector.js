@@ -149,10 +149,17 @@ export default {
         credentials: credentials,
       });
 
+      response.headers.forEach(console.log);
       if (!response.ok) {
-        const httpError = new HTTPError('', response.status);
-        httpError.statusCode = response.status;
-        throw httpError;
+        console.log('not ok');
+        const csrf_token = response.headers.get('X-Csrf-Token')
+        if (csrf_token) {
+          console.log(csrf_token);
+        } else {
+          const httpError = new HTTPError('', response.status);
+          httpError.statusCode = response.status;
+          throw httpError;
+        }
       }
 
       return response;
