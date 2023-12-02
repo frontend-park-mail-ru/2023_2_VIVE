@@ -2,7 +2,7 @@ import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import router from "../modules/router/router.js";
 import Store from "./Store.js";
-import { isObjEmpty } from '../utils.js';
+import { getFormObject, isObjEmpty } from '../utils.js';
 import { validateForm } from '../modules/constraints.js';
 
 const ROLES = {
@@ -76,7 +76,8 @@ class ProfileStore extends Store {
             })
     }
 
-    getContext() {
+    async getContext() {
+        const blob_avatar = await this.getAvatar();
         const errorsFields = this.errors;
         const formError = this.form_error;
         this.form_error = null;
@@ -86,7 +87,8 @@ class ProfileStore extends Store {
             errors: errorsFields,
             state: this.state,
             user: this.user,
-            data: this.data
+            data: this.data,
+            avatar: blob_avatar ? URL.createObjectURL(blob_avatar) : undefined,
         }
     }
 
@@ -144,16 +146,39 @@ class ProfileStore extends Store {
         }
     }
 
-    async sendAvatar(base64_str) {
+    async sendAvatar(form_data) {
+        
         try {
-            const resp = await APIConnector.post(
-                BACKEND_SERVER_URL + '/current_user', base64_str
-            );
+            let response = await fetch(BACKEND_SERVER_URL + '/upload_avatar', {
+                method: 'POST',
+                body: form_data,
+                credentials: 'include',
+            });
+
+            // const resp = await APIConnector.post(
+            //     BACKEND_SERVER_URL + '/upload_avatar', 
+            //     form_data);
 
             return true;
         } catch (error) {
             console.error(error);
             return false;
+        }
+    }
+
+    async getAvatar() {
+        try {
+
+            const resp = await APIConnector.get(
+                BACKEND_SERVER_URL + '/get_avatar');
+            // const data = await resp.json();
+            const blob = await resp.blob();
+
+            
+            return blob;
+        } catch (error) {
+            console.error(error);
+            return undefined;
         }
     }
 

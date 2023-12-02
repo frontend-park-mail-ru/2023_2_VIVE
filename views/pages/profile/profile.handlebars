@@ -1,12 +1,17 @@
 <div class="profile">
     <div class="d-flex profile__header profile__header--background--default-hh">
         <div class="push__error push__error_deactive">Hello</div>
-
         <form class="js-avatar-form profile__upload" enctype="multipart/form-data">
+        {{#if avatar}} 
+        <label for="user-avatar">
+                <img class="js-avatar-image profile__upload__image" src="{{avatar}}" alt="profile-logo">
+            </label>
+        {{else}}
             <label for="user-avatar">
                 <img class="js-avatar-image profile__upload__image" src="../../../public/images/img/buttersss.jpg" alt="profile-logo">
             </label>
-            <input class="js-avatar-input profile__upload__input" type="file" id="user-avatar"
+            {{/if}}
+            <input name="avatar" class="js-avatar-input profile__upload__input" type="file" id="user-avatar"
             accept="image/jpg, image/jpeg, image/gif, image/png">
         </form>
         <div class="profile__info">
