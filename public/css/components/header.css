@@ -6,6 +6,9 @@
   .navbar {
     display: flex;
     align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: -2px 14px 39px -28px #948f8f;
   }
 
   .navbar__search {
@@ -14,8 +17,8 @@
 
   .navbar__search_dropdown {
     position: absolute;
-    transform: translateX(-88%);
-    top: 20%
+    transform: translateX(-86%);
+    top: 70px;
   }
 
   .navbar__logo,
@@ -28,7 +31,16 @@
   }
 
   .search__input {
-    width: 50vw;
+    width: 65vw;
+  }
+
+  .mobile__d-none {
+    display: none;
+  }
+
+  .mobile__search-type {
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -92,6 +104,10 @@
 
   .search__input {
     width: 350px;
+  }
+
+  .mobile__search-type {
+    display: none;
   }
 }
 
@@ -157,4 +173,8 @@
 
   border-radius: 0px 10px 10px 0px;
   background: var(--main-dodger-blue);
+}
+
+.search-type__main-var {
+  display: flex;
 }
