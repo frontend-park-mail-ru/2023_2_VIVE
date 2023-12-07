@@ -1,3 +1,15 @@
+@media only screen and (max-width: 767px) {
+  .footer_btn {
+    display: none;
+  }
+
+  .footer__main-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
 .footer {
   background-color: var(--main-prussian-blue);
   padding-top: 15px;
@@ -8,17 +20,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--main-background-grey);
   margin-bottom: 15px;
-}
-
-.footer__text {
-  font-family: 'Acumin', sans-serif;
-  font-weight: bold;
-  color: var(--main-background-grey);
-  margin: 0px 0px;
-}
-
-.footer__text__company-name {
-  margin-bottom: 10px;
 }
