@@ -1,3 +1,21 @@
+@media only screen and (max-width: 767px) {
+  .mobile__header-drop {
+    transform: translateX(100%);
+    right: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .dropdown__content-left {
+    transform: translateX(-100%);
+    left: 100%;
+  }
+
+  .dropdown-mobile__item {
+    display: none !important;
+  }
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -16,11 +34,6 @@
   background: var(--main--eror-white);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   z-index: 1;
-}
-
-.dropdown__content-left {
-  transform: translateX(-100%);
-  left: 100%;
 }
 
 .dropdown__content-add-info {

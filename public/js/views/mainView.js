@@ -33,10 +33,33 @@ export default class mainView extends View {
     }
 
     searchTypeListener() {
+        const mobileSearchBtn = document.querySelector('[name="mobile-search-btn"]');
         const searchDropdown = document.querySelector('[name="search-dropdown"]');
         const searchContentDropdown = document.querySelector('.dropdown__content-search');
         const searchSvgIcon = document.querySelector('[name="search-svg-icon"]');
         const searchType = document.querySelector('[name="search-type"]');
+
+        if (mobileSearchBtn) {
+            const searchMobileField = mobileSearchBtn.nextElementSibling;
+            mobileSearchBtn.addEventListener('touchstart', function(event) {
+                const isContentVisible = !searchMobileField.classList.contains('navbar__search');
+
+                if (isContentVisible) {
+                    searchMobileField.classList.add('navbar__search');
+                    searchMobileField.classList.remove('navbar__search_dropdown');
+                } else {
+                    searchMobileField.classList.remove('navbar__search');
+                    searchMobileField.classList.add('navbar__search_dropdown');
+                }
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!searchMobileField.contains(event.target) && !mobileSearchBtn.contains(event.target)) {
+                    searchMobileField.classList.add('navbar__search');
+                    searchMobileField.classList.remove('navbar__search_dropdown');
+                }
+            });
+        }
 
         if (searchDropdown) {
             searchDropdown.addEventListener('click', function(event) {
@@ -96,13 +119,14 @@ export default class mainView extends View {
     }
 
     addDropListener() {
-        const profileDropdown = document.querySelector('[name="drop-btn-profile"]');
-        const profileContentDropdown = document.querySelector('.dropdown__content__profile');
+        const profileDropdowns = document.querySelectorAll('[name="drop-btn-profile"]');
 
-        if (profileDropdown) {
+        profileDropdowns.forEach(profileDropdown => {
+            const profileContentDropdown = profileDropdown.parentNode.nextElementSibling;
+        
             profileDropdown.addEventListener('click', function (event) {
                 const isContentVisible = !profileContentDropdown.classList.contains('d-none');
-
+        
                 if (isContentVisible) {
                     profileDropdown.classList.remove('dropdown__img--rotate');
                     profileDropdown.classList.add('dropdown__img--rotate-secondary');
@@ -112,43 +136,55 @@ export default class mainView extends View {
                     profileDropdown.classList.add('dropdown__img--rotate');
                     profileContentDropdown.classList.remove('d-none');
                 }
-
+        
                 event.stopPropagation();
             });
+        });
 
-            document.addEventListener('click', function (event) {
+        document.addEventListener('click', function (event) {
+            profileDropdowns.forEach(profileDropdown => {
+                const profileContentDropdown = profileDropdown.parentNode.nextElementSibling;
+                
                 if (!profileContentDropdown.contains(event.target) && !profileDropdown.contains(event.target)) {
                     profileDropdown.classList.remove('dropdown__img--rotate');
                     profileDropdown.classList.add('dropdown__img--rotate-secondary');
                     profileContentDropdown.classList.add('d-none');
                 }
             });
-            
-            const switchBtn = document.querySelector('[name="switch"]');
-            const leaveBtn = document.querySelector('[name="leave"]');
+        });
 
-            switchBtn.addEventListener('click', async (e) => {
-                e.preventDefault();
-                try {
-                    await User.logout();
-                    if (User.getUser().role === User.ROLES.app) {
-                        router.goToLink('/app_auth');
-                    } else {
-                        router.goToLink('/emp_auth');
+        const switchBtns = document.querySelectorAll('[name="switch"]');
+        const leaveBtns = document.querySelectorAll('[name="leave"]');
+
+        if (switchBtns) {
+            switchBtns.forEach(switchBtn => {
+                switchBtn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        await User.logout();
+                        if (User.getUser().role === User.ROLES.app) {
+                            router.goToLink('/app_auth');
+                        } else {
+                            router.goToLink('/emp_auth');
+                        }
+                    } catch (err) {
+                        console.error('logout: ', err);
                     }
-                } catch (err) {
-                    console.error('logout: ', err);
-                }
+                });
             });
-
-            leaveBtn.addEventListener('click', async (e) => {
-                e.preventDefault();
-                try {
-                    await User.logout();
-                    router.goToLink('/');
-                } catch (err) {
-                    console.error('logout: ', err);
-                }
+        }
+        
+        if (leaveBtns) {
+            leaveBtns.forEach(leaveBtn => {
+                leaveBtn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        await User.logout();
+                        router.goToLink('/');
+                    } catch (err) {
+                        console.error('logout: ', err);
+                    }
+                });
             });
         }
     }
