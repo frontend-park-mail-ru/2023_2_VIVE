@@ -17,6 +17,7 @@
 
     .reg_auth {
         display: flex;
+        height: 926px;
         flex-direction: column;
         align-items: flex-start;
         gap: 70px;
