@@ -17,11 +17,12 @@
 
     .reg_auth {
         display: flex;
-        height: 750px;
         flex-direction: column;
         align-items: flex-start;
         gap: 70px;
         flex-shrink: 0;
+        min-height: auto;
+        padding-bottom: 50px;
     }
 
     .reg_auth__form {
@@ -48,7 +49,7 @@
         width: 100%;
         flex-direction: column;
         align-items: center;
-        gap: 28px;
+        gap: 15px;
     }
 
     .reg_auth__desktop-btn {
@@ -63,6 +64,25 @@
         display: flex;
         align-items: center;
         gap: 5px;
+    }
+
+    .reg__auth__form__field-mobile-back {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .reg__auth__form__field-mobile-back:focus-within .auth__form_svg-input-field {
+        display: none;
+      }
+
+    .reg__auth__form__field-mobile-input {
+        background-color: #E8E8E8
+    }
+
+    .auth__form_svg-input-field {
+        position: absolute;
+        left: 80%;
     }
 }
 
@@ -100,6 +120,10 @@
     }
     
     .reg_auth__mobile-btn {
+        display: none;
+    }
+
+    .auth__form_svg-input-field {
         display: none;
     }
 }
