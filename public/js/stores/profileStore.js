@@ -4,6 +4,7 @@ import router from "../modules/router/router.js";
 import Store from "./Store.js";
 import { isObjEmpty } from '../utils.js';
 import { validateForm } from '../modules/constraints.js';
+import vacancyStore from './VacancyStore.js';
 
 const ROLES = {
     app: 'applicant',
@@ -158,14 +159,12 @@ class ProfileStore extends Store {
     
         if (this.state == 'vacancies') {
             this.data = await this.updateData("/vacancies/current_user");
-            if (screen.width < 768) {
-                for (const key in this.data) {
-                    const element = this.data[key];
-                    if (element.name.length > 25) {
-                    element.name = element.name.slice(0, 25) + "...";
-                    }
-                }
-            }
+            this.data.forEach(element => {
+                element.salary_view = vacancyStore.processVacanciesSalary(element);
+                element.experience_view = vacancyStore.processVacanciesExperience(element);
+                element.employment_view = vacancyStore.processVacanciesEmployment(element);
+            });
+            console.log(this.data);
         } else if (this.state == 'resumes') {
             this.data = await this.updateData("/current_user/cvs");
         }

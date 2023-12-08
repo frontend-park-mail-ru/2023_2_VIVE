@@ -11,21 +11,21 @@
     <div class="vacancies__main-blocks">
       {{#each data}}
       <div class="vacancie">
-        <div class="header-text header-text--first text-dark-title">
+        <div class="vacancy__job-name header-text header-text--first text-dark-title">
           {{this.name}}
         </div>
         <div class="vacancie__additional-info">
           <div class="add-info">
             <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
-            <div class="common-text common-text--medium text-dark-regular">{{#if this.salary_lower_bound}}{{#if this.salary_upper_bound}}от {{this.salary_lower_bound}} до {{this.salary_upper_bound}} тыс. рублей{{else}}от {{this.salary_lower_bound}} тыс. рублей{{/if}}{{else if this.salary_upper_bound}}до {{this.salary_upper_bound}} тыс. рублей{{else}}Не указана{{/if}}</div>
+            <div class="vacancy__salary-info common-text common-text--medium text-dark-regular">{{this.salary_view}}</div>
           </div>
           <div class="add-info add-info-exp">
             <img class="add-info__img" src="../../../../../public/images/img/stars_20.png">
-            <div class="common-text common-text--medium text-dark-regular">{{#if this.experience_lower_bound}}{{#if this.experience_upper_bound}}{{this.experience_lower_bound}}-{{this.experience_upper_bound}} года{{else}}{{this.salary_lower_bound}} года{{/if}}{{else if this.experience_upper_bound}}{{this.experience_upper_bound}} года{{else}}Не указана{{/if}}</div>
+            <div class="common-text common-text--medium text-dark-regular">{{this.experience_view}}</div>
           </div>
           <div class="add-info add-info-emp">
             <img class="add-info__img" src="../../../../../public/images/img/clock_outline_20.png">
-            <div class="common-text common-text--medium text-dark-regular">{{#if this.employment}}{{this.employment}}{{else}}Не указано{{/if}}</div>
+            <div class="common-text common-text--medium text-dark-regular">{{this.employment_view}}</div>
           </div>
           <div class="add-info">
             <img class="add-info__img" src="../../../../../public/images/img/location_map_outline_20.png">
