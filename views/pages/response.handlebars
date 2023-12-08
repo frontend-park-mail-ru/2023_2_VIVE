@@ -6,46 +6,46 @@
                     {{vacancy.name}}
                 </div>
                 <div class="vacancie__additional-info">
-                    <div class="add-info">
+                    <div class="add-info add-info-vacancy-salary">
                         <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
                         <div class="tooltip">
-                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-salary">
+                            <div class="vacancy-add-info-text common-text common-text--medium text-dark-regular" name="vacancy-salary">
                                 {{vacancy.salary_view}}
                             </div>
                             <span class="tooltip-text-down tooltip-text-down__vacancy">Зарплата: {{vacancy.salary_view}}</span>
                         </div>
                     </div>
-                    <div class="add-info">
+                    <div class="add-info add-info-vacancy">
                         <img class="add-info__img" src="../../../../../public/images/img/stars_20.png">
                         <div class="tooltip">
-                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-experience">
+                            <div class="vacancy-add-info-text common-text common-text--medium text-dark-regular" name="vacancy-experience">
                                 {{vacancy.experience_view}}
                             </div>
                             <span class="tooltip-text-down tooltip-text-down__vacancy">Требуемый опыт:
                                 {{vacancy.experience_view}}</span>
                         </div>
                     </div>
-                    <div class="add-info">
+                    <div class="add-info add-info-vacancy">
                         <img class="add-info__img" src="../../../../../public/images/img/clock_outline_20.png">
                         <div class="tooltip">
-                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-employment">
+                            <div class="vacancy-add-info-text common-text common-text--medium text-dark-regular" name="vacancy-employment">
                                 {{vacancy.employment_view}}
                             </div>
                             <span class="tooltip-text-down tooltip-text-down__vacancy">Занятость:
                                 {{vacancy.employment_view}}</span>
                         </div>
                     </div>
-                    <div class="add-info">
+                    <div class="add-info add-info-vacancy">
                         <img class="add-info__img" src="../../../../../public/images/img/location_map_outline_20.png">
                         <div class="tooltip">
-                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-location">
+                            <div class="vacancy-add-info-text common-text common-text--medium text-dark-regular" name="vacancy-location">
                                 {{vacancy.location}}
                             </div>
                             <span class="tooltip-text-down tooltip-text-down__vacancy">Расположение:
                                 {{vacancy.location}}</span>
                         </div>
                     </div>
-                    <div class="add-info">
+                    <div class="add-info add-info-vacancy">
                         <img class="add-info__img" src="../../../../../public/images/img/calendar_check_outline_20.png">
                         <div class="common-text common-text--medium text-dark-regular">2 дня</div>
                     </div>
@@ -81,7 +81,7 @@
             </span>
             {{/if}}
         </div>
-          <a href="/vacancies/profile/{{vacancy.employer_id}}" class="js-nav-link view-company">
+        <a href="/vacancies/profile/{{vacancy.employer_id}}" class="js-nav-link view-company">
             <img class="view-company__img" src="../../../public/images/img/vk-company.png">
             <div class="view-company__main-info">
                 <div class="header-text header-text--first text-dark-title">
