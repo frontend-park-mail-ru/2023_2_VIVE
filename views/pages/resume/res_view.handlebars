@@ -1,5 +1,5 @@
 <section class="resv-section">
-  <div class="column-wrapper">
+  <div class="column-wrapper mobile-wrapper">
     <div class="resv">
       <div class="resv__nav">
         {{> link-btn text="К списку резюме" href="/resumes"
@@ -24,16 +24,22 @@
             {{> res_form_edit (object page=0 errors=errors data=(lookup forms_data 0) page_data=page_data)}}
             {{else}}
             {{#with (object data=(lookup forms_data 0))}}
-            <div class="resv__data__main mb-20">
-              <div>
-                <div class="resv__text_big mb-15">
-                  {{data.profession_name}}
-                </div>
-                <div class="resv__text_med mb-20">
-                  {{data.first_name}} {{data.last_name}}
+            <div class="resv__data__main">
+              <div class="resv__data__main-items">
+                <div class="resv__data__main-job-name">
+                  <div class="resv__text_big">
+                    {{data.profession_name}}
+                  </div>
+                  <div class="resv__text_med">
+                    {{data.first_name}} {{data.last_name}}
+                  </div>
                 </div>
                 <div class="resv__text_sm">
-                  {{iffs data.gender '==' 'male' 'Мужской' 'Женский'}}, {{data.birthday}}, {{data.city}}
+                  <div class="resv__data__additional">
+                  <div class="resv__data__additional">Пол: {{iffs data.gender '==' 'male' 'Мужской' 'Женский'}}</div>
+                  <div class="resv__data__additional">Дата рождения: {{data.birthday}}</div>
+                  <div class="resv__data__additional">Место проживания: {{data.city}}</div>
+                  </div>
                 </div>
               </div>
               
@@ -46,8 +52,7 @@
             {{#if is_my_resume}}
             {{> link-btn text="Редактировать"
             data=(object page=0)
-            class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
-            d-block"}}
+            class="js-edit-page text-dodger-blue link-btn-blue common-text common-text--medium"}}
             {{/if}}
             {{/if}}
           </div>
@@ -80,7 +85,7 @@
             {{> res_form_edit (object page=1 errors=errors data=(lookup forms_data 1) page_data=page_data)}}
             {{else}}
             {{#with (object data=(lookup forms_data 1))}}
-            <div class="resv__data__main mb-20">
+            <div class="resv__data__main">
               <div>
 
                 {{#with (object level=(object
@@ -95,19 +100,19 @@
                 doctor="Доктор наук"
                 ))}}
                 <div class="resv__text_big mb-15">
-                  Образование({{lookup level ../data.education_level}})
+                  Образование ({{lookup level ../data.education_level}})
                 </div>
                 {{/with}}
 
                 {{#each data.institutions}}
                 <div class="resv__text_med mb-5">
-                  {{this.name}}
+                  Университет: {{this.name}}
                 </div>
                 <div class="resv__text_sm">
-                  {{this.major_field}}
+                  <i>Специализация:</i> {{this.major_field}}
                 </div>
                 <div class="resv__text_sm mb-15">
-                  {{this.graduation_year}}
+                  <i>Год окончания:</i> {{this.graduation_year}}
                 </div>
                 {{#iff @index '<' (sum (array ../data.companies.length -1))}} <div class="res__form_edu__splitter">
               </div>{{/iff}}
@@ -119,8 +124,7 @@
           {{#if is_my_resume }}
           {{> link-btn text="Редактировать"
           data=(object page=1)
-          class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
-          d-block"}}
+          class="js-edit-page text-dodger-blue link-btn-blue common-text common-text--medium"}}
           {{/if}}
           {{/if}}
         </div>
@@ -139,16 +143,16 @@
 
               {{#each data.companies}}
               <div class="resv__text_med mb-5">
-                {{this.name}}
+                Компания: {{this.name}}
               </div>
-              <div class="resv__text_sm mb-15">
-                {{this.start_date}} - {{#if this.end_date}}{{this.end_date}}{{else}}по настоящее время{{/if}}
+              <div class="resv__text_sm mb-5">
+                <i>Дата начала и окончания работы:</i> {{this.start_date}} - {{#if this.end_date}}{{this.end_date}}{{else}}по настоящее время{{/if}}
               </div>
-              <div class="resv__text_med mb-5">
-                {{this.job_position}}
+              <div class="resv__text_sm mb-5">
+                <i>Должность:</i> {{this.job_position}}
               </div>
               <div class="resv__text_sm">
-                {{this.description}}
+                <i>Достижения:</i> {{this.description}}
               </div>
               {{#iff @index '<' (sum (array ../data.companies.length -1))}} <div class="res__form_edu__splitter">
             </div>{{/iff}}
@@ -161,8 +165,7 @@
         {{#if is_my_resume }}
         {{> link-btn text="Редактировать"
         data=(object page=2)
-        class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
-        d-block"
+        class="js-edit-page text-dodger-blue link-btn-blue common-text common-text--medium"
         }}
         {{/if}}
         {{/if}}
@@ -181,7 +184,7 @@
             <div class="resv__text_big mb-20">
               Навыки
             </div>
-            <div class="resv__text_sm" style="display: flex;">
+            <div class="resv__text_sm resv__item-tags">
               {{#each data.skills}}
               <div class="tag-container">
                 {{this}}
@@ -204,8 +207,7 @@
         {{#if is_my_resume}}
         {{> link-btn text="Редактировать"
         data=(object page=3)
-        class="js-edit-page resv__data__edit__btn link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm
-        d-block"
+        class="js-edit-page text-dodger-blue link-btn-blue common-text common-text--medium"
         }}
         {{/if}}
         {{/if}}
@@ -215,10 +217,10 @@
 
 
     <div class="resv__params">
-      <div class="resv__params__item resv__text_sm mb-20">
+      <div class="resv__params__item resv__text_sm">
         Резюме обновлено 01.11.23
       </div>
-      <div class="resv__params__actions mb-20">
+      <div class="resv__params__actions">
         {{#if is_my_resume }}
         {{> link-btn
         class="resv__params__actions__print link-btn_transp-box-blue link-btn_pd-sm link-btn_bd-rad-sm
