@@ -12,7 +12,14 @@ export default class mainView extends View {
     async render() {
         await super.render();
 
-        
+        if (!document.querySelector('header')) {
+            const headerElement = document.createElement('header');
+            document.querySelector('.container').insertBefore(headerElement, document.querySelector('main'));
+        };
+        if (!document.querySelector('footer')) {
+            const footerElement = document.createElement('footer');
+            document.querySelector('.container').appendChild(footerElement);
+        }
         document.querySelector('header').innerHTML = Handlebars.partials['header'](
             { 
                 user: await User.getUser(), 

@@ -23,6 +23,15 @@ export default class regAuthView extends mainView {
         await super.render();
         regAuthStore.sendView(this);
 
+        if (screen.width < 768) {
+            const header = document.querySelector("header");
+            const footer = document.querySelector("footer");
+            if (header !== null && footer !== null) {
+                header.remove();
+                footer.remove();
+            }
+        }
+        
         const template = Handlebars.templates['form_login_reg'];
         document.querySelector('main').innerHTML = template(regAuthStore.getContext());
 

@@ -1,13 +1,106 @@
-.reg_auth {
-    padding: 30px;
-    border-radius: 30px;
-    background: var(--main-grey-blue, rgba(210, 224, 234, 0.37));
-    width: 500px;
-    margin: auto;
+@media only screen and (max-width: 767px) {
+    .reg_auth__mobile-block {
+        position: absolute;
+        top: 0%;
+        z-index: -1;
+    }
+
+    .reg_auth__svg_back {
+        width: 100vw;
+    }
+
+    .reg_auth__back-btn-frame {
+        display: flex;
+        align-items: flex-start;
+        align-self: stretch;
+    }
+
+    .reg_auth {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 70px;
+        flex-shrink: 0;
+    }
+
+    .reg_auth__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 150px;
+        align-self: stretch;
+    }
+
+    .reg_auth__form__mobile-main-text {
+        color: var(--text-light-title);
+    }
+
+    .reg__auth__form--field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .reg_auth__input-fields {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+    }
+
+    .reg_auth__desktop-btn {
+        display: none;
+    }
+
+    .auth__form__confirm-btn {
+        width: 100%;
+    }
+
+    .reg_auth__mobile-btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
 }
 
-.reg_auth__form {
-    width: 100%;
+@media only screen and (min-width: 768px) {
+    .reg_auth__mobile-block {
+        display: none;
+    }
+
+    .reg_auth {
+        padding: 30px;
+        border-radius: 30px;
+        background: var(--main-grey-blue, rgba(210, 224, 234, 0.37));
+        width: 500px;
+        margin: auto;
+    }
+
+    .reg_auth__form {
+        width: 100%;
+        align-items: center;
+    }
+
+    .reg_auth__back-btn-frame {
+        display: none;
+    }
+
+    .reg__auth__form--field {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .reg_auth__input-fields {
+        width: 100%;
+    }
+    
+    .reg_auth__mobile-btn {
+        display: none;
+    }
 }
 
 .reg_auth__form__title {

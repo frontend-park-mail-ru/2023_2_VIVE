@@ -19,6 +19,10 @@
     padding-left: 10vw;
     padding-right: 10vw;
   }
+
+  main {
+    padding: 60px 0px;
+  }
 }
 
 * {
@@ -48,7 +52,6 @@ header {
 
 main {
   width: 100%;
-  padding: 60px 0px;
 }
 
 footer {

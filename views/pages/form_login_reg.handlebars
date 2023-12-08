@@ -1,7 +1,19 @@
 <div class="column-wrapper">
+  <div class="reg_auth__mobile-block">
+    <svg class="reg_auth__svg_back" xmlns="http://www.w3.org/2000/svg" height="267" fill="none">
+      <path d="M428 263.131C406.25 242.097 371.04 214.755 325.21 209.751C242.43 200.702 199.33 272.683 113.81 266.639C86.8 264.731 47.09 254.436 0 212.379V0H428V263.131Z" fill="#0496FF"/>
+    </svg>
+  </div>
   <div class="reg_auth">
+    <div class="reg_auth__back-btn-frame">
+      <a href="/vacs" class="js-nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2152 13.2151C14.0353 12.395 15.3649 12.395 16.185 13.2151L28.0001 25.0302L39.8153 13.2151C40.6354 12.395 41.9648 12.395 42.7849 13.2151C43.6051 14.0352 43.6051 15.3648 42.7849 16.1849L30.9701 28L42.7849 39.8152C43.6051 40.6353 43.6051 41.9647 42.7849 42.7848C41.9648 43.605 40.6354 43.605 39.8153 42.7848L28.0001 30.97L16.185 42.7848C15.3649 43.605 14.0353 43.605 13.2152 42.7848C12.3951 41.9647 12.3951 40.6353 13.2152 39.8152L25.0302 28L13.2152 16.1849C12.3951 15.3648 12.3951 14.0352 13.2152 13.2151Z" fill="#EBEDEB"/>
+        </svg>
+      </a>
+    </div>
     <form class="reg_auth__form form">
-      <div class="reg_auth__form__title header-text header-text--first text-dark-title">
+      <div class="reg_auth__form__title header-text header-text--first text-dark-title reg_auth__form__mobile-main-text">
         {{#iff form_type '==' FORM_TYPES.auth}}
         Войти ({{iffs role '==' ROLES.app "как соискатель" "как работодатель"}})
         {{else}}
@@ -9,84 +21,115 @@
         {{/iff}}
       </div>
 
-      <div class="reg_auth__form__nav">
-        <span class="me-10 {{#iff role '==' ROLES.emp}}text-dark-regular{{else}}text-dark-title{{/iff}}">Соискатель</span>
-        <a class="reg_auth__form__slider {{#iff role '==' ROLES.emp}} reg_auth__form__slider_right {{/iff}} js-nav-link"
-          href="{{iffs form_type '==' FORM_TYPES.reg (iffs role '==' ROLES.emp "/app_reg" "/emp_reg" ) 
-          (iffs role '==' ROLES.emp "/app_auth" "/emp_auth" )}}">
-          <div class="reg_auth__form__slider__circle"></div>
-        </a>
-        <span class="ms-10 {{#iff role '==' ROLES.app}}text-dark-regular{{else}}text-dark-title{{/iff}}">Работодатель</span>
-      </div>
+      <div class="reg__auth__form--field">
+        <div class="reg_auth__form__nav">
+          <span class="me-10 {{#iff role '==' ROLES.emp}}text-dark-regular{{else}}text-dark-title{{/iff}}">Соискатель</span>
+          <a class="reg_auth__form__slider {{#iff role '==' ROLES.emp}} reg_auth__form__slider_right {{/iff}} js-nav-link"
+            href="{{iffs form_type '==' FORM_TYPES.reg (iffs role '==' ROLES.emp "/app_reg" "/emp_reg" ) 
+            (iffs role '==' ROLES.emp "/app_auth" "/emp_auth" )}}">
+            <div class="reg_auth__form__slider__circle"></div>
+          </a>
+          <span class="ms-10 {{#iff role '==' ROLES.app}}text-dark-regular{{else}}text-dark-title{{/iff}}">Работодатель</span>
+        </div>
 
-      {{#if error }}
-      <div class="form__error">{{error}}</div>
-      {{/if}}
+        {{#if error }}
+        <div class="form__error">{{error}}</div>
+        {{/if}}
 
-      {{!-- inputs: --}}
+        {{!-- inputs: --}}
 
-      {{#each
-      (iffs form_type '==' FORM_TYPES.reg
-      (iffs role '==' ROLES.app
-      (array
-      (object type='text' name='first_name' placeholder='Имя')
-      (object type='text' name='last_name' placeholder='Фамилия')
-      (object type='text' name='email' placeholder='Электронная почта')
-      (object type='password' name='password' placeholder='Придумайте пароль')
-      (object type='password' name='repeat_password' placeholder='Повторите пароль')
-      )
+        <div class="reg_auth__input-fields">
+          {{#each
+          (iffs form_type '==' FORM_TYPES.reg
+          (iffs role '==' ROLES.app
+          (array
+          (object type='text' name='first_name' placeholder='Имя')
+          (object type='text' name='last_name' placeholder='Фамилия')
+          (object type='text' name='email' placeholder='Электронная почта')
+          (object type='password' name='password' placeholder='Придумайте пароль')
+          (object type='password' name='repeat_password' placeholder='Повторите пароль')
+          )
 
-      (array
-      (object type='text' name='first_name' placeholder='Имя')
-      (object type='text' name='last_name' placeholder='Фамилия')
-      (object type='text' name='organization_name' placeholder='Название компании')
-      (object type='text' name='email' placeholder='Электронная почта')
-      (object type='password' name='password' placeholder='Придумайте пароль')
-      (object type='password' name='repeat_password' placeholder='Повторите пароль')
-      )
-      )
+          (array
+          (object type='text' name='first_name' placeholder='Имя')
+          (object type='text' name='last_name' placeholder='Фамилия')
+          (object type='text' name='organization_name' placeholder='Название компании')
+          (object type='text' name='email' placeholder='Электронная почта')
+          (object type='password' name='password' placeholder='Придумайте пароль')
+          (object type='password' name='repeat_password' placeholder='Повторите пароль')
+          )
+          )
 
-      (array
-      (object type='text' name='email' placeholder='Электронная почта')
-      (object type='password' name='password' placeholder='Пароль')
-      )
-      )
-      }}
+          (array
+          (object type='text' name='email' placeholder='Электронная почта')
+          (object type='password' name='password' placeholder='Пароль')
+          )
+          )
+          }}
 
-      {{> input (object obj=this
-      class=(object
-      block="reg_auth__form__field"
-      input="reg_auth__input"
-      )
-      name=this.name
-      value=(lookup ../data this.name)
-      error=(lookup ../form_errors this.name)
-      )}}
+          {{> input (object obj=this
+          class=(object
+          block="reg_auth__form__field"
+          input="reg_auth__input"
+          )
+          name=this.name
+          value=(lookup ../data this.name)
+          error=(lookup ../form_errors this.name)
+          )}}
 
-      {{/each}}
+          {{/each}}
+        </div>
 
-      {{!-- ====== --}}
+        {{!-- ====== --}}
 
-      <div class="form__actions">
-        <button type="submit" class="link-btn-blue--bg common-text common-text--medium text-light-title">
-          <span class="link-btn__text">{{#iff form_type '==' FORM_TYPES.auth }}
-            Войти
-            {{else}}
-            Зарегистрироваться
-            {{/iff}}
-          </span>
-        </button>
-        <a class="js-nav-link link-btn-blue text-dodger-blue"
-          href="{{iffs role '==' ROLES.app (iffs form_type '==' FORM_TYPES.reg "/app_auth" "/app_reg" ) 
-          (iffs form_type '==' FORM_TYPES.reg "/emp_auth" "/emp_reg" )}}">
-          <span class="link-btn__text">
-            {{#iff form_type '==' FORM_TYPES.auth}}
-            Создать аккаунт
-            {{else}}
-            Уже есть аккаунт
-            {{/iff}}
-          </span>
-        </a>
+        <div class="form__actions">
+          <button type="submit" class="link-btn-blue--bg common-text common-text--medium text-light-title auth__form__confirm-btn">
+            <span class="link-btn__text">{{#iff form_type '==' FORM_TYPES.auth }}
+              Войти
+              {{else}}
+              Зарегистрироваться
+              {{/iff}}
+            </span>
+          </button>
+          <div class="reg_auth__desktop-btn">
+            <a class="js-nav-link link-btn-blue text-dodger-blue"
+              href="{{iffs role '==' ROLES.app (iffs form_type '==' FORM_TYPES.reg "/app_auth" "/app_reg" ) 
+              (iffs form_type '==' FORM_TYPES.reg "/emp_auth" "/emp_reg" )}}">
+              <span class="link-btn__text">
+                {{#iff form_type '==' FORM_TYPES.auth}}
+                Создать аккаунт
+                {{else}}
+                Уже есть аккаунт
+                {{/iff}}
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="reg_auth__mobile-btn">
+          {{#iff form_type '==' FORM_TYPES.auth}}
+          <div class="header-text header-text--third text-dark-title">
+            Нет аккаунта?
+          </div>
+          <a class="js-nav-link link-btn_blue-without-bd common-text common-text--medium"
+            href="{{iffs role '==' ROLES.app (iffs form_type '==' FORM_TYPES.reg "/app_auth" "/app_reg" ) 
+            (iffs form_type '==' FORM_TYPES.reg "/emp_auth" "/emp_reg" )}}">
+            <span class="link-btn__text">
+              Зарегистрироваться
+            </span>
+          </a>
+          {{else}}
+          <div class="header-text header-text--third text-dark-title">
+            Уже есть аккаунт?
+          </div>
+          <a class="js-nav-link link-btn_blue-without-bd common-text common-text--medium"
+            href="{{iffs role '==' ROLES.app (iffs form_type '==' FORM_TYPES.reg "/app_auth" "/app_reg" ) 
+            (iffs form_type '==' FORM_TYPES.reg "/emp_auth" "/emp_reg" )}}">
+            <span class="link-btn__text">
+              Войти
+            </span>
+          </a>
+          {{/iff}}
+        </div>
       </div>
     </form>
   </div>
