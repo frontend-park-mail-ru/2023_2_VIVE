@@ -137,6 +137,30 @@
         border: 0.5px solid var(--forms-border-active);
         background: var(--forms-background-normal);
     }
+
+    .setting-inpute__button:hover {
+        color: var(--text-light-title);
+        background-color: var(--buttons-blue-primary-default);
+        transition: color 0.5s ease, background-color 0.5s ease;
+    }
+    
+    .setting-inpute__button:active {
+        color: var(--text-dodger-blue);
+        background-color: unset;
+        transition: color 0.5s ease, background-color 0.5s ease;
+    }
+
+    .setting-inpute__button--primary:hover {
+        background-color: unset;
+        color: var(--text-dodger-blue);
+        transition: color 0.5s ease, background-color 0.5s ease;
+    }
+    
+    .setting-inpute__button--primary:active {
+        background-color: var(--buttons-blue-primary-default);
+        color: var(--text-light-title);
+        transition: color 0.5s ease, background-color 0.5s ease;
+    }
 }
 
 .settings-inpute__field {
@@ -160,32 +184,8 @@
     border: 1px solid var(--buttons-blue-primary-default);
 }
 
-.setting-inpute__button:hover {
-    color: var(--text-light-title);
-    background-color: var(--buttons-blue-primary-default);
-    transition: color 0.5s ease, background-color 0.5s ease;
-}
-
-.setting-inpute__button:active {
-    color: var(--text-dodger-blue);
-    background-color: unset;
-    transition: color 0.5s ease, background-color 0.5s ease;
-}
-
 .setting-inpute__button--primary {
     background-color: var(--buttons-blue-primary-default);
-}
-
-.setting-inpute__button--primary:hover {
-    background-color: unset;
-    color: var(--text-dodger-blue);
-    transition: color 0.5s ease, background-color 0.5s ease;
-}
-
-.setting-inpute__button--primary:active {
-    background-color: var(--buttons-blue-primary-default);
-    color: var(--text-light-title);
-    transition: color 0.5s ease, background-color 0.5s ease;
 }
 
 .setting__btn {
