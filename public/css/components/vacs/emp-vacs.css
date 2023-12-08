@@ -1,6 +1,17 @@
+@media only screen and (max-width: 767px) {
+    .emp-vacs__frame {
+        width: 95vw;
+    }
+}
+  
+@media only screen and (min-width: 768px) {
+    .emp-vacs__frame {
+        width: 1190px;
+    }
+}
+
 .emp-vacs__frame {
     display: flex;
-    width: 1190px;
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
@@ -8,7 +19,7 @@
 
 .emp-vacs__main-frame {
     display: flex;
-    width: 1190px;
+    width: 100%;
     align-items: flex-start;
     gap: 50px;
 }

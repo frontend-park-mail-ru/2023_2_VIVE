@@ -1,11 +1,11 @@
 <div class="profile">
-    <div class="d-flex profile__header profile__header--background--default-hh">
+    <div class="profile__header profile__header--background--default-hh">
         <img class="profile_image" src="../../../public/images/img/buttersss.jpg" alt="profile-logo">
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="header-text header-text--first text-light-title">{{full_name}}</div>
-                    <div class="secondary-text text-light-regular">Компания: {{organization}}</div>
+                    <div class="header-text header-text--first text-light-title profile__about-mobile-main-text">{{full_name}}</div>
+                    <div class="secondary-text text-light-regular profile__about-mobile-main-text">Компания: {{organization}}</div>
                 </div>
             </div>
         </div>
@@ -22,13 +22,13 @@
     </div>
     <div class="emp-vacs__frame">
         <div class="header-text header-text--first">
-            Найдено {{vacancies.length}} вакансий работодателя
+          Найдено {{vacancies.length}} вакансий(я) работодателя
         </div>
         <div class="emp-vacs__main-frame">
             <div class="emp-vacs__item">
                 {{#each vacancies}}
-                <div class="vacs__list__item" style="width: 100%;">
-                    <div class="vacs__list__item__desc__main">
+                <div class="vacs__list__item">
+                    <div class="vacs__list__item__desc__main vacs__list__item__desc__main--desktop">
                         <div class="vacs__list__item__company-logo">
                             <a class="js-nav-link" href="/vacancies/profile/{{this.employer_id}}"><img src="../../public/images/Logo 1.png" alt=""></a>
                         </div>
@@ -37,12 +37,12 @@
                         <div class="vacancie__additional-info">
                             <div class="add-info">
                                 <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
-                                    <div class="tooltip">
-                                        <div class="common-text common-text--medium text-dark-regular" name="vacancy-salary">
-                                            от {{this.salary_lower_bound}} до {{this.salary_upper_bound}}
-                                        </div>
-                                        <span class="tooltip-text-down tooltip-text-down__vacancy">Зарплата: от {{this.salary_lower_bound}} до {{this.salary_upper_bound}} рублей</span>
+                                <div class="tooltip">
+                                    <div class="common-text common-text--medium text-dark-regular" name="vacancy-salary">
+                                        от {{this.salary_lower_bound}} до {{this.salary_upper_bound}}
                                     </div>
+                                    <span class="tooltip-text-down tooltip-text-down__vacancy">{{this.salary_view}}</span>
+                                </div>
                             </div>
                             <div class="add-info">
                                 <img class="add-info__img" src="../../../../../public/images/img/stars_20.png">
@@ -91,11 +91,33 @@
                         staticHref=this.id}}
                         {{!-- <a href="#">{{this.name}}</a> --}}
                         </h3>
-                        <p class="vacs__list__item__desc__prev" name="vacancy-description">
+                        <p class="vacs__list__item__desc__prev vacs__list__item__description__main--desktop" name="vacancy-description">
                         {{this.description}}
                         </p>
                     </div>
                     {{log ../user}}
+                    <div class="vacs__list__item__mobile-version">
+                      <div class="add-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M3.33268 17.5C2.87435 17.5 2.48199 17.3368 2.1556 17.0104C1.82921 16.684 1.66602 16.2917 1.66602 15.8333V6.66667C1.66602 6.20833 1.82921 5.81597 2.1556 5.48958C2.48199 5.16319 2.87435 5 3.33268 5H6.66602V3.33333C6.66602 2.875 6.82921 2.48264 7.1556 2.15625C7.48199 1.82986 7.87435 1.66667 8.33268 1.66667H11.666C12.1243 1.66667 12.5167 1.82986 12.8431 2.15625C13.1695 2.48264 13.3327 2.875 13.3327 3.33333V5H16.666C17.1243 5 17.5167 5.16319 17.8431 5.48958C18.1695 5.81597 18.3327 6.20833 18.3327 6.66667V15.8333C18.3327 16.2917 18.1695 16.684 17.8431 17.0104C17.5167 17.3368 17.1243 17.5 16.666 17.5H3.33268ZM3.33268 15.8333H16.666V6.66667H3.33268V15.8333ZM8.33268 5H11.666V3.33333H8.33268V5Z" fill="#1C1B1F"/>
+                            </svg>
+                            <div class="common-text common-text--medium text-dark-regular">
+                            {{../organization}}
+                            </div>
+                        </div>
+                        <div class="add-info">
+                            <img class="add-info__img" src="../../../../../public/images/img/location_map_outline_20.png">
+                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-location">
+                            {{this.location}}
+                            </div>
+                        </div>
+                        <div class="add-info">
+                            <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
+                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-salary">
+                                {{this.salary_view}}
+                            </div>
+                        </div>
+                    </div>
                     {{#iff ../user.role '==' 'employer'}}
                     {{else}}
                     <div class="vacs__list__item__feed">
