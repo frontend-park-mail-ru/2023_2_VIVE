@@ -52,6 +52,30 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .vacancie__btns {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .vacancie__btns_desktop {
+        display: none;
+    }
+
+    .vacancie__btns_mobile {
+        display: flex;
+        align-items: center;
+    }
+
+    .vacancy__desc-btns {
+        justify-content: center;
+    }
+
+    .mobile__lh-20 {
+        line-height: 20px;
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -65,6 +89,7 @@
 
     .vacancie__additional-info {
         display: flex;
+        width: 100%;
         align-items: flex-start;
         gap: 20px;
     }
@@ -73,6 +98,40 @@
         display: flex;
         align-items: flex-start;
         gap: 10px;
+    }
+
+    .vacancy-add-info-text {
+        width: 85%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .add-info-vacancy-salary {
+        width: 32%;
+    }
+
+    .add-info-vacancy {
+        width: 17%;
+    }
+
+    .vacancie__btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    } 
+    
+    .vacancie__btns_mobile {
+        display: none;
+    }
+
+    .vacancy__desc-btns {
+        justify-content: space-between;
+    }
+    
+    .vacancie-refactor {
+        width: 790px;
     }
 }
 
@@ -103,16 +162,8 @@
     background: var(--card-back-default); 
 }
 
-.vacancie__btns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-}
-
 .vacancie-refactor {
     display: flex;
-    width: 790px;
     padding: 30px;
     flex-direction: column;
     align-items: flex-start;
@@ -160,5 +211,4 @@
 .vacancy__desc-btns {
     width: 100%;
     display: flex;
-    justify-content: space-between;
 }

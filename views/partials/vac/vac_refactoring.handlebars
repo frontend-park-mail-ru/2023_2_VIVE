@@ -39,7 +39,7 @@
         value_second=../data.salary_upper_bound
         error_first=(lookup ../errors this.first.name)
         error_second=(lookup ../errors this.second.name)
-        class=(object class="res__form__input__title header-text header-text--fourth text-form-active")
+        class=(object class="res__form__input__title header-text header-text--fourth text-form-active mobile__lh-20")
         )}}
         {{else}}
         {{> double_input (object
@@ -48,7 +48,7 @@
         value_second=@root.vacancy.salary_upper_bound
         error_first=(lookup ../errors this.first.name)
         error_second=(lookup ../errors this.second.name)
-        class=(object class="res__form__input__title header-text header-text--fourth text-form-active")
+        class=(object class="res__form__input__title header-text header-text--fourth text-form-active mobile__lh-20")
         )}}
         {{/or}}
 
@@ -223,11 +223,21 @@
     <div class="vacancie-refactor__btns">
         <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
         data-name="cancel-refactoring">
-            Отменить изменения
+            <div class="vacancie__btns_desktop">
+                Отменить изменения
+            </div>
+            <div class="vacancie__btns_mobile">
+                Отменить
+            </div>
         </div>
         <div class="text-light-title setting-inpute__button setting-inpute__button--primary common-text common-text--medium"
         data-name="send-refactoring">
-            Сохранить изменения
+            <div class="vacancie__btns_desktop">
+                Сохранить изменения
+            </div>
+            <div class="vacancie__btns_mobile">
+                Сохранить
+            </div>
         </div>
     </div>
 </div>

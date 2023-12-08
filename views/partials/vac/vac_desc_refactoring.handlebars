@@ -3,8 +3,7 @@
     {{#each (array
     (object 
     name="description"
-    placeholder="Описание"
-    title="Введите описание")
+    placeholder="Описание")
     )}}
 
     {{#if ../data.description}}
@@ -35,11 +34,21 @@
     <div class="vacancie-refactor__btns">
         <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
         data-name="cancel-desc-refactoring">
-            Отменить изменения
+            <div class="vacancie__btns_desktop">
+                Отменить изменения
+            </div>
+            <div class="vacancie__btns_mobile">
+                Отменить
+            </div>
         </div>
         <div class="text-light-title setting-inpute__button setting-inpute__button--primary common-text common-text--medium"
         data-name="send-desc-refactoring">
-            Сохранить изменения
+            <div class="vacancie__btns_desktop">
+                Сохранить изменения
+            </div>
+            <div class="vacancie__btns_mobile">
+                Сохранить
+            </div>
         </div>
     </div>
 </div>

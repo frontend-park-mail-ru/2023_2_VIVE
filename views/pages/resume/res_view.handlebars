@@ -221,7 +221,6 @@
         Резюме обновлено 01.11.23
       </div>
       <div class="resv__params__actions">
-        {{#if is_my_resume }}
         {{> link-btn
         class="resv__params__actions__print link-btn_transp-box-blue link-btn_pd-sm link-btn_bd-rad-sm
         link-btn_semi-bold d-block"
@@ -237,11 +236,16 @@
               fill="#0496FF" />
           </g>
         </svg>'}}
+        {{#if is_my_resume }}
         <div class="setting__delete-btn" data-name="delete-resume">
           <div class="common-text common-text--medium">
             Удалить резюме
           </div>
         </div>
+        {{else}}
+          <div class="text-light-title link-btn-blue--bg common-text common-text--medium">
+              Связаться
+          </div>
         {{/if}}
       </div>
 

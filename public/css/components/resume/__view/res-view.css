@@ -150,6 +150,8 @@
 
 .resv__params__actions {
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .resv__params__actions__print {
