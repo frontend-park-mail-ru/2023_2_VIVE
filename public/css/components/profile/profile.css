@@ -16,7 +16,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-height: 650px;
+        min-height: 77vh;
     }
 
     .profile__mobile-navigation {
