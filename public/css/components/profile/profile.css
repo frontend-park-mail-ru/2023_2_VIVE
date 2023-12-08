@@ -27,7 +27,7 @@
     .profile__mobile-navigation {
         display: flex;
         position: fixed;
-        top: 87vh;
+        bottom: 0;
         width: 100vw;
         padding-top: 15px;
         justify-content: center;
