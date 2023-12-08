@@ -91,7 +91,7 @@
 /* vac */
 
 .vacs__list__item {
-  /* all: initial; */
+  width: 100%;
   color: inherit;
   text-decoration: inherit;
 
