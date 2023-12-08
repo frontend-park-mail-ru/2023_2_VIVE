@@ -10,6 +10,13 @@ export default class empVacs extends mainView {
     async render() {
         await super.render();
 
+        if (screen.width < 768) {
+            const footer = document.querySelector("footer");
+            if (footer !== null) {
+                footer.remove();
+            }
+        }
+
         const template = Handlebars.templates['empVacs'];
         document.querySelector('main').innerHTML = template(empVacsStore.getContext());
 
