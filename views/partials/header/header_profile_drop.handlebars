@@ -6,9 +6,15 @@
       {{#if user}}
       {{#iff user.role '==' 'applicant'}}
       <div class="dropdown__item dropdown-mobile__item cursor-pointer">
+        <a href="/resume/creation" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Создать резюме</a>
+      </div>
+      <div class="dropdown__item dropdown-mobile__item cursor-pointer">
         <a href="/profile/resumes" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Мои резюме</a>
       </div>
       {{else}}
+      <div class="dropdown__item dropdown-mobile__item cursor-pointer">
+        <a href="/vacancy/creation" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Создать вакансию</a>
+      </div>
       <div class="dropdown__item dropdown-mobile__item cursor-pointer">
         <a href="/profile/vacancies" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Мои Вакансии</a>
       </div>
