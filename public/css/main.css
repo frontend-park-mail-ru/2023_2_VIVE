@@ -8,6 +8,10 @@
     width: 100%;
   }
 
+  .container {
+    gap: 30px;
+  }
+
   .mobile-wrapper {
     padding-left: 2vw;
     padding-right: 2vw;
@@ -22,6 +26,10 @@
 
   main {
     padding: 60px 0px;
+  }
+
+  .container {
+    gap: 60px;
   }
 }
 
@@ -43,7 +51,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 60px;
 }
 
 header {
