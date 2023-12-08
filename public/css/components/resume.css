@@ -11,6 +11,17 @@
         gap: 10px;
         align-self: stretch;
     }
+
+    .resume__job-name {
+        width: 60vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .resume__btns {
+        width: 100%;
+    }
 }
 
 @media only screen and (min-width: 768px) {
