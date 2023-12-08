@@ -12,6 +12,13 @@
         gap: 60px;
     }
 
+    .mobile__profile {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 650px;
+    }
+
     .profile__mobile-navigation {
         display: flex;
         width: 100vw;
