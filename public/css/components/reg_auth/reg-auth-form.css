@@ -68,6 +68,7 @@
 
     .reg__auth__form__field-mobile-back {
         display: flex;
+        position: relative;
         justify-content: space-between;
         align-items: center;
     }
@@ -82,7 +83,7 @@
 
     .auth__form_svg-input-field {
         position: absolute;
-        left: 80%;
+        left: 85%;
     }
 }
 
