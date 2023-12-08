@@ -3,6 +3,10 @@
     transform: translateX(100%);
     right: 100%;
   }
+
+  .dropdown__content-search {
+    top: calc(100% + 13px);
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -13,6 +17,10 @@
 
   .dropdown-mobile__item {
     display: none !important;
+  }
+
+  .dropdown__content-search {
+    top: calc(100% + 10px);
   }
 }
 
@@ -84,7 +92,7 @@
 
 .dropdown__content-search {
   position: absolute;
-  top: calc(100% + 10px);
+  left: -10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
