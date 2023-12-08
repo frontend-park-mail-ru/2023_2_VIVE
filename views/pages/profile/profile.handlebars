@@ -1,11 +1,11 @@
 <div class="profile">
-    <div class="d-flex profile__header profile__header--background--default-hh">
+    <div class="profile__header profile__header--background--default-hh">
         <img class="profile_image" src="../../../public/images/img/buttersss.jpg" alt="profile-logo">
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="header-text header-text--first text-light-title">{{ user.last_name }} {{ user.first_name }} {{ user.third_name }}</div>
-                    <div class="secondary-text text-light-regular">{{ user.email }}</div>
+                    <div class="header-text header-text--first text-light-title profile__about-mobile-main-text">{{ user.last_name }} {{ user.first_name }} {{ user.third_name }}</div>
+                    <div class="secondary-text text-light-regular profile__about-mobile-add-text">{{ user.email }}</div>
                 </div>
                 {{#iff user.role '==' 'applicant'}}
                 <div class="profile__switch-btns">

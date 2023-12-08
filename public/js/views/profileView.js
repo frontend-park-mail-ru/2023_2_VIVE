@@ -12,6 +12,13 @@ export default class profileView extends mainView {
    */
   async render() {
     await super.render();
+
+    if (screen.width < 768) {
+      const footer = document.querySelector("footer");
+      if (footer !== null) {
+          footer.remove();
+      }
+    }
     
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['profile'];

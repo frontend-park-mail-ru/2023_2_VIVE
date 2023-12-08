@@ -4,9 +4,20 @@
 @import url("__resumes/profile__resumes.css");
 @import url("__vacancies/profile__vacancies.css");
 
+@media only screen and (max-width: 767px) {
+    .profile {
+        gap: 10px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .profile {
+        gap: 30px;
+    }
+}
+
 .profile {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
 }
