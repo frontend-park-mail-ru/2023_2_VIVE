@@ -1,6 +1,11 @@
 <div class="vacancies">
-  <div class="header-text header-text--first">
+  <div class="vacancies__main-text header-text header-text--first text-dark-title">
     Мои вакансии
+    <a class="js-nav-link vacancies__main-text-btn" href="/vacancy/creation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0707 2.92924C13.1657 -0.975762 6.83373 -0.975762 2.92973 2.92924C-0.975273 6.83424 -0.975273 13.1662 2.92973 17.0712C6.83473 20.9762 13.1667 20.9762 17.0717 17.0712C20.9767 13.1662 20.9767 6.83424 17.0717 2.92924H17.0707ZM5.75673 9.00024C5.49151 9.00024 5.23716 9.1056 5.04962 9.29313C4.86208 9.48067 4.75673 9.73502 4.75673 10.0002C4.75673 10.2655 4.86208 10.5198 5.04962 10.7073C5.23716 10.8949 5.49151 11.0002 5.75673 11.0002H8.99973V14.2432C8.99973 14.5085 9.10508 14.7628 9.29262 14.9503C9.48016 15.1379 9.73451 15.2432 9.99973 15.2432C10.2649 15.2432 10.5193 15.1379 10.7068 14.9503C10.8944 14.7628 10.9997 14.5085 10.9997 14.2432V11.0002H14.2427C14.5079 11.0002 14.7623 10.8949 14.9498 10.7073C15.1374 10.5198 15.2427 10.2655 15.2427 10.0002C15.2427 9.73502 15.1374 9.48067 14.9498 9.29313C14.7623 9.1056 14.5079 9.00024 14.2427 9.00024H10.9997V5.75724C10.9997 5.49202 10.8944 5.23767 10.7068 5.05013C10.5193 4.8626 10.2649 4.75724 9.99973 4.75724C9.73451 4.75724 9.48016 4.8626 9.29262 5.05013C9.10508 5.23767 8.99973 5.49202 8.99973 5.75724V9.00024H5.75673Z" fill="#0496FF"/>
+      </svg>
+    </a>
   </div>
   <div class="vacancies__block">
     <div class="vacancies__main-blocks">
@@ -14,11 +19,11 @@
             <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
             <div class="common-text common-text--medium text-dark-regular">{{#if this.salary_lower_bound}}{{#if this.salary_upper_bound}}от {{this.salary_lower_bound}} до {{this.salary_upper_bound}} тыс. рублей{{else}}от {{this.salary_lower_bound}} тыс. рублей{{/if}}{{else if this.salary_upper_bound}}до {{this.salary_upper_bound}} тыс. рублей{{else}}Не указана{{/if}}</div>
           </div>
-          <div class="add-info">
+          <div class="add-info add-info-exp">
             <img class="add-info__img" src="../../../../../public/images/img/stars_20.png">
             <div class="common-text common-text--medium text-dark-regular">{{#if this.experience_lower_bound}}{{#if this.experience_upper_bound}}{{this.experience_lower_bound}}-{{this.experience_upper_bound}} года{{else}}{{this.salary_lower_bound}} года{{/if}}{{else if this.experience_upper_bound}}{{this.experience_upper_bound}} года{{else}}Не указана{{/if}}</div>
           </div>
-          <div class="add-info">
+          <div class="add-info add-info-emp">
             <img class="add-info__img" src="../../../../../public/images/img/clock_outline_20.png">
             <div class="common-text common-text--medium text-dark-regular">{{#if this.employment}}{{this.employment}}{{else}}Не указано{{/if}}</div>
           </div>
@@ -26,14 +31,19 @@
             <img class="add-info__img" src="../../../../../public/images/img/location_map_outline_20.png">
             <div class="common-text common-text--medium text-dark-regular">{{#if this.location}}{{this.location}}{{else}}Не указано{{/if}}</div>
           </div>
-          <div class="add-info">
+          <div class="add-info add-info-time">
             <img class="add-info__img" src="../../../../../public/images/img/calendar_check_outline_20.png">
             <div class="common-text common-text--medium text-dark-regular">2 дня</div>
           </div>
         </div>
         <a href="/vacancy/{{this.id}}"
           class="js-nav-link text-dodger-blue link-btn-blue common-text common-text--medium">
-          Посмотреть подробную информацию
+          <div class="vacancy__open-info-btn">
+            Посмотреть подробную информацию
+          </div>
+          <div class="vacancy__open-info-btn--mobile">
+            Редактировать
+          </div>
         </a>
       </div>
       {{/each}}

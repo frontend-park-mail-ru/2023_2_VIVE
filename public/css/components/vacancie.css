@@ -1,24 +1,68 @@
+@media only screen and (max-width: 767px) {
+    .vacancie {
+        width: 100%;
+    }
+
+    .vacancy__open-info-btn {
+        display: none;
+    }
+
+    .vacancie__additional-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .add-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .add-info-exp {
+        display: none;
+    }
+
+    .add-info-emp {
+        display: none;
+    }
+
+    .add-info-time {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .vacancie {
+        width: 790px;
+    }
+
+    .vacancy__open-info-btn--mobile {
+        display: none;
+    }
+
+    .vacancie__additional-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .add-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
 .vacancie {
     display: flex;
-    width: 790px;
     padding: 40px;
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
     border-radius: 30px;
     background: var(--card-back-default);
-}
-
-.vacancie__additional-info {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-}
-
-.add-info {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
 }
 
 .add-info__img {

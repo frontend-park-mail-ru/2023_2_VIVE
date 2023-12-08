@@ -158,6 +158,14 @@ class ProfileStore extends Store {
     
         if (this.state == 'vacancies') {
             this.data = await this.updateData("/vacancies/current_user");
+            if (screen.width < 768) {
+                for (const key in this.data) {
+                    const element = this.data[key];
+                    if (element.name.length > 25) {
+                    element.name = element.name.slice(0, 25) + "...";
+                    }
+                }
+            }
         } else if (this.state == 'resumes') {
             this.data = await this.updateData("/current_user/cvs");
         }
