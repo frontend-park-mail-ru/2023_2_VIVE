@@ -20,6 +20,7 @@
   box-sizing: border-box;
   border: 1px solid #b0b0b0;
   margin-right: 10px;
+  flex-shrink: 0;
 }
 
 .input_radio__input:checked~.input_radio__div {
