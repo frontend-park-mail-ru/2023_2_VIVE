@@ -31,3 +31,7 @@
   background-color: rgba(239, 74, 60, 0.15);
   border: 2px solid var(--main-error);
 }
+
+.input_radio__text {
+  line-height: 20px;
+}
