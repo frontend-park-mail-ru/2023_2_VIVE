@@ -1,6 +1,28 @@
+@media only screen and (max-width: 767px) {
+  .rescr__form {
+    width: 100%;
+  }
+
+  .rescr__form__step__title--mobile {
+    display: none;
+  }
+
+  .rescr__form__actions_0 {
+    justify-content: center;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .rescr__form {
+    width: 500px;
+  }
+  
+  .rescr__form__actions_0 {
+    justify-content: end;
+  }
+}
 
 .rescr__form {
-  width: 500px;
   background-color: transparent;
 }
 
@@ -17,9 +39,3 @@
   line-height: 26px;
   margin: 0px 0px 25px 0px;
 }
-
-.rescr__form__actions_0 {
-  justify-content: end;
-}
-
-
