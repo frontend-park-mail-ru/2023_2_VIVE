@@ -1,4 +1,18 @@
+@media only screen and (max-width: 767px) {
+  .vaccr {
+    width: 100%;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .vaccr {
+    justify-content: space-between;
+  } 
+}
+
 .vaccr {
   display: flex;
-  justify-content: space-between;
 }

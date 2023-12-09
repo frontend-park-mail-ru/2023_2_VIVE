@@ -7,11 +7,12 @@
   }
 
   .rescr__steps__splitter {
-    width: 15vw;
+    width: 100%;
   }
 
   .rescr__steps__splitter--mobile {
     display: flex;
+    width: -webkit-fill-available;
   }
 
   .rescr__steps__splitter--desktop {

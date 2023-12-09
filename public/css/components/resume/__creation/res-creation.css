@@ -1,6 +1,6 @@
 @media only screen and (max-width: 767px) {
   .rescr {
-    width: 95vw;
+    width: 100%;
     flex-direction: column-reverse;
     align-items: center;
     gap: 20px;
