@@ -16,7 +16,7 @@
 
     .add-info {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
     }
 
