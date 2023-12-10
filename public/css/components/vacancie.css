@@ -148,6 +148,12 @@
         flex-direction: column;
         justify-content: space-between;
     }
+
+    .res-up-add-info {
+        display: flex;
+        width: -webkit-fill-available;
+        justify-content: space-between;
+    }
 }
 
 .vacancie {
