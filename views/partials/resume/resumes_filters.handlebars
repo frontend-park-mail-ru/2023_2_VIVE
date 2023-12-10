@@ -1,6 +1,9 @@
 <aside class="vacs__filters">
-    <div class="vacs__desc">
-        Найдено <span>{{ resumes.length }}</span> резюме
+    <div class="vacs__desc header-text header-text--first text-dark-title fw-bold">
+        Найдено <span>{{#if data}}{{ data.length }}{{else}}0{{/if}}</span> резюме
+    </div>
+    <div class="vacs__button-open-filters">
+        <button class="text-light-title link-btn-blue--bg common-text common-text--medium" name="resumes_filters">Фильтры</button>
     </div>
     <!-- Input field -->
     {{!-- <div class="vacs__search vacs__filter">
@@ -13,47 +16,48 @@
         class="common-text common-text--medium link-btn-blue--bg text-light-title")}}
     </div> --}}
     <!-- Checkbox buttons -->
-    <div class="vacs__filter">
-        <div class="vacs__filter__name">
-            Образование
-        </div>
-        <ul class="vacs__filter__list">
-            <li class="vacs__filter__list__item">
-                <label class="vacs__filter__list__item__label">
-                    {{> input_checkbox }}
-                    <span>Среднее</span>
-                </label>
-            </li>
-            <li class="vacs__filter__list__item">
-                <label class="vacs__filter__list__item__label">
-                    {{> input_checkbox }}
-                    <span>Среднее специальное</span>
-                </label>
-            </li>
-
-        </ul>
-    </div>
-    <!-- Radio buttons -->
-    <div class="vacs__filter">
-        <ul class="vacs__filter__list">
+    <div class="vacs__filters-frame vacs__filters-frame-mobile-hidden">
+        <div class="vacs__filter">
             <div class="vacs__filter__name">
-                Пол
+                Образование
             </div>
-            <li class="vacs__filter__list__item">
-                {{> input_radio (object text="Не имеет значения"
-                attrs=(object
-                name="gender"
-                )
-                class_label="vacs__filter__list__item__label") }}
-            </li>
-            <li class="vacs__filter__list__item">
-                {{> input_radio (object text="Мужской"
-                attrs=(object
-                name="gender"
-                )
-                class_label="vacs__filter__list__item__label") }}
-            </li>
-        </ul>
-    </div>
+            <ul class="vacs__filter__list">
+                <li class="vacs__filter__list__item">
+                    <label class="vacs__filter__list__item__label">
+                        {{> input_checkbox }}
+                        <span>Среднее</span>
+                    </label>
+                </li>
+                <li class="vacs__filter__list__item">
+                    <label class="vacs__filter__list__item__label">
+                        {{> input_checkbox }}
+                        <span>Среднее специальное</span>
+                    </label>
+                </li>
 
+            </ul>
+        </div>
+        <!-- Radio buttons -->
+        <div class="vacs__filter">
+            <ul class="vacs__filter__list">
+                <div class="vacs__filter__name">
+                    Пол
+                </div>
+                <li class="vacs__filter__list__item">
+                    {{> input_radio (object text="Не имеет значения"
+                    attrs=(object
+                    name="gender"
+                    )
+                    class_label="vacs__filter__list__item__label") }}
+                </li>
+                <li class="vacs__filter__list__item">
+                    {{> input_radio (object text="Мужской"
+                    attrs=(object
+                    name="gender"
+                    )
+                    class_label="vacs__filter__list__item__label") }}
+                </li>
+            </ul>
+        </div>
+    </div>
 </aside>

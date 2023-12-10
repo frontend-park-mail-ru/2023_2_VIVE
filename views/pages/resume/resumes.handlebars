@@ -66,10 +66,21 @@
             {{/iff}}
           </div>
         </div>
+        {{#if resumes}}
         {{> res_list
         user=user
         resumes=resumes
         block_type=block_type}}
+        {{else}}
+        <div class="empty-vacs__text-frame">
+          <div class="common-text common-text--regular text-dark-regular">
+            Список резюме пуст или по выбранным фильтрам ничего не нашлось :(
+          </div>
+          <div class="common-text common-text--regular text-dark-regular">
+            Попробуйте другие варианты поискового запроса или уберите фильтры
+          </div>
+        </div>
+        {{/if}}
       </div>
     </div>
 
