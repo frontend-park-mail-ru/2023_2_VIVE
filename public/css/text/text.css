@@ -86,3 +86,8 @@
     line-height: 25px;
     text-decoration-line: underline;
 }
+
+.fw-bold {
+    font-weight: bold
+    ;
+}

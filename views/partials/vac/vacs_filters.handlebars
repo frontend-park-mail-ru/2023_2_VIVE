@@ -1,6 +1,9 @@
 <aside class="vacs__filters">
-  <div class="vacs__desc">
+  <div class="vacs__desc header-text header-text--first text-dark-title fw-bold">
     Найдено <span>{{ data.length }}</span> вакансий
+  </div>
+  <div class="vacs__button-open-filters">
+    <button class="text-light-title link-btn-blue--bg common-text common-text--medium">Фильтры</button>
   </div>
   <!-- Input field -->
   {{!-- <div class="vacs__search vacs__filter">
@@ -13,41 +16,43 @@
     class="common-text common-text--medium link-btn-blue--bg text-light-title")}}
   </div> --}}
   <!-- Checkbox buttons -->
-  <div class="vacs__filter">
-    <div class="vacs__filter__name">
-      Регион
-    </div>
-    <ul class="vacs__filter__list">
-      <li class="vacs__filter__list__item">
-        <label class="vacs__filter__list__item__label">
-          {{> input_checkbox }}
-          <span>Россия</span>
-        </label>
-      </li>
-      <li class="vacs__filter__list__item">
-        <label class="vacs__filter__list__item__label">
-          {{> input_checkbox }}
-          <span>Москва</span>
-        </label>
-      </li>
-
-    </ul>
-  </div>
-  <!-- Radio buttons -->
-  <div class="vacs__filter">
-    <ul class="vacs__filter__list">
+  <div class="vacs__filters-frame vacs__filters-frame-mobile-hidden">
+    <div class="vacs__filter">
       <div class="vacs__filter__name">
-        Уровень дохода
+        Регион
       </div>
-      <li class="vacs__filter__list__item">
-        {{> input_radio (object text="Не имеет значения" name="category"
-        class_label="vacs__filter__list__item__label") }}
-      </li>
-      <li class="vacs__filter__list__item">
-        {{> input_radio (object text="> 70000" name="category"
-        class_label="vacs__filter__list__item__label") }}
-      </li>
-    </ul>
+      <ul class="vacs__filter__list">
+        <li class="vacs__filter__list__item">
+          <label class="vacs__filter__list__item__label">
+            {{> input_checkbox }}
+            <span>Россия</span>
+          </label>
+        </li>
+        <li class="vacs__filter__list__item">
+          <label class="vacs__filter__list__item__label">
+            {{> input_checkbox }}
+            <span>Москва</span>
+          </label>
+        </li>
+
+      </ul>
+    </div>
+    <!-- Radio buttons -->
+    <div class="vacs__filter">
+      <ul class="vacs__filter__list">
+        <div class="vacs__filter__name">
+          Уровень дохода
+        </div>
+        <li class="vacs__filter__list__item">
+          {{> input_radio (object text="Не имеет значения" name="category"
+          class_label="vacs__filter__list__item__label") }}
+        </li>
+        <li class="vacs__filter__list__item">
+          {{> input_radio (object text="> 70000" name="category"
+          class_label="vacs__filter__list__item__label") }}
+        </li>
+      </ul>
+    </div>
   </div>
 
 </aside>

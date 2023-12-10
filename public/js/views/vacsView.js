@@ -27,12 +27,6 @@ export default class vacsView extends mainView {
   addEventListeners() {
     super.addEventListeners();
 
-    if (this.block_type === 'list') {
-      this.ListEventListeners();
-    } else if (this.block_type === 'block') {
-      this.BlockEventListeners();
-    }
-
     const buttonListView = document.querySelector('[data-name="list-view"]');
     const buttonBlockView = document.querySelector('[data-name="block-view"]');
     const sortingDateButton = document.querySelector('[name="sorting-date-btn"]');
@@ -55,68 +49,6 @@ export default class vacsView extends mainView {
       vacsStore.sortVacancies();
       this.render();
     });
-  }
-
-  ListEventListeners() {
-    const salaryInfo = document.querySelectorAll('[name="vacancy-salary"]');
-    const experienceInfo = document.querySelectorAll('[name="vacancy-experience"]');
-    const employmentInfo = document.querySelectorAll('[name="vacancy-employment"]');
-    const locationInfo = document.querySelectorAll('[name="vacancy-location"]');
-    const descriptionText = document.querySelectorAll('[name="vacancy-description"]');
-
-    salaryInfo.forEach(salary => {
-      if (salary.innerText.length > 25) {
-        salary.innerText = salary.innerText.substring(0, 25) + "...";
-      }
-    });
-
-    experienceInfo.forEach(experience => {
-      if (experience.innerText.length > 10) {
-        experience.innerText = experience.innerText.substring(0, 10) + "...";
-      }
-    });
-
-    employmentInfo.forEach(employment => {
-      if (employment.innerText.length > 10) {
-        employment.innerText = employment.innerText.substring(0, 10) + "...";
-      }
-    });
-
-    locationInfo.forEach(location => {
-      if (location.innerText.length > 10) {
-        location.innerText = location.innerText.substring(0, 10) + "...";
-      }
-    });
-
-    descriptionText.forEach(description => {
-      if (description.innerText.length > 400) {
-      description.innerText = description.innerText.substring(0, 400) + "...";
-      }
-    });
-  }
-
-  BlockEventListeners() {
-    const salaryInfo = document.querySelectorAll('[name="vacancy-salary"]');
-    const locationInfo = document.querySelectorAll('[name="vacancy-location"]');
-    const descriptionText = document.querySelectorAll('[name="vacancy-description"]');
-
-    salaryInfo.forEach(salary => {
-      if (salary.innerText.length > 15) {
-        salary.innerText = salary.innerText.substring(0, 15) + "...";
-      }
-    });
-
-    locationInfo.forEach(location => {
-      if (location.innerText.length > 8) {
-        location.innerText = location.innerText.substring(0, 8) + "...";
-      }
-    });
-
-    descriptionText.forEach(description => {
-      if (description.innerText.length > 300) {
-      description.innerText = description.innerText.substring(0, 300) + "...";
-      }
-    })
   }
 
   clear() {

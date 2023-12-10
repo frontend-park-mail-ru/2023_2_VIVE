@@ -5,6 +5,12 @@
 @import url("emp-vacs.css");
 
 @media only screen and (max-width: 767px) {
+  .vacs {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
   .vacs__list__item__desc__main--desktop {
     display: none !important;
   }
@@ -20,35 +26,84 @@
     gap: 10px;
     margin-bottom: 20px;
   }
+
+  .vacs__block__params {
+    display: none;
+  }
+
+  .vacs__block {
+    width: 100%;
+  }
+
+  .vacs__list_list,
+  .vacs__list_block {
+    display: none !important;
+  }
 }
 
 @media only screen and (min-width: 768px) {
   .vacs__list__item__mobile-version {
     display: none;
   }
+
+  .vacs__block__params {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .vacs {
+    justify-content: space-between;
+    gap: 50px;
+  }
+
+  .vacs__block {
+    width: 80%;
+  }
+
+  .vacs__list-main--mobile {
+    display: none;
+  }
+
+  .vacs__list__item__desc__prev {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+
+  .vacs-add-info-text {
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .add-info-vacs-salary {
+    width: 25%;
+  }
+
+  .add-info-vacs {
+    width: 20%;
+  }
+
+  .add-info-vacancy-salary-block,
+  .add-info-vacancy-block {
+    width: 50% !important;
+  }
 }
 
 .vacs {
   display: flex;
-  justify-content: space-between;
-  gap: 50px;
 }
 
 .vacs_query {
   margin-bottom: 20px;
 }
 
-.vacs__block {
-  width: 80%;
-}
-
 /* params */
-
-.vacs__block__params {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-}
 
 .vacs__block__params__sorted__btn {
   font-weight: 500;

@@ -7,33 +7,33 @@
             <div class="vacs__list__item__company-logo">
                 <img src="../../../public/images/img/vk-company.png" alt="">
             </div>
-            <div>
+            <div style="width: -webkit-fill-available;">
                 <h3 class="vacs__list__item__company-name">{{this.organizaton}}</h3>
                 <div class="vacancie__additional-info">
-                    <div class="add-info">
+                    <div class="add-info add-info-vacs-salary {{#iff ../block_type '==' 'block'}}add-info-vacancy-salary-block{{/iff}}">
                         <img class="add-info__img" src="../../../../public/images/img/rouble_outline_20.png">
                         <div class="tooltip">
-                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-salary">
+                            <div class="common-text common-text--medium text-dark-regular vacs-add-info-text" name="vacancy-salary">
                                 {{this.salary}}
                             </div>
                             <span class="tooltip-text-down tooltip-text-down__vacancy">Зарплата: {{this.salary}}</span>
                         </div>
                     </div>
                     {{#iff ../block_type '==' 'list'}}
-                    <div class="add-info">
+                    <div class="add-info add-info-vacancy {{#iff ../block_type '==' 'block'}}add-info-vacancy-block{{/iff}}">
                         <img class="add-info__img" src="../../../../../public/images/img/stars_20.png">
                         <div class="tooltip">
-                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-experience">
+                            <div class="common-text common-text--medium text-dark-regular vacs-add-info-text" name="vacancy-experience">
                                 {{this.experience}}
                             </div>
                             <span class="tooltip-text-down tooltip-text-down__vacancy">Требуемый опыт:
                                 {{this.experience}}</span>
                         </div>
                     </div>
-                    <div class="add-info">
+                    <div class="add-info add-info-vacs">
                         <img class="add-info__img" src="../../../../../public/images/img/clock_outline_20.png">
                         <div class="tooltip">
-                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-employment">
+                            <div class="common-text common-text--medium text-dark-regular vacs-add-info-text" name="vacancy-employment">
                                 {{this.employment}}
                             </div>
                             <span class="tooltip-text-down tooltip-text-down__vacancy">Занятость:
@@ -41,10 +41,10 @@
                         </div>
                     </div>
                     {{/iff}}
-                    <div class="add-info">
+                    <div class="add-info add-info-vacs">
                         <img class="add-info__img" src="../../../../../public/images/img/location_map_outline_20.png">
                         <div class="tooltip">
-                            <div class="common-text common-text--medium text-dark-regular" name="vacancy-location">
+                            <div class="common-text common-text--medium text-dark-regular vacs-add-info-text" name="vacancy-location">
                                 {{this.location}}
                             </div>
                             <span class="tooltip-text-down tooltip-text-down__vacancy">Расположение:
@@ -52,10 +52,10 @@
                         </div>
                     </div>
                     {{#iff ../block_type '==' 'list'}}
-                    <div class="add-info">
+                    <div class="add-info add-info-vacs">
                         <img class="add-info__img" src="../../../../../public/images/img/calendar_check_outline_20.png">
                         <div class="tooltip">
-                            <div class="common-text common-text--medium text-dark-regular">2 дня</div>
+                            <div class="common-text common-text--medium text-dark-regular vacs-add-info-text">2 дня</div>
                             <span class="tooltip-text-down tooltip-text-down__vacancy">Время отклика: 2 дня</span>
                         </div>
                     </div>

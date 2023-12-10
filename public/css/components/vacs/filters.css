@@ -1,16 +1,36 @@
-.vacs__filters {
-  
+@media only screen and (max-width: 767px) {
+  .vacs__filters-frame-mobile-hidden {
+    display: none;
+  }
+
+  .vacs__filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .vacs__button-open-filters {
+    display: flex;
+    justify-content: center;
+  }
 }
 
-.vacs__desc {
-  font-weight: bold;
-  font-size: 20px;
-  margin-bottom: 30px;
-  color: #333333;
-}
+@media only screen and (min-width: 768px) {
+  .vacs__filter {
+    margin-bottom: 25px;
+  }
 
-.vacs__filter {
-  margin-bottom: 25px;
+  .vacs__desc {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #333333;
+  }
+
+  .vacs__button-open-filters {
+    display: none;
+  }
 }
 
 .vacs__search__name {
