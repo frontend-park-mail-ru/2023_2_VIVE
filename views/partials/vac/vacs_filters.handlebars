@@ -1,6 +1,6 @@
 <aside class="vacs__filters">
   <div class="vacs__desc header-text header-text--first text-dark-title fw-bold">
-    Найдено <span>{{ data.length }}</span> вакансий
+    Найдено <span>{{#if data}}{{ data.length }}{{else}}0{{/if}}</span> вакансий
   </div>
   <div class="vacs__button-open-filters">
     <button class="text-light-title link-btn-blue--bg common-text common-text--medium">Фильтры</button>

@@ -39,6 +39,13 @@
   .vacs__list_block {
     display: none !important;
   }
+
+  .empty-vacs__text-frame {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
 }
 
 @media only screen and (min-width: 768px) {

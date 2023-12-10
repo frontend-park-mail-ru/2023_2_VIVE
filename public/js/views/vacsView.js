@@ -31,24 +31,30 @@ export default class vacsView extends mainView {
     const buttonBlockView = document.querySelector('[data-name="block-view"]');
     const sortingDateButton = document.querySelector('[name="sorting-date-btn"]');
 
-    buttonListView.addEventListener('click', () => {
-      if (this.block_type != 'list') {
-        this.block_type = 'list';
-        this.render();
-      }
-    });
+    if (buttonListView)  {
+      buttonListView.addEventListener('click', () => {
+        if (this.block_type != 'list') {
+          this.block_type = 'list';
+          this.render();
+        }
+      });
+    }
 
-    buttonBlockView.addEventListener('click', () => {
-      if (this.block_type != 'block') {
-        this.block_type = 'block';
-        this.render();
-      }
-    });
+    if (buttonBlockView) {
+      buttonBlockView.addEventListener('click', () => {
+        if (this.block_type != 'block') {
+          this.block_type = 'block';
+          this.render();
+        }
+      });
+    }
 
-    sortingDateButton.addEventListener('click', () => {
-      vacsStore.sortVacancies();
-      this.render();
-    });
+    if (sortingDateButton) {
+      sortingDateButton.addEventListener('click', () => {
+        vacsStore.sortVacancies();
+        this.render();
+      });
+    }
   }
 
   clear() {

@@ -66,14 +66,25 @@
             {{/iff}}
           </div>
         </div>
-        {{> vacs_list
-        user=user
-        data=data
-        block_type=block_type}}
-        <div class="vacs__list-main--mobile">
-          {{> vacs_list_mobile
-          vacancies=data}}
+        {{#if data}}
+          {{> vacs_list
+          user=user
+          data=data
+          block_type=block_type}}
+          <div class="vacs__list-main--mobile">
+            {{> vacs_list_mobile
+            vacancies=data}}
+          </div>
+        {{else}}
+        <div class="empty-vacs__text-frame">
+          <div class="common-text common-text--regular text-dark-regular">
+            Список вакансий пуст  или по выбранным фильтрам не нашлось ни одной вакансии :(
+          </div>
+          <div class="common-text common-text--regular text-dark-regular">
+            Попробуйте другие варианты поискового запроса или уберите фильтры
+          </div>
         </div>
+        {{/if}}
       </div>
     </div>
 
