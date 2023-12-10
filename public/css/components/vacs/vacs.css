@@ -61,11 +61,10 @@
 
   .vacs {
     justify-content: space-between;
-    gap: 50px;
   }
 
   .vacs__block {
-    width: 80%;
+    width: 77%;
   }
 
   .vacs__list-main--mobile {

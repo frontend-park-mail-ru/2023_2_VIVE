@@ -31,6 +31,11 @@
   .vacs__button-open-filters {
     display: none;
   }
+
+  .vacs__filters {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .vacs__search__name {
