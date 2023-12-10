@@ -45,16 +45,19 @@
                 {{> vac_description}}
                 {{/iff}}
             </div>
-            <a href="/vacancies/profile/{{vacancy.employer_id}}" class="js-nav-link view-company">
-                <img class="view-company__img" src="../../../public/images/img/vk-company.png">
-                <div class="view-company__main-info">
-                    <div class="header-text header-text--first text-dark-title">
-                        {{organization}}
-                    </div>
-                    <div class="view-company__location">
-                        <img class="view-company__location-img" src="../../../public/images/img/location_map_outline_20.png">
-                        <div class="common-text common-text--medium text-dark-regular">
-                            {{vacancy.location}}
+            <a href="/vacancies/profile/{{vacancy.employer_id}}" class="js-nav-link view-company" style="flex-direction: column;">
+                <div class="text-dark-regular">Вакансия обновлена {{formatDate vacancy.updated_at}}</div>
+                <div class="view-company" style="background: none; padding: 0;">
+                    <img class="view-company__img" src="../../../public/images/img/vk-company.png">
+                    <div class="view-company__main-info">
+                        <div class="header-text header-text--first text-dark-title">
+                            {{organization}}
+                        </div>
+                        <div class="view-company__location">
+                            <img class="view-company__location-img" src="../../../public/images/img/location_map_outline_20.png">
+                            <div class="common-text common-text--medium text-dark-regular">
+                                {{vacancy.location}}
+                            </div>
                         </div>
                     </div>
                 </div>
