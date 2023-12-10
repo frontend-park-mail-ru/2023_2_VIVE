@@ -526,7 +526,7 @@ class ResStore extends Store {
             const data = await resp.json();
             console.log(data);
             // console.log(data['vacancies']['list']);
-            return data['list'];
+            return data.cvs.list;
         } catch(error) {
             console.log(error);
             return undefined;

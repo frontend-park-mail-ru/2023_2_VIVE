@@ -1,7 +1,11 @@
 <aside class="vacs__filters">
     <div class="vacs__desc header-text header-text--first text-dark-title fw-bold">
-        Найдено <span>{{#if data}}{{ data.length }}{{else}}0{{/if}}</span> резюме
+        Найдено <span>{{#if resumes}}{{ resumes.length }}{{else}}0{{/if}}</span> резюме
     </div>
+    {{#if qObj.q}}
+    <div class="header-text header-text--second">Запрос: {{qObj.q}}</div>
+    <a href="/resumes" class="js-nav-link link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</a>
+    {{/if}}
     <div class="vacs__button-open-filters">
         <button class="text-light-title link-btn-blue--bg common-text common-text--medium" name="resumes_filters">Фильтры</button>
     </div>

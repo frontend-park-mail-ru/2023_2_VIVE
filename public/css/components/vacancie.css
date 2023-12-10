@@ -141,6 +141,13 @@
     .vacancie-refactor {
         width: 790px;
     }
+
+    .up-add-info {
+        display: flex;
+        width: -webkit-fill-available;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 }
 
 .vacancie {
