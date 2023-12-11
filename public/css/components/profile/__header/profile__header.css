@@ -28,6 +28,11 @@
     padding: 5px;
 }
 
+.profile__image {
+    width: 198px;
+    height: 198px;
+}
+
 .profile__info {
     display: flex;
     height: 100%;

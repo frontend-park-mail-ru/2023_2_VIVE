@@ -1,5 +1,6 @@
 import vacsStore from '../stores/VacsStore.js';
 import mainView from './mainView.js';
+import Handlebars from 'handlebars';
 
 export default class vacsView extends mainView {
   constructor() {
@@ -17,7 +18,6 @@ export default class vacsView extends mainView {
     const data = await vacsStore.getContext();
     Object.assign(data, {['block_type']: this.block_type});
 
-    // eslint-disable-next-line no-undef
     const template = Handlebars.templates['vacs'];
     document.querySelector('main').innerHTML = template(data);
 

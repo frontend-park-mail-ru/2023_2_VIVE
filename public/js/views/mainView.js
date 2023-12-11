@@ -4,6 +4,8 @@ import User from '../stores/UserStore.js';
 import { getFormObject } from '../utils.js';
 import View from './view.js';
 
+import Handlebars from 'handlebars';
+
 
 export default class mainView extends View {
     /**
@@ -12,7 +14,7 @@ export default class mainView extends View {
     async render() {
         await super.render();
 
-        
+        document.querySelector('.container').innerHTML = Handlebars.templates['main']();
         document.querySelector('header').innerHTML = Handlebars.partials['header'](
             { 
                 user: await User.getUser(), 

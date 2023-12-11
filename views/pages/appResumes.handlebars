@@ -1,10 +1,10 @@
 <div class="profile">
     <div class="d-flex profile__header profile__header--background--default-hh">
-        <img class="profile_image" src="../../../public/images/img/buttersss.jpg" alt="profile-logo">
+        <img class="profile__image" src="../../../public/images/profile.png" alt="profile-logo">
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="header-text header-text--first text-light-title">{{first_name}} {{last_name}}</div>
+                    <div class="header-text header-text--first text-light-title">{{cv.first_name}} {{cv.last_name}}</div>
                     <div class="secondary-text text-light-regular">Соискатель</div>
                 </div>
             </div>
@@ -23,11 +23,11 @@
     </div>
     <div class="emp-vacs__frame">
         <div class="header-text header-text--first">
-            Найдено {{cvs.length}} резюме соискателя
+            Найдено {{cv.cvs.length}} резюме соискателя
         </div>
         <div class="emp-vacs__main-frame">
             <div class="emp-vacs__item">
-                {{#each cvs}}
+                {{#each cv.cvs}}
                 <div class="vacs__list__item" style="width: 100%;">
                     <div class="vacs__list__item__desc__main">
                         <div class="vacs__list__item__company-logo">

@@ -1,5 +1,6 @@
 import { BACKEND_SERVER_URL } from "../../../config/config.js";
 import APIConnector from "../modules/APIConnector.js";
+import router from '../modules/router/router.js';
 import Store from "./Store.js";
 import User from "./UserStore.js";
 
@@ -12,10 +13,8 @@ class AppResumesStore extends Store {
 
   getContext() {
     return {
-      first_name: this.first_name,
-      last_name: this.last_name,
+      cv: this.cv,
       user: User.getUser(),
-      cvs: this.cvs,
     }
   }
 
@@ -23,16 +22,10 @@ class AppResumesStore extends Store {
     console.log(data);
     try {
       const resp = await APIConnector.get(BACKEND_SERVER_URL + "/cvs/applicant/" + data.id);
-      const resp_json = await resp.json();
-      console.log(resp_json);
-
-      this.first_name = resp_json.first_name;
-      this.last_name = resp_json.last_name;
-      this.cvs = resp_json.cvs;
-      this.user = User.getUser();
-      
+      this.cv = await resp.json();
       return true;
     } catch (error) {
+      router.render404();
       console.log(error);
       return false;
     }

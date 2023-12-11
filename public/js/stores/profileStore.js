@@ -149,15 +149,16 @@ class ProfileStore extends Store {
     async sendAvatar(form_data) {
         
         try {
-            let response = await fetch(BACKEND_SERVER_URL + '/upload_avatar', {
-                method: 'POST',
-                body: form_data,
-                credentials: 'include',
-            });
 
-            // const resp = await APIConnector.post(
-            //     BACKEND_SERVER_URL + '/upload_avatar', 
-            //     form_data);
+            // let response = await fetch(BACKEND_SERVER_URL + '/upload_avatar', {
+            //     method: 'POST',
+            //     body: form_data,
+            //     credentials: 'include',
+            // });
+
+            const resp = await APIConnector.post(
+                BACKEND_SERVER_URL + '/upload_avatar', 
+                form_data);
 
             return true;
         } catch (error) {

@@ -1,6 +1,7 @@
 /**
  * Функция для добавления пользовательских handlebars-helpers
  */
+import Handlebars from 'handlebars';
 
 export function registerHelpers() {
   Handlebars.registerHelper('sub', function (num1, num2) {
