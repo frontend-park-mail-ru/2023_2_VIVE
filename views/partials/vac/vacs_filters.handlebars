@@ -23,13 +23,19 @@
   </div> --}}
   <!-- Checkbox buttons -->
   <div class="vacs__filters-frame vacs__filters-frame-mobile-hidden">
+    {{log filters}}
     {{#each filters}}
-    <div class="vacs__filter" name="this.name">
+    {{#iff this.name '==' 'salary'}}
+    {{else}}
+    <div class="vacs__filter" name="{{this.name}}">
       <div class="vacs__filter__name">
         {{ruFilters this.name}}
       </div>
       <ul class="vacs__filter__list">
         {{#each (sortByCityCount this.values this.name 5)}}
+        {{#iff this.value '==' 'none'}}
+        {{else iff this.value '==' 'nothing'}}
+        {{else}}
           <li class="vacs__filter__list__item">
               {{#iff ../this.type '==' 'radio'}}
               {{> input_radio (object text=(ruFilters this.value) name="category"
@@ -53,6 +59,7 @@
                 </div>
               {{/iff}}
           </li>
+        {{/iff}}
         {{/each}}
       </ul>
         {{#iff this.type '==' 'checkbox_search'}}
@@ -73,6 +80,7 @@
         </div>
         {{/iff}}
     </div>
+    {{/iff}}
     {{/each}}
   </div>
 </aside>

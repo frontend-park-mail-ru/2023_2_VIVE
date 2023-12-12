@@ -25,6 +25,7 @@ const isValidParam = (param) => {
 class Router {
     constructor() {
         this.prevView = undefined;
+        this.curUrl = '';
     }
 
     //MAIN FUNCTIONS
@@ -50,9 +51,14 @@ class Router {
     }
 
     async goToLink(url) {
+        this.curUrl = url;
         url = (url == '/') ? '/vacs' : url;
         await this.urlWork(url);
         history.pushState({url: url}, null, url);
+    }
+
+    currentUrl() {
+        return new URL(this.getPrefUrl() + this.curUrl);
     }
 
     back() {
