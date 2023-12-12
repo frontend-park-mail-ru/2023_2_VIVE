@@ -141,3 +141,19 @@
     flex-shrink: 0;
     border-radius: 50%;
 }
+
+.profile__upload__input {
+    display: none;
+}
+
+.profile__upload__image {
+    cursor: pointer;
+    width: 198px;
+    height: 198px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 7px solid var(--mono-blue-dark-blue);
+    padding: 5px;
+}

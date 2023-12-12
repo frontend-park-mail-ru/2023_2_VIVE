@@ -2,7 +2,7 @@ import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import router from "../modules/router/router.js";
 import Store from "./Store.js";
-import { isObjEmpty } from '../utils.js';
+import { getFormObject, isObjEmpty } from '../utils.js';
 import { validateForm } from '../modules/constraints.js';
 import vacancyStore from './VacancyStore.js';
 
@@ -59,7 +59,7 @@ class ProfileStore extends Store {
                     type: "password",
                     required: true,
                     password: true,
-                    password_repeat: "repeat_password",   
+                    password_repeat: "repeat_password",
                 },
                 "repeat_password": {
                     type: "password",
@@ -74,10 +74,11 @@ class ProfileStore extends Store {
                     type: "paswword",
                     required: true,
                 }
-        })
+            })
     }
 
-    getContext() {
+    async getContext() {
+        const blob_avatar = await this.getAvatar();
         const errorsFields = this.errors;
         const formError = this.form_error;
         this.form_error = null;
@@ -85,17 +86,18 @@ class ProfileStore extends Store {
         return {
             form_error: formError,
             errors: errorsFields,
-            state: this.state, 
-            user: this.user, 
-            data: this.data
+            state: this.state,
+            user: this.user,
+            data: this.data,
+            avatar: blob_avatar ? URL.createObjectURL(blob_avatar) : undefined,
         }
     }
-    
+
     getDataObj(meta_obj, data_obj) {
         for (const key in data_obj) {
-          if (data_obj[key].value !== undefined) {
-            meta_obj[data_obj[key].name]["data"] = data_obj[key].value;
-          }
+            if (data_obj[key].value !== undefined) {
+                meta_obj[data_obj[key].name]["data"] = data_obj[key].value;
+            }
         }
         return meta_obj;
     }
@@ -118,8 +120,8 @@ class ProfileStore extends Store {
     }
 
     async sendData(fields) {
-        let newDataUser = { ...this.user};
-        
+        let newDataUser = { ...this.user };
+
         delete newDataUser['repeat_password'];
 
         fields.forEach(input => {
@@ -128,35 +130,71 @@ class ProfileStore extends Store {
 
         try {
             const resp = await APIConnector.put(
-              BACKEND_SERVER_URL + '/current_user',
-              newDataUser,
+                BACKEND_SERVER_URL + '/current_user',
+                newDataUser,
             );
-  
+
             this.form_error = null;
             this.errors = {};
 
 
             router.goToLink(`/profile/settings`);
             return true;
-  
+
         } catch (error) {
             this.form_error = 'Неверный пароль';
             return false;
         }
     }
 
+    async sendAvatar(form_data) {
+        
+        try {
+            let response = await fetch(BACKEND_SERVER_URL + '/upload_avatar', {
+                method: 'POST',
+                body: form_data,
+                credentials: 'include',
+            });
+
+            // const resp = await APIConnector.post(
+            //     BACKEND_SERVER_URL + '/upload_avatar', 
+            //     form_data);
+
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
+
+    async getAvatar() {
+        try {
+
+            const resp = await APIConnector.get(
+                BACKEND_SERVER_URL + '/get_avatar');
+            // const data = await resp.json();
+            const blob = await resp.blob();
+
+            
+            return blob;
+        } catch (error) {
+            console.error(error);
+            return undefined;
+        }
+    }
+
     async updateInnerData(data) {
         this.user = await this.updateData("/current_user");
-    
+
         const parts = data.url.split('/');
         this.state = parts[2] ? parts[2] : 'settings';
-    
+
         if ((this.state == 'resumes' || this.state == 'responses') && this.user.role == 'employer') {
-          return false;
+            return false;
         } else if (this.state == 'vacancies' && this.user.role == 'applicant') {
-          return false;
+            return false;
         }
-    
+
         if (this.state == 'vacancies') {
             this.data = await this.updateData("/vacancies/current_user");
             this.data.forEach(element => {
@@ -168,7 +206,7 @@ class ProfileStore extends Store {
         } else if (this.state == 'resumes') {
             this.data = await this.updateData("/current_user/cvs");
         }
-    
+
         return true;
     }
 
@@ -177,7 +215,7 @@ class ProfileStore extends Store {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + url);
             const data = await resp.json();
             return data;
-        } catch(err) {
+        } catch (err) {
             return undefined;
         }
     }

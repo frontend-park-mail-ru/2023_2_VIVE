@@ -58,6 +58,24 @@ export default class vacsView extends mainView {
       });
     }
 
+    const pagPrev = document.querySelector('.js-pag-next');
+      if (pagPrev) {
+      pagPrev.addEventListener('click', async event => {
+        if (await vacsStore.pagToNext()) {
+          window.scrollTo(0, 0);
+        }
+      });
+    }
+
+    const pagNext = document.querySelector('.js-pag-prev');
+    if (pagNext) {
+      pagNext.addEventListener('click', async event => {
+        if (await vacsStore.pagToPrev()) {
+          window.scrollTo(0, 0);
+        }
+      });
+    }
+
     this.filtersListener();
   }
 
@@ -68,9 +86,12 @@ export default class vacsView extends mainView {
       element.addEventListener('click', (event) => {
         event.stopPropagation();
         this.checked_checkboxes = [];
+        console.log(router.currentUrl());
         const qParam =  new URLSearchParams(router.currentUrl().searchParams);
+        console.log(vacsStore.parseQueryToDict(qParam));
+        console.log(qParam.get('q'));
         const filterDict = {
-          'q': qParam.get('q'),
+          'q': qParam.get('q') ? qParam.get('q') : '',
         };
         filters.forEach(filter => {
           if (filter.checked == true) {

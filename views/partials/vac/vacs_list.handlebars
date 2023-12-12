@@ -1,6 +1,7 @@
 <div class="vacs__list {{#iff ../block_type '==' 'list'}} vacs__list_list {{else}} vacs__list_block {{/iff}}">
 
     {{#each data}}
+   
     <a href="/vacancy/{{this.id}}"
         class="js-nav-link vacs__list__item {{#iff ../block_type '==' 'list'}} vacs__list__item_list {{else}} vacs__list__item_block {{/iff}}">
         <div class="vacs__list__item__desc__main">

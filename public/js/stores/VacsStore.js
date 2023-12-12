@@ -1,5 +1,6 @@
 import { BACKEND_SERVER_URL } from "../../../config/config.js";
 import APIConnector from "../modules/APIConnector.js";
+import router from '../modules/router/router.js';
 import Store from "./Store.js";
 import User from "./UserStore.js";
 import vacancyStore from "./VacancyStore.js";
@@ -18,6 +19,7 @@ class VacsStore extends Store {
             sorted: this.sorted,
             data: this.vacs,
             qObj: this.qObj,
+            vacancies: this.vacancies,
             filters: this.filters,
         }
     }
@@ -31,8 +33,14 @@ class VacsStore extends Store {
     }
 
     async updateInnerData(data) {
+        console.log()
         this.qObj = this.parseQueryToDict(data['urlObj'].searchParams);
-        
+        if (!this.qObj.page_num || !this.qObj.results_per_page) {
+            this.qObj['page_num'] = 1;
+            this.qObj['results_per_page'] = 10;
+        }
+        console.log(this.qObj);
+
         try {
             this.vacs = this.sortVacanciesByDateToOld(await this.getVacancies());
             this.vacs = this.processVacanciesData(this.vacs);
@@ -76,9 +84,28 @@ class VacsStore extends Store {
         });
     }
 
+    async pagToNext() {
+        console.log(this.qObj, this.vacancies);
+        if (this.qObj.page_num * this.qObj.results_per_page >= this.vacancies.count) {
+            return false;
+        }
+        this.qObj.page_num++;
+        await router.goToLink('/vacs?' + decodeURIComponent(new URLSearchParams(this.qObj).toString()));
+        return true;
+    }
+
+    async pagToPrev() {
+        if (this.qObj.page_num == 1) {
+            return false;
+        }
+        this.qObj.page_num--;
+        await router.goToLink('/vacs?' + decodeURIComponent(new URLSearchParams(this.qObj).toString()));
+        return true;
+    }
+
     async getVacancies() {
-        this.qObj['page_num'] = 1;
-        this.qObj['results_per_page'] = 10; 
+        console.log(this.qObj);
+
         if (!this.qObj['q']) {
             this.qObj['q'] = '';
         }
@@ -88,6 +115,7 @@ class VacsStore extends Store {
             console.log('Отправляемый запрос:', q_str);
             const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies/search' + '?' + q_str);
             const data = await resp.json();
+            this.vacancies = data['vacancies'];
             this.filters = data['filters'];
             return data['vacancies']['list'];
         } catch (err) {

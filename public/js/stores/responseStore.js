@@ -32,7 +32,7 @@ class ResponseStore extends Store {
     async updateInnerData(data) {
         try {
             const vac_data = await this.getData(`/vacancies/${data['id']}`);
-            this.vacancy = vac_data.vacancy;
+            this.vacancy = vac_data;
             this.organization = vac_data.organization_name;
             this.resumes = await this.getData("/current_user/cvs");
             this.user = await this.getData("/current_user");

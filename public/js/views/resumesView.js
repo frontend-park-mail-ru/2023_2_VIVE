@@ -21,6 +21,7 @@ class resumesView extends mainView {
         'resumes': await resStore.getAllResumes(),
         'filters': resStore.getFilters(),
         'qObj': resStore.qObj,
+        'cvs': resStore.cvs,
       }
     );
 
@@ -45,6 +46,20 @@ class resumesView extends mainView {
       if (this.block_type != 'block') {
         this.block_type = 'block';
         this.render();
+      }
+    });
+
+    const pagPrev = document.querySelector('.js-pag-next');
+    pagPrev.addEventListener('click', async event => {
+      if (await resStore.pagToNext()) {
+        window.scrollTo(0, 0);
+      }
+    });
+
+    const pagNext = document.querySelector('.js-pag-prev');
+    pagNext.addEventListener('click', async event => {
+      if (await resStore.pagToPrev()) {
+        window.scrollTo(0, 0);
       }
     });
 

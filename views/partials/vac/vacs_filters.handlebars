@@ -1,6 +1,6 @@
 <aside class="vacs__filters">
   <div class="vacs__desc header-text header-text--first text-dark-title fw-bold">
-    Найдено <span>{{#if data}}{{ data.length }}{{else}}0{{/if}}</span> вакансий
+    Найдено <span>{{#if data}}{{ vacancies.count }}{{else}}0{{/if}}</span> вакансий
   </div>
   {{#if qObj.q}}
     <div class="header-text header-text--second">Запрос: {{qObj.q}}</div>
