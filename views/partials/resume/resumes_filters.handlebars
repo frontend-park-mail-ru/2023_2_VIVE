@@ -21,47 +21,52 @@
     </div> --}}
     <!-- Checkbox buttons -->
     <div class="vacs__filters-frame vacs__filters-frame-mobile-hidden">
+        {{#each filters}}
         <div class="vacs__filter">
-            <div class="vacs__filter__name">
-                Образование
-            </div>
-            <ul class="vacs__filter__list">
-                <li class="vacs__filter__list__item">
-                    <label class="vacs__filter__list__item__label">
-                        {{> input_checkbox }}
-                        <span>Среднее</span>
-                    </label>
-                </li>
-                <li class="vacs__filter__list__item">
-                    <label class="vacs__filter__list__item__label">
-                        {{> input_checkbox }}
-                        <span>Среднее специальное</span>
-                    </label>
-                </li>
+        <div class="vacs__filter__name">
+            {{ruFilters this.name}}
+        </div>
+        <ul class="vacs__filter__list">
+            {{#each (sortByCityCount this.values this.name 5)}}
+            <li class="vacs__filter__list__item">
+                {{#iff ../this.type '==' 'radio'}}
+                {{> input_radio (object text=(ruFilters this.value) name="category"
+                class_label="vacs__filter__list__item__label") }}
+                {{else iff ../this.type '==' 'double_range'}}
 
-            </ul>
+                {{else}}
+                <label class="vacs__filter__list__item__label">
+                    {{> input_checkbox }}
+                    <span>{{#iff ../this.name '==' 'city'}}{{this.value}}{{else}}{{ ruFilters this.value}}{{/iff}}</span>
+                </label>
+                {{/iff}}
+                {{#iff ../this.type '==' 'double_range'}}
+                {{else}}
+                    <div class="cursive-text text-form-active">
+                    {{this.count}}
+                    </div>
+                {{/iff}}
+            </li>
+            {{/each}}
+        </ul>
+            {{#iff this.type '==' 'checkbox_search'}}
+            <div class="filters__for_search">
+                {{#each (array
+                (object name=this.name placeholder=(ruFilters this.name))
+                )}}
+
+                {{> input (object obj=this
+                class=(object
+                title="res__form__input__title"
+                input="res__form__input forms-placeholder"
+                block="res__form__field"
+                )
+                name=this.name)}}
+                {{/each}}
+            <button class="text-light-title link-btn-blue--bg common-text common-text--medium">Применить</button>
+            </div>
+            {{/iff}}
         </div>
-        <!-- Radio buttons -->
-        <div class="vacs__filter">
-            <ul class="vacs__filter__list">
-                <div class="vacs__filter__name">
-                    Пол
-                </div>
-                <li class="vacs__filter__list__item">
-                    {{> input_radio (object text="Не имеет значения"
-                    attrs=(object
-                    name="gender"
-                    )
-                    class_label="vacs__filter__list__item__label") }}
-                </li>
-                <li class="vacs__filter__list__item">
-                    {{> input_radio (object text="Мужской"
-                    attrs=(object
-                    name="gender"
-                    )
-                    class_label="vacs__filter__list__item__label") }}
-                </li>
-            </ul>
-        </div>
+        {{/each}}
     </div>
 </aside>

@@ -55,6 +55,25 @@ export default class vacsView extends mainView {
         this.render();
       });
     }
+
+    this.filtersListener();
+  }
+
+  filtersListener() {
+    const filters = document.querySelectorAll('.js_filter__label_input_click');
+
+    filters.forEach(element => {
+      element.addEventListener('click', (event) => {
+        event.stopPropagation();
+        filters.forEach(filter => {
+          if (filter.checked == true) {
+            const filterName = filter.name;
+            const filetValue = filter.parentNode.nextElementSibling.title;
+            console.log(`${filterName}=${filetValue}`);
+          }
+        })
+      });
+    });
   }
 
   clear() {

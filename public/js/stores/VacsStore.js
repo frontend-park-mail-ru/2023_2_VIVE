@@ -7,6 +7,7 @@ import vacancyStore from "./VacancyStore.js";
 class VacsStore extends Store {
     constructor() {
         super();
+        this.filters = [];
         this.vacs = [];
         this.sorted = false;
     }
@@ -17,6 +18,7 @@ class VacsStore extends Store {
             sorted: this.sorted,
             data: this.vacs,
             qObj: this.qObj,
+            filters: this.filters,
         }
     }
 
@@ -30,7 +32,6 @@ class VacsStore extends Store {
 
     async updateInnerData(data) {
         this.qObj = this.parseQueryToDict(data['urlObj'].searchParams);
-        console.log(this.qObj);
         
         try {
             this.vacs = this.sortVacanciesByDateToOld(await this.getVacancies());
@@ -76,7 +77,6 @@ class VacsStore extends Store {
     }
 
     async getVacancies() {
-        console.log(this.qObj);
         this.qObj['page_num'] = 1;
         this.qObj['results_per_page'] = 10; 
         if (!this.qObj['q']) {
@@ -88,8 +88,7 @@ class VacsStore extends Store {
             console.log('Отправляемый запрос:', q_str);
             const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies/search' + '?' + q_str);
             const data = await resp.json();
-            console.log(data);
-            console.log(data['vacancies']['list']);
+            this.filters = data['filters'];
             return data['vacancies']['list'];
         } catch (err) {
             console.error(err);

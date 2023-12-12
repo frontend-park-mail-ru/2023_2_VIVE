@@ -59,7 +59,11 @@ class ResStore extends Store {
             }
         ];
 
+        this.filters = [];
+    }
 
+    getFilters() {
+        return this.filters;
     }
 
     get form_data() {
@@ -525,7 +529,7 @@ class ResStore extends Store {
             );
             const data = await resp.json();
             console.log(data);
-            // console.log(data['vacancies']['list']);
+            this.filters = data.filters;
             return data.cvs.list;
         } catch(error) {
             console.log(error);

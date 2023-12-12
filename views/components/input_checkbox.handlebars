@@ -1,6 +1,6 @@
 <div class="input_checkbox {{class.block}}">
   {{!-- Невидимая кнопка --}}
-  <input class="input_checkbox__input {{class.input}}" type="checkbox" {{#each data}} data-{{@key}}={{this}} {{/each}} {{#each attrs}} {{@key}}={{this}} {{/each}}>
+  <input class="input_checkbox__input {{jsclass}} {{class.input}}" name="{{filter_name}}" type="checkbox" {{#each data}} data-{{@key}}={{this}} {{/each}} {{#each attrs}} {{@key}}={{this}} {{/each}}>
   {{!-- Видимый блок --}}
   <div class="input_checkbox__div {{class.btn}}">
     <svg class="input_checkbox__svg" width="18" height="13" viewBox="0 0 18 13" fill="none"

@@ -1,3 +1,38 @@
+const ruNames = {
+  'none': 'Не указано',
+  'nothing': 'Не указано',
+
+  'city': 'Город',
+  'salary': 'Уровень дохода',
+
+  'gender': 'Пол',
+  'female': 'Женский',
+  'male': 'Мужской',
+
+  'experience': 'Опыт работы',
+  'no_experience': 'Без опыта',
+  'one_three_years': 'От 1 до 3-х лет',
+  'three_six_years': 'От 3-х до 6-ти лет',
+  'six_more_years': 'Более 6-ти лет',
+
+  'employment': 'Тип занятости',
+  'full-time': 'Полная занятость',
+  'one-time': 'Разовая работа',
+  'volunteering': 'Волонтерство',
+  'part-time': 'Частичная занятость',
+  'internship': 'Стажировка',
+
+  'education_type': 'Образование',
+  'secondary': 'Среднее',
+  'secondary_special': 'Среднее специальное',
+  'incomplete_higher': 'Незаконченное высшее',
+  'higher': 'Высшее',
+  'bachelor': 'Бакалавр',
+  'master': 'Магистр',
+  'phd_junior': 'Кандидат наук',
+  'phd': 'Доктор наук',
+};
+
 /**
  * Функция для добавления пользовательских handlebars-helpers
  */
@@ -121,6 +156,22 @@ export function registerHelpers() {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     const formattedDate = new Date(dateString).toLocaleDateString('ru-RU', options);
     return formattedDate;
+  });
+
+  Handlebars.registerHelper('ruFilters', function (string) {
+    return ruNames[string];
+  });
+
+  Handlebars.registerHelper('sortByCityCount', function(cities, name, number) {
+    if (name !== 'city') {
+      return cities;
+    }
+
+    cities.sort(function(a, b) {
+      return b.count - a.count;
+    });
+
+    return cities.slice(0, number);
   });
 }
 
