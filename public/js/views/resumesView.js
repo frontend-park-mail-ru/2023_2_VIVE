@@ -47,6 +47,20 @@ class resumesView extends mainView {
       }
     });
 
+    const pagPrev = document.querySelector('.js-pag-next');
+    pagPrev.addEventListener('click', async event => {
+      if (await resStore.pagToNext()) {
+        window.scrollTo(0, 0);
+      }
+    });
+
+    const pagNext = document.querySelector('.js-pag-prev');
+    pagNext.addEventListener('click', async event => {
+      if (await resStore.pagToPrev()) {
+        window.scrollTo(0, 0);
+      }
+    });
+
     // sortingDateButton.addEventListener('click', () => {
     //   vacsStore.sortVacancies();
     //   this.render();

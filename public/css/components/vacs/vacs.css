@@ -18,6 +18,11 @@
   width: 80%;
 }
 
+.vacs__pag {
+  display: flex;
+  justify-content: center;
+}
+
 /* params */
 
 .vacs__block__params {
@@ -54,6 +59,7 @@
   display: flex;
   gap: 30px;
   justify-content: space-between;
+  margin-bottom: 40px;
 }
 
 .vacs__list_list {}

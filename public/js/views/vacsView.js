@@ -15,7 +15,7 @@ export default class vacsView extends mainView {
     await super.render();
 
     const data = await vacsStore.getContext();
-    Object.assign(data, {['block_type']: this.block_type});
+    Object.assign(data, { ['block_type']: this.block_type });
 
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['vacs'];
@@ -23,7 +23,7 @@ export default class vacsView extends mainView {
 
     this.addEventListeners();
   }
-  
+
   addEventListeners() {
     super.addEventListeners();
 
@@ -56,15 +56,18 @@ export default class vacsView extends mainView {
       this.render();
     });
 
-    const pagPrev = document.querySelector('.js-pag-prev');
-    pagPrev.addEventListener('click', event => {
-      vacsStore.pagToNext();
-      
+    const pagPrev = document.querySelector('.js-pag-next');
+    pagPrev.addEventListener('click', async event => {
+      if (await vacsStore.pagToNext()) {
+        window.scrollTo(0, 0);
+      }
     });
 
-    const pagNext = document.querySelector('.js-pag-next');
-    pagNext.addEventListener('click', event => {
-      console.log('click');
+    const pagNext = document.querySelector('.js-pag-prev');
+    pagNext.addEventListener('click', async event => {
+      if (await vacsStore.pagToPrev()) {
+        window.scrollTo(0, 0);
+      }
     });
   }
 
@@ -101,7 +104,7 @@ export default class vacsView extends mainView {
 
     descriptionText.forEach(description => {
       if (description.innerText.length > 400) {
-      description.innerText = description.innerText.substring(0, 400) + "...";
+        description.innerText = description.innerText.substring(0, 400) + "...";
       }
     });
   }
@@ -125,7 +128,7 @@ export default class vacsView extends mainView {
 
     descriptionText.forEach(description => {
       if (description.innerText.length > 300) {
-      description.innerText = description.innerText.substring(0, 300) + "...";
+        description.innerText = description.innerText.substring(0, 300) + "...";
       }
     })
   }

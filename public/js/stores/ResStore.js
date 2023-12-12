@@ -394,9 +394,9 @@ class ResStore extends Store {
         try {
             const resp = await APIConnector.get(
                 BACKEND_SERVER_URL + '/cv/' + id);
-            
+
             const data = await resp.json();
-            
+
             console.log("received(resume): ", data);
             return data;
         } catch (err) {
@@ -477,7 +477,7 @@ class ResStore extends Store {
             );
             router.goToLink('/profile/resumes');
             return true;
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             return false;
         }
@@ -493,6 +493,10 @@ class ResStore extends Store {
 
     updateInnerData(data) {
         this.qObj = this.parseQueryToDict(data['urlObj'].searchParams);
+        if (!this.qObj.page_num || !this.qObj.results_per_page) {
+            this.qObj['page_num'] = 1;
+            this.qObj['results_per_page'] = 10;
+        }
 
         console.log(this.qObj);
     }
@@ -504,16 +508,34 @@ class ResStore extends Store {
             );
             router.goToLink('/profile/resumes');
             return true;
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             return false;
         }
     }
 
+    async pagToNext() {
+        console.log(this.qObj, this.vacancies);
+        if (this.qObj.page_num * this.qObj.results_per_page >= this.vacancies.count) {
+            return false;
+        }
+        this.qObj.page_num++;
+        await router.goToLink('/resumes?' + decodeURIComponent(new URLSearchParams(this.qObj).toString()));
+        return true;
+    }
+
+    async pagToPrev() {
+        if (this.qObj.page_num == 1) {
+            return false;
+        }
+        this.qObj.page_num--;
+        await router.goToLink('/resumes?' + decodeURIComponent(new URLSearchParams(this.qObj).toString()));
+        return true;
+    }
+
     async getAllResumes() {
         console.log(this.qObj);
-        this.qObj['page_num'] = 1;
-        this.qObj['results_per_page'] = 10; 
+
         if (!this.qObj['q']) {
             this.qObj['q'] = '';
         }
@@ -526,8 +548,9 @@ class ResStore extends Store {
             const data = await resp.json();
             console.log(data);
             // console.log(data['vacancies']['list']);
-            return data['list'];
-        } catch(error) {
+            this.cvs = data['cvs'];
+            return this.cvs['list'];
+        } catch (error) {
             console.log(error);
             return undefined;
         }

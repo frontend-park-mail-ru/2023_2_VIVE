@@ -9,3 +9,8 @@
 .cvs__block__params {
     justify-content: flex-end !important; 
 }
+
+.resumes__pag {
+    display: flex;
+    justify-content: center;
+  }
