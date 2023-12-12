@@ -51,7 +51,7 @@
         </div>
     </div>
     <form class="js-search-form search__form">
-        <input name="q" class="search__input common-text common-text--medium text-dark-regular" type="text"
+        <input name="q" class="search__input common-text common-text--medium text-dark-regular" type="text" {{#if qObj}}value="{{qObj}}"{{/if}}
             placeholder="Поиск...">
         <button type="submit" class="search__srch-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

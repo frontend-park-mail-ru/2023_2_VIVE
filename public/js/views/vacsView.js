@@ -86,10 +86,7 @@ export default class vacsView extends mainView {
       element.addEventListener('click', (event) => {
         event.stopPropagation();
         this.checked_checkboxes = [];
-        console.log(router.currentUrl());
         const qParam =  new URLSearchParams(router.currentUrl().searchParams);
-        console.log(vacsStore.parseQueryToDict(qParam));
-        console.log(qParam.get('q'));
         const filterDict = {
           'q': qParam.get('q') ? qParam.get('q') : '',
         };

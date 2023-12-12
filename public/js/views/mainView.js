@@ -1,6 +1,8 @@
 import router from "../modules/router/router.js";
+import resStore from "../stores/ResStore.js";
 import searchStore from '../stores/SearchStore.js';
 import User from '../stores/UserStore.js';
+import vacsStore from "../stores/VacsStore.js";
 import { getFormObject } from '../utils.js';
 import View from './view.js';
 
@@ -23,7 +25,8 @@ export default class mainView extends View {
         document.querySelector('header').innerHTML = Handlebars.partials['header'](
             { 
                 user: await User.getUser(), 
-                search_type: searchStore.getType() 
+                search_type: searchStore.getType(),
+                qObj : (router.currentUrl().pathname === '/vacs') ? vacsStore.qObj.q : resStore.qObj.q,
             });
         document.querySelector('footer').innerHTML = Handlebars.partials['footer']({ user: await User.getUser() });
     }

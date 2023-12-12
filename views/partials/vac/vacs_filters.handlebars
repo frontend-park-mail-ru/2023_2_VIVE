@@ -2,10 +2,7 @@
   <div class="vacs__desc header-text header-text--first text-dark-title fw-bold">
     Найдено <span>{{#if data}}{{ vacancies.count }}{{else}}0{{/if}}</span> вакансий
   </div>
-  {{#if qObj.q}}
-    <div class="header-text header-text--second">Запрос: {{qObj.q}}</div>
-    <a href="/vacs" class="js-nav-link link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</a>
-  {{else if checked_checkboxes}}
+  {{#if checked_checkboxes}}
     <a href="/vacs" class="link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</a>
   {{/if}}
   <div class="vacs__button-open-filters">
