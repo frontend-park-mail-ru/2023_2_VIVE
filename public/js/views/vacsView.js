@@ -55,6 +55,17 @@ export default class vacsView extends mainView {
       vacsStore.sortVacancies();
       this.render();
     });
+
+    const pagPrev = document.querySelector('.js-pag-prev');
+    pagPrev.addEventListener('click', event => {
+      vacsStore.pagToNext();
+      
+    });
+
+    const pagNext = document.querySelector('.js-pag-next');
+    pagNext.addEventListener('click', event => {
+      console.log('click');
+    });
   }
 
   ListEventListeners() {

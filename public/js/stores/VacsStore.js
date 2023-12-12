@@ -30,8 +30,12 @@ class VacsStore extends Store {
 
     async updateInnerData(data) {
         this.qObj = this.parseQueryToDict(data['urlObj'].searchParams);
+        if (!this.qObj.page_num || !this.qObj.results_per_page) {
+            this.qObj['page_num'] = 1;
+            this.qObj['results_per_page'] = 10;
+        }
         console.log(this.qObj);
-        
+
         try {
             this.vacs = this.sortVacanciesByDateToOld(await this.getVacancies());
             this.vacs = this.processVacanciesData(this.vacs);
@@ -77,8 +81,7 @@ class VacsStore extends Store {
 
     async getVacancies() {
         console.log(this.qObj);
-        this.qObj['page_num'] = 1;
-        this.qObj['results_per_page'] = 10; 
+
         if (!this.qObj['q']) {
             this.qObj['q'] = '';
         }
