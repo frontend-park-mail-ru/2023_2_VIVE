@@ -21,7 +21,6 @@
   </div> --}}
   <!-- Checkbox buttons -->
   <div class="vacs__filters-frame vacs__filters-frame-mobile-hidden">
-    {{log filters}}
     {{#each filters}}
     <div class="vacs__filter" name="this.name">
       <div class="vacs__filter__name">
@@ -39,7 +38,7 @@
               <label class="vacs__filter__list__item__label">
                 {{> input_checkbox (object jsclass="js_filter__label_input_click" filter_name=../this.name)}}
                 <span title={{this.value}}>{{#iff ../this.name '==' 'city'}}{{this.value}}{{else}}{{ ruFilters this.value}}{{/iff}}</span>
-              </label>
+              </label> 
               {{/iff}}
               {{#iff ../this.type '==' 'double_range'}}
               {{else}}

@@ -65,13 +65,22 @@ export default class vacsView extends mainView {
     filters.forEach(element => {
       element.addEventListener('click', (event) => {
         event.stopPropagation();
+        const filterDict = {};
         filters.forEach(filter => {
           if (filter.checked == true) {
             const filterName = filter.name;
-            const filetValue = filter.parentNode.nextElementSibling.title;
-            console.log(`${filterName}=${filetValue}`);
+            const filterValue = filter.parentNode.nextElementSibling.title;
+            
+            if (!filterDict[filterName]) {
+              filterDict[filterName] = [filterValue];
+            } else {
+              filterDict[filterName] += ',' + filterValue;
+            }
           }
-        })
+        });
+        console.log(filterDict);
+        const searchParams = new URLSearchParams(filterDict);
+        console.log(searchParams);
       });
     });
   }

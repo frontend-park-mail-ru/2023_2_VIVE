@@ -163,15 +163,15 @@ export function registerHelpers() {
   });
 
   Handlebars.registerHelper('sortByCityCount', function(cities, name, number) {
-    if (name !== 'city') {
-      return cities;
-    }
-
     cities.sort(function(a, b) {
       return b.count - a.count;
     });
-
-    return cities.slice(0, number);
+    
+    if (name !== 'city') {
+      return cities;
+    } else {
+      return cities.slice(0, number);
+    }
   });
 }
 
