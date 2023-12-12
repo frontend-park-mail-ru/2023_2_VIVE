@@ -1,6 +1,7 @@
 import router from "../modules/router/router.js";
 import vacancyStore from '../stores/VacancyStore.js';
 import mainView from './mainView.js';
+import Handlebars from 'handlebars';
 
 export default class profileView extends mainView {
     constructor() {

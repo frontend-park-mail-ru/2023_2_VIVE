@@ -1,8 +1,7 @@
-import { FRONTEND_POLL_SERVER_PORT, FRONTEND_SERVER_PORT } from '../../../config/config.js';
-import APIConnector from '../modules/APIConnector.js';
-import User from '../stores/UserStore.js';
+
 import csatStore from '../stores/csatStore.js';
 import View from './view.js';
+import Handlebars from 'handlebars';
 
 export default class csatpollView extends View {
     async render() {

@@ -1,5 +1,6 @@
 import csatStatStore from "../stores/csatStatStore.js";
 import mainView from "./mainView.js";
+import Handlebars from 'handlebars';
 
 export default class csatStatView extends mainView {
     constructor() {

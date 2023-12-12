@@ -2,8 +2,6 @@ import compiledTemplates from "../../views/templates.precompiled.js";
 import compiledPartials from "../../views/partials.precompiled.js";
 import '../css/main.css';
 
-import ico from '../images/favicon.ico';
-
 import { registerHelpers } from './handlebars/helpers.js';
 import router from './modules/router/router.js';
 

@@ -2,6 +2,7 @@ import router from "../modules/router/router.js";
 import profileStore from '../stores/profileStore.js';
 import { getFormObject } from '../utils.js';
 import mainView from './mainView.js';
+import Handlebars from 'handlebars';
 
 export default class profileView extends mainView {
   constructor() {

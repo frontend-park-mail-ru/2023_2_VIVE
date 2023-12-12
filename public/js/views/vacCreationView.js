@@ -1,6 +1,7 @@
 import vacancyStore from '../stores/VacancyStore.js';
 import { getFormObject } from '../utils.js';
 import mainView from './mainView.js'
+import Handlebars from 'handlebars';
 
 export default class vacCreationView extends mainView {
   async render() {

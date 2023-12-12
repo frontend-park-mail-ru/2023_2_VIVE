@@ -1,11 +1,12 @@
 const path = require('path');
 // const HandlebarsPlugin = require("handlebars-webpack-plugin");
 
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: 'development', 
 
   entry: './public/js/index.js',
 
@@ -14,16 +15,34 @@ module.exports = {
     filename: 'main.[contenthash].js',
   },
 
+  // devServer: {
+  //   port: 8000,
+  // },  
+
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+
+          }, 
+          'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
         type: 'asset/resource',
-        use: ['file-loader'],
+        generator: {
+          filename: path.join('images', '[name].[contenthash][ext]'),
+        },
+      },
+      {
+        test: /\.(ttf)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: path.join('fonts', '[name].[contenthash][ext]'),
+        },
       },
     ]
   },
@@ -31,49 +50,23 @@ module.exports = {
   plugins: [
 
     new HtmlWebpackPlugin({
-      template: './views/layouts/index.html',
+      template: './public/index.html',
+    }),
+
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
+    }),
+
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'public/images'),
+          to: path.resolve(__dirname, 'dist/images'),
+        }
+      ]
     }),
 
     new CleanWebpackPlugin(),
-    // new HandlebarsPlugin({
-    //   // path to hbs entry file(s). Also supports nested directories if write path.join(process.cwd(), "app", "src", "**", "*.hbs"),
-    //   entry: path.join(process.cwd(), "views", "layouts", "*.handlebars"),
-    //   // output path and filename(s). This should lie within the webpacks output-folder
-    //   // if ommited, the input filepath stripped of its extension will be used
-    //   output: path.join(process.cwd(), "dist", "index.html"),
-    //   // you can also add a [path] variable, which will emit the files with their relative path, like
-    //   // output: path.join(process.cwd(), "build", [path], "[name].html"),
-      
-    //   // data passed to main hbs template: `main-template(data)`
-    //   // data: require("./public/data/project.json"),
-    //   // or add it as filepath to rebuild data on change using webpack-dev-server
-    //   // data: path.join(__dirname, "app/data/project.json"),
-
-    //   // globbed path to partials, where folder/filename is unique
-    //   // partials: [
-    //   //   path.join(process.cwd(), "app", "src", "components", "*", "*.hbs")
-    //   // ],
-
-    //   // register custom helpers. May be either a function or a glob-pattern
-    //   // helpers: {
-    //   //   nameOfHbsHelper: Function.prototype,
-    //   //   projectHelpers: path.join(process.cwd(), "app", "helpers", "*.helper.js")
-    //   // },
-
-    //   // hooks
-    //   // getTargetFilepath: function (filepath, outputTemplate) {},
-    //   // getPartialId: function (filePath) {}
-    //   // onBeforeSetup: function (Handlebars) {},
-    //   // onBeforeAddPartials: function (Handlebars, partialsMap) {},
-    //   // onBeforeCompile: function (Handlebars, templateContent) {},
-    //   // onBeforeRender: function (Handlebars, data, filename) {},
-    //   // onBeforeSave: function (Handlebars, resultHtml, filename) {},
-    //   // onDone: function (Handlebars, filename) {}
-    // })
   ],
-
-  cache: {  
-    type: 'filesystem'
-  },  
 
 };

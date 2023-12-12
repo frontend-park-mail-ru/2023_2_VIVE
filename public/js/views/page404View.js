@@ -1,4 +1,5 @@
 import View from './view.js';
+import Handlebars from 'handlebars';
 
 export default class page404View extends View {
     async render() {

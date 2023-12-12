@@ -3,6 +3,7 @@ import router from "../modules/router/router.js";
 import User from '../stores/UserStore.js';
 import csatStore from '../stores/csatStore.js';
 import { getHrefFromLink } from '../utils.js';
+import Handlebars from 'handlebars';
 
 export default class View {
     constructor() {
