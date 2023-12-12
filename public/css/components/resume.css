@@ -114,12 +114,12 @@
 
 .resume__form-create {
     display: flex;
-    width: 286px;
-    height: 160px;
-    padding: 30px 10px 30px 33px;
+    justify-content: center;
+    width: max-content;
+    height: max-content;
+    padding: 30px;
     align-items: center;
     align-content: center;
-    gap: 23px 0px;
     flex-shrink: 0;
     flex-wrap: wrap;
     border-radius: 30px;
