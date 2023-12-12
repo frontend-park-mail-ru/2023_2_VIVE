@@ -1,3 +1,4 @@
+import router from '../modules/router/router.js';
 import vacsStore from '../stores/VacsStore.js';
 import mainView from './mainView.js';
 
@@ -16,6 +17,7 @@ export default class vacsView extends mainView {
 
     const data = await vacsStore.getContext();
     Object.assign(data, {['block_type']: this.block_type});
+    Object.assign(data, {['checked_checkboxes']: this.checked_checkboxes});
 
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['vacs'];
@@ -65,11 +67,15 @@ export default class vacsView extends mainView {
     filters.forEach(element => {
       element.addEventListener('click', (event) => {
         event.stopPropagation();
-        const filterDict = {};
+        this.checked_checkboxes = [];
+        const filterDict = {
+          'q': '',
+        };
         filters.forEach(filter => {
           if (filter.checked == true) {
             const filterName = filter.name;
             const filterValue = filter.parentNode.nextElementSibling.title;
+            this.checked_checkboxes.push(filterValue);
             
             if (!filterDict[filterName]) {
               filterDict[filterName] = [filterValue];
@@ -78,9 +84,8 @@ export default class vacsView extends mainView {
             }
           }
         });
-        console.log(filterDict);
         const searchParams = new URLSearchParams(filterDict);
-        console.log(searchParams);
+        router.goToLink('/vacs' + '?' + searchParams.toString());
       });
     });
   }

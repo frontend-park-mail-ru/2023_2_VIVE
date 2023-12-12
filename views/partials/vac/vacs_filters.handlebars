@@ -5,6 +5,8 @@
   {{#if qObj.q}}
     <div class="header-text header-text--second">Запрос: {{qObj.q}}</div>
     <a href="/vacs" class="js-nav-link link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</a>
+  {{else if checked_checkboxes}}
+    <a href="/vacs" class="link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</a>
   {{/if}}
   <div class="vacs__button-open-filters">
     <button class="text-light-title link-btn-blue--bg common-text common-text--medium" name="vacs_filters">Фильтры</button>
@@ -36,9 +38,13 @@
               
               {{else}}
               <label class="vacs__filter__list__item__label">
-                {{> input_checkbox (object jsclass="js_filter__label_input_click" filter_name=../this.name)}}
-                <span title={{this.value}}>{{#iff ../this.name '==' 'city'}}{{this.value}}{{else}}{{ ruFilters this.value}}{{/iff}}</span>
-              </label> 
+                {{#isInArray this.value ../../checked_checkboxes}}
+                  {{> input_checkbox (object jsclass="js_filter__label_input_click" isSelected="true" filter_name=../this.name)}}
+                {{else}}
+                  {{> input_checkbox (object jsclass="js_filter__label_input_click" filter_name=../this.name)}}
+                {{/isInArray}}
+                <span title="{{this.value}}">{{#iff ../this.name '==' 'city'}}{{this.value}}{{else}}{{ ruFilters this.value}}{{/iff}}</span>
+              </label>
               {{/iff}}
               {{#iff ../this.type '==' 'double_range'}}
               {{else}}

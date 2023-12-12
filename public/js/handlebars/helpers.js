@@ -173,6 +173,14 @@ export function registerHelpers() {
       return cities.slice(0, number);
     }
   });
+
+  Handlebars.registerHelper('isInArray', function (item, array, options) {
+    if (Array.isArray(array) && array.length > 0 && array.indexOf(item) > -1) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    } 
+  });
 }
 
 registerHelpers();
