@@ -7,6 +7,7 @@ export default class vacsView extends mainView {
     super();
     this.block_type = 'list';
     this.checked_checkboxes = [];
+    this.priceFilters = null;
   }
 
   async updateInnerData(data) {
@@ -19,6 +20,8 @@ export default class vacsView extends mainView {
     const data = await vacsStore.getContext();
     Object.assign(data, {['block_type']: this.block_type});
     Object.assign(data, {['checked_checkboxes']: this.checked_checkboxes});
+    Object.assign(data, {['priceFilters']: this.priceFilters});
+
 
     // eslint-disable-next-line no-undef
     const template = Handlebars.templates['vacs'];
@@ -116,7 +119,6 @@ export default class vacsView extends mainView {
         const inputFilter = searchBtnFilters.parentNode.querySelector('.js-input-filter');
         const inputValue = inputFilter.value;
         if (inputValue !== '') {
-          console.log(inputValue);
           const labelCheckbox = searchBtnFilters.parentNode.parentNode.querySelector('label');
           const inputCheckbox = labelCheckbox.querySelector('input');
           const spanChecbox = labelCheckbox.querySelector('span');
@@ -132,6 +134,9 @@ export default class vacsView extends mainView {
     const priceGap = rangeInput[0].max / 100;
     
     if (rangeInput) {
+      progress.style.left = (parseInt(rangeInput[0].value) / rangeInput[0].max) * 100 + "%";
+      progress.style.right = 100 - (parseInt(rangeInput[1].value) / rangeInput[1].max) * 100 + "%";
+
       rangeInput.forEach(input => {
         input.addEventListener("input", e => {
           let minVal = parseInt(rangeInput[0].value);
@@ -172,6 +177,21 @@ export default class vacsView extends mainView {
       });
     }
 
+    const priceBtnFilter = document.querySelector('.js-price-filters-btn');
+    if (priceBtnFilter) {
+      priceBtnFilter.addEventListener('click', e => {
+        e.preventDefault();
+        const firstVal = rangeInput[0].value; 
+        const secondVal = rangeInput[1].value;
+        const labelCheckbox = priceBtnFilter.parentNode.parentNode.querySelector('label');
+        const inputCheckbox = labelCheckbox.querySelector('input');
+        const spanChecbox = labelCheckbox.querySelector('span');
+        spanChecbox.title = firstVal + ',' + secondVal;
+        this.priceFilters = firstVal + ':' + secondVal;
+        inputCheckbox.click();
+      });
+    }
+
     const dropFilters = document.querySelector('.js-button-drop-filters');
     if (dropFilters) {
       dropFilters.addEventListener('click', () => {
@@ -179,26 +199,6 @@ export default class vacsView extends mainView {
         router.goToLink('/vacs');
       });
     }
-  }
-  
-  filterChecking(filters) {
-    const qParam =  new URLSearchParams(router.currentUrl().searchParams);
-    const filterDict = {
-      'q': qParam.get('q') ? qParam.get('q') : '',
-    };
-    filters.forEach(filter => {
-      if (filter.checked == true) {
-        const filterName = filter.name;
-        const filterValue = filter.parentNode.nextElementSibling.title;
-        this.checked_checkboxes.push(filterValue);
-        
-        if (!filterDict[filterName]) {
-          filterDict[filterName] = [filterValue];
-        } else {
-          filterDict[filterName] += ',' + filterValue;
-        }
-      }
-    });
   }
 
   clear() {

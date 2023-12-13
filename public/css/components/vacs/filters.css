@@ -135,8 +135,6 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .range-input__progress {
   height: 5px;
-  left: 0%;
-  right: 0%;
   position: absolute;
   border-radius: 5px;
   background: var(--main-dodger-blue);
@@ -149,7 +147,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .range-input-field input {
   position: absolute;
-  top: -12px;
+  top: -16px;
   height: 5px;
   width: 100%;
   background: none;

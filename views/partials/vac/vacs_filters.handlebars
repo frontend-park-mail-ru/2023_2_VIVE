@@ -9,16 +9,29 @@
     <button class="text-light-title link-btn-blue--bg common-text common-text--medium" name="vacs_filters">Фильтры</button>
   </div>
   <div class="vacs__filters-frame vacs__filters-frame-mobile-hidden">
+    {{log filters}}
     {{#each filters}}
     <div class="vacs__filter" name="{{this.name}}">
       <div class="vacs__filter__name">
         {{ruFilters this.name}}
       </div>
       {{#iff this.type '==' 'double_range'}}
-        {{#each this.values}}
-        {{> double_range
-        (object min_value=(minFromValue this.value) max_value=(maxFromValue this.value))}}
-        {{/each}}
+        <label class="vacs__filter__list__item__label d-none">
+          {{> input_checkbox (object jsclass="js_filter__label_input_click" filter_name=this.name)}}
+          <span title=""></span>
+        </label>
+        <form action="" class="filters__for_search">
+            {{#each this.values}}
+              {{#if ../../priceFilters}}
+                {{> double_range
+                (object min_value=(minFromValue ../../priceFilters) max_value=(maxFromValue ../../priceFilters) fact_max_value=(maxFromValue this.value))}}
+              {{else}}
+                {{> double_range
+                (object min_value=(minFromValue this.value) max_value=(maxFromValue this.value) fact_max_value=(maxFromValue this.value))}}
+              {{/if}}
+            {{/each}}
+          <button class="js-price-filters-btn text-light-title link-btn-blue--bg common-text common-text--medium">Применить</button>
+        </form>
       {{else}}
       <ul class="vacs__filter__list">
         {{#each (sortByCityCount this.values this.name 5)}}
