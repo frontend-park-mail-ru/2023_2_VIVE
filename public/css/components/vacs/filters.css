@@ -93,3 +93,75 @@
   flex-direction: column;
   justify-content: flex-start;
 }
+
+.range-input {
+  display: flex;
+  width: 95%;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.range-input__field {
+  display: flex;
+  width: 100%;
+  height: 35px;
+  align-items: center;
+  gap: 5px;
+}
+
+.range-input__field input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid var(--forms-background-disabled);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.range-input__slider {
+  height: 5px;
+  width: 95%;
+  border-radius: 5px;
+  background: var(--forms-background-disabled);
+  position: relative;
+}
+
+.range-input__progress {
+  height: 5px;
+  left: 0%;
+  right: 0%;
+  position: absolute;
+  border-radius: 5px;
+  background: var(--main-dodger-blue);
+}
+
+.range-input-field {
+  position: relative;
+  width: 95%;
+}
+
+.range-input-field input {
+  position: absolute;
+  top: -12px;
+  height: 5px;
+  width: 100%;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  background: var(--main-dodger-blue);
+}

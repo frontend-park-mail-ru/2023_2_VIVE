@@ -181,6 +181,14 @@ export function registerHelpers() {
       return options.inverse(this);
     } 
   });
+
+  Handlebars.registerHelper('minFromValue', function(value) {
+    return value.split(':')[0];
+  });
+
+  Handlebars.registerHelper('maxFromValue', function(value) {
+    return value.split(':')[1];
+  });
 }
 
 registerHelpers();
