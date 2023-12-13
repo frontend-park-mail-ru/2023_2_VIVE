@@ -131,9 +131,9 @@ export default class vacsView extends mainView {
     const rangeInput = document.querySelectorAll(".range-input-field input");
     const priceInput = document.querySelectorAll(".range-input input");
     const progress = document.querySelector(".range-input__slider .range-input__progress");
-    const priceGap = rangeInput[0].max / 100;
+    const priceGap = (rangeInput.length !== 0) ? rangeInput[0].max / 100 : null;
     
-    if (rangeInput) {
+    if (rangeInput.length !== 0) {
       progress.style.left = (parseInt(rangeInput[0].value) / rangeInput[0].max) * 100 + "%";
       progress.style.right = 100 - (parseInt(rangeInput[1].value) / rangeInput[1].max) * 100 + "%";
 
@@ -158,7 +158,7 @@ export default class vacsView extends mainView {
       });
     }
 
-    if (priceInput) {
+    if (priceInput.length !== 0) {
       priceInput.forEach(input => {
         input.addEventListener("input", e => {
           let minVal = parseInt(priceInput[0].value);
@@ -196,6 +196,7 @@ export default class vacsView extends mainView {
     if (dropFilters) {
       dropFilters.addEventListener('click', () => {
         this.checked_checkboxes = [];
+        this.priceFilters = null;
         router.goToLink('/vacs');
       });
     }
