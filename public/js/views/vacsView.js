@@ -6,6 +6,7 @@ export default class vacsView extends mainView {
   constructor() {
     super();
     this.block_type = 'list';
+    this.checked_checkboxes = [];
   }
 
   async updateInnerData(data) {
@@ -107,6 +108,35 @@ export default class vacsView extends mainView {
         router.goToLink('/vacs' + '?' + searchParams.toString());
       });
     });
+
+    const searchBtnFilters = document.querySelector('.js-search-filters');
+    if (searchBtnFilters) {
+      searchBtnFilters.addEventListener('click', (e)=> {
+        e.preventDefault();
+        const inputFilter = searchBtnFilters.parentNode.querySelector('.js-input-filter');
+        const inputValue = inputFilter.value;
+        if (inputValue !== '') {
+          console.log(inputValue);
+          const labelCheckbox = searchBtnFilters.parentNode.parentNode.querySelector('label');
+          const inputCheckbox = labelCheckbox.querySelector('input');
+          const spanChecbox = labelCheckbox.querySelector('span');
+          spanChecbox.title = inputValue;
+          inputCheckbox.click();
+        }
+      });
+    }
+
+    const dropFilters = document.querySelector('.js-button-drop-filters');
+    if (dropFilters) {
+      dropFilters.addEventListener('click', () => {
+        this.checked_checkboxes = [];
+        router.goToLink('/vacs');
+      });
+    }
+  }
+
+  checkFilters() {
+    
   }
 
   clear() {

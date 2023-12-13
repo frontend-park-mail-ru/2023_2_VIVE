@@ -3,22 +3,11 @@
     Найдено <span>{{#if data}}{{ vacancies.count }}{{else}}0{{/if}}</span> вакансий
   </div>
   {{#if checked_checkboxes}}
-    <a href="/vacs" class="link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</a>
+    <button class="js-button-drop-filters link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</button>
   {{/if}}
   <div class="vacs__button-open-filters">
     <button class="text-light-title link-btn-blue--bg common-text common-text--medium" name="vacs_filters">Фильтры</button>
   </div>
-  <!-- Input field -->
-  {{!-- <div class="vacs__search vacs__filter">
-    <div class="vacs__search__name vacs__filter__name">
-      Профессия, должность или компания
-    </div>
-    {{> input (object obj=(object placeholder="Ключевые слова")
-    class="vacs__search__input common-text common-text--medium")}}
-    {{> link-btn (object text="Применить"
-    class="common-text common-text--medium link-btn-blue--bg text-light-title")}}
-  </div> --}}
-  <!-- Checkbox buttons -->
   <div class="vacs__filters-frame vacs__filters-frame-mobile-hidden">
     {{log filters}}
     {{#each filters}}
@@ -61,19 +50,25 @@
       </ul>
         {{#iff this.type '==' 'checkbox_search'}}
           <div class="filters__for_search">
-            {{#each (array
-            (object name=this.name placeholder=(ruFilters this.name))
-            )}}
+            <label class="vacs__filter__list__item__label d-none">
+              {{> input_checkbox (object jsclass="js_filter__label_input_click" filter_name=this.name)}}
+              <span title=""></span>
+            </label>
+            <form action="" class="filters__for_search">
+              {{#each (array
+                (object name=this.name placeholder=(ruFilters this.name))
+                )}}
 
-            {{> input (object obj=this
-            class=(object
-            title="res__form__input__title"
-            input="res__form__input forms-placeholder"
-            block="res__form__field"
-            )
-            name=this.name)}}
-            {{/each}}
-          <button class="text-light-title link-btn-blue--bg common-text common-text--medium">Применить</button>
+                {{> input (object obj=this
+                class=(object
+                title="res__form__input__title"
+                input="res__form__input forms-placeholder js-input-filter"
+                block="res__form__field"
+                )
+                name=this.name)}}
+              {{/each}}
+              <button class="js-search-filters text-light-title link-btn-blue--bg common-text common-text--medium">Применить</button>
+            </form>
         </div>
         {{/iff}}
     </div>
