@@ -87,3 +87,9 @@
   display: flex;
   align-items: center;
 }
+
+.filter__radio_btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

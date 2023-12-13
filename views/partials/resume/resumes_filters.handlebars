@@ -14,16 +14,45 @@
         <div class="vacs__filter__name">
             {{ruFilters this.name}}
         </div>
+        {{#iff this.type '==' 'radio'}}
+            <div class="filter__radio_btns">
+                {{#each this.values}}
+                    <div class="vacs__filter__list__item">
+                        {{#isInArray this.value ../../checked_checkboxes}}
+                            {{> input_radio (object
+                            checked="true"
+                            jsclass="js_filter__label_input_click"
+                            text=(ruFilters this.value)
+                            attrs=(object
+                            name=../this.name
+                            value=this.value 
+                            )
+                            )}}
+                        {{else}}
+                            {{> input_radio (object
+                            jsclass="js_filter__label_input_click"
+                            text=(ruFilters this.value)
+                            attrs=(object
+                            name=../this.name
+                            value=this.value 
+                            )
+                            )}}
+                        {{/isInArray}}
+                        <span title="{{this.value}}" class="d-none"></span>
+                        <div class="cursive-text text-form-active">
+                          {{this.count}}
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        {{else}}
         <ul class="vacs__filter__list">
             {{#each (sortByCityCount this.values this.name 5)}}
             {{#iff this.value '==' 'none'}}
             {{else iff this.value '==' 'nothing'}}
             {{else}}
             <li class="vacs__filter__list__item">
-                {{#iff ../this.type '==' 'radio'}}
-                {{> input_radio (object text=(ruFilters this.value) name="category"
-                class_label="vacs__filter__list__item__label") }}
-                {{else iff ../this.type '==' 'double_range'}}
+                {{#iff ../this.type '==' 'double_range'}}
                 
                 {{else}}
                 <label class="vacs__filter__list__item__label">
@@ -45,6 +74,7 @@
             {{/iff}}
             {{/each}}
         </ul>
+        {{/iff}}
            {{#iff this.type '==' 'checkbox_search'}}
             <div class="filters__for_search">
                 <label class="vacs__filter__list__item__label d-none">
