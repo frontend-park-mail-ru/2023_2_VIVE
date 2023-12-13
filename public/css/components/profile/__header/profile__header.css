@@ -133,6 +133,10 @@
         height: 32px;
         flex-shrink: 0;
     }
+
+    .profile__upload__image {
+        padding: 5px;
+    }
 }
 
 .profile_image {
@@ -150,10 +154,7 @@
     cursor: pointer;
     width: 198px;
     height: 198px;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
+    object-fit: cover;
     border-radius: 50%;
     border: 7px solid var(--mono-blue-dark-blue);
-    padding: 5px;
 }

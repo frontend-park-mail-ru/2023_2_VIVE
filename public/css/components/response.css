@@ -100,8 +100,8 @@
     }
     
     .response-block__status--not-checked {
-        color: var(--orange-main);
-        border: 2px solid var(--orange-main);
+        color: var(--main-xanthous);
+        border: 2px solid var(--text-xanthous);
     }
     
     .response-block__status--deleted {

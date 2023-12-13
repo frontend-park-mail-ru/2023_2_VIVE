@@ -205,6 +205,8 @@ class ProfileStore extends Store {
             console.log(this.data);
         } else if (this.state == 'resumes') {
             this.data = await this.updateData("/current_user/cvs");
+        } else if (this.state == 'responses') {
+            this.data = await this.updateData(`/users/${this.user.id}/responses`);
         }
 
         return true;

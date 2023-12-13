@@ -1,35 +1,37 @@
+{{log data}}
 <div class="responses">
   <div class="responses__main-text header-text header-text--first text-dark-title">
     Мои отклики
   </div>
   <div class="responses__blocks">
-    <div class="response-block">
-      <div class="response-block__main-info">
-        <div class="response-block__status-frame">
-          <div class="response-block__status response-block__status--not-checked">
-            Не просмотрено
+    {{#each data}}
+      <div class="response-block">
+        <div class="response-block__main-info">
+          <div class="response-block__status-frame">
+            <div class="response-block__status response-block__status--not-checked">
+              Отправлено
+            </div>
+            <div class="response-block__status-svg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <path d="M15.9167 30L6.41667 20.5L8.79167 18.125L15.9167 25.25L31.2083 9.95833L33.5833 12.3333L15.9167 30Z" fill="#0496FF"/>
+              </svg>
+            </div>
           </div>
-          <div class="response-block__status-svg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <path d="M15.9167 30L6.41667 20.5L8.79167 18.125L15.9167 25.25L31.2083 9.95833L33.5833 12.3333L15.9167 30Z" fill="#0496FF"/>
-            </svg>
+          <div class="response__employer">
+            <div class="response__job-name header-text header-text--second text-dark-title">
+              {{this.vacancy_name}}
+            </div>
+            <div class="response__company-name common-text common-text-regular text-dark-regular">
+              {{this.organization_name}}
+            </div>
           </div>
         </div>
-        <div class="response__employer">
-          <div class="response__job-name">
-            Младший разработчик в HR Tek
-          </div>
-          <div class="response__company-name">
-            VK
-          </div>
+        <div class="response-block__date">
+          {{formatDate  this.updated_at}}
         </div>
       </div>
-      <div class="response-block__date">
-        10.10.2023
-      </div>
-    </div>
-
-    <div class="response-block">
+    {{/each}}
+    {{!-- <div class="response-block">
       <div class="response-block__main-info">
         <div class="response-block__status-frame">
           <div class="response-block__status response-block__status--checked">
@@ -105,6 +107,6 @@
       <div class="response-block__date">
         10.10.2023
       </div>
-    </div>
+    </div> --}}
   </div>
 </div>

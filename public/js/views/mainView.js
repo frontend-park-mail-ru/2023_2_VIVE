@@ -22,11 +22,17 @@ export default class mainView extends View {
             const footerElement = document.createElement('footer');
             document.querySelector('.container').appendChild(footerElement);
         }
+        let qObj = '';
+        if (router.currentUrl().pathname === '/vacs') {
+            qObj = vacsStore.qObj ? vacsStore.qObj.q : null;
+        } else {
+            qObj = resStore.qObj ? resStore.qObj.q : null;
+        }
         document.querySelector('header').innerHTML = Handlebars.partials['header'](
             { 
                 user: await User.getUser(), 
                 search_type: searchStore.getType(),
-                qObj : (router.currentUrl().pathname === '/vacs') ? vacsStore.qObj.q : resStore.qObj.q,
+                qObj : qObj,
             });
         document.querySelector('footer').innerHTML = Handlebars.partials['footer']({ user: await User.getUser() });
     }
