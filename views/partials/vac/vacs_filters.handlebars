@@ -1,10 +1,10 @@
 <aside class="vacs__filters">
   <div class="vacs__desc header-text header-text--first text-dark-title fw-bold">
     Найдено <span>{{#if data}}{{ vacancies.count }}{{else}}0{{/if}}</span> вакансий
+     {{#if checked_checkboxes}}
+        <button class="js-button-drop-filters link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</button>
+    {{/if}}
   </div>
-  {{#if checked_checkboxes}}
-    <button class="js-button-drop-filters link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</button>
-  {{/if}}
   <div class="vacs__button-open-filters">
     <button class="text-light-title link-btn-blue--bg common-text common-text--medium" name="vacs_filters">Фильтры</button>
   </div>
