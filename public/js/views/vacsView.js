@@ -135,10 +135,6 @@ export default class vacsView extends mainView {
     }
   }
 
-  checkFilters() {
-    
-  }
-
   clear() {
     super.clear();
     document.querySelector('main').innerHTML = "";
