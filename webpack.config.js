@@ -15,9 +15,16 @@ module.exports = {
     filename: 'main.[contenthash].js',
   },
 
-  // devServer: {
-  //   port: 8000,
-  // },  
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, './public/'),
+      "@pages": path.resolve(__dirname, './views/pages/'),
+    },
+  },
+
+  devServer: {
+    port: 8500,
+  },
 
   module: {
     rules: [
@@ -27,7 +34,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
 
-          }, 
+          },
           'css-loader'],
       },
       {
@@ -44,26 +51,46 @@ module.exports = {
           filename: path.join('fonts', '[name].[contenthash][ext]'),
         },
       },
+      // { 
+      //   test: /\.handlebars$/, 
+      //   use: [
+      //     {
+      //       loader: 'handlebars-loader',
+      //       options: {
+      //         // runtime: 'handlebars/dist/cjs/handlebars.runtime',
+      //         // precompileOptions: {
+      //         //   knownHelpersOnly: false,
+      //         // },
+      //         helperDirs: [
+      //           path.resolve(__dirname, 'public/js/handlebars'),
+      //         ],
+      //         // inlineRequires: '/assets/',
+      //         rootRelative: './views/partials/',
+      //       },
+      //     },
+      //   ],
+      // },
     ]
   },
 
   plugins: [
 
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: './public/images',
+          to: './images',
+        }
+      ]
+    }),
+
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      // filename: './index.html'
     }),
 
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
-    }),
-
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'public/images'),
-          to: path.resolve(__dirname, 'dist/images'),
-        }
-      ]
     }),
 
     new CleanWebpackPlugin(),

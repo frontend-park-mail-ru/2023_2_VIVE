@@ -10,11 +10,11 @@
     "path": "^0.12.7"
   },
   "scripts": {
-    "build": "npm run compile:partials && npm run compile:templates && webpack --mode development",
-    "start": "nodemon --exec 'npm run build'",
-    "webpack": "webpack --mode development",
-    "compile:templates": "handlebars views/layouts/*.handlebars views/pages/*.handlebars views/pages/vac/*.handlebars views/pages/profile/*.handlebars views/pages/resume/*.handlebars  views/pages/polls/*.handlebars -f views/templates.precompiled.js -c handlebars",
-    "compile:partials": "handlebars views/components/setting_inputes/*.handlebars views/partials/header/*.handlebars views/partials/resume/*.handlebars views/partials/*.handlebars views/components/*.handlebars views/partials/profile/*.handlebars views/partials/vac/*.handlebars -p -f views/partials.precompiled.js -c handlebars",
+    "build:dev": "webpack --mode development",
+    "webpack": "webpack-dev-server --mode development",
+    "start": "nodemon --exec 'npm run compile:templates && npm run compile:partials && npm run build:dev'",
+    "compile:templates": "handlebars views/layouts/*.handlebars views/pages/*.handlebars views/pages/vac/*.handlebars views/pages/profile/*.handlebars views/pages/resume/*.handlebars  views/pages/polls/*.handlebars -f public/js/templates/templates.precompiled.js -c handlebars",
+    "compile:partials": "handlebars views/partials/components/setting_inputes/*.handlebars views/partials/header/*.handlebars views/partials/resume/*.handlebars views/partials/*.handlebars views/partials/components/*.handlebars views/partials/profile/*.handlebars views/partials/vac/*.handlebars -p -f public/js/templates/partials.precompiled.js -c handlebars",
     "lint": "eslint ."
   },
   "devDependencies": {
@@ -27,6 +27,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "file-loader": "^6.2.0",
     "glob": "^10.3.10",
+    "handlebars-loader": "^1.7.3",
     "html-webpack-plugin": "^5.5.4",
     "mini-css-extract-plugin": "^2.7.6",
     "prettier": "3.0.3",

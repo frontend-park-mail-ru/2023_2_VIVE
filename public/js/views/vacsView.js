@@ -6,6 +6,7 @@ export default class vacsView extends mainView {
   constructor() {
     super();
     this.block_type = 'list';
+    // this.template = require('@pages/vac/vacs.handlebars');
   }
 
   async updateInnerData(data) {
@@ -19,6 +20,7 @@ export default class vacsView extends mainView {
     Object.assign(data, {['block_type']: this.block_type});
 
     const template = Handlebars.templates['vacs'];
+    
     document.querySelector('main').innerHTML = template(data);
 
     this.addEventListeners();

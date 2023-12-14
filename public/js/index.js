@@ -1,5 +1,5 @@
-import compiledTemplates from "../../views/templates.precompiled.js";
-import compiledPartials from "../../views/partials.precompiled.js";
+import compiledTemplates from "./templates/templates.precompiled.js";
+import compiledPartials from "./templates/partials.precompiled.js";
 import '../css/main.css';
 
 import { registerHelpers } from './handlebars/helpers.js';

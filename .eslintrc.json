@@ -10,9 +10,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  //   "plugins": ["prettier"],
-  "ignorePatterns": ["/views/templates.precompiled.js"],
-  "rules": {
-    // "prettier/prettier": "error"
-  }
+  "ignorePatterns": [
+    "public/js/templates/*.js"
+  ],
 }
