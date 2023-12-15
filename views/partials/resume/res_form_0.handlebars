@@ -1,0 +1,66 @@
+<div class="form">
+
+  {{#each (array
+  (object title="Профессия" name="profession_name" placeholder="Профессия")
+  (object title="Имя" name="first_name" placeholder="Имя" )
+  (object title="Фамилия" name="last_name" placeholder="Фамилия")
+  (object title="Отчество" name="middle_name" placeholder="Отчество")
+  )}}
+
+  {{> input (object obj=this
+  value=(lookup ../data this.name)
+  class=(object
+  title="res__form__input__title"
+  input="res__form__input forms-placeholder"
+  block="res__form__field"
+  )
+  name=this.name
+  error=(lookup ../errors this.name))}}
+
+  {{/each}}
+
+  <div class="res__form__field">
+    <div class="res__form__input__title">Пол</div>
+    <div class=" res__form__input_radio_flex">
+      {{#each (array
+      (object text="Мужской" value="male")
+      (object text="Женский" value="female")
+      )}}
+      {{> input_radio (object
+      text=this.text
+      class=(object
+      block="mr-10"
+      input="js-gender"
+      )
+      attrs=(object
+      name="gender"
+      value=this.value 
+      )
+      checked=(iffs (lookup ../data "gender") '==' this.value true false)
+      error=(lookup ../errors "gender"))}}
+      {{/each}}
+    </div>
+    {{#if (lookup errors "gender")}}
+    <div class="input_error__msg">{{lookup errors "gender"}}</div>
+    {{/if}}
+  </div>
+
+
+  {{#each (array
+  (object title="Дата рождения" name="birthday" type="date")
+  (object title="Город" name="city" placeholder="Город")
+  )}}
+
+  {{> input (object obj=this
+  class=(object
+  title="res__form__input__title"
+  input="res__form__input forms-placeholder"
+  block="res__form__field"
+  )
+  name=this.name
+  value=(lookup ../data this.name)
+  error=(lookup ../errors this.name))}}
+
+  {{/each}}
+
+</div>

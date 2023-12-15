@@ -1,0 +1,127 @@
+@media only screen and (max-width: 767px) {
+    .resume__status {
+        display: none;
+    }
+
+    .resume__mobile-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px;
+        align-self: stretch;
+    }
+
+    .resume__job-name {
+        width: 60vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .resume__btns {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .resume__status-mobile {
+        display: none;
+    }
+
+    .resume__status {
+        display: flex;
+        height: 25px;
+        padding: 4px 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 12px;
+    }
+    
+    .resume__status--avaliable {
+        color: var(--labels-green-main);
+        border: 2px solid var(--labels-green-main);
+    }
+    
+    .resume__status--hidden {
+        color: var(--labels-orange-main);
+        border: 2px solid var(--labels-orange-main);
+    }
+
+    .resume__name-age-info-mobile {
+        display: none;
+    }
+}
+
+.resume {
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+    border-radius: 30px;
+    background: var(--card-back-default);
+}
+
+.resume__job-type {
+    display: flex;
+    height: 26px;
+    align-items: center;
+    gap: 30px;
+}
+
+.resume__btns {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.resume__btns-text--primary {
+    color: var(--main-background-grey);
+}
+
+.resume__btns-text--secondary {
+    color: var(--button-color-primary-default);
+}
+
+.resume__btns-text--green {
+    color: var(--greeen-main);
+}
+
+.resume__statistic {
+    display: flex;
+    width: 234px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.resume__statistic-more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    gap: 20px;
+}
+
+.resume__statistic-line {
+    height: 100%;
+    width: 2px;
+    background-color: var(--text-dark-regular);
+}
+
+.resume__form-create {
+    display: flex;
+    justify-content: center;
+    width: max-content;
+    height: max-content;
+    padding: 30px;
+    align-items: center;
+    align-content: center;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    border-radius: 30px;
+    background: var(--card-back-default);    
+}

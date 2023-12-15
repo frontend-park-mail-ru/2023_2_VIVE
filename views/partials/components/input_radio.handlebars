@@ -1,0 +1,5 @@
+<label class="input_radio {{class.block}} {{#if error}} input_error {{/if}}">
+  <input class="input_radio__input {{jsclass}} {{class.input}}" type="radio" {{#if checked }} checked {{/if}} {{#each attrs}} {{@key}}={{this}} {{/each}}>
+  <div class="input_radio__div {{class.btn}}"></div>
+  <div class="input_radio__text {{class.text}}">{{text}}</div>
+</label>

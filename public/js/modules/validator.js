@@ -1,6 +1,21 @@
 'use strict';
 
-const DEFAULT_ALLOWED_SYMBOLS = `~!?@#$%^&*_-+()[]{}></|"'.,:;`;
+// import { PreCheckField } from './constraints.js';
+// const DEFAULT_ALLOWED_SYMBOLS = `~!?@#$%^&*_-+()[]{}></|"'.,:;`;
+const EMAIL_REGEX = /.+@.+\..+$/g;
+const WORDS_SEPARATOR_REG_EX = /\s+/;
+const ALPHANUMERIC_REGEX = /^[a-zA-Z0-9]$/;
+const UPPERCASE_REGEX = /^[A-Z]$/;
+const DIGIT_REGEX = /^[0-9]$/g;
+const DATE_REGEX = /^\d{1,2}\.\d{1,2}\.\d{4}$/g;
+const ONLY_DIGITS_REDEX = /^\d+$/;
+
+export const DEFAULT_PASSWORD_PARAM = {
+  minLength: 6,
+  maxLength: 128,
+  includeUpperCase: true,
+  includeDigits: true,
+};
 
 /**
  * Class that validates input data on frontend level.
@@ -9,15 +24,86 @@ const DEFAULT_ALLOWED_SYMBOLS = `~!?@#$%^&*_-+()[]{}></|"'.,:;`;
  */
 class Validator {
   /**
-   * Check if given string is valid.
    *
-   * @param {string} str A string with expected email.
+   * @param {string} data Given data.
+   * @returns {boolean} True if data is not empty string.
+   */
+  preCheckText(data) {
+    if (data.trim() === '') {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Checks if `data` for a required constraint.
+   *
+   * @param {any} data Given data.
+   * @param {boolean} requiredFlag Required field flag.
+   * @returns {boolean} True if `required` is true and `data` is given otherwise false.
+   */
+  checkRequired(data, requiredFlag) {
+    return requiredFlag && data;
+  }
+
+  /**
+   * Check if given string is a valid email.
+   *
+   * @param {string} data A string with expected email.
    * @returns {boolean} True if given string is a valid email, false otherwise.
    */
-  isEmail(str) {
-    const emailRegExp = /.+@.+\..+$/g;
-    const res = str.match(emailRegExp) || [];
+  isEmail(data) {
+    const res = data.match(EMAIL_REGEX) || [];
     return res.length == 1;
+  }
+
+  /**
+   * Check if the password is valid.
+   *
+   * @param {string} password A string with the given password.
+   * @param {object} passwordParams Password check flag.
+   * @returns {boolean} True if the password is valid, false otherwise.
+   */
+  isValidPasswor(str, passwordParams = DEFAULT_PASSWORD_PARAM) {
+    if (!passwordParams) {
+      return false;
+    }
+
+    const isLengthValid =
+      this.checkMinLen(str, passwordParams.minLength) &&
+      this.checkMaxLen(str, passwordParams.maxLength);
+
+    const hasUpperCase = passwordParams.includeUpperCase
+      ? str.split('').some((sym) => this.isUpperCase(sym))
+      : true;
+
+    const hasDigits = passwordParams.includeDigits
+      ? str.split('').some((sym) => this.isDigit(sym))
+      : true;
+
+    // const symbolsAreValid = str
+    //   .split('')
+    //   .every((sym) => this.checkPasswordSymbol(sym));
+
+    return isLengthValid && hasUpperCase && hasDigits; /* && symbolsAreValid */
+  }
+
+  hasDigits(str) {
+    return str.split('').some((sym) => this.isDigit(sym));
+  }
+
+  onlyDigits(str) {
+    const res = str.match(ONLY_DIGITS_REDEX) || [];
+    return res.length == 1;
+  }
+
+  fullMatchRegExp(str, regExp) {
+    const res = str.match(regExp) || [];
+    return res.length == 1;
+  }
+
+  isEmpty(str) {
+    return str.trim() === '' ? false : true;
   }
 
   /**
@@ -48,28 +134,6 @@ class Validator {
   }
 
   /**
-   * Check for minimal length of a string.
-   *
-   * @param {string} str String to check.
-   * @param {number} minLength Minimal allowed length.
-   * @returns {boolean} True if length of a string >= `minLength`, false otherwise.
-   */
-  checkMinLength(str, minLength) {
-    return str.length >= minLength;
-  }
-
-  /**
-   * Check for maximal length of a string.
-   *
-   * @param {string} str String to check.
-   * @param {number} maxLength Maximal allowed length.
-   * @returns {boolean} True if length of a string <= `maxLength`, false otherwise.
-   */
-  checkMaxLength(str, maxLength) {
-    return str.length <= maxLength;
-  }
-
-  /**
    * Check if given symbol is alphanumeric.
    *
    * @param {string} sym Symbol to check.
@@ -80,7 +144,7 @@ class Validator {
     if (sym.length != 1) {
       throw new Error('wrong number of symbols: should be only one');
     }
-    const res = sym.match(/^[a-zA-Z0-9]$/) || [];
+    const res = sym.match(ALPHANUMERIC_REGEX) || [];
     return res.length == 1;
   }
 
@@ -95,8 +159,71 @@ class Validator {
     if (sym.length != 1) {
       throw new Error('wrong number of symbols: should be only one');
     }
-    const res = sym.match(/^[0-9]$/) || [];
+    const res = sym.match(DIGIT_REGEX) || [];
     return res.length == 1;
+  }
+
+  /**
+   * Checks `day`, `month`, `year`.
+   *
+   * @param {string} day Day string.
+   * @param {string} month Month string..
+   * @param {string} year Year string.
+   * @returns {boolean} Returns true if date is valid, false otherwise.
+   */
+  isValidDayMonthYear(day, month, year) {
+    const res = Date.parse(`${year}-${month}-${day}`);
+    if (isNaN(res)) {
+      return false;
+    }
+    return true;
+  }
+
+  isValidDate(str) {
+    const res = str.match(DATE_REGEX) || [];
+    const isValid = res.length == 1;
+    if (!isValid) {
+      return false;
+    }
+
+    const tokens = str.split('.');
+    const day = tokens[0];
+    const month = tokens[1];
+    const year = tokens[2];
+
+    return this.isValidDayMonthYear(day, month, year);
+  }
+
+  /**
+   * Checks `year`.
+   *
+   * @param {string} year Year string.
+   * @returns {boolean} Returns true if `year` is valid, false otherwise.
+   */
+  isValidYear(year) {
+    return Number(year) > 1900 && Number(year) < 2100;
+  }
+
+  /**
+   * Check for maximal length of a `data`.
+   *
+   * @param {string} data Given text to check.
+   * @param {number} maxLenFlag Maximal allowed length.
+   * @returns {boolean} True if `maxLen` > 0 length of a string <= `maxLength`, false otherwise.
+   */
+  checkMaxLen(data, maxLenFlag) {
+    return maxLenFlag ? data.length <= maxLenFlag : false;
+  }
+
+  /**
+   * Check for minimal length of a `data`.
+   *
+   * @param {string} data Given text to check.
+   * @param {number} minLenFlag Minimal allowed length.
+   * @returns {boolean} True if `minLen` >= 0 and length of a `data` >= `minLength`, false otherwise.
+   */
+  checkMinLen(data, minLenFlag) {
+    return minLenFlag >= 0 ? data.length >= minLenFlag : false;
   }
 
   /**
@@ -110,8 +237,19 @@ class Validator {
     if (sym.length != 1) {
       throw new Error('wrong number of symbols: should be only one');
     }
-    const res = sym.match(/^[A-Z]$/) || [];
+    const res = sym.match(UPPERCASE_REGEX) || [];
     return res.length == 1;
+  }
+
+  /**
+   * Returns number of words in the given line. Word is a sybol collection
+   * separated by one ore more spaces.
+   *
+   * @param {string} line A line to count words into.
+   * @returns {int} Number of words in the given line.
+   */
+  countWords(line) {
+    return line.trim().split(WORDS_SEPARATOR_REG_EX).length;
   }
 
   /**
@@ -121,75 +259,16 @@ class Validator {
    * @param {string} otherAlowedSymbols String of other allowed symbols.
    * @returns {boolean} True if password symbol is allowed, false otherwise.
    */
-  checkPasswordSymbol(sym, otherAlowedSymbols) {
+  checkPasswordSymbol(sym) {
     let res = true;
     if (!this.isAlphanumeric(sym)) {
-      res = false;
+      return false;
     }
     if (res) {
       return true;
     }
-    if (this.contains(otherAlowedSymbols, sym)) {
-      res = true;
-    } else {
-      res = false;
-    }
 
     return res;
-  }
-
-  /**
-   * Check if the password is valid.
-   *
-   * @param {string} password A string with the given password.
-   * @param {number} [minLength=8] Minimal legth of a password, default 8.
-   * @param {number} [maxLength=128] Maximal legth of a password, default 128.
-   * @param {boolean} [includeUpperCase=true] Check for upper case letters, default true.
-   * @param {boolean} [includeDigits=true] Check for digits, default true.
-   * @param {string} [includeSpecialSymbols=DEFAULT_ALLOWED_SYMBOLS] String of remaining allowed symbols, default DEFAULT_ALLOWED_SYMBOLS.
-   * @returns {boolean} True if the password is valid, false otherwise.
-   */
-  checkPassword({
-    password,
-    minLength = 8,
-    maxLength = 128,
-    includeUpperCase = true,
-    includeDigits = true,
-    includeSpecialSymbols = DEFAULT_ALLOWED_SYMBOLS,
-  }) {
-    const isLengthValid =
-      this.checkMinLength(password, minLength) &&
-      this.checkMaxLength(password, maxLength);
-
-    const hasUpperCase = includeUpperCase
-      ? password.split('').some((sym) => this.isUpperCase(sym))
-      : true;
-
-    const hasDigits = includeDigits
-      ? password.split('').some((sym) => this.isDigit(sym))
-      : true;
-
-    const hasSpecialSymbols = password
-      .split('')
-      .some((sym) => this.contains(includeSpecialSymbols, sym));
-
-    const areSymbolsValid = password
-      .split('')
-      .every((sym) => this.checkPasswordSymbol(sym, includeSpecialSymbols));
-
-    return (
-      isLengthValid &&
-      hasUpperCase &&
-      hasDigits &&
-      hasSpecialSymbols &&
-      areSymbolsValid
-    );
-  }
-
-  validateField(data, errorMessage) {
-    if (!data || !data.trim() === '') {
-      return errorMessage;
-    }
   }
 
   /**
@@ -202,7 +281,11 @@ class Validator {
    * @throws Will throw an error if there are no required fields in `data`.
    */
   validateRegistrationForm(data) {
-    if (!('email' in data) || !('password' in data) || !('repeat_password' in data)) {
+    if (
+      !('email' in data) ||
+      !('password' in data) ||
+      !('repeat_password' in data)
+    ) {
       throw new Error("data doesn't contain required fields");
     }
 
@@ -221,7 +304,7 @@ class Validator {
     }
 
     // Password
-    if (!errors.password && !this.checkPassword({ password: data.password })) {
+    if (!errors.password && !this.isValidPasswor({ password: data.password })) {
       errors.password =
         'Пароль должен быть от 8 до 128 символов, иметь заглавные буквы, цифры и прочие символы';
     }
@@ -269,7 +352,13 @@ class Validator {
 
     return errors;
   }
+
+  validateField(data, errorMessage) {
+    if (!data || !data.trim() === '') {
+      return errorMessage;
+    }
+  }
 }
 
-const validator = new Validator();
-export default validator;
+export const validator = new Validator();
+// export default validator;

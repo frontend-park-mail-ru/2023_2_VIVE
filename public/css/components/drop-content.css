@@ -1,0 +1,122 @@
+@media only screen and (max-width: 767px) {
+  .mobile__header-drop {
+    transform: translateX(100%);
+    right: 100%;
+  }
+
+  .dropdown__content-search {
+    top: calc(100% + 13px);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .dropdown__content-left {
+    transform: translateX(-100%);
+    left: 100%;
+  }
+
+  .dropdown-mobile__item {
+    display: none !important;
+  }
+
+  .dropdown__content-search {
+    top: calc(100% + 10px);
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown__content {
+  position: absolute;
+  top: calc(100% + 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 10px;
+  border-radius: 12px;
+  background: var(--main--eror-white);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.dropdown__content-add-info {
+  top: calc(100% + 27px);
+}
+
+.dropdown__item {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  align-items: center;
+  white-space: nowrap;
+  gap: 5px;
+}
+
+.dropdown__item:hover {
+  border-radius: 12px;
+  background: var(--main-background-grey);
+}
+
+.dropdown__img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.dropdown__img--rotate {
+  transform: rotate(90deg);
+  transition: 0.3s ease;
+}
+
+.dropdown__img--rotate-secondary {
+  transform: rotate(0deg);
+  transition: 0.3s ease;
+}
+
+.dropdown__btn {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar__item__drp-menu.minus path {
+  d: path("M3 12C3 12.8284 3.67158 13.5 4.5 13.5H19.5C20.3284 13.5 21 12.8284 21 12C21 11.1716 20.3284 10.5 19.5 10.5H4.5C3.67158 10.5 3 11.1716 3 12Z");
+}
+
+.dropdown__content-search {
+  position: absolute;
+  left: -10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+  background: var(--card-back-default-no-em);
+}
+
+.dropdown-search__item {
+  display: flex;
+  padding: 10px 15px;
+  align-items: center;
+  align-self: stretch;
+}
+
+.dropdown-search__item:hover {
+  background-color: var(--card-back-default);
+}
+
+.dropdown-search__item_active {
+  background-color: rgb(18 19 19 / 11%);
+}
+
+.dropdown-search__item_active:hover {
+  background-color: rgba(4, 4, 4, 0.11);
+}
+

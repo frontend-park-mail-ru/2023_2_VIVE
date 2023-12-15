@@ -1,0 +1,18 @@
+@media only screen and (max-width: 767px) {
+  .rescr {
+    width: 100%;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .rescr {
+    justify-content: space-between;
+  } 
+}
+
+.rescr {
+  display: flex;
+} 

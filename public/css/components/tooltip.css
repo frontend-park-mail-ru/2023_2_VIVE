@@ -1,0 +1,30 @@
+.tooltip {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text-down {
+    width: max-content;
+    border-radius: 6px;
+    background-color: var(--main-background-grey);
+    padding: 5px;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.tooltip-text-down__profile {
+    top: 35px;
+    left: -170%;
+}
+
+.tooltip-text-down__vacancy {
+    left: -30%;
+}
+
+.tooltip:hover .tooltip-text-down {
+    visibility: visible;
+    opacity: 1;
+}

@@ -1,0 +1,18 @@
+<div class="range-input">
+  <div class="range-input__field">
+    <span>Min</span>
+    <input class="range-input__min common-text common-text--medium text-dark-title" type="number" value={{min_value}}>
+  </div>
+  <div class="range-input__separator">-</div>
+  <div class="range-input__field">
+    <span>Max</span>
+    <input class="range-input__max common-text common-text--medium text-dark-title" type="number" value={{max_value}}>
+  </div>
+</div>
+<div class="range-input__slider">
+  <div class="range-input__progress"></div>
+</div>
+<div class="range-input-field">
+  <input type="range" class="range-range__min" min="1" max="{{fact_max_value}}" value="{{min_value}}">
+  <input type="range" class="range-range__max" min="1" max="{{fact_max_value}}" value="{{max_value}}">
+</div>

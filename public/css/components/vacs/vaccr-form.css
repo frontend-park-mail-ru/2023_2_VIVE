@@ -1,0 +1,33 @@
+@media only screen and (max-width: 767px) {
+  .vaccr__form {
+    width: 100%;
+  }
+
+  .vaccr__form__actions_0 {
+    justify-content: center;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .vaccr__form {
+    width: 500px;
+  }
+}
+
+.vaccr__form {
+  background-color: transparent;
+}
+
+.vaccr__form__title {
+  color: #333333;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+  margin: 0px 0px 35px 0px;
+}
+
+.vaccr__form__step__title {
+  font-size: 20px;
+  line-height: 26px;
+  margin: 0px 0px 25px 0px;
+}

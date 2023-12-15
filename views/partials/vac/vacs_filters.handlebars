@@ -1,0 +1,91 @@
+<aside class="vacs__filters">
+  <div class="vacs__desc header-text header-text--first text-dark-title fw-bold">
+    Найдено <span>{{#if data}}{{ vacancies.count }}{{else}}0{{/if}}</span> вакансий
+    {{#if checked_checkboxes}}
+      <button class="js-button-drop-filters link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</button>
+    {{/if}}
+  </div>
+  <div class="vacs__button-open-filters">
+    <button class="text-light-title link-btn-blue--bg common-text common-text--medium" name="vacs_filters">Фильтры</button>
+  </div>
+  <div class="vacs__filters-frame vacs__filters-frame-mobile-hidden">
+    {{#each filters}}
+    <div class="vacs__filter" name="{{this.name}}">
+      <div class="vacs__filter__name">
+        {{ruFilters this.name}}
+      </div>
+      {{#iff this.type '==' 'double_range'}}
+        <label class="vacs__filter__list__item__label d-none">
+          {{> input_checkbox (object jsclass="js_filter__label_input_click" filter_name=this.name)}}
+          <span title=""></span>
+        </label>
+        <form action="" class="filters__for_search">
+            {{#each this.values}}
+              {{#if ../../priceFilters}}
+                {{> double_range
+                (object min_value=(minFromValue ../../priceFilters) max_value=(maxFromValue ../../priceFilters) fact_max_value=(maxFromValue this.value))}}
+              {{else}}
+                {{> double_range
+                (object min_value=(minFromValue this.value) max_value=(maxFromValue this.value) fact_max_value=(maxFromValue this.value))}}
+              {{/if}}
+            {{/each}}
+          <button class="js-price-filters-btn text-light-title link-btn-blue--bg common-text common-text--medium">Применить</button>
+        </form>
+      {{else}}
+      <ul class="vacs__filter__list">
+        {{#each (sortByCityCount this.values this.name 5)}}
+        {{#iff this.value '==' 'none'}}
+        {{else iff this.value '==' 'nothing'}}
+        {{else}}
+          <li class="vacs__filter__list__item">
+              {{#iff ../this.type '==' 'radio'}}
+              {{> input_radio (object text=(ruFilters this.value) name="category"
+              class_label="vacs__filter__list__item__label") }}
+              {{else}}
+              <label class="vacs__filter__list__item__label">
+                {{#isInArray this.value ../../checked_checkboxes}}
+                  {{> input_checkbox (object jsclass="js_filter__label_input_click" isSelected="true" filter_name=../this.name)}}
+                {{else}}
+                  {{> input_checkbox (object jsclass="js_filter__label_input_click" filter_name=../this.name)}}
+                {{/isInArray}}
+                <span title="{{this.value}}">{{#iff ../this.name '==' 'city'}}{{this.value}}{{else}}{{ ruFilters this.value}}{{/iff}}</span>
+              </label>
+              {{/iff}}
+              {{#iff ../this.type '==' 'double_range'}}
+              {{else}}
+                <div class="cursive-text text-form-active">
+                  {{this.count}}
+                </div>
+              {{/iff}}
+          </li>
+        {{/iff}}
+        {{/each}}
+      </ul>
+      {{/iff}}
+        {{#iff this.type '==' 'checkbox_search'}}
+          <div class="filters__for_search">
+            <label class="vacs__filter__list__item__label d-none">
+              {{> input_checkbox (object jsclass="js_filter__label_input_click" filter_name=this.name)}}
+              <span title=""></span>
+            </label>
+            <form action="" class="filters__for_search">
+              {{#each (array
+                (object name=this.name placeholder=(ruFilters this.name))
+                )}}
+
+                {{> input (object obj=this
+                class=(object
+                title="res__form__input__title"
+                input="res__form__input forms-placeholder js-input-filter"
+                block="res__form__field"
+                )
+                name=this.name)}}
+              {{/each}}
+              <button class="js-search-filters text-light-title link-btn-blue--bg common-text common-text--medium">Применить</button>
+            </form>
+        </div>
+        {{/iff}}
+    </div>
+    {{/each}}
+  </div>
+</aside>

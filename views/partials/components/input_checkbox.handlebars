@@ -1,0 +1,14 @@
+<div class="input_checkbox {{class.block}}">
+  {{!-- Невидимая кнопка --}}
+  <input class="input_checkbox__input {{jsclass}} {{class.input}}" name="{{filter_name}}" type="checkbox" {{#if isSelected}}checked{{/if}} {{#each data}} data-{{@key}}={{this}} {{/each}} {{#each attrs}} {{@key}}={{this}} {{/each}}>
+  {{!-- Видимый блок --}}
+  <div class="input_checkbox__div {{class.btn}}">
+    <svg class="input_checkbox__svg" width="18" height="13" viewBox="0 0 18 13" fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M6.5501 12.5L0.850098 6.79998L2.2751 5.37498L6.5501 9.64998L15.7251 0.474976L17.1501 1.89998L6.5501 12.5Z"
+        fill="#E4FDE1" />
+    </svg>
+  </div>
+  <div class="input_checkbox__text {{class.text}}">{{text}}</div>
+</div>

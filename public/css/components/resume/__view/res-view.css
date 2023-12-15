@@ -1,0 +1,177 @@
+@media only screen and (max-width: 767px) {
+  .resv__nav {
+    display: none;
+  }
+
+  .resv__data {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .resv__params {
+    width: 100%;
+  }
+
+  .resv__data__list {
+    width: 100%;
+  }
+
+  .resv__data__main {
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .resv__data__main__avatar {
+    width: 50px;
+    height: 50px;
+    display: block;
+  }
+
+  .resv__data__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .resv__nav {
+    margin-bottom: 10px;
+  }
+
+  .resv__nav__link {
+    align-items: center;
+    padding-left: 0;
+  }
+  
+  .resv__nav__link__svg {
+    align-items: center;
+    margin-right: 5px;
+  }
+
+  .resv__data {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .resv__data__list {
+    width: 70%;
+  }
+ 
+  .resv__data__item {
+    margin-bottom: 30px;
+  }
+
+  .resv__data__main {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .resv__data__main__avatar {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-left: 50px;
+  }
+
+  .resv__data__item {
+    width: 100%;
+  }
+}
+
+.resv__data__main-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.resv__data__main-job-name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  align-self: stretch;
+}
+
+.resv__data__additional {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.resv__data__item {
+  border-radius: 30px;
+  padding: 30px;
+  background-color: #D2E0EA5E;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.resv__data__main {
+  display: flex;
+}
+
+.resv__text_big {
+  color: #333333;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.resv__text_med {
+  color: #333333;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.resv__text_sm {
+  color: #5E5E5E;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.resv__params {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  border-radius: 30px;
+  padding: 30px;
+  background-color: #D2E0EA5E;
+}
+
+.resv__params__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resv__params__actions__print {
+  margin-right: 20px;
+}
+
+.resv__params__actions__delete {
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.resv__params__view {
+  margin: auto;
+}
+
+.js-edit-form {
+  width: 100%;
+}
+
+.resv__item-tags {
+  display: flex;
+  flex-wrap: wrap;
+}

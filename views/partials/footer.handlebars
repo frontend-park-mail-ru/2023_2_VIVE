@@ -1,0 +1,25 @@
+<div class="footer">
+  <div class="column-wrapper mobile-wrapper">
+    <div class="footer__top">
+      <div class="footer__main-text">
+        <div class="big-text text-light-title">{{#iff user.role '==' 'applicant' }}Найди работу{{else}}Постройте свой идеальный{{/iff}}</div>
+        <div class="big-text text-light-title">{{#iff user.role '==' 'applicant'}}Своей мечты здесь{{else}}Коллектив с нами{{/iff}}</div>
+      </div>
+      <div class="footer_btn">
+        {{#iff user.role '==' 'applicant' }}
+          {{> link-btn (object href="/resume/creation" text="Создать резюме"
+          class="js-nav-link footer__btn link-btn_orange"
+          class_text="common-text common-text--medium")}}
+        {{else}}
+          {{> link-btn (object href="/vacancy/creation" text="Создать вакансию"
+          class="js-nav-link footer__btn link-btn_orange"
+          class_text="common-text common-text--medium")}}
+        {{/iff}}
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="header-text header-text--second text-light-title">Hunt & Hire</p>
+      <p class="secondary-text text-light-regular">{{#iff user.role '==' 'applicant' }}Найти работу своей мечты теперь проще чем когда-либо{{else}}Откройте двери для поиска талантов и создания вдохновляющей команды{{/iff}}</p>
+    </div>
+  </div>
+</div>

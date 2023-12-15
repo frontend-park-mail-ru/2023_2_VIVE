@@ -1,0 +1,11 @@
+<form class="js-edit-form" data-page={{page}}>
+    {{> (concat 'res_form_' page) (object errors=errors data=data page_data=page_data)}}
+    <div class="form__actions">
+        {{> link-btn
+        text="Отменить"
+        data=(object page=page)
+        class="js-cancel-edit link-btn text-dodger-blue link-btn-blue common-text common-text--medium"}}
+        <button type="submit" class="js-save-edit text-light-title link-btn-blue--bg common-text common-text--medium"
+            data-page={{page}}>Сохранить</button>
+    </div>
+</form>

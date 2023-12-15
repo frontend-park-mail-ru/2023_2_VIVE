@@ -1,0 +1,244 @@
+{{#iff user.employer_id '==' vacancy.employer_id}}
+<div class="vacancie-refactor {{#if data}}{{else}}d-none{{/if}}">
+    <div class="vacancie-refactor__main">
+        {{#each (array
+        (object title="Название вакансии" name="name" placeholder="Название вакансии" 
+        )
+        )}}
+
+        {{#if ../data.name}}
+            {{> input (object
+            value=../data.name
+            obj=this
+            name=this.name
+            error=(lookup ../errors this.name)
+            class=(object title="res__form__input__title header-text header-text--fourth text-form-active")
+            )}}
+        {{else}}
+            {{> input (object
+            value=@root.vacancy.name
+            obj=this
+            name=this.name
+            error=(lookup ../errors this.name)
+            class=(object title="res__form__input__title header-text header-text--fourth text-form-active")
+            )}}
+        {{/if}}
+        
+        {{/each}}
+
+        {{#each (array
+        (object title="Предполагаемый уровень дохода, ₽"
+        first=(object placeholder='От' name='salary_lower_bound')
+        second=(object placeholder='До' name='salary_upper_bound')
+        ))}}
+
+        {{#or ../data.salary_lower_bound ../data.salary_upper_bound}}
+        {{> double_input (object
+        obj=this
+        value_one=../data.salary_lower_bound
+        value_second=../data.salary_upper_bound
+        error_first=(lookup ../errors this.first.name)
+        error_second=(lookup ../errors this.second.name)
+        class=(object class="res__form__input__title header-text header-text--fourth text-form-active mobile__lh-20")
+        )}}
+        {{else}}
+        {{> double_input (object
+        obj=this
+        value_one=@root.vacancy.salary_lower_bound
+        value_second=@root.vacancy.salary_upper_bound
+        error_first=(lookup ../errors this.first.name)
+        error_second=(lookup ../errors this.second.name)
+        class=(object class="res__form__input__title header-text header-text--fourth text-form-active mobile__lh-20")
+        )}}
+        {{/or}}
+
+        {{/each}}
+
+        <div class="vacancie-refactor__input-radio-field">
+            <div class="res__form__input__title header-text header-text--fourth text-form-active">Требуемый опыт</div>
+            <div class="vacancie-refactor__input-radio">
+            {{#each 
+            (array
+            (object text="Не выбирать" value="none")
+            (object text="Без опыта" value="no_experience")
+            (object text="От 1 года и до 3-х лет" value="one_three_years")
+            (object text="От 3-х до 6-ти лет" value="three_six_years")
+            (object text="Более 6 лет" value="six_more_years")
+            )
+            }}
+
+            {{#if ../data.experience}}
+                {{#iff this.value '==' ../data.experience}}
+                    {{> input_radio (object text=this.text
+                    attrs=(object
+                    name="experience"
+                    value=this.value
+                    checked='checked'
+                    )
+                    class=(object
+                    block="res__form__input__title header-text header-text--fourth text-form-active"
+                    input="js-education-level"
+                    )
+                    )}}
+                {{else}}
+                    {{> input_radio (object text=this.text
+                    attrs=(object
+                    name="experience"
+                    value=this.value
+                    )
+
+                    class=(object
+                    block="res__form__input__title header-text header-text--fourth text-form-active"
+                    input="js-education-level"
+                    )
+                    )}}
+                {{/iff}}
+            {{else}}
+                {{#iff this.value '==' @root.vacancy.experience}}
+                    {{> input_radio (object text=this.text
+                    attrs=(object
+                    name="experience"
+                    value=this.value
+                    checked='checked'
+                    )
+                    class=(object
+                    block="res__form__input__title header-text header-text--fourth text-form-active"
+                    input="js-education-level"
+                    )
+                    )}}
+                {{else}}
+                    {{> input_radio (object text=this.text
+                    attrs=(object
+                    name="experience"
+                    value=this.value
+                    )
+
+                    class=(object
+                    block="res__form__input__title header-text header-text--fourth text-form-active"
+                    input="js-education-level"
+                    )
+                    )}}
+                {{/iff}}
+            {{/if}}
+
+            {{/each}}
+            </div>
+        </div>
+
+        <div class="vacancie-refactor__input-radio-field">
+            <div class="res__form__input__title header-text header-text--fourth text-form-active">Занятость</div>
+            <div class="vacancie-refactor__input-radio">
+            {{#each 
+            (array
+            (object text="Не выбирать" value="none")
+            (object text="Полная занятость" value="full-time")
+            (object text="Частичная занятость" value="part-time")
+            (object text="Проектная работа или разовое задание" value="one-time")
+            (object text="Волонтерство" value="volunteering")
+            (object text="Стажировка" value="internship")
+            )
+            }}
+            
+            {{#if ../data.employment}}
+                {{#iff this.value '==' ../data.employment}}
+                    {{> input_radio (object text=this.text
+                    attrs=(object
+                    name="employment"
+                    value=this.value
+                    checked='checked'
+                    )
+                    class=(object
+                    block="res__form__input__title header-text header-text--fourth text-form-active"
+                    input="js-education-level"
+                    )
+                    )}}
+                {{else}}
+                    {{> input_radio (object text=this.text
+                    attrs=(object
+                    name="employment"
+                    value=this.value
+                    )
+                    class=(object
+                    block="res__form__input__title header-text header-text--fourth text-form-active"
+                    input="js-education-level"
+                    )
+                    )}}
+                {{/iff}}
+            {{else}}
+                {{#iff this.value '==' @root.vacancy.employment}}
+                    {{> input_radio (object text=this.text
+                    attrs=(object
+                    name="employment"
+                    value=this.value
+                    checked='checked'
+                    )
+                    class=(object
+                    block="res__form__input__title header-text header-text--fourth text-form-active"
+                    input="js-education-level"
+                    )
+                    )}}
+                {{else}}
+                    {{> input_radio (object text=this.text
+                    attrs=(object
+                    name="employment"
+                    value=this.value
+                    )
+                    class=(object
+                    block="res__form__input__title header-text header-text--fourth text-form-active"
+                    input="js-education-level"
+                    )
+                    )}}
+                {{/iff}}
+            {{/if}}
+
+            {{/each}}
+            </div>
+        </div>
+
+        {{#each (array
+        (object title="Расположение работы" name="location" placeholder="Расположение работы")
+        )}}
+
+        
+        {{#if ../data.location}}
+            {{> input (object 
+            obj=this
+            name=this.name
+            value=../data.location
+            error=(lookup ../errors this.name)
+            class=(object title="res__form__input__title header-text header-text--fourth text-form-active")
+            )}}
+        {{else}}
+            {{> input (object 
+            obj=this
+            name=this.name
+            value=@root.vacancy.location
+            error=(lookup ../errors this.name)
+            class=(object title="res__form__input__title header-text header-text--fourth text-form-active")
+            )}}
+        {{/if}}
+
+        {{/each}}
+    </div>
+    <div class="vacancie-refactor__btns">
+        <div class="text-dodger-blue setting-inpute__button common-text common-text--medium"
+        data-name="cancel-refactoring">
+            <div class="vacancie__btns_desktop">
+                Отменить изменения
+            </div>
+            <div class="vacancie__btns_mobile">
+                Отменить
+            </div>
+        </div>
+        <div class="text-light-title setting-inpute__button setting-inpute__button--primary common-text common-text--medium"
+        data-name="send-refactoring">
+            <div class="vacancie__btns_desktop">
+                Сохранить изменения
+            </div>
+            <div class="vacancie__btns_mobile">
+                Сохранить
+            </div>
+        </div>
+    </div>
+</div>
+{{/iff}}

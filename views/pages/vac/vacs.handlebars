@@ -1,0 +1,92 @@
+<section class="vacs-section">
+  <div class="column-wrapper mobile-wrapper">
+    <div class="vacs">
+      {{> vacs_filters }}
+      <div class="vacs__block">
+        <div class="vacs__block__params">
+          <div class="vacs__block__params__sorted">
+            <div name="sorting-date-btn" class="link-btn_blue-without-bd common-text common-text--regular">По дате
+              создания
+              <svg class="{{#if sorted}}vacs__sorted_icon-on{{/if}}" name="sorted-icon" width="12" height="8"
+                viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 7.4L0 1.4L1.4 0L6 4.6L10.6 0L12 1.4L6 7.4Z" fill="#0496FF" />
+              </svg>
+            </div>
+          </div>
+          <div class="vacs__block__params__view">
+            {{#iff block_type '==' 'list'}}
+            {{> link-btn (object
+            class="vacs__block__params__view__left link-svg_blue link-btn_pd-med d-block"
+            data= (object
+            name="list-view"
+            )
+            svg='<svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 14H18V11.325H7V14ZM2 4.675H5V2H2V4.675ZM2 9.35H5V6.675H2V9.35ZM2 14H5V11.325H2V14ZM7 9.35H18V6.675H7V9.35ZM7 4.675H18V2H7V4.675ZM2 16C1.45 16 0.979167 15.8042 0.5875 15.4125C0.195833 15.0208 0 14.55 0 14V2C0 1.45 0.195833 0.979167 0.5875 0.5875C0.979167 0.195833 1.45 0 2 0H18C18.55 0 19.0208 0.195833 19.4125 0.5875C19.8042 0.979167 20 1.45 20 2V14C20 14.55 19.8042 15.0208 19.4125 15.4125C19.0208 15.8042 18.55 16 18 16H2Z"
+                fill="#E4FDE1" />
+            </svg>'
+            )}}
+            {{> link-btn (object
+            class="vacs__block__params__view__right link-svg_blue--bg link-btn_pd-med d-block"
+            data= (object
+            name="block-view"
+            )
+            svg='<svg width="20" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M0 8V0H8V8H0ZM0 18V10H8V18H0ZM10 8V0H18V8H10ZM10 18V10H18V18H10ZM2 6H6V2H2V6ZM12 6H16V2H12V6ZM12 16H16V12H12V16ZM2 16H6V12H2V16Z"
+                fill="#0496FF" />
+            </svg>'
+            )}}
+            {{else}}
+            {{> link-btn (object
+            class="vacs__block__params__view__left link-svg_blue--bg link-btn_pd-med d-block"
+            data= (object
+            name="list-view"
+            )
+            svg='<svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 14H18V11.325H7V14ZM2 4.675H5V2H2V4.675ZM2 9.35H5V6.675H2V9.35ZM2 14H5V11.325H2V14ZM7 9.35H18V6.675H7V9.35ZM7 4.675H18V2H7V4.675ZM2 16C1.45 16 0.979167 15.8042 0.5875 15.4125C0.195833 15.0208 0 14.55 0 14V2C0 1.45 0.195833 0.979167 0.5875 0.5875C0.979167 0.195833 1.45 0 2 0H18C18.55 0 19.0208 0.195833 19.4125 0.5875C19.8042 0.979167 20 1.45 20 2V14C20 14.55 19.8042 15.0208 19.4125 15.4125C19.0208 15.8042 18.55 16 18 16H2Z"
+                fill="#E4FDE1" />
+            </svg>'
+            )}}
+            {{> link-btn (object
+            class="vacs__block__params__view__right link-svg_blue link-btn_pd-med d-block"
+            data= (object
+            name="block-view"
+            )
+            svg='<svg width="20" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M0 8V0H8V8H0ZM0 18V10H8V18H0ZM10 8V0H18V8H10ZM10 18V10H18V18H10ZM2 6H6V2H2V6ZM12 6H16V2H12V6ZM12 16H16V12H12V16ZM2 16H6V12H2V16Z"
+                fill="#0496FF" />
+            </svg>'
+            )}}
+            {{/iff}}
+          </div>
+        </div>
+        {{#if data}}
+          {{> vacs_list
+          user=user
+          data=data
+          block_type=block_type}}
+          <div class="vacs__list-main--mobile">
+            {{> vacs_list_mobile
+            vacancies=data}}
+          </div>
+          <div class="vacs__pag">
+            {{> pag}}
+          </div>
+        {{else}}
+        <div class="empty-vacs__text-frame">
+          <div class="common-text common-text--regular text-dark-regular">
+            Список вакансий пуст или по выбранным фильтрам ничего не нашлось :(
+          </div>
+          <div class="common-text common-text--regular text-dark-regular">
+            Попробуйте другие варианты поискового запроса или уберите фильтры
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+
+  </div>
+</section>

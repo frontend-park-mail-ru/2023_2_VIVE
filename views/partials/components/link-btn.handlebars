@@ -1,0 +1,24 @@
+<{{#if href}}a href="{{#if dynamicHref}}{{dynamicHref}}{{staticHref}}{{else}}{{href}}{{/if}}" {{else}}button{{/if}} class="link-btn {{class}}" {{#each data}} data-{{@key}}={{this}}
+  {{/each}}>
+
+  {{#if svg_pos}}
+
+  {{#iff svg_pos '==' 'before'}}
+  {{{svg}}}
+  {{/iff}}
+
+  <span class="common-text common-text--medium text-light-title {{class_text}}">{{text}}</span>
+
+  {{#iff svg_pos '==' 'after'}}
+  {{{svg}}}
+  {{/iff}}
+
+  {{else}}
+  {{#if svg}}
+  {{{svg}}}
+  {{else}}
+  <span class="link-btn__text {{class_text}}">{{text}}</span>
+  {{/if}}
+  {{/if}}
+
+</{{#if href}}a{{else}}button{{/if}}>

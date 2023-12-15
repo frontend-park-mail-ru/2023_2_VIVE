@@ -1,0 +1,100 @@
+<div class="vacs__list {{#iff ../block_type '==' 'list'}} vacs__list_list {{else}} vacs__list_block {{/iff}}">
+
+    {{#each data}}
+   
+    <a href="/vacancy/{{this.id}}"
+        class="js-nav-link vacs__list__item {{#iff ../block_type '==' 'list'}} vacs__list__item_list {{else}} vacs__list__item_block {{/iff}}">
+        <div class="vacs__list__item__desc__main">
+            <div class="vacs__list__item__company-logo">
+                <img src="images/img/vk-company.png" alt="">
+            </div>
+            <div class="up-add-info">
+                <div class="header-text header-text--first fw-bold">{{this.organization_name}}</div>
+                <div class="vacancie__additional-info">
+                    <div class="add-info add-info-vacs-salary {{#iff ../block_type '==' 'block'}}add-info-vacancy-salary-block{{/iff}}">
+                        <img class="add-info__img" src="images/img/rouble_outline_20.png">
+                        <div class="tooltip">
+                            <div class="common-text common-text--medium text-dark-regular vacs-add-info-text" name="vacancy-salary">
+                                {{this.salary}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Зарплата: {{this.salary}}</span>
+                        </div>
+                    </div>
+                    {{#iff ../block_type '==' 'list'}}
+                    <div class="add-info add-info-vacancy {{#iff ../block_type '==' 'block'}}add-info-vacancy-block{{/iff}}">
+                        <img class="add-info__img" src="images/img/stars_20.png">
+                        <div class="tooltip">
+                            <div class="common-text common-text--medium text-dark-regular vacs-add-info-text" name="vacancy-experience">
+                                {{this.experience}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Требуемый опыт:
+                                {{this.experience}}</span>
+                        </div>
+                    </div>
+                    <div class="add-info add-info-vacs">
+                        <img class="add-info__img" src="images/img/clock_outline_20.png">
+                        <div class="tooltip">
+                            <div class="common-text common-text--medium text-dark-regular vacs-add-info-text" name="vacancy-employment">
+                                {{this.employment}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Занятость:
+                                {{this.employment}}</span>
+                        </div>
+                    </div>
+                    {{/iff}}
+                    <div class="add-info add-info-vacs">
+                        <img class="add-info__img" src="images/img/location_map_outline_20.png">
+                        <div class="tooltip">
+                            <div class="common-text common-text--medium text-dark-regular vacs-add-info-text" name="vacancy-location">
+                                {{this.location}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Расположение:
+                                {{this.location}}</span>
+                        </div>
+                    </div>
+                    {{#iff ../block_type '==' 'list'}}
+                    <div class="add-info add-info-vacs">
+                        <img class="add-info__img" src="images/img/calendar_check_outline_20.png">
+                        <div class="tooltip">
+                            <div class="common-text common-text--medium text-dark-regular vacs-add-info-text">2 дня</div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Время отклика: 2 дня</span>
+                        </div>
+                    </div>
+                    {{/iff}}
+                </div>
+            </div>
+        </div>
+        <div class="vacs__list__item__desc__text">
+            <h3 class="vacs__list__item__desc__name x-large-font">
+                {{this.name}}
+            </h3>
+            <p class="vacs__list__item__desc__prev" name="vacancy-description">
+                {{{this.description}}}
+            </p>
+        </div>
+        {{#iff ../user.role '==' 'employer'}}
+        {{else}}
+        <div class="vacs__list__item__feed">
+            <div class="vacs__list__item__feed__respond">
+                <object>
+                    <a href="/vacancy/{{this.id}}/response"
+                        class="js-nav-link text-light-title link-btn-blue--bg common-text common-text--medium">
+                        Откликнуться
+                    </a>
+                </object>
+            </div>
+            <div class="vacs__list__item__feed__fav">
+                {{> link-btn (object
+                class="vacs__list__item__feed__fav__btn br-10 link-svg_blue--bg d-block cursor-not-allowed"
+                svg='<svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 18L6.825 15.15C5.625 14.0667 4.59583 13.1 3.7375 12.25C2.87917 11.4 2.17083 10.6 1.6125 9.85C1.05417 9.1 0.645833 8.375 0.3875 7.675C0.129167 6.975 0 6.24167 0 5.475C0 3.90833 0.525 2.60417 1.575 1.5625C2.625 0.520833 3.93333 0 5.5 0C6.36667 0 7.19167 0.183333 7.975 0.55C8.75833 0.916667 9.43333 1.43333 10 2.1C10.5667 1.43333 11.2417 0.916667 12.025 0.55C12.8083 0.183333 13.6333 0 14.5 0C15.85 0 16.9833 0.379167 17.9 1.1375C18.8167 1.89583 19.4417 2.85 19.775 4H17.65C17.35 3.33333 16.9083 2.83333 16.325 2.5C15.7417 2.16667 15.1333 2 14.5 2C13.65 2 12.9167 2.22917 12.3 2.6875C11.6833 3.14583 11.1083 3.75 10.575 4.5H9.425C8.90833 3.75 8.32083 3.14583 7.6625 2.6875C7.00417 2.22917 6.28333 2 5.5 2C4.55 2 3.72917 2.32917 3.0375 2.9875C2.34583 3.64583 2 4.475 2 5.475C2 6.025 2.11667 6.58333 2.35 7.15C2.58333 7.71667 3 8.37083 3.6 9.1125C4.2 9.85417 5.01667 10.7208 6.05 11.7125C7.08333 12.7042 8.4 13.9 10 15.3C10.4333 14.9167 10.9417 14.475 11.525 13.975C12.1083 13.475 12.575 13.0583 12.925 12.725L14.35 14.15C13.9833 14.4833 13.5167 14.8958 12.95 15.3875C12.3833 15.8792 11.8833 16.3167 11.45 16.7L10 18ZM17 14V11H14V9H17V6H19V9H22V11H19V14H17Z"
+                        fill="#0496FF" />
+                </svg>
+                ')}}
+            </div>
+        </div>
+        {{/iff}}
+    </a>
+    {{/each}}
+</div>

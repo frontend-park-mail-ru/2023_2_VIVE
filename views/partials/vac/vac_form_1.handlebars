@@ -1,0 +1,25 @@
+{{#each (array
+(object 
+name="description"
+placeholder="Основная информация:
+
+Задачи:
+
+Требования:
+
+Условия:
+"
+title="Опишите вакансию (задачи, требования, условия)")
+)}}
+
+{{> input_textarea (object obj=this
+rows=15
+class=(object
+block="res__form__field"
+title="res__form__input__title"
+input="res__form__input forms-placeholder"
+)
+error=(lookup ../errors this.name)
+value=(lookup ../data this.name)
+)}}
+{{/each}}

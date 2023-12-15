@@ -1,0 +1,30 @@
+.input_checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.input_checkbox__input {
+  display: none;
+}
+
+.input_checkbox__div {
+  display: inline-block;
+  border: 1px solid #0496ff;
+  border-radius: 4px;
+  padding: 3px;
+  margin-right: 10px;
+}
+
+
+.input_checkbox__svg {
+  visibility: hidden;
+}
+
+.input_checkbox__input:checked~.input_checkbox__div {
+  background-color: #0496ff;
+}
+
+.input_checkbox__input:checked~.input_checkbox__div .input_checkbox__svg {
+  visibility: visible;
+}

@@ -1,0 +1,99 @@
+<div class="view">
+    <div class="response-page__frame">
+        <div class="response-page__main-block">
+            <div class="vacancie" id="{{vacancy.id}}">
+                <div class="header-text header-text--first text-dark-title">
+                    {{vacancy.name}}
+                </div>
+                <div class="vacancie__additional-info">
+                    <div class="add-info add-info-vacancy-salary">
+                        <img class="add-info__img" src="images/img/rouble_outline_20.png">
+                        <div class="tooltip">
+                            <div class="vacancy-add-info-text common-text common-text--medium text-dark-regular" name="vacancy-salary">
+                                {{vacancy.salary_view}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Зарплата: {{vacancy.salary_view}}</span>
+                        </div>
+                    </div>
+                    <div class="add-info add-info-vacancy">
+                        <img class="add-info__img" src="images/img/stars_20.png">
+                        <div class="tooltip">
+                            <div class="vacancy-add-info-text common-text common-text--medium text-dark-regular" name="vacancy-experience">
+                                {{vacancy.experience_view}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Требуемый опыт:
+                                {{vacancy.experience_view}}</span>
+                        </div>
+                    </div>
+                    <div class="add-info add-info-vacancy">
+                        <img class="add-info__img" src="images/img/clock_outline_20.png">
+                        <div class="tooltip">
+                            <div class="vacancy-add-info-text common-text common-text--medium text-dark-regular" name="vacancy-employment">
+                                {{vacancy.employment_view}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Занятость:
+                                {{vacancy.employment_view}}</span>
+                        </div>
+                    </div>
+                    <div class="add-info add-info-vacancy">
+                        <img class="add-info__img" src="images/img/location_map_outline_20.png">
+                        <div class="tooltip">
+                            <div class="vacancy-add-info-text common-text common-text--medium text-dark-regular" name="vacancy-location">
+                                {{vacancy.location}}
+                            </div>
+                            <span class="tooltip-text-down tooltip-text-down__vacancy">Расположение:
+                                {{vacancy.location}}</span>
+                        </div>
+                    </div>
+                    <div class="add-info add-info-vacancy">
+                        <img class="add-info__img" src="images/img/calendar_check_outline_20.png">
+                        <div class="common-text common-text--medium text-dark-regular">2 дня</div>
+                    </div>
+                </div>
+            </div>
+            {{#if resumes}}
+            <div class="response-page__select-block">
+                {{#if form_error }}
+                <div class="form__error">{{form_error}}</div>
+                {{/if}}
+                <div class="header-text header-text--second text-form-active">
+                    Выберите резюме для отправки отклика
+                </div>
+                <select class="response__select-block-input common-text common-text--medium text-dark-regular" name="resumes">
+                    {{#each resumes}}
+                        <option value="{{this.id}}">ФИО: {{this.last_name}} {{this.first_name}} {{this.middle_name}}. Профессия: {{this.profession_name}} </option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="response-page__buttons">
+                <div class="text-dodger-blue link-btn-blue common-text common-text--medium"
+                data-name="cancel-response">
+                    Отменить
+                </div>
+                <div class="text-light-title link-btn-blue--bg common-text common-text--medium"
+                data-name="send-response">
+                    Отправить отклик
+                </div>
+            </div>
+            {{else}}
+            <span class="header-text header-text--second text-form-active" style="display: flex; gap: 5px">
+                Упс... Кажется у вас еще нет резюме. Давайте <a href="/resume/creation" class="js-nav-link link-btn link-btn_blue-without-bd">создадим</a> его!
+            </span>
+            {{/if}}
+        </div>
+        <a href="/vacancies/profile/{{vacancy.employer_id}}" class="js-nav-link view-company">
+            <img class="view-company__img" src="images/img/vk-company.png">
+            <div class="view-company__main-info">
+                <div class="header-text header-text--first text-dark-title">
+                    {{organization}}
+                </div>
+                <div class="view-company__location">
+                    <img class="view-company__location-img" src="images/img/location_map_outline_20.png">
+                    <div class="common-text common-text--medium text-dark-regular">
+                        {{vacancy.location}}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

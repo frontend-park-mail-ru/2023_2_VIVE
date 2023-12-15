@@ -1,3 +1,4 @@
 {
-  "ext": "js,json,hbs,html"
+  "ext": "js,json,handlebars,html,css",
+  "ignore": ["dist/*", "public/js/templates/templates.precompiled.js", "public/js/templates/partials.precompiled.js"]
 }

@@ -1,0 +1,33 @@
+<div class="csat">
+    <div class="csat__exit-frame">
+        <svg class="js-close-poll cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.71967 4.71967C5.01256 4.42678 5.48744 4.42678 5.78033 4.71967L10 8.93934L14.2197 4.71967C14.5126 4.42678 14.9874 4.42678 15.2803 4.71967C15.5732 5.01256 15.5732 5.48744 15.2803 5.78033L11.0607 10L15.2803 14.2197C15.5732 14.5126 15.5732 14.9874 15.2803 15.2803C14.9874 15.5732 14.5126 15.5732 14.2197 15.2803L10 11.0607L5.78033 15.2803C5.48744 15.5732 5.01256 15.5732 4.71967 15.2803C4.42678 14.9874 4.42678 14.5126 4.71967 14.2197L8.93934 10L4.71967 5.78033C4.42678 5.48744 4.42678 5.01256 4.71967 4.71967Z" fill="#EF4A3C"/>
+        </svg>
+    </div>
+    <div class="csat__main-frame">
+        {{#if end}} Спасибо! 
+        {{else}}
+        <div class="csat__question-frame">
+            <div class="csat__question common-text common-text--regular">
+                {{question.question}}
+            </div>
+            <div class="csat__stars">
+                {{#times 5}}
+                <svg class="csat__star_clicked csat__star cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" id="{{id}}">
+                    <path d="M19.9629 7.58656C19.8885 7.36437 19.696 7.2025 19.4644 7.16687L13.3163 6.2275L10.5616 0.359375C10.4585 0.14 10.2378 0 9.99566 0C9.75347 0 9.53316 0.14 9.42972 0.359375L6.67504 6.2275L0.526911 7.16719C0.295349 7.2025 0.103161 7.36469 0.0284738 7.58687C-0.0459012 7.80875 0.0100363 8.05375 0.173786 8.22156L4.64066 12.8019L3.58504 19.2719C3.54629 19.5081 3.64597 19.7459 3.84191 19.8834C3.94941 19.9594 4.07535 19.9978 4.2016 19.9978C4.30535 19.9978 4.40972 19.9716 4.5041 19.9197L9.99535 16.8825L15.4866 19.9197C15.581 19.9716 15.6853 19.9978 15.7891 19.9978C15.9153 19.9978 16.0416 19.9594 16.1488 19.8834C16.3447 19.7459 16.4444 19.5081 16.4057 19.2719L15.35 12.8019L19.8169 8.22156C19.981 8.05344 20.0372 7.80844 19.9629 7.58656Z"/>
+                </svg>
+                {{/times}}
+            </div>
+            <textarea class="csat__textarea d-none" placeholder="Почему вы так считаете?"></textarea>
+        </div>
+        <div class="csat__btn-frame">
+            <div class="d-none text-light-title link-btn-blue--bg common-text common-text--medium" name="next">
+                Далее
+            </div>
+            <div class="text-dodger-blue link-btn-blue common-text common-text--medium" name="skip">
+                Пропустить
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

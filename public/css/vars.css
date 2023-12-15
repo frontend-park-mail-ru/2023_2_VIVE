@@ -1,0 +1,117 @@
+:root {
+
+  /* TEXT COLORS */
+  --text-dark-title: #333333;
+  --text-dark-regular: #5E5E5E;
+  --text-dark-link: #006BA6;
+  --text-light-title: #FBFBFB;
+  --text-light-regular: #f3f3f398;
+  --text-form-inactive: #A6A6A6;
+  --text-form-active: #5E5E5E;
+  --text-dodger-blue: #0496FF;
+  --text-xanthous: #FFBC42;
+  --text-error-regular: #EF4A3C;
+  --text-prussian-blue: #042439;
+  /* END TEXT COLORS */
+
+  /* CARD BACK COLORS */
+  --card-back-default: rgba(210, 224, 234, 0.37);
+  --card-back-default-no-em: rgb(236, 241, 245);
+  --card-back-hover: rgba(4, 150, 255, 0.11);
+  /* END CARD BACK COLORS */
+  
+  /* MAIN COLORS */
+  --main-bice-blue: #006BA6;
+  --main-dodger-blue: #0496FF;
+  --main-prussian-blue: #042439;
+  --main-xanthous: #FFBC42;
+  --main-main-green: #CDF7F6;
+  --main-background-grey: #F7F7F7;
+  --main-error-red: #EF4A3C;
+  --main-error-back: #EF4A3C;
+  --main--eror-white: #FFFFFF;
+  --main-error-grey: #B0B0B0;
+  /* END MAIN COLORS */
+
+  /* MONO BLUE COLORS */
+  --mono-blue-hover: rgba(4, 151, 255, 0.08);
+  --mono-blue-active: rgba(50, 133, 191, 0.2);
+  --mono-blue-dark-blue: #0162A6;
+  --mono-blue-blue-ws: #43B1FF;
+  --mono-blue-faded-blue: #43B1FF;
+  --mono-blue-dark-blue: #063452;
+  /* END MONO BLUE COLORS */
+
+  /* LABELS COLORS */
+  --labels-blue-main: #0496FF;
+  --labels-blue-back: #0496FF10;
+  --labels-red-main: #EF4A3C;
+  --labels-red-back: #EF4A3C10;
+  --labels-green-main: #31B546;
+  --labels-green-back: #31B54610;
+  --labels-orange-main: #FFBC42;
+  --labels-orange-back: #FFBC4210;
+  /* END LABELS COLORS */
+
+  /* FORMS COLORS */
+  --forms-background-normal: #F7F7F7;
+  --forms-background-error: #EF4A3C10;
+  --forms-background-disabled: #D2D2D2;
+  --forms-text-filled: #5E5E5E;
+  --forms-text-placeholder: #A6A6A6;
+  --forms-border-active: #0496FF;
+  --forms-border-error: #EF4A3C;
+  /* END FORMS COLORS */
+
+  /* BUTTON COLORS */
+  --buttons-blue-primary-default: #0496FF;
+  --buttons-blue-primary-hover: #018AED;
+  --buttons-blue-primary-active: #0284E2;
+  --buttons-blue-primary-disabled: #0496FF20;
+
+  --buttons-blue-secondary-deafult: #EBEDEB;
+  --buttons-blue-secondary-hover: #E3E3E3;
+  --buttons-blue-secondary-active: #DEDEDE;
+  --buttons-blue-secondary-disabled: #F5F5F450;
+
+  --buttons-blue-outline-hover: #F2F2F2;
+  --buttons-blue-outlinea-active: #E8E8E8;
+
+  --buttons-orange-primary-default: #FFBC42;
+  --buttons-orange-primary-hover: #E3A93F;
+  --buttons-orange-primary-active: #CD9939;
+  --buttons-orange-primary-disabled: #FFBC4250;
+  
+  --buttons-orange-outline-hover: #063452;
+  --buttons-orange-outline-active: #0C5788;
+  
+  --buttons-orange-secondary-default: #063452;
+  --buttons-orange-secondary-hover: #09446B;
+  --buttons-orange-secondary-active: #0C5788;
+  --buttons-orange-secondary-disabled: #042439;
+
+  --buttons-red-primary-default: #EF4A3C;
+  --buttons-red-primary-hover: #D6463A;
+  --buttons-red-primary-active: #BB3E33;
+  --buttons-red-primary-disabled: #EF4A3C20;
+  
+  --buttons-red-secondary-default: #EBEDEB;
+  --buttons-red-secondary-hover: #E3E3E3;
+  --buttons-red-secondary-active: #DEDEDE;
+  --buttons-red-secondary-disabled: #F5F5F450;
+
+  --buttons-red-outline-hover: #F2F2F2;
+  --buttons-red-outline-active: #E8E8E8;
+
+  --buttons-photo-hover: #EBEDEB70;
+  --buttons-photo-hover: #DEDEDE80;
+  /* END BUTTON COLORS */
+
+  /* PHOTO BLOCKS */
+  --photo-hover: rgba(235, 237, 235);
+  /* END PHOTO BLOCKS */
+}
+
+.forms-placeholder {
+  background-color: var(--forms-background-disabled);
+}

@@ -1,0 +1,69 @@
+@media only screen and (max-width: 767px) {
+    .resumes {
+        display: flex;
+        width: 95vw;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .resume__form-create {
+        display: none;
+    }
+
+    .resumes__main-text {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .resumes__main-blocks {
+        display: flex;
+        width: 95vw;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        align-self: stretch;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .resumes {
+        display: flex;
+        width: 1187px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .resumes__main-text-btn {
+        display: none;
+    }
+
+    .resumes__main-blocks {
+        display: flex;
+        width: 790px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        flex-shrink: 0;
+    }
+
+    .resumes__blocks {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .resumes__looking-work {
+        display: flex;
+        width: 230px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+}

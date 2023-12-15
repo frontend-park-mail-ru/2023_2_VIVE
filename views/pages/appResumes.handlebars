@@ -1,0 +1,29 @@
+<div class="profile">
+    <div class="profile__header profile__header--background--default-hh">
+        <img class="profile_image" src="images/img/buttersss.jpg" alt="profile-logo">
+        <div class="profile__info">
+            <div class="profile__main-info">
+                <div class="profile__about">
+                    <div class="header-text header-text--first text-light-title profile__about-mobile-main-text">{{last_name}} {{first_name}}</div>
+                    <div class="secondary-text text-light-regular profile__about-mobile-main-text">Соискатель</div>
+                </div>
+            </div>
+        </div>
+        <div class="profile__filled-container">
+            <div class="profile__role-big-frame">
+                <div class="profile__roles-frame">
+                    <div class="tooltip">
+                        <img src="images/img/briefcase_outline_28-01.png" class="profile__role-img">
+                        <span class="tooltip-text-down tooltip-text-down__profile common-text common-text-medium text-dark-title">Работодатель</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="emp-vacs__frame">
+        <div class="header-text header-text--first">
+            Найдено {{cv.cvs.length}} резюме соискателя
+        </div>
+        {{> resumes-list-mobile}}
+    </div>
+</div>

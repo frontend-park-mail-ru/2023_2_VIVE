@@ -1,0 +1,33 @@
+<form class="vaccr__form">
+  <p class="vaccr__form__title form__title text header-text header-text--first text-dark-title">
+    Создание вакансии
+  </p>
+
+  <p class="vaccr__form__step__title header-text header-text--second">
+    {{{lookup steps page}}} <span class="rescr__form__step__title--mobile">(шаг {{sum (array page 1)}}/{{steps.length}})</span>
+  </p>
+
+  {{#if form_error}}
+  <div class="form__error">{{form_error}}</div>
+  {{/if}}
+
+
+  {{> (concat 'vac_form_' page) (object errors=form_errors data=data) }}
+
+  <div class="form__actions vaccr__form__actions_{{page}}">
+    {{#iff page '>' 0}}
+    {{> link-btn (object text="Назад"
+    class="js-vaccr-back link-btn_transp-box-blue link-btn_pd-med link-btn_bd-rad-sm")}}
+    {{/iff}}
+    <button type="submit"
+      class="{{#iff page '==' (sub steps.length 1)}} js-vaccr-submit {{else}} js-vaccr-save-continue {{/iff}} link-btn-blue--bg common-text common-text--medium text-light-title">
+      <span class="link-btn__text ">
+        {{#iff page '==' (sub steps.length 1)}}
+        Создать вакансию
+        {{else}}
+        Сохранить и продолжить
+        {{/iff}}
+      </span>
+    </button>
+  </div>
+</form>

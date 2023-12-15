@@ -1,0 +1,41 @@
+@media only screen and (max-width: 767px) {
+    .emp-vacs__frame {
+        width: 95vw;
+    }
+}
+  
+@media only screen and (min-width: 768px) {
+    .emp-vacs__frame {
+        width: 1190px;
+    }
+}
+
+.emp-vacs__frame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.emp-vacs__main-frame {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+.emp-vacs__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    flex: 1 0 0;
+}
+
+.emp-vacs__filters {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    flex-shrink: 0;
+}

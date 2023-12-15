@@ -1,0 +1,26 @@
+@media only screen and (max-width: 767px) {
+  .footer_btn {
+    display: none;
+  }
+
+  .footer__main-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.footer {
+  background-color: var(--main-prussian-blue);
+  padding-top: 15px;
+  padding-bottom: 20px;
+}
+
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--main-background-grey);
+  margin-bottom: 15px;
+}

@@ -1,0 +1,34 @@
+{{#each (array
+ (object title="Введите ваши навыки (через пробел)" name="skills" placeholder="Навыки")
+)}}
+
+{{> input (object obj=this
+  class=(object
+  title="res__form__input__title"
+  input="res__form__input forms-placeholder"
+  block="res__form__field"
+  )
+  name=this.name
+  value=(arraytostr (lookup ../data this.name))
+  error=(lookup ../errors this.name))}}
+
+{{/each}}
+
+{{#each (array
+(object 
+name="description"
+placeholder="Расскажите о своих качествах, знаниях, увлечениях, которые , как вам кажется, будут полезны работодателю"
+title="Расскажите немного о себе (ваше хобби, личные качества, любая дополнительная информация)")
+)}}
+
+{{> input_textarea (object obj=this
+rows=15
+class=(object
+block="res__form__field"
+title="res__form__input__title"
+input="res__form__input forms-placeholder"
+)
+error=(lookup ../errors this.name)
+value=(lookup ../data this.name)
+)}}
+{{/each}}

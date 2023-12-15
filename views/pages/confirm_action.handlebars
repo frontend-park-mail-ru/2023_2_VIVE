@@ -1,0 +1,29 @@
+<div class="confirm-action__frame">
+    <div class="confirm-action__field">
+        <div class="confirm-action__header">
+            <div class="header-text header-text--second text-dark-title">
+                Подтверждение действия
+            </div>
+            <img class="confirm-action__default-img" src="images/img/cancel_outline_28-01.png" data-name="cancel-action">
+        </div>
+        <div class="confirm-action__answer-text ">
+            <div class="common-text common-text--regular text-dark-title">
+                {{#iff action '==' 'vacancy-del'}}
+                Вы действительно хотите удалить выбранную вакансию?
+                {{else iff action '==' 'resume-del'}}
+                Вы действительно хотите удалить выбранное резюме?
+                {{/iff}}
+            </div>
+        </div>
+        <div class="confirm-action__btns">
+            <div class="common-text common-text--medium text-error-regular"
+            data-name="cancel-action" style="cursor: pointer;">
+                Отменить
+            </div>
+            <div class="common-text common-text--medium link-btn-blue--bg text-light-title"
+            data-name="confirm-action">
+                Подтвердить
+            </div>
+        </div>
+    </div>
+</div>

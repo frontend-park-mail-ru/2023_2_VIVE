@@ -1,0 +1,47 @@
+
+
+.res__form__field {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.res__form__field_flex {
+  display: flex;
+  gap: 20px;
+}
+
+.res__form__input {
+  padding: 10px 20px;
+}
+
+.res__form__input__title {
+  font-size: 15px;
+  margin-bottom: 7px;
+}
+
+.res__form__input_radio {
+  
+}
+
+.res__form__input_radio_field {
+  margin-bottom: 10px;
+}
+
+.res__form__input_radio_flex {
+  display: flex;
+}
+
+.res__form__input_radio_flex_field {
+  margin-right: 20px;
+}
+
+.res__form_edu__add {
+  margin-bottom: 20px;
+}
+
+.res__form_edu__splitter {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 1%;
+  margin: 30px auto;
+}

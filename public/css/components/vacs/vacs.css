@@ -1,0 +1,263 @@
+/* @import url("__blocks/vacs__blocks.css"); */
+@import url("filters.css");
+@import url("creation.css");
+@import url("vaccr-form.css");
+@import url("emp-vacs.css");
+
+@media only screen and (max-width: 767px) {
+  .vacs {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .vacs__list__item__desc__main--desktop {
+    display: none !important;
+  }
+
+  .vacs__list__item__description__main--desktop {
+    display: none !important;
+  }
+  
+  .vacs__list__item__mobile-version {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .vacs__block__params {
+    display: none;
+  }
+
+  .vacs__block {
+    width: 100%;
+  }
+
+  .vacs__list_list,
+  .vacs__list_block {
+    display: none !important;
+  }
+
+  .empty-vacs__text-frame {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .vacs__list__item__mobile-version {
+    display: none;
+  }
+
+  .vacs__block__params {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .vacs {
+    justify-content: space-between;
+  }
+
+  .vacs__block {
+    width: 77%;
+  }
+
+  .vacs__list-main--mobile {
+    display: none;
+  }
+
+  .vacs__list__item__desc__prev {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+
+  .vacs-add-info-text {
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .add-info-vacs-salary {
+    width: 25%;
+  }
+
+  .add-info-vacs {
+    width: 20%;
+  }
+
+  .add-info-vacancy-salary-block,
+  .add-info-vacancy-block {
+    width: 50% !important;
+  }
+}
+
+.vacs {
+  display: flex;
+}
+
+.vacs_query {
+  margin-bottom: 20px;
+}
+
+/* params */
+
+.vacs__block__params__sorted__btn {
+  font-weight: 500;
+  color: #0496ff;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.vacs__block__params__view {
+  display: flex;
+}
+
+.vacs__block__params__view__left {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.vacs__block__params__view__right {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/* vacs list */
+
+.vacs__list {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.vacs__list_list {}
+
+.vacs__list_block {
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* align-content: stretch; */
+}
+
+/* vac */
+
+.vacs__list__item {
+  width: 100%;
+  color: inherit;
+  text-decoration: inherit;
+
+  display: block;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 40px -30px gray;
+  background-color: #eaeff2;
+
+  flex-grow: 1;
+
+  transition: box-shadow 0.2s;
+}
+
+.vacs__list__item_list {
+  width: 100%;
+}
+
+.vacs__list__item_block {
+  max-width: calc((100% - 30px) / 2);
+}
+
+.vacs__list__item:hover {
+  box-shadow: 0px 0px 40px -30px black;
+}
+
+.vacs__list__item:active {
+  box-shadow: 0px 0px 40px -30px rgb(165, 165, 165);
+}
+
+
+/* description */
+
+.vacs__list__item__desc__main {
+  display: flex;
+}
+
+.vacs__list__item__company-logo {
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: block;
+  margin-right: 25px;
+  transition: transform .3s;
+}
+
+.vacs__list__item__company-logo:hover {
+  transform: scale(1.05, 1.05);
+}
+
+.vacs__list__item__company-logo img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.vacs__list__item__company-name {
+  margin-top: 0;
+  color: #333333;
+}
+
+.vacs__list__item__desc__list {
+  display: flex;
+}
+
+.vacs__list__item__desc__list__item {
+  font-weight: 200;
+  margin-right: 30px;
+}
+
+.vacs__list__item__desc__name {
+  color: #333333;
+}
+
+.vacs__list__item__desc__name__link {
+  padding: 5px 0px;
+}
+
+.vacs__list__item__desc__prev {
+  margin-top: 0px;
+}
+
+.vacs__sorted_icon-on {
+  transform: rotate(180deg);
+}
+
+
+.vacs__list__item__feed {
+  display: flex;
+}
+
+.vacs__list__item__feed__respond {
+  margin-right: 30px;
+}
+
+.vacs__list__item__feed__respond__btn {
+  height: 100%;
+}
+
+.vacs__list__item__feed__fav__btn {
+  padding: 10px 10px 6px 10px;
+  background-color: transparent;
+}
+
+.vacs__pag {
+  display: flex;
+  justify-content: center;
+}

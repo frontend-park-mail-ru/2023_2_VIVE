@@ -1,0 +1,35 @@
+.text-dark-title {
+  color: var(--text-dark-title);
+}
+
+.text-dark-regular {
+  color: var(--text-dark-regular);
+}
+
+.text-dark-link {
+  color: var(--text-dark-link);
+}
+
+.text-light-title {
+  color: var(--text-light-title);
+}
+
+.text-light-regular {
+  color: var(--text-light-regular);
+}
+
+.text-form-inactive {
+  color: var(--text-form-inactive);
+}
+
+.text-form-active {
+  color: var(--text-form-active);
+}
+
+.text-dodger-blue {
+  color: var(--text-dodger-blue);
+}
+
+.text-error-regular {
+  color: var(--text-error-regular);
+}

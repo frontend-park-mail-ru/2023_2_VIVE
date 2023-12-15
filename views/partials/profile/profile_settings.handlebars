@@ -1,0 +1,88 @@
+<div class="profile__settings">
+  <div class="header-text header-text--first">
+    Мои настройки
+  </div>
+  <div class="setting-inputes-block">
+    
+    {{#if form_error }}
+      <div class="form__error">{{form_error}}</div>
+    {{/if}}
+
+    {{#each
+    (array
+    (object data-name='changing-change-full-name' title='ФИО')
+    (object data-name='setting-change-full-name' title='ФИО' value='full-name' type='change-full-name')
+    (object data-name='changing-change-mail' title='Почта')
+    (object data-name='setting-change-mail' title='Почта' value='email' type='change-mail')
+    (object data-name='changing-change-password' title='Пароль')
+    (object data-name='setting-change-password' title='Пароль' value='*******************' type='change-password')
+    )
+    }}
+
+    {{#if (isOdd @index)}}
+      {{#iff this.title '==' 'ФИО'}}
+        {{> sttng_input (object obj=this
+        user=../user
+        data=(lookup ../errors 'data-last-name')
+        )}}
+      {{else iff this.title '==' 'Почта'}}
+        {{> sttng_input (object obj=this
+        user=../user
+        data=(lookup ../errors 'data-email')
+        )}}
+      {{else iff this.title '==' 'Пароль'}}
+        {{> sttng_input (object obj=this
+        user=../user
+        data=(lookup ../errors 'data-password')
+        )}}
+      {{/iff}}
+    {{else}}
+      {{#iff this.title '==' 'ФИО'}}
+        {{> sttng_chng (object 
+        obj=this
+        user=../user
+        inputs = (array
+        (object title='Фамилия' name='last-name' type='text' placeholder='Фамилия')
+        (object title='Имя' name='first-name' type='text' placeholder='Имя')
+        (object title='Пароль' name='password' type='password' placeholder='Пароль')
+        )
+        data=(lookup ../errors 'data-last-name')
+        errors=(lookup ../errors 'last-name')
+        )}}
+      {{else iff this.title '==' 'Почта'}}
+        {{> sttng_chng (object 
+        obj=this
+        user=../user
+        inputs = (array
+        (object title='Новая почта' name='email' type='text' placeholder='Почта')
+        (object title='Пароль' name='password' type='password' placeholder='Пароль')
+        )
+        errors=(lookup ../errors 'email')
+        data=(lookup ../errors 'data-email')
+        )}}
+      {{else}}
+        {{> sttng_chng (object 
+        obj=this
+        user=../user
+        inputs = (array
+        (object title='Старый пароль' name='password' type='password' placeholder='Почта')
+        (object title='Новый пароль' name='new_password' type='password' placeholder='Пароль')
+        (object title='Повторите пароль' name='repeat_password' type='password' placeholder='Пароль')
+        )
+        errors=(lookup ../errors 'password')
+        data=(lookup ../errors 'data-password')
+        )}}
+      {{/iff}}
+    {{/if}}
+
+    {{/each}}
+
+  <div class="setting__btn">
+    <div class="setting__delete-btn" data-name="delete-account" style="cursor:not-allowed;">
+      <div class="common-text common-text--medium text-error-regular">
+        Удалить аккаунт
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

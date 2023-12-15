@@ -1,0 +1,235 @@
+@media only screen and (max-width: 767px) {
+    .vacancie {
+        width: 100%;
+    }
+
+    .vacancy__open-info-btn {
+        display: none;
+    }
+
+    .vacancie__additional-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .add-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .add-info-exp {
+        display: none;
+    }
+
+    .add-info-emp {
+        display: none;
+    }
+
+    .add-info-time {
+        display: none;
+    }
+
+    .vacancy__job-name {
+        width: 75vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .vacancy__salary-info {
+        width: 60vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .vacancy__location-info {
+        width: 60vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .vacancie__btns {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .vacancie__btns_desktop {
+        display: none;
+    }
+
+    .vacancie__btns_mobile {
+        display: flex;
+        align-items: center;
+    }
+
+    .vacancy__desc-btns {
+        justify-content: center;
+    }
+
+    .mobile__lh-20 {
+        line-height: 20px;
+    }
+
+    .ellipsis-salary {
+        max-width: 65vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .vacancie {
+        width: 790px;
+    }
+
+    .vacancy__open-info-btn--mobile {
+        display: none;
+    }
+
+    .vacancie__additional-info {
+        display: flex;
+        width: 100%;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .add-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .vacancy-add-info-text {
+        width: 85%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .add-info-vacancy-salary {
+        width: 32%;
+    }
+
+    .add-info-vacancy {
+        width: 17%;
+    }
+
+    .vacancie__btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    } 
+    
+    .vacancie__btns_mobile {
+        display: none;
+    }
+
+    .vacancy__desc-btns {
+        justify-content: space-between;
+    }
+    
+    .vacancie-refactor {
+        width: 790px;
+    }
+
+    .up-add-info {
+        display: flex;
+        width: -webkit-fill-available;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .res-up-add-info {
+        display: flex;
+        width: -webkit-fill-available;
+        justify-content: space-between;
+    }
+}
+
+.vacancie {
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    border-radius: 30px;
+    background: var(--card-back-default);
+}
+
+.add-info__img {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.vacancie__form-create {
+    display: flex;
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    border-radius: 30px;
+    background: var(--card-back-default); 
+}
+
+.vacancie-refactor {
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    border-radius: 30px;
+    background: var(--card-back-default);
+}
+
+.vacancie-refactor__main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+}
+
+.vacancie-refactor__btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.vacancie-refactor__input-radio-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    align-self: stretch;
+}
+
+.vacancie-refactor__input-radio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5px;
+    align-self: stretch;
+}
+
+.full-job-info__refactor {
+    width: 100%;
+}
+
+.vacancy__desc-btns {
+    width: 100%;
+    display: flex;
+}

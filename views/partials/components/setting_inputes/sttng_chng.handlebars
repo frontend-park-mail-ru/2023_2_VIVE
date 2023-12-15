@@ -1,0 +1,19 @@
+<div class="changing-inpute {{#if data}}{{else}}ch-i__d-none{{/if}}" data-name="{{obj.data-name}}">
+    {{#each inputs}}
+        {{> sttng_chng_input (object
+        error=(lookup ../errors this.name)
+        data=(lookup ../data this.name)
+        user=../user
+        input=this
+        )}}
+    {{/each}}
+    <div class="changing-inpute__btns">
+        <button class="text-dodger-blue link-btn-blue common-text common-text--medium" data-name="cancel-changing">
+            Отменить
+        </button>
+        <button class="text-light-title link-btn-blue--bg common-text common-text--medium"
+        data-name="send-form">
+            Применить
+        </button>
+    </div>
+</div>

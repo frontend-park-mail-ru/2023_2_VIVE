@@ -1,7 +1,16 @@
-import { cookie } from './modules/cookieCheck.js';
+import compiledTemplates from "./templates/templates.precompiled.js";
+import compiledPartials from "./templates/partials.precompiled.js";
+import '../css/main.css';
+
 import { registerHelpers } from './handlebars/helpers.js';
+import router from './modules/router/router.js';
 
 registerHelpers();
 
-const cur_path = window.location.pathname;
-await cookie.checkPathForNoCookie(cur_path);
+try {
+    router.start();
+} catch(error) {
+    console.log(error);
+}
+
+router.goToLink(window.location.pathname + window.location.search);
