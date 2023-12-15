@@ -11,6 +11,11 @@
     "sourceType": "module"
   },
   "ignorePatterns": [
-    "public/js/templates/*.js"
+    "public/js/templates/*.js",
+    "dist/*"
   ],
+
+  "rules": {
+    "no-unused-vars": "off"
+  }
 }

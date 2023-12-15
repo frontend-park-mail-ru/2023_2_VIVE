@@ -1,4 +1,5 @@
 
+import { FRONTEND_SERVER_PORT } from '../../../config/config.js';
 import csatStore from '../stores/csatStore.js';
 import View from './view.js';
 import Handlebars from 'handlebars';

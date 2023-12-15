@@ -31,7 +31,7 @@ class CsatStatStore {
             }))
         }
     }
-};
+}
 
 const csatStatStore = new CsatStatStore();
 export default csatStatStore;
