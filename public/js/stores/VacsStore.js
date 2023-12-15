@@ -38,7 +38,6 @@ class VacsStore extends Store {
             this.qObj['page_num'] = 1;
             this.qObj['results_per_page'] = 10;
         }
-        console.log(this.qObj);
 
         try {
             this.vacs = this.sortVacanciesByDateToOld(await this.getVacancies());

@@ -149,26 +149,10 @@ export default {
         credentials: credentials,
       });
 
-      console.log(response);
-      // response.headers.forEach(console.log);
-      let str = ""
-      for (let [key, value] of response.headers) {
-        str += `${key} = ${value}\n`;
-      }
-      console.log(url, str);
-
-      
-
       if (!response.ok) {
-        console.log('not ok');
-        const csrf_token = response.headers.get('X-Csrf-Token')
-        if (csrf_token) {
-          console.log(csrf_token);
-        } else {
-          const httpError = new HTTPError('', response.status);
-          httpError.statusCode = response.status;
-          throw httpError;
-        }
+        const httpError = new HTTPError('', response.status);
+        httpError.statusCode = response.status;
+        throw httpError;
       }
 
       return response;
