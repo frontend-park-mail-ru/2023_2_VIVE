@@ -33,7 +33,6 @@ class VacsStore extends Store {
     }
 
     async updateInnerData(data) {
-        console.log()
         this.qObj = this.parseQueryToDict(data['urlObj'].searchParams);
         if (!this.qObj.page_num || !this.qObj.results_per_page) {
             this.qObj['page_num'] = 1;

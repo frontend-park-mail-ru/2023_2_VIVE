@@ -38,6 +38,7 @@
 
   .vacs__filters {
     display: flex;
+    width: 23%;
     flex-direction: column;
   }
 
