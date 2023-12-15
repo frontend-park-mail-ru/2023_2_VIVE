@@ -1,7 +1,7 @@
 'use strict';
 
-const FRONTEND_SERVER_PORT = 8084;
-const FRONTEND_POLL_SERVER_PORT = 8085;
+const FRONTEND_SERVER_PORT = 8083;
+const FRONTEND_POLL_SERVER_PORT = 8084;
 
 const express = require('express');
 const exphbs = require('express-handlebars');
@@ -16,7 +16,7 @@ app.engine(
     extname: 'handlebars',
     layoutsDir: path.join(__dirname, '..', 'views/layouts'),
     partialsDir: path.join(__dirname, '..', 'views/partials'),
-    }),
+  }),
 );
 
 poll_app.engine(
@@ -25,7 +25,7 @@ poll_app.engine(
     extname: 'handlebars',
     layoutsDir: path.join(__dirname, '..', 'views/layouts'),
     partialsDir: path.join(__dirname, '..', 'views/partials'),
-    }),
+  }),
 );
 
 app.set('view engine', 'handlebars');

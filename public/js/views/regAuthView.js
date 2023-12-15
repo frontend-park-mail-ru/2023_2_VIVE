@@ -1,6 +1,7 @@
 import { getFormObject } from '../utils.js';
 import mainView from './mainView.js';
 import regAuthStore from '../stores/RegAuthStore.js';
+import Handlebars from 'handlebars';
 
 export default class regAuthView extends mainView {
     /**

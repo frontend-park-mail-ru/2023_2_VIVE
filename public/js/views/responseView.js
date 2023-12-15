@@ -1,6 +1,7 @@
 import router from "../modules/router/router.js";
 import responseStore from '../stores/responseStore.js';
 import mainView from './mainView.js';
+import Handlebars from 'handlebars';
 
 export default class responseView extends mainView {
     constructor() {

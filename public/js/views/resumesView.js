@@ -1,6 +1,7 @@
 import router from '../modules/router/router.js';
 import resStore from '../stores/ResStore.js';
 import mainView from './mainView.js';
+import Handlebars from 'handlebars';
 
 class resumesView extends mainView {
   constructor() {

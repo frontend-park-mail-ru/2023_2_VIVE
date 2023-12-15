@@ -1,6 +1,7 @@
 import router from '../modules/router/router.js';
 import vacsStore from '../stores/VacsStore.js';
 import mainView from './mainView.js';
+import Handlebars from 'handlebars';
 
 export default class vacsView extends mainView {
   constructor() {
@@ -23,8 +24,8 @@ export default class vacsView extends mainView {
     Object.assign(data, {['priceFilters']: this.priceFilters});
 
 
-    // eslint-disable-next-line no-undef
     const template = Handlebars.templates['vacs'];
+    
     document.querySelector('main').innerHTML = template(data);
 
     this.addEventListeners();

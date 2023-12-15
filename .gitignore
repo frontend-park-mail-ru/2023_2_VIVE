@@ -1,4 +1,5 @@
 .vscode
 node_modules
-views/templates.precompiled.js
-views/partials.precompiled.js
+public/js/templates/templates.precompiled.js
+public/js/templates/partials.precompiled.js
+dist

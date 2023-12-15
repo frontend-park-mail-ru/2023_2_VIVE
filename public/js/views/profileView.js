@@ -2,6 +2,7 @@ import router from "../modules/router/router.js";
 import profileStore from '../stores/profileStore.js';
 import { getFormObject } from '../utils.js';
 import mainView from './mainView.js';
+import Handlebars from 'handlebars';
 
 export default class profileView extends mainView {
   constructor() {
@@ -103,18 +104,7 @@ export default class profileView extends mainView {
           this.setError('Ошибка сохранения изображения')
         } else {
           console.log("ok!");
-          let reader = new FileReader();
-
-          reader.readAsDataURL(file);
-
-          reader.onload = async () => {
-            const base64_str = reader.result;
-            avatar_img.src = base64_str;
-          };
-
-          reader.onerror = function () {
-            this.setError('Ошибка чтения файла');
-          };
+          avatar_img.src = URL.createObjectURL(file);
         }
       }
     })

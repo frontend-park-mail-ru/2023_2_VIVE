@@ -139,9 +139,9 @@ export default {
     mode = MODES.CORS,
     credentials = 'include',
   }) {
-    let response;
+
     try {
-      response = await fetch(url, {
+      const response = await fetch(url, {
         method: method,
         headers: headers,
         body: body,
@@ -149,7 +149,16 @@ export default {
         credentials: credentials,
       });
 
-      response.headers.forEach(console.log);
+      console.log(response);
+      // response.headers.forEach(console.log);
+      let str = ""
+      for (let [key, value] of response.headers) {
+        str += `${key} = ${value}\n`;
+      }
+      console.log(url, str);
+
+      
+
       if (!response.ok) {
         console.log('not ok');
         const csrf_token = response.headers.get('X-Csrf-Token')

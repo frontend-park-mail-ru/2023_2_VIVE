@@ -1,6 +1,7 @@
 import resStore from '../stores/ResStore.js';
 import { getFormObject } from '../utils.js';
 import mainView from './mainView.js';
+import Handlebars from 'handlebars';
 
 export default class resCreationView extends mainView {
 

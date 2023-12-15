@@ -71,7 +71,7 @@ class Router {
 
     // HELPER FUNCTIONS
     processUrl(urlObject) {
-        if (!urlObject.hasOwnProperty(UrlParams.URL) || !urlObject.hasOwnProperty(UrlParams.VIEW)) {
+        if (!(UrlParams.URL in urlObject) || !(UrlParams.VIEW in urlObject)) {
             throw new Error(`Parameters URL or VIEW are undefined for one of the URL`);
         }
 

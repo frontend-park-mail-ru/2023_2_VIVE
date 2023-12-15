@@ -6,6 +6,8 @@ import vacsStore from "../stores/VacsStore.js";
 import { getFormObject } from '../utils.js';
 import View from './view.js';
 
+import Handlebars from 'handlebars';
+
 
 export default class mainView extends View {
     /**
