@@ -10,7 +10,7 @@ export default class csatStatView extends mainView {
     async render() {
         await super.render();
 
-        const template = Handlebars.templates['csat_stat'];
+        const template = require('@pages/polls/csat_stat.handlebars');
         document.querySelector('main').innerHTML = template(csatStatStore.getContext());
 
         this.addEventListeners();

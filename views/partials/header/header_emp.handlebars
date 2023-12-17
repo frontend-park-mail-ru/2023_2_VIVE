@@ -1,11 +1,11 @@
 <div class="navbar__right">
   <div class="navbar__item">
-    {{> link-btn (object href="/vacancy/creation" text="Создать вакансию"
+    {{> components/link-btn (object href="/vacancy/creation" text="Создать вакансию"
     class="js-nav-link navbar__item__btn link-btn-blue text-dodger-blue"
     data=(array (object key="type" value="res_create")))}}
   </div>
   <div class="navbar__item">
-    {{> link-btn (object href="#"
+    {{> components/link-btn (object href="#"
     class="js-nav-link navbar__item__btn link-btn_link link-btn_transp link-btn_block link-btn_pd-sm cursor-not-allowed"
     svg='<svg width="28" height="34" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -15,7 +15,7 @@
     ')}}
   </div>
   <div class="navbar__item">
-    {{> link-btn (object href="#"
+    {{> components/link-btn (object href="#"
     class="js-nav-link navbar__item__btn link-btn_link link-btn_transp link-btn_block link-btn_pd-sm cursor-not-allowed"
     svg='<svg width="35" height="31" viewBox="0 0 35 31" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -24,5 +24,5 @@
     </svg>
     ')}}
   </div>
-  {{> header_profile_drop}}
+  {{> header/header_profile_drop}}
 </div>

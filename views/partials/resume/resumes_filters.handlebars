@@ -19,7 +19,7 @@
                 {{#each this.values}}
                     <div class="vacs__filter__list__item">
                         {{#isInArray this.value ../../checked_checkboxes}}
-                            {{> input_radio (object
+                            {{> components/input_radio (object
                             checked="true"
                             jsclass="js_filter__label_input_click"
                             text=(ruFilters this.value)
@@ -29,7 +29,7 @@
                             )
                             )}}
                         {{else}}
-                            {{> input_radio (object
+                            {{> components/input_radio (object
                             jsclass="js_filter__label_input_click"
                             text=(ruFilters this.value)
                             attrs=(object
@@ -57,9 +57,9 @@
                 {{else}}
                 <label class="vacs__filter__list__item__label">
                     {{#isInArray this.value ../../checked_checkboxes}}
-                    {{> input_checkbox (object jsclass="js_filter__label_input_click" isSelected="true" filter_name=../this.name)}}
+                    {{> components/input_checkbox (object jsclass="js_filter__label_input_click" isSelected="true" filter_name=../this.name)}}
                     {{else}}
-                    {{> input_checkbox (object jsclass="js_filter__label_input_click" filter_name=../this.name)}}
+                    {{> components/input_checkbox (object jsclass="js_filter__label_input_click" filter_name=../this.name)}}
                     {{/isInArray}}
                     <span title="{{this.value}}">{{#iff ../this.name '==' 'city'}}{{this.value}}{{else}}{{ ruFilters this.value}}{{/iff}}</span>
                 </label>
@@ -78,7 +78,7 @@
            {{#iff this.type '==' 'checkbox_search'}}
             <div class="filters__for_search">
                 <label class="vacs__filter__list__item__label d-none">
-                {{> input_checkbox (object jsclass="js_filter__label_input_click" filter_name=this.name)}}
+                {{> components/input_checkbox (object jsclass="js_filter__label_input_click" filter_name=this.name)}}
                 <span title=""></span>
                 </label>
                 <form action="" class="filters__for_search">
@@ -86,7 +86,7 @@
                     (object name=this.name placeholder=(ruFilters this.name))
                     )}}
 
-                    {{> input (object obj=this
+                    {{> components/input (object obj=this
                     class=(object
                     title="res__form__input__title"
                     input="res__form__input forms-placeholder js-input-filter"

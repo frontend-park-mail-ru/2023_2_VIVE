@@ -30,7 +30,7 @@ export default class resCreationView extends mainView {
   async render() {
     await super.render();
 
-    const template = Handlebars.templates['res_creation'];
+    const template = require('@pages/resume/res_creation.handlebars');
 
     document.querySelector('main').innerHTML = template(resStore.getContext());
 

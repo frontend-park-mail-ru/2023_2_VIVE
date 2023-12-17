@@ -11,7 +11,7 @@ export default class vacCreationView extends mainView {
 
   async rerender() {
     await super.render();
-    const template = Handlebars.templates['vac_creation'];
+    const template = require('@pages/vac/vac_creation.handlebars');
     document.querySelector('main').innerHTML = template(vacancyStore.getCreationContext());
 
     this.addEventListeners();

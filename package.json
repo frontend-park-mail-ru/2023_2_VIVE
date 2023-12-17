@@ -10,10 +10,11 @@
     "path": "^0.12.7"
   },
   "scripts": {
-    "build:dev": "webpack --mode development",
-    "webpack": "webpack-dev-server --mode development",
-    "start": "nodemon --exec 'npm run compile:templates && npm run compile:partials && npm run build:dev'",
-    "compile:templates": "handlebars views/layouts/*.handlebars views/pages/*.handlebars views/pages/vac/*.handlebars views/pages/profile/*.handlebars views/pages/resume/*.handlebars  views/pages/polls/*.handlebars -f public/js/templates/templates.precompiled.js -c handlebars",
+    "build:dev": "webpack-dev-server",
+    "webpack": "webpack",
+    "start": "npm run build:dev",
+    "compile:templates": "mkdir -p public/js/templates && npm run compile:pages && npm run compile:partials",
+    "compile:pages": "handlebars views/layouts/*.handlebars views/pages/*.handlebars views/pages/vac/*.handlebars views/pages/profile/*.handlebars views/pages/resume/*.handlebars  views/pages/polls/*.handlebars -f public/js/templates/templates.precompiled.js -c handlebars",
     "compile:partials": "handlebars views/partials/components/setting_inputes/*.handlebars views/partials/header/*.handlebars views/partials/resume/*.handlebars views/partials/*.handlebars views/partials/components/*.handlebars views/partials/profile/*.handlebars views/partials/vac/*.handlebars -p -f public/js/templates/partials.precompiled.js -c handlebars",
     "lint": "eslint ."
   },

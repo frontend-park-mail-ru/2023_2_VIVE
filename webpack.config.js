@@ -6,24 +6,36 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
+const CONFIG = {
+  isDev: true,
+}
 
-  entry: './public/js/index.js',
+module.exports = {
+  mode: CONFIG.isDev ? 'development' : 'production',
+  devtool: CONFIG.isDev ? 'eval-source-map' : false,
+
+  entry: path.resolve(__dirname, 'public/js/index.js'),
 
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.[contenthash].js',
   },
 
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, './public/'),
-      "@pages": path.resolve(__dirname, './views/pages/'),
+      "@": path.resolve(__dirname, '/public'),
+      "@pages": path.resolve(__dirname, '/views/pages'),
     },
   },
 
   devServer: {
     port: 8500,
+    historyApiFallback: true,
+    static: {
+      directory: path.join(__dirname, './'),
+      watch: true
+    },
   },
 
   module: {
@@ -51,25 +63,18 @@ module.exports = {
           filename: path.join('fonts', '[name].[contenthash][ext]'),
         },
       },
-      // { 
-      //   test: /\.handlebars$/, 
-      //   use: [
-      //     {
-      //       loader: 'handlebars-loader',
-      //       options: {
-      //         // runtime: 'handlebars/dist/cjs/handlebars.runtime',
-      //         // precompileOptions: {
-      //         //   knownHelpersOnly: false,
-      //         // },
-      //         helperDirs: [
-      //           path.resolve(__dirname, 'public/js/handlebars'),
-      //         ],
-      //         // inlineRequires: '/assets/',
-      //         rootRelative: './views/partials/',
-      //       },
-      //     },
-      //   ],
-      // },
+      {
+        test: /\.handlebars$/,
+        use: [
+          {
+            loader: 'handlebars-loader',
+            options: {
+              helperDirs: [path.resolve(__dirname, 'public/js/handlebars')],
+              partialDirs: [path.resolve(__dirname, 'views/partials')]
+            },
+          },
+        ],
+      },
     ]
   },
 
@@ -86,7 +91,6 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      // filename: './index.html'
     }),
 
     new MiniCssExtractPlugin({

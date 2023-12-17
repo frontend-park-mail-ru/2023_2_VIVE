@@ -1,7 +1,7 @@
 <section class="vacs-section">
   <div class="column-wrapper mobile-wrapper">
     <div class="vacs">
-      {{> vacs_filters }}
+      {{> vac/vacs_filters}}
       <div class="vacs__block">
         <div class="vacs__block__params">
           <div class="vacs__block__params__sorted">
@@ -15,7 +15,7 @@
           </div>
           <div class="vacs__block__params__view">
             {{#iff block_type '==' 'list'}}
-            {{> link-btn (object
+            {{> components/link-btn (object
             class="vacs__block__params__view__left link-svg_blue link-btn_pd-med d-block"
             data= (object
             name="list-view"
@@ -26,7 +26,7 @@
                 fill="#E4FDE1" />
             </svg>'
             )}}
-            {{> link-btn (object
+            {{> components/link-btn (object
             class="vacs__block__params__view__right link-svg_blue--bg link-btn_pd-med d-block"
             data= (object
             name="block-view"
@@ -38,7 +38,7 @@
             </svg>'
             )}}
             {{else}}
-            {{> link-btn (object
+            {{> components/link-btn (object
             class="vacs__block__params__view__left link-svg_blue--bg link-btn_pd-med d-block"
             data= (object
             name="list-view"
@@ -49,7 +49,7 @@
                 fill="#E4FDE1" />
             </svg>'
             )}}
-            {{> link-btn (object
+            {{> components/link-btn (object
             class="vacs__block__params__view__right link-svg_blue link-btn_pd-med d-block"
             data= (object
             name="block-view"
@@ -64,17 +64,17 @@
           </div>
         </div>
         {{#if data}}
-          {{> vacs_list
-          user=user
-          data=data
-          block_type=block_type}}
-          <div class="vacs__list-main--mobile">
-            {{> vacs_list_mobile
-            vacancies=data}}
-          </div>
-          <div class="vacs__pag">
-            {{> pag}}
-          </div>
+        {{> vac/vacs_list
+        user=user
+        data=data
+        block_type=block_type}}
+        <div class="vacs__list-main--mobile">
+          {{> vac/vacs_list_mobile
+          vacancies=data}}
+        </div>
+        <div class="vacs__pag">
+          {{> pag }}
+        </div>
         {{else}}
         <div class="empty-vacs__text-frame">
           <div class="common-text common-text--regular text-dark-regular">

@@ -40,7 +40,7 @@ export default class resView extends mainView {
 
   async rerender() {
     await super.render();
-    const template = Handlebars.templates['res_view'];
+    const template = require('@pages/resume/res_view.handlebars');
     document.querySelector('main').innerHTML = template(resStore.getContext());
 
     this.addEventListeners();

@@ -7,11 +7,11 @@
       </div>
       <div class="footer_btn">
         {{#iff user.role '==' 'applicant' }}
-          {{> link-btn (object href="/resume/creation" text="Создать резюме"
+          {{> components/link-btn (object href="/resume/creation" text="Создать резюме"
           class="js-nav-link footer__btn link-btn_orange"
           class_text="common-text common-text--medium")}}
         {{else}}
-          {{> link-btn (object href="/vacancy/creation" text="Создать вакансию"
+          {{> components/link-btn (object href="/vacancy/creation" text="Создать вакансию"
           class="js-nav-link footer__btn link-btn_orange"
           class_text="common-text common-text--medium")}}
         {{/iff}}

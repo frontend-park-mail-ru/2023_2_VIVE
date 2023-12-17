@@ -63,15 +63,15 @@
             </div>
             
             {{#iff state '==' 'settings'}}
-            {{> profile_settings}}
+            {{> profile/profile_settings}}
             {{else iff state '==' 'responses'}}
-            {{> profile_responses}}
+            {{> profile/profile_responses}}
             {{else iff state '==' 'resumes'}}
-            {{> profile_resumes (object data=data)}}
+            {{> profile/profile_resumes (object data=data)}}
             {{else iff state '==' 'vacancies'}}
-            {{> profile_vacs }}
+            {{> profile/profile_vacs }}
             {{else}}
-            {{> profile_settings}}
+            {{> profile/profile_settings}}
             {{/iff}}
 
             <div class="profile__mobile-navigation">

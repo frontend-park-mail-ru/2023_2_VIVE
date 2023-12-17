@@ -24,7 +24,7 @@ export default class profileView extends mainView {
     }
     
     // eslint-disable-next-line no-undef
-    const template = Handlebars.templates['profile'];
+    const template = require('@pages/profile.handlebars');
     document.querySelector('main').innerHTML = template(await profileStore.getContext());
 
     this.addEventListeners();

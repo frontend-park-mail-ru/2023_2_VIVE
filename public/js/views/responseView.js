@@ -12,7 +12,7 @@ export default class responseView extends mainView {
         await super.render();
         
         // eslint-disable-next-line no-undef
-        const template = Handlebars.templates['response'];
+        const template = require('@pages/response.handlebars');
         document.querySelector('main').innerHTML = template(responseStore.getContext());
     
         this.addEventListeners();

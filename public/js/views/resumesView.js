@@ -17,7 +17,7 @@ class resumesView extends mainView {
   async render() {
     await super.render();
 
-    const template = Handlebars.templates['resumes'];
+    const template = require('@pages/resume/resumes.handlebars');
     document.querySelector('main').innerHTML = template(
       {
         'block_type': this.block_type,

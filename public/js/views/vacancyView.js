@@ -15,7 +15,7 @@ export default class profileView extends mainView {
         await super.render();
         
         // eslint-disable-next-line no-undef
-        const template = Handlebars.templates['vac'];
+        const template = require('@pages/vac/vac.handlebars');
         document.querySelector('main').innerHTML = template(vacancyStore.getContext());
 
         this.addEventListeners();

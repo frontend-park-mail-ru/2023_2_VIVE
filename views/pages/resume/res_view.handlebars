@@ -2,7 +2,7 @@
   <div class="column-wrapper mobile-wrapper">
     <div class="resv">
       <div class="resv__nav">
-        {{> link-btn text="К списку резюме" href="/resumes"
+        {{> components/link-btn text="К списку резюме" href="/resumes"
         class="js-nav-link resv__nav__link link-btn_transp"
         class_text = "text-dodger-blue"
         svg_pos="before"
@@ -21,7 +21,7 @@
 
           <div class="resv__data__item">
             {{#if (lookup is_edit 0)}}
-            {{> res_form_edit (object page=0 errors=errors data=(lookup forms_data 0) page_data=page_data)}}
+            {{> resume/res_form_edit (object page=0 errors=errors data=(lookup forms_data 0) page_data=page_data)}}
             {{else}}
             {{#with (object data=(lookup forms_data 0))}}
             <div class="resv__data__main">
@@ -50,7 +50,7 @@
             </div>
             {{/with}}
             {{#if is_my_resume}}
-            {{> link-btn text="Редактировать"
+            {{> components/link-btn text="Редактировать"
             data=(object page=0)
             class="js-edit-page text-dodger-blue link-btn-blue common-text common-text--medium"}}
             {{/if}}
@@ -59,30 +59,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <div class="resv__data__item">
             {{#if (lookup is_edit 1)}}
-            {{> res_form_edit (object page=1 errors=errors data=(lookup forms_data 1) page_data=page_data)}}
+            {{> resume/res_form_edit (object page=1 errors=errors data=(lookup forms_data 1) page_data=page_data)}}
             {{else}}
             {{#with (object data=(lookup forms_data 1))}}
             <div class="resv__data__main">
@@ -122,7 +101,7 @@
           </div>
           {{/with}}
           {{#if is_my_resume }}
-          {{> link-btn text="Редактировать"
+          {{> components/link-btn text="Редактировать"
           data=(object page=1)
           class="js-edit-page text-dodger-blue link-btn-blue common-text common-text--medium"}}
           {{/if}}
@@ -132,7 +111,7 @@
 
         <div class="resv__data__item">
           {{#if (lookup is_edit 2)}}
-          {{> res_form_edit (object page=2 errors=errors data=(lookup forms_data 2) page_data=page_data)}}
+          {{> resume/res_form_edit (object page=2 errors=errors data=(lookup forms_data 2) page_data=page_data)}}
           {{else}}
           {{#with (object data=(lookup forms_data 2))}}
           <div class="resv__data__main mb-20">
@@ -163,7 +142,7 @@
         </div>
         {{/with}}
         {{#if is_my_resume }}
-        {{> link-btn text="Редактировать"
+        {{> components/link-btn text="Редактировать"
         data=(object page=2)
         class="js-edit-page text-dodger-blue link-btn-blue common-text common-text--medium"
         }}
@@ -176,7 +155,7 @@
 
       <div class="resv__data__item">
         {{#if (lookup is_edit 3)}}
-        {{> res_form_edit (object page=3 errors=errors data=(lookup forms_data 3) page_data=page_data)}}
+        {{> resume/res_form_edit (object page=3 errors=errors data=(lookup forms_data 3) page_data=page_data)}}
         {{else}}
         {{#with (object data=(lookup forms_data 3))}}
         <div class="resv__data__main mb-20">
@@ -205,7 +184,7 @@
         </div>
         {{/with}}
         {{#if is_my_resume}}
-        {{> link-btn text="Редактировать"
+        {{> components/link-btn text="Редактировать"
         data=(object page=3)
         class="js-edit-page text-dodger-blue link-btn-blue common-text common-text--medium"
         }}
@@ -221,7 +200,7 @@
         Резюме обновлено {{formatDate  this.data.updated_at}}
       </div>
       <div class="resv__params__actions">
-        {{> link-btn
+        {{> components/link-btn
         class="resv__params__actions__print link-btn_transp-box-blue link-btn_pd-sm link-btn_bd-rad-sm
         link-btn_semi-bold d-block"
         svg_pos="before"
@@ -250,10 +229,10 @@
       </div>
 
       {{#iff data.status '==' 'searching'}}
-      {{> link-btn text="Доступно для просмотра"
+      {{> components/link-btn text="Доступно для просмотра"
       class="resv__params__view resume__status resume__status--avaliable"}}
       {{else}}
-      {{> link-btn text="Скрыто для просмотра"
+      {{> components/link-btn text="Скрыто для просмотра"
       class="resv__params__view resume__status resume__status--hidden"}}
       {{/iff}}
     </div>

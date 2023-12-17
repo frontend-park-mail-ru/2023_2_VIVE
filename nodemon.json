@@ -1,4 +1,5 @@
 {
+  "delay": 1000,
   "ext": "js,json,handlebars,html,css",
   "ignore": ["dist/*", "public/js/templates/templates.precompiled.js", "public/js/templates/partials.precompiled.js"]
 }

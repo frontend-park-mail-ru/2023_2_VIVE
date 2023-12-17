@@ -2,7 +2,7 @@
     <div>
         <div class="link-btn complex-btn link-btn_blue-without-bd">
             <div class="resv__nav">
-                {{> link-btn text="К списку вакансий" href="/vacs"
+                {{> components/link-btn text="К списку вакансий" href="/vacs"
                 class="resv__nav__link js-nav-link link-btn_transp"
                 class_text = "text-dodger-blue"
                 svg_pos="before"
@@ -16,33 +16,33 @@
         </div>
         <div class="view__field vac__view-field-mobile">
             <div class="view__main">
-                {{> vac_refactoring 
+                {{> vac/vac_refactoring 
                 vacancy=vacancy
                 user=user
                 errors=(lookup errors 'main')
                 data=(lookup errors 'data-main')
                 }}
-                {{> vac_title
+                {{> vac/vac_title
                 user=user
                 vacancy=vacancy
                 data=(lookup errors 'data-main')
                 }}
                 {{#iff user.role '==' 'employer'}}
                     {{#iff state '==' 'description'}}
-                    {{>vac_desc_refactoring
+                    {{> vac/vac_desc_refactoring
                     user=user
                     vacancy=vacancy
                     errors=(lookup errors 'desc')
                     data=(lookup errors 'data-desc')
                     }}
-                    {{> vac_description
+                    {{> vac/vac_description
                     data=(lookup errors 'data-desc')
                     }}
                     {{else iff state '==' 'responses'}}
-                    {{> vac_responses}}
+                    {{> vac/vac_responses}}
                     {{/iff}}
                 {{else}}
-                {{> vac_description}}
+                {{> vac/vac_description}}
                 {{/iff}}
             </div>
             <a href="/vacancies/profile/{{vacancy.employer_id}}" class="js-nav-link view-company" style="flex-direction: column;">

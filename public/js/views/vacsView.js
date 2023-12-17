@@ -24,7 +24,9 @@ export default class vacsView extends mainView {
     Object.assign(data, {['priceFilters']: this.priceFilters});
 
 
-    const template = Handlebars.templates['vacs'];
+    // const template = Handlebars.templates['vacs'];
+    const template = require('@pages/vac/vacs.handlebars');
+    console.log('HELLO!');
     
     document.querySelector('main').innerHTML = template(data);
 
