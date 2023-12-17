@@ -11,8 +11,17 @@
   <div class="form__error">{{form_error}}</div>
   {{/if}}
 
-
-  {{> (concat 'resume/res_form_' page) (object errors=errors data=data page_data=page_data) }}
+  {{log (concat 'resume/res_form_' page)}}
+  {{#iff page '==' '0'}}
+    {{> resume/res_form_0}}
+  {{else iff page '==' '1'}}
+    {{> resume/res_form_1 (object errors=errors data=data page_data=page_data) }}
+  {{else iff page '==' '2'}}
+    {{> resume/res_form_2 (object errors=errors data=data page_data=page_data) }}
+  {{else iff page '==' '3'}}
+    {{> resume/res_form_3 (object errors=errors data=data page_data=page_data) }}
+  {{/iff}}
+  
 
   <div class="form__actions rescr__form__actions_{{page}}">
     {{#iff page '>' 0}}

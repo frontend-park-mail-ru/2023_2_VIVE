@@ -2,7 +2,7 @@
  (object title="Введите ваши навыки (через пробел)" name="skills" placeholder="Навыки")
 )}}
 
-{{> input (object obj=this
+{{> components/input (object obj=this
   class=(object
   title="res__form__input__title"
   input="res__form__input forms-placeholder"
@@ -21,7 +21,7 @@ placeholder="Расскажите о своих качествах, знания
 title="Расскажите немного о себе (ваше хобби, личные качества, любая дополнительная информация)")
 )}}
 
-{{> input_textarea (object obj=this
+{{> components/input_textarea (object obj=this
 rows=15
 class=(object
 block="res__form__field"

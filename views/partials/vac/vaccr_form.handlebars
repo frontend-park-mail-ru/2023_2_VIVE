@@ -11,8 +11,11 @@
   <div class="form__error">{{form_error}}</div>
   {{/if}}
 
-
-  {{> (concat 'vac/vac_form_' page) (object errors=form_errors data=data) }}
+  {{#iff page '==' '0'}}
+    {{> vac/vac_form_0}}
+  {{else iff page '==' '1'}}
+    {{> vac/vac_form_1}}
+  {{/iff}}
 
   <div class="form__actions vaccr__form__actions_{{page}}">
     {{#iff page '>' 0}}

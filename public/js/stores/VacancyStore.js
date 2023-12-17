@@ -78,6 +78,11 @@ class VacancyStore extends Store {
         // const responses = this.responses;
         this.errors = {};
         // this.responses = [];
+
+        if (this.vacancy === undefined) {
+            return null;
+        }
+
         this.vacancy.salary_view = this.processVacanciesSalary(this.vacancy);
         this.vacancy.employment_view = this.processVacanciesEmployment(this.vacancy);
         this.vacancy.experience_view = this.processVacanciesExperience(this.vacancy);

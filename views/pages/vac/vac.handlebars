@@ -1,4 +1,5 @@
 <div class="view">
+    {{#if vacancy}}
     <div>
         <div class="link-btn complex-btn link-btn_blue-without-bd">
             <div class="resv__nav">
@@ -64,4 +65,7 @@
             </a>
         </div>
     </div>
+    {{else}}
+        <p class="header-text header-text--first text-dark-title">ВАКАНСИЯ НЕ НАЙДЕНА</p>
+    {{/if}}
 </div>

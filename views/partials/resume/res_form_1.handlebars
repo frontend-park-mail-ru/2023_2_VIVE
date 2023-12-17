@@ -13,7 +13,7 @@
     (object text="Доктор наук" value="doctor")
     )}}
 
-    {{> input_radio (object text=this.text
+    {{> components/input_radio (object text=this.text
     attrs=(object
     name="education_level"
     value=this.value
@@ -36,7 +36,7 @@
   {{#each data.institutions }}
 
   {{#iff ../data.institutions.length '>' 1}}
-  {{> link-btn (object
+  {{> components/link-btn (object
   text="- Удалить учебное заведение"
   class="js-del-institute res__form_edu__add link-btn_text_red"
   data=(object num=@index)
@@ -52,7 +52,7 @@
 
   {{lookup ../../errors.institutions this.name}}
 
-  {{> input (object obj=this
+  {{> components/input (object obj=this
   name=(concat this.name '#' "institutions" '#' @../index)
   class=(object
   block="res__form__field"
@@ -71,7 +71,7 @@
 {{/each}}
 
 {{#iff data.institutions.length '>=' 1}}
-{{> link-btn (object
+{{> components/link-btn (object
 text="+ Добавить учебное заведение"
 class="js-add-institute res__form_edu__add link-btn_text_blue"
 )}}
