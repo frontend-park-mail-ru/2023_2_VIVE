@@ -8,6 +8,7 @@ class UserStore extends Store {
         super();
         this.login = false;
         this.user = null;
+        // this.notifications = null;
     }
 
     ROLES = {

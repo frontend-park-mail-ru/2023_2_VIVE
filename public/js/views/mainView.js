@@ -1,3 +1,5 @@
+import { BACKEND_SERVER_URL } from "../../../config/config.js";
+import APIConnector from "../modules/APIConnector.js";
 import router from "../modules/router/router.js";
 import resStore from "../stores/ResStore.js";
 import searchStore from '../stores/SearchStore.js';
@@ -51,6 +53,7 @@ export default class mainView extends View {
         this.addDropListener();
         this.profileDropListener();
         this.searchTypeListener();
+        this.pushmentEventsListener();
     }
 
     searchTypeListener() {
@@ -260,6 +263,35 @@ export default class mainView extends View {
                 }
             });
         }
+    }
+
+    async pushmentEventsListener() {
+        // if (User.getUser().role !== 'applicant') {
+        //     const ws = new WebSocket('ws://84.23.53.171:8065/ws');
+
+        //     ws.addEventListener('open', function (event) {
+        //         console.log('WebSocket соединение установлено');
+        //     });
+
+        //     try {
+        //         let resp = await APIConnector.get(BACKEND_SERVER_URL + '/notifications/146');
+        //         console.log(await resp.json());
+        //     } catch(error) {
+        //         console.error(error);
+        //     }
+
+        //     ws.addEventListener('message', function (event) {
+        //         console.log(`Получено сообщение: ${event.data}`);
+        //     });
+
+        //     ws.addEventListener('close', function (event) {
+        //         if (event.wasClean) {
+        //             console.log(`Соединение закрыто чисто, код: ${event.code}, причина: ${event.reason}`);
+        //         } else {
+        //             console.error('Соединение разорвано');
+        //         }
+        //     });
+        // }
     }
 
     clear() {
