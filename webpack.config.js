@@ -14,12 +14,24 @@ module.exports = {
   mode: CONFIG.isDev ? 'development' : 'production',
   devtool: CONFIG.isDev ? 'eval-source-map' : false,
 
-  entry: path.resolve(__dirname, 'public/js/index.js'),
+  entry: {
+    sw: {
+      import: path.resolve(__dirname, 'public/js/workers/sw.js'),
+    },
+    swload: {
+      dependOn: 'sw',
+      import: path.resolve(__dirname, 'public/js/workers/swload.js'),
+    },
+    main: {
+      import: path.resolve(__dirname, 'public/js/index.js'),
+    }
+  },
 
   output: {
-    publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.[contenthash].js',
+    filename: ({ chunk }) => {
+      return chunk.name === 'main' ? '[name].[contenthash].js' : '[name].js';
+    },
   },
 
   resolve: {
@@ -30,7 +42,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 8083,
+    port: 8085,
     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, './'),
@@ -47,7 +59,16 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
 
           },
-          'css-loader'],
+          'css-loader', "postcss-loader"],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+
+          },
+          'css-loader', "less-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
