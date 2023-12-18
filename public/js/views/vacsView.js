@@ -26,7 +26,6 @@ export default class vacsView extends mainView {
 
     // const template = Handlebars.templates['vacs'];
     const template = require('@pages/vac/vacs.handlebars');
-    console.log('HELLO!');
     
     document.querySelector('main').innerHTML = template(data);
 
