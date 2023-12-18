@@ -13,7 +13,7 @@ class NotificationStore extends Store {
     }
 
     async updateData(user) {
-        this.updateSocket(user);
+       //this.updateSocket(user);
         await this.updateNotifications(user);
     }
 
@@ -43,7 +43,7 @@ class NotificationStore extends Store {
         this.notificationSocket = new WebSocket(`ws://84.23.53.171:8065/ws`);
 
         this.notificationSocket.addEventListener('open', () => {
-            console.log('WebSocket соединение установлено');
+            console.log('WebSocket соединение установлено')
         });
 
         this.notificationSocket.addEventListener('message', async (event) => {
@@ -129,7 +129,7 @@ class NotificationStore extends Store {
             console.error(error);
         }
     }
-};
+}
 
 const notificationStore = new NotificationStore();
 export default notificationStore;

@@ -111,6 +111,7 @@ class VacsStore extends Store {
         try {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies/search' + '?' + q_str);
             const data = await resp.json();
+            console.log(data);
             this.vacancies = data['vacancies'];
             this.filters = data['filters'];
             return data['vacancies']['list'];

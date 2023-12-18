@@ -26,14 +26,31 @@ self.addEventListener('message', (event) => {
     }
 });
 
-self.addEventListener('fetch', function(event) {
-    console.log(event.request);
+self.addEventListener('fetch', function (event) {
+    // console.log(event.request);
+
+    const req = event.request;
+
     event.respondWith(
-        caches.match(event.request).then(function(cachedResponse) {
+        caches.match(req).then(function (cachedResponse) {
             if (cachedResponse) {
                 return cachedResponse;
             }
-            return fetch(event.request);
+
+            return new Promise((fulfill, reject) => {
+                fetch(req).then((response) => {
+                    fulfill(response);
+                    if (req.method === 'GET') {
+                        const cloneResponse = response.clone();
+                        caches
+                            .open(CACHE_NAME)
+                            .then((cache) =>
+                                cache.put(req, cloneResponse),
+                            );
+                    }
+                }, reject);
+            });
+
         })
     );
 });

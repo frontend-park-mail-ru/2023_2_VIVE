@@ -101,6 +101,7 @@ export default class profileView extends mainView {
         let form_data = new FormData(form);
 
         if (!await profileStore.sendAvatar(form_data)) {
+          
           this.setError('Ошибка сохранения изображения')
         } else {
           console.log("ok!");
