@@ -30,4 +30,4 @@ router.goToLink(window.location.pathname + window.location.search);
 //     })
 // }
 
-console.log(...performance.getEntriesByType('resource').map((r) => r.name));
+// console.log(...performance.getEntriesByType('resource').map((r) => r.name));

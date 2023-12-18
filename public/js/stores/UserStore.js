@@ -2,6 +2,7 @@ import { BACKEND_SERVER_URL } from '../../../config/config.js';
 import APIConnector from '../modules/APIConnector.js';
 import router from "../modules/router/router.js";
 import Store from './Store.js';
+import notificationStore from './notificationStore.js';
 
 class UserStore extends Store {
     constructor() {
@@ -23,6 +24,7 @@ class UserStore extends Store {
         } else {
             this.user = null;
         }
+        await notificationStore.updateData(this.user);
     }
 
     async reqLogin() {

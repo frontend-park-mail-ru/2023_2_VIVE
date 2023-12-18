@@ -1,0 +1,49 @@
+<div class="dropdown">
+    <div class="navbar__item">
+        <div class="navbar__item__btn link-btn_link link-btn_transp link-btn_block link-btn_pd-sm cursor-pointer" name="drop-btn-notifications">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <g mask="url(#mask0_2585_19012)">
+                <path d="M6.66667 31.6667V28.8889H10V16.5555C10 14.2315 10.6898 12.1551 12.0695 10.3264C13.4491 8.49768 15.2593 7.33333 17.5 6.83333V5.83333C17.5 5.13888 17.7431 4.54861 18.2292 4.06249C18.7153 3.57638 19.3056 3.33333 20 3.33333C20.6945 3.33333 21.2847 3.57638 21.7708 4.06249C22.2569 4.54861 22.5 5.13888 22.5 5.83333V6.83333C24.7408 7.33333 26.5509 8.49768 27.9305 10.3264C29.3102 12.1551 30 14.2315 30 16.5555V28.8889H33.3333V31.6667H6.66667ZM20 36.6667C19.0833 36.6667 18.2986 36.3403 17.6458 35.6875C16.9931 35.0347 16.6667 34.25 16.6667 33.3333H23.3333C23.3333 34.25 23.0069 35.0347 22.3542 35.6875C21.7014 36.3403 20.9167 36.6667 20 36.6667ZM12.7778 28.8889H27.2223V16.5555C27.2223 14.5555 26.5185 12.8518 25.1111 11.4444C23.7037 10.037 22 9.33333 20 9.33333C18 9.33333 16.2963 10.037 14.8889 11.4444C13.4815 12.8518 12.7778 14.5555 12.7778 16.5555V28.8889Z" fill="#0496FF"/>
+                <circle class="{{#if notifications}}{{else}}d-none{{/if}}" cx="29" cy="31" r="7" fill="#FFBC42"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+    <div class="dropdown__content-motification d-none">
+        <div class="header-text header-text--second text-dark-title">Уведомления</div>
+        <div class="notification__frame notification__today">
+            <div class="common-text common-text--medium text-dark-title">Сегодня</div>
+            {{#each (notTodayArray notifications)}}
+            <div class="notification__item">
+                <img class="notification__img" src="/images/img/vk-company.png">
+                <div class="notification__main-info">
+                    {{#iff this.message '==' 'New response'}}
+                        <a href="/resume/{{this.cv_id}}" class="js-nav-link link-btn_blue-without-bd common-text common-text--medium">Новый отклик!</a>
+                        <div class="secondary-text text-dark-regular">На вашу вакансию откликнулся соискатель</div>
+                    {{else}}
+                        <a href="#" class="link-btn_blue-without-bd common-text common-text--medium">Просмотр вакансии!</a>
+                        <div class="secondary-text text-dark-regular">Ваше резюме просмотрел соискатель</div>
+                    {{/iff}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div class="notification__frame notification__early">
+            <div class="common-text common-text--medium text-dark-title">Ранее</div>
+            {{#each (notEarlyArray notifications)}}
+            <div class="notification__item">
+                <img class="notification__img" src="/images/img/vk-company.png">
+                <div class="notification__main-info">
+                    {{#iff this.message '==' 'New response'}}
+                        <a href="/resume/{{this.cv_id}}" class="js-nav-link link-btn_blue-without-bd common-text common-text--medium">Новый отклик!</a>
+                        <div class="secondary-text text-dark-regular">На вашу вакансию откликнулся соискатель</div>
+                    {{else}}
+                        <a href="#" class="link-btn_blue-without-bd common-text common-text--medium">Просмотр вакансии!</a>
+                        <div class="secondary-text text-dark-regular">Ваше резюме просмотрел соискатель</div>
+                    {{/iff}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

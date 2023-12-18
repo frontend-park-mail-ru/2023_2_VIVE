@@ -5,6 +5,7 @@ import resStore from "../stores/ResStore.js";
 import searchStore from '../stores/SearchStore.js';
 import User from '../stores/UserStore.js';
 import vacsStore from "../stores/VacsStore.js";
+import notificationStore from "../stores/notificationStore.js";
 import { getFormObject } from '../utils.js';
 import View from './view.js';
 
@@ -40,6 +41,7 @@ export default class mainView extends View {
                 user: await User.getUser(),
                 search_type: searchStore.getType(),
                 qObj: qObj,
+                notifications: notificationStore.getNotifications(),
             });
         document.querySelector('footer').innerHTML = require('@pages/footer.handlebars')({ user: await User.getUser() });
     }
@@ -53,7 +55,7 @@ export default class mainView extends View {
         this.addDropListener();
         this.profileDropListener();
         this.searchTypeListener();
-        this.pushmentEventsListener();
+        this.notificationListener();
     }
 
     searchTypeListener() {
@@ -165,6 +167,41 @@ export default class mainView extends View {
         }
     }
 
+    notificationListener() {
+        const notificationsDropdowns = document.querySelectorAll('[name="drop-btn-notifications"]');
+
+        notificationsDropdowns.forEach(notificationsDropdown => {
+            const notificationsContentDropdown = notificationsDropdown.parentNode.nextElementSibling;
+
+            notificationsDropdown.addEventListener('click', function(event) {
+                const isContentVisible = !notificationsContentDropdown.classList.contains('d-none');
+
+                if (isContentVisible) {
+                    notificationsContentDropdown.classList.add('d-none');
+                } else {
+                    notificationsContentDropdown.classList.remove('d-none');
+                }
+
+                event.stopPropagation();
+            });
+
+
+            document.addEventListener('click', function (event) {
+                notificationsDropdowns.forEach(notificationsDropdown => {
+                    const notificationsContentDropdown = notificationsDropdown.parentNode.nextElementSibling;
+    
+                    if (!notificationsContentDropdown.contains(event.target) && !notificationsDropdown.contains(event.target)) {
+                        notificationsContentDropdown.classList.add('d-none');
+                    }
+                });
+            });
+        });
+    }
+
+    notificationAdd(notification) {
+
+    }
+
     addDropListener() {
         const profileDropdowns = document.querySelectorAll('[name="drop-btn-profile"]');
 
@@ -263,35 +300,6 @@ export default class mainView extends View {
                 }
             });
         }
-    }
-
-    async pushmentEventsListener() {
-        // if (User.getUser().role !== 'applicant') {
-        //     const ws = new WebSocket('ws://84.23.53.171:8065/ws');
-
-        //     ws.addEventListener('open', function (event) {
-        //         console.log('WebSocket соединение установлено');
-        //     });
-
-        //     try {
-        //         let resp = await APIConnector.get(BACKEND_SERVER_URL + '/notifications/146');
-        //         console.log(await resp.json());
-        //     } catch(error) {
-        //         console.error(error);
-        //     }
-
-        //     ws.addEventListener('message', function (event) {
-        //         console.log(`Получено сообщение: ${event.data}`);
-        //     });
-
-        //     ws.addEventListener('close', function (event) {
-        //         if (event.wasClean) {
-        //             console.log(`Соединение закрыто чисто, код: ${event.code}, причина: ${event.reason}`);
-        //         } else {
-        //             console.error('Соединение разорвано');
-        //         }
-        //     });
-        // }
     }
 
     clear() {
