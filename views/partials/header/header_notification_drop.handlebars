@@ -19,10 +19,10 @@
                 <div class="notification__main-info">
                     {{#iff this.message '==' 'New response'}}
                         <a href="/resume/{{this.cv_id}}" class="js-nav-link link-btn_blue-without-bd common-text common-text--medium">Новый отклик!</a>
-                        <div class="secondary-text text-dark-regular">На вашу вакансию откликнулся соискатель</div>
+                        <span class="secondary-text text-dark-regular">На вашу <a href="/vacancy/{{this.vacancy_id}}" class="js-nav-link link-btn_blue-without-bd secondary-text text-dark-regular">вакансию</a> откликнулся соискатель</span>
                     {{else}}
                         <a href="#" class="link-btn_blue-without-bd common-text common-text--medium">Просмотр вакансии!</a>
-                        <div class="secondary-text text-dark-regular">Ваше резюме просмотрел соискатель</div>
+                        <span class="secondary-text text-dark-regular">Ваше <a href="/resume/{{this.cv_id}}">резюме</a> просмотрел соискатель</span>
                     {{/iff}}
                 </div>
             </div>
