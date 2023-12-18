@@ -5,6 +5,7 @@ import router from "../modules/router/router.js";
 import { getFormObject, getMetaPlusDataObj, isObjEmpty } from '../utils.js';
 import Store from './Store.js';
 import User from './UserStore.js';
+import { saveAs } from 'file-saver';
 
 class ResStore extends Store {
     constructor() {
@@ -557,6 +558,22 @@ class ResStore extends Store {
         } catch(error) {
             console.log(error);
             return undefined;
+        }
+    }
+
+    async loadPfdResume() {
+        try {
+            const resp = await APIConnector.get(
+                BACKEND_SERVER_URL + `/current_user/cvs/${this.form_data.id}/pdf`,
+            );
+            const contentDisposition = await resp.headers.get('Content-Disposition');
+            const match = contentDisposition && contentDisposition.match(/filename=(.+)/);
+            const fileName = match && match[1] ? match[1] : 'filename.pdf';
+            const file = await resp.blob();
+            saveAs(file, fileName);
+        } catch(error) {
+            console.log(error);
+            return false;
         }
     }
 }

@@ -71,6 +71,18 @@ module.exports = {
           'css-loader', "less-loader"],
       },
       {
+        test: /\.mp3$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'mp3/',
+            },
+          },
+        ],
+      },
+      {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
         type: 'asset/resource',
         generator: {

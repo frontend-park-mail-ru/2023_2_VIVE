@@ -53,6 +53,13 @@ export default class resView extends mainView {
   addEventListeners() {
     super.addEventListeners();
 
+    const loadPdfResume = document.querySelector('.js-load-pf-resume');
+    if (loadPdfResume) {
+      loadPdfResume.addEventListener('click', () => {
+        resStore.loadPfdResume();
+      });
+    }
+
     const edit_btns = document.querySelectorAll('.js-edit-page');
     edit_btns.forEach(edit_btn => {
       edit_btn.addEventListener('click', event => {

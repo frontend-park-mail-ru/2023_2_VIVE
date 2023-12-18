@@ -1,8 +1,11 @@
+import { BACKEND_SERVER_URL } from "../../../config/config.js";
+import APIConnector from "../modules/APIConnector.js";
 import router from "../modules/router/router.js";
 import resStore from "../stores/ResStore.js";
 import searchStore from '../stores/SearchStore.js';
 import User from '../stores/UserStore.js';
 import vacsStore from "../stores/VacsStore.js";
+import notificationStore from "../stores/notificationStore.js";
 import { getFormObject } from '../utils.js';
 import View from './view.js';
 
@@ -38,6 +41,7 @@ export default class mainView extends View {
                 user: await User.getUser(),
                 search_type: searchStore.getType(),
                 qObj: qObj,
+                notifications: notificationStore.getNotifications(),
             });
         document.querySelector('footer').innerHTML = require('@pages/footer.handlebars')({ user: await User.getUser() });
     }
@@ -51,6 +55,7 @@ export default class mainView extends View {
         this.addDropListener();
         this.profileDropListener();
         this.searchTypeListener();
+        this.notificationListener();
     }
 
     searchTypeListener() {
@@ -160,6 +165,41 @@ export default class mainView extends View {
                 router.goToLink(main_link + '?' + searchParams.toString());
             })
         }
+    }
+
+    notificationListener() {
+        const notificationsDropdowns = document.querySelectorAll('[name="drop-btn-notifications"]');
+
+        notificationsDropdowns.forEach(notificationsDropdown => {
+            const notificationsContentDropdown = notificationsDropdown.parentNode.nextElementSibling;
+
+            notificationsDropdown.addEventListener('click', function(event) {
+                const isContentVisible = !notificationsContentDropdown.classList.contains('d-none');
+
+                if (isContentVisible) {
+                    notificationsContentDropdown.classList.add('d-none');
+                } else {
+                    notificationsContentDropdown.classList.remove('d-none');
+                }
+
+                event.stopPropagation();
+            });
+
+
+            document.addEventListener('click', function (event) {
+                notificationsDropdowns.forEach(notificationsDropdown => {
+                    const notificationsContentDropdown = notificationsDropdown.parentNode.nextElementSibling;
+    
+                    if (!notificationsContentDropdown.contains(event.target) && !notificationsDropdown.contains(event.target)) {
+                        notificationsContentDropdown.classList.add('d-none');
+                    }
+                });
+            });
+        });
+    }
+
+    notificationAdd(notification) {
+
     }
 
     addDropListener() {
