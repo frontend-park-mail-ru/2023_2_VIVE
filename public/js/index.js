@@ -1,4 +1,4 @@
-import '../css/main.css';
+import '../css/main.less';
 
 import router from './modules/router/router.js';
 import { log } from 'handlebars';

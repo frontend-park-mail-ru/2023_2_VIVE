@@ -42,7 +42,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 8500,
+    port: 8085,
     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, './'),
@@ -59,7 +59,16 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
 
           },
-          'css-loader'],
+          'css-loader', "postcss-loader"],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+
+          },
+          'css-loader', "less-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
