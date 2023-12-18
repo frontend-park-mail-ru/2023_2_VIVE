@@ -1,15 +1,12 @@
-import compiledTemplates from "./templates/templates.precompiled.js";
-import compiledPartials from "./templates/partials.precompiled.js";
-import '../css/main.css';
+import '../css/main.less';
 
-import { registerHelpers } from './handlebars/helpers.js';
 import router from './modules/router/router.js';
+import { log } from 'handlebars';
 
-registerHelpers();
 
 try {
     router.start();
-} catch(error) {
+} catch (error) {
     console.log(error);
 }
 

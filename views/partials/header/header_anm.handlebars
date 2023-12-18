@@ -1,11 +1,11 @@
 <div class="navbar__right">
   <div class="navbar__item">
-    {{> link-btn (object href="/app_auth" text="Уже есть аккаунт"
+    {{> components/link-btn (object href="/app_auth" text="Уже есть аккаунт"
     class="js-nav-link navbar__item__btn link-btn-blue text-dodger-blue"
     data=(array (object key="type" value="login")))}}
   </div>
   <div class="navbar__item">
-    {{> link-btn (object href="/app_reg" text="Зарегистрироваться"
+    {{> components/link-btn (object href="/app_reg" text="Зарегистрироваться"
     class="js-nav-link navbar__item__btn link-btn-blue--bg text-light-title"
     data=(array (object key="type" value="reg")))}}
   </div>

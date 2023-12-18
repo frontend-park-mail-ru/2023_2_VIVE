@@ -3,11 +3,11 @@
     <div class="navbar">
       
       <div class="navbar-mobile__left">
-        {{> header_profile_drop}}
+        {{> header/header_profile_drop}}
       </div>
 
       <div class="navbar-mobile__center">
-        {{> link-btn (object 
+        {{> components/link-btn (object 
         href="/"
         class="js-nav-link navbar__item__btn"
         svg_pos="before"
@@ -20,8 +20,8 @@
       </div>
 
       <div class="navbar__item navbar__logo">
-        {{> header_info_drop}}
-        {{> link-btn (object 
+        {{> header/header_info_drop}}
+        {{> components/link-btn (object 
         href="/"
         class="js-nav-link navbar__item__btn"
         svg_pos="before"
@@ -43,20 +43,20 @@
           </g>
         </svg>
         <div class="navbar__search">
-          {{> header_search}}
+          {{> header/header_search}}
         </div>
       </div>
 
       {{#if user}}
       
       {{#iff user.role '==' 'applicant'}}
-      {{> header_app}}
+      {{> header/header_app}}
       {{else}}
-      {{> header_emp}}
+      {{> header/header_emp}}
       {{/iff}}
 
       {{else}}
-      {{> header_anm }}
+      {{> header/header_anm }}
       {{/if}}
     </div>
   </div>

@@ -40,7 +40,7 @@ export default class resView extends mainView {
 
   async rerender() {
     await super.render();
-    const template = Handlebars.templates['res_view'];
+    const template = require('@pages/resume/res_view.handlebars');
     document.querySelector('main').innerHTML = template(resStore.getContext());
 
     this.addEventListeners();
@@ -52,6 +52,13 @@ export default class resView extends mainView {
 
   addEventListeners() {
     super.addEventListeners();
+
+    const loadPdfResume = document.querySelector('.js-load-pf-resume');
+    if (loadPdfResume) {
+      loadPdfResume.addEventListener('click', () => {
+        resStore.loadPfdResume();
+      });
+    }
 
     const edit_btns = document.querySelectorAll('.js-edit-page');
     edit_btns.forEach(edit_btn => {

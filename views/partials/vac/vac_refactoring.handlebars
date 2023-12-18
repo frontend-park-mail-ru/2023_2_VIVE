@@ -7,7 +7,7 @@
         )}}
 
         {{#if ../data.name}}
-            {{> input (object
+            {{> components/input (object
             value=../data.name
             obj=this
             name=this.name
@@ -15,7 +15,7 @@
             class=(object title="res__form__input__title header-text header-text--fourth text-form-active")
             )}}
         {{else}}
-            {{> input (object
+            {{> components/input (object
             value=@root.vacancy.name
             obj=this
             name=this.name
@@ -33,7 +33,7 @@
         ))}}
 
         {{#or ../data.salary_lower_bound ../data.salary_upper_bound}}
-        {{> double_input (object
+        {{> components/double_input (object
         obj=this
         value_one=../data.salary_lower_bound
         value_second=../data.salary_upper_bound
@@ -42,7 +42,7 @@
         class=(object class="res__form__input__title header-text header-text--fourth text-form-active mobile__lh-20")
         )}}
         {{else}}
-        {{> double_input (object
+        {{> components/double_input (object
         obj=this
         value_one=@root.vacancy.salary_lower_bound
         value_second=@root.vacancy.salary_upper_bound
@@ -69,7 +69,7 @@
 
             {{#if ../data.experience}}
                 {{#iff this.value '==' ../data.experience}}
-                    {{> input_radio (object text=this.text
+                    {{> components/input_radio (object text=this.text
                     attrs=(object
                     name="experience"
                     value=this.value
@@ -81,7 +81,7 @@
                     )
                     )}}
                 {{else}}
-                    {{> input_radio (object text=this.text
+                    {{> components/input_radio (object text=this.text
                     attrs=(object
                     name="experience"
                     value=this.value
@@ -95,7 +95,7 @@
                 {{/iff}}
             {{else}}
                 {{#iff this.value '==' @root.vacancy.experience}}
-                    {{> input_radio (object text=this.text
+                    {{> components/input_radio (object text=this.text
                     attrs=(object
                     name="experience"
                     value=this.value
@@ -107,7 +107,7 @@
                     )
                     )}}
                 {{else}}
-                    {{> input_radio (object text=this.text
+                    {{> components/input_radio (object text=this.text
                     attrs=(object
                     name="experience"
                     value=this.value
@@ -141,7 +141,7 @@
             
             {{#if ../data.employment}}
                 {{#iff this.value '==' ../data.employment}}
-                    {{> input_radio (object text=this.text
+                    {{> components/input_radio (object text=this.text
                     attrs=(object
                     name="employment"
                     value=this.value
@@ -153,7 +153,7 @@
                     )
                     )}}
                 {{else}}
-                    {{> input_radio (object text=this.text
+                    {{> components/input_radio (object text=this.text
                     attrs=(object
                     name="employment"
                     value=this.value
@@ -166,7 +166,7 @@
                 {{/iff}}
             {{else}}
                 {{#iff this.value '==' @root.vacancy.employment}}
-                    {{> input_radio (object text=this.text
+                    {{> components/input_radio (object text=this.text
                     attrs=(object
                     name="employment"
                     value=this.value
@@ -178,7 +178,7 @@
                     )
                     )}}
                 {{else}}
-                    {{> input_radio (object text=this.text
+                    {{> components/input_radio (object text=this.text
                     attrs=(object
                     name="employment"
                     value=this.value
@@ -201,7 +201,7 @@
 
         
         {{#if ../data.location}}
-            {{> input (object 
+            {{> components/input (object 
             obj=this
             name=this.name
             value=../data.location
@@ -209,7 +209,7 @@
             class=(object title="res__form__input__title header-text header-text--fourth text-form-active")
             )}}
         {{else}}
-            {{> input (object 
+            {{> components/input (object 
             obj=this
             name=this.name
             value=@root.vacancy.location

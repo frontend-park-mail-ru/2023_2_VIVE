@@ -6,24 +6,48 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
+const CONFIG = {
+  isDev: true,
+}
 
-  entry: './public/js/index.js',
+module.exports = {
+  mode: CONFIG.isDev ? 'development' : 'production',
+  devtool: CONFIG.isDev ? 'eval-source-map' : false,
+
+  entry: {
+    sw: {
+      import: path.resolve(__dirname, 'public/js/workers/sw.js'),
+    },
+    swload: {
+      dependOn: 'sw',
+      import: path.resolve(__dirname, 'public/js/workers/swload.js'),
+    },
+    main: {
+      import: path.resolve(__dirname, 'public/js/index.js'),
+    }
+  },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.[contenthash].js',
+    filename: ({ chunk }) => {
+      return chunk.name === 'main' ? '[name].[contenthash].js' : '[name].js';
+    },
   },
 
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, './public/'),
-      "@pages": path.resolve(__dirname, './views/pages/'),
+      "@": path.resolve(__dirname, '/public'),
+      "@pages": path.resolve(__dirname, '/views/pages'),
     },
   },
 
   devServer: {
-    port: 8500,
+    port: 8085,
+    historyApiFallback: true,
+    static: {
+      directory: path.join(__dirname, './'),
+      watch: true
+    },
   },
 
   module: {
@@ -35,7 +59,28 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
 
           },
-          'css-loader'],
+          'css-loader', "postcss-loader"],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+
+          },
+          'css-loader', "less-loader"],
+      },
+      {
+        test: /\.mp3$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'mp3/',
+            },
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
@@ -51,25 +96,18 @@ module.exports = {
           filename: path.join('fonts', '[name].[contenthash][ext]'),
         },
       },
-      // { 
-      //   test: /\.handlebars$/, 
-      //   use: [
-      //     {
-      //       loader: 'handlebars-loader',
-      //       options: {
-      //         // runtime: 'handlebars/dist/cjs/handlebars.runtime',
-      //         // precompileOptions: {
-      //         //   knownHelpersOnly: false,
-      //         // },
-      //         helperDirs: [
-      //           path.resolve(__dirname, 'public/js/handlebars'),
-      //         ],
-      //         // inlineRequires: '/assets/',
-      //         rootRelative: './views/partials/',
-      //       },
-      //     },
-      //   ],
-      // },
+      {
+        test: /\.handlebars$/,
+        use: [
+          {
+            loader: 'handlebars-loader',
+            options: {
+              helperDirs: [path.resolve(__dirname, 'public/js/handlebars')],
+              partialDirs: [path.resolve(__dirname, 'views/partials')]
+            },
+          },
+        ],
+      },
     ]
   },
 
@@ -86,7 +124,6 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      // filename: './index.html'
     }),
 
     new MiniCssExtractPlugin({

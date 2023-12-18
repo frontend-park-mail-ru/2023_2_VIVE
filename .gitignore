@@ -1,5 +1,4 @@
 .vscode
 node_modules
-public/js/templates/templates.precompiled.js
-public/js/templates/partials.precompiled.js
+public/js/templates/*
 dist

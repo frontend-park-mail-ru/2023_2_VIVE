@@ -18,7 +18,7 @@ export default class empVacs extends mainView {
             }
         }
 
-        const template = Handlebars.templates['empVacs'];
+        const template = require('@pages/empVacs.handlebars');
         document.querySelector('main').innerHTML = template(empVacsStore.getContext());
 
         this.addEventListeners();

@@ -1,7 +1,7 @@
 <div class="form">
 
   <label class="res__form__field form__label_flex">
-    {{> input_checkbox (object
+    {{> components/input_checkbox (object
     text="У меня есть опыт работы"
     class=(object
     input="js-name-is-experience"
@@ -12,7 +12,7 @@
   {{#each data.companies }}
 
   {{#iff ../data.companies.length '>' 1}}
-  {{> link-btn (object
+  {{> components/link-btn (object
   text="- Удалить место работы"
   class="js-del-company res__form_edu__add link-btn_text_red"
   data=(object num=@index)
@@ -26,7 +26,7 @@
   (object title="Начало работы" name="start_date" type="date")
   )}}
 
-  {{> input (object obj=this
+  {{> components/input (object obj=this
   class=(object
   block="res__form__field"
   title="res__form__input__title"
@@ -45,7 +45,7 @@
   (object title="Год окончания" name="end_date" placeholder="Год окончания" type="date")
   )}}
 
-  {{> input (object obj=this
+  {{> components/input (object obj=this
   class=(object
   block="res__form__field"
   title="res__form__input__title"
@@ -61,7 +61,7 @@
   {{/if}}
 
   <label class="res__form__field form__label_flex">
-    {{> input_checkbox (object
+    {{> components/input_checkbox (object
     text="Добавить дату окончания"
     class=(object
     input="js-name-is-expirience_end_date"
@@ -74,7 +74,7 @@
   (object title="Расскажите о ваших обязанностях и достижениях" name="description" placeholder="Достижения и
   обязанности"))}}
 
-  {{> input (object obj=this
+  {{> components/input (object obj=this
   class=(object
   block="res__form__field"
   title="res__form__input__title"
@@ -93,7 +93,7 @@
 {{/each}}
 
 {{#iff data.companies.length '>=' 1}}
-{{> link-btn (object
+{{> components/link-btn (object
 text="+ Добавить место работы"
 class="js-add-company res__form_edu__add link-btn_text_blue"
 )}}

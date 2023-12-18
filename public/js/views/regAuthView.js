@@ -33,7 +33,7 @@ export default class regAuthView extends mainView {
             }
         }
         
-        const template = Handlebars.templates['form_login_reg'];
+        const template = require('@pages/form_login_reg.handlebars');
         document.querySelector('main').innerHTML = template(regAuthStore.getContext());
 
         this.addEventListeners();

@@ -24,7 +24,7 @@ export default class profileView extends mainView {
     }
     
     // eslint-disable-next-line no-undef
-    const template = Handlebars.templates['profile'];
+    const template = require('@pages/profile.handlebars');
     document.querySelector('main').innerHTML = template(await profileStore.getContext());
 
     this.addEventListeners();
@@ -101,6 +101,7 @@ export default class profileView extends mainView {
         let form_data = new FormData(form);
 
         if (!await profileStore.sendAvatar(form_data)) {
+          
           this.setError('Ошибка сохранения изображения')
         } else {
           console.log("ok!");

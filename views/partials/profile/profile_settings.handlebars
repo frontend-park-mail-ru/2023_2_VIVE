@@ -21,24 +21,24 @@
 
     {{#if (isOdd @index)}}
       {{#iff this.title '==' 'ФИО'}}
-        {{> sttng_input (object obj=this
+        {{> components/setting_inputs/sttng_input (object obj=this
         user=../user
         data=(lookup ../errors 'data-last-name')
         )}}
       {{else iff this.title '==' 'Почта'}}
-        {{> sttng_input (object obj=this
+        {{> components/setting_inputs/sttng_input (object obj=this
         user=../user
         data=(lookup ../errors 'data-email')
         )}}
       {{else iff this.title '==' 'Пароль'}}
-        {{> sttng_input (object obj=this
+        {{> components/setting_inputs/sttng_input (object obj=this
         user=../user
         data=(lookup ../errors 'data-password')
         )}}
       {{/iff}}
     {{else}}
       {{#iff this.title '==' 'ФИО'}}
-        {{> sttng_chng (object 
+        {{> components/setting_inputs/sttng_chng (object 
         obj=this
         user=../user
         inputs = (array
@@ -50,7 +50,7 @@
         errors=(lookup ../errors 'last-name')
         )}}
       {{else iff this.title '==' 'Почта'}}
-        {{> sttng_chng (object 
+        {{> components/setting_inputs/sttng_chng (object 
         obj=this
         user=../user
         inputs = (array
@@ -61,7 +61,7 @@
         data=(lookup ../errors 'data-email')
         )}}
       {{else}}
-        {{> sttng_chng (object 
+        {{> components/setting_inputs/sttng_chng (object 
         obj=this
         user=../user
         inputs = (array

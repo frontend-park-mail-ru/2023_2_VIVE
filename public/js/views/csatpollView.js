@@ -10,7 +10,7 @@ export default class csatpollView extends View {
 
         console.log(csatStore.getContext());
         await csatStore.setQuestions();
-        document.querySelector('.main__poll').innerHTML = Handlebars.templates['csatpoll'](csatStore.getContext());
+        document.querySelector('.main__poll').innerHTML = require('@pages/polls/csatpoll.handlebars')(csatStore.getContext());
         this.addEventListeners();
         // console.log(window.location.href);
         // window.addEventListener('message', event => {

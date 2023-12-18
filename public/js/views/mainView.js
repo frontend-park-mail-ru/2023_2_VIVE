@@ -1,8 +1,11 @@
+import { BACKEND_SERVER_URL } from "../../../config/config.js";
+import APIConnector from "../modules/APIConnector.js";
 import router from "../modules/router/router.js";
 import resStore from "../stores/ResStore.js";
 import searchStore from '../stores/SearchStore.js';
 import User from '../stores/UserStore.js';
 import vacsStore from "../stores/VacsStore.js";
+import notificationStore from "../stores/notificationStore.js";
 import { getFormObject } from '../utils.js';
 import View from './view.js';
 
@@ -16,7 +19,7 @@ export default class mainView extends View {
     async render() {
         await super.render();
 
-        document.querySelector('.container').innerHTML = Handlebars.templates['main']();
+        document.querySelector('.container').innerHTML = require('@pages/main.handlebars')();
 
         if (!document.querySelector('header')) {
             const headerElement = document.createElement('header');
@@ -32,13 +35,15 @@ export default class mainView extends View {
         } else {
             qObj = resStore.qObj ? resStore.qObj.q : null;
         }
-        document.querySelector('header').innerHTML = Handlebars.partials['header'](
-            { 
-                user: await User.getUser(), 
+
+        document.querySelector('header').innerHTML = require('@pages/header.handlebars')(
+            {
+                user: await User.getUser(),
                 search_type: searchStore.getType(),
-                qObj : qObj,
+                qObj: qObj,
+                notifications: notificationStore.getNotifications(),
             });
-        document.querySelector('footer').innerHTML = Handlebars.partials['footer']({ user: await User.getUser() });
+        document.querySelector('footer').innerHTML = require('@pages/footer.handlebars')({ user: await User.getUser() });
     }
 
     /**
@@ -50,6 +55,7 @@ export default class mainView extends View {
         this.addDropListener();
         this.profileDropListener();
         this.searchTypeListener();
+        this.notificationListener();
     }
 
     searchTypeListener() {
@@ -61,7 +67,7 @@ export default class mainView extends View {
 
         if (mobileSearchBtn) {
             const searchMobileField = mobileSearchBtn.nextElementSibling;
-            mobileSearchBtn.addEventListener('touchstart', function(event) {
+            mobileSearchBtn.addEventListener('touchstart', function (event) {
                 const isContentVisible = !searchMobileField.classList.contains('navbar__search');
 
                 if (isContentVisible) {
@@ -82,7 +88,7 @@ export default class mainView extends View {
         }
 
         if (searchDropdown) {
-            searchDropdown.addEventListener('click', function(event) {
+            searchDropdown.addEventListener('click', function (event) {
                 const isContentVisible = !searchContentDropdown.classList.contains('d-none');
 
                 if (isContentVisible) {
@@ -161,15 +167,50 @@ export default class mainView extends View {
         }
     }
 
+    notificationListener() {
+        const notificationsDropdowns = document.querySelectorAll('[name="drop-btn-notifications"]');
+
+        notificationsDropdowns.forEach(notificationsDropdown => {
+            const notificationsContentDropdown = notificationsDropdown.parentNode.nextElementSibling;
+
+            notificationsDropdown.addEventListener('click', function(event) {
+                const isContentVisible = !notificationsContentDropdown.classList.contains('d-none');
+
+                if (isContentVisible) {
+                    notificationsContentDropdown.classList.add('d-none');
+                } else {
+                    notificationsContentDropdown.classList.remove('d-none');
+                }
+
+                event.stopPropagation();
+            });
+
+
+            document.addEventListener('click', function (event) {
+                notificationsDropdowns.forEach(notificationsDropdown => {
+                    const notificationsContentDropdown = notificationsDropdown.parentNode.nextElementSibling;
+    
+                    if (!notificationsContentDropdown.contains(event.target) && !notificationsDropdown.contains(event.target)) {
+                        notificationsContentDropdown.classList.add('d-none');
+                    }
+                });
+            });
+        });
+    }
+
+    notificationAdd(notification) {
+
+    }
+
     addDropListener() {
         const profileDropdowns = document.querySelectorAll('[name="drop-btn-profile"]');
 
         profileDropdowns.forEach(profileDropdown => {
             const profileContentDropdown = profileDropdown.parentNode.nextElementSibling;
-        
+
             profileDropdown.addEventListener('click', function (event) {
                 const isContentVisible = !profileContentDropdown.classList.contains('d-none');
-        
+
                 if (isContentVisible) {
                     profileDropdown.classList.remove('dropdown__img--rotate');
                     profileDropdown.classList.add('dropdown__img--rotate-secondary');
@@ -179,7 +220,7 @@ export default class mainView extends View {
                     profileDropdown.classList.add('dropdown__img--rotate');
                     profileContentDropdown.classList.remove('d-none');
                 }
-        
+
                 event.stopPropagation();
             });
         });
@@ -187,7 +228,7 @@ export default class mainView extends View {
         document.addEventListener('click', function (event) {
             profileDropdowns.forEach(profileDropdown => {
                 const profileContentDropdown = profileDropdown.parentNode.nextElementSibling;
-                
+
                 if (!profileContentDropdown.contains(event.target) && !profileDropdown.contains(event.target)) {
                     profileDropdown.classList.remove('dropdown__img--rotate');
                     profileDropdown.classList.add('dropdown__img--rotate-secondary');
@@ -216,7 +257,7 @@ export default class mainView extends View {
                 });
             });
         }
-        
+
         if (leaveBtns) {
             leaveBtns.forEach(leaveBtn => {
                 leaveBtn.addEventListener('click', async (e) => {

@@ -102,7 +102,6 @@ class VacsStore extends Store {
     }
 
     async getVacancies() {
-        console.log(this.qObj);
 
         if (!this.qObj['q']) {
             this.qObj['q'] = '';
@@ -110,9 +109,9 @@ class VacsStore extends Store {
 
         const q_str = decodeURIComponent(new URLSearchParams(this.qObj).toString());
         try {
-            console.log('Отправляемый запрос:', q_str);
             const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies/search' + '?' + q_str);
             const data = await resp.json();
+            console.log(data);
             this.vacancies = data['vacancies'];
             this.filters = data['filters'];
             return data['vacancies']['list'];
