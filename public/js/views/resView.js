@@ -210,7 +210,7 @@ export default class resView extends mainView {
     const deleteResumeButton = document.querySelector('[data-name="delete-resume"]');
     if (deleteResumeButton) {
       deleteResumeButton.addEventListener('click', (e) => {
-        const template = Handlebars.templates['confirm_action'];
+        const template = require('@pages/confirm_action.handlebars');
         document.querySelector('main').innerHTML += template({'action': 'resume-del'});
         
         const confirmActionFrame = document.querySelector('.confirm-action__frame');

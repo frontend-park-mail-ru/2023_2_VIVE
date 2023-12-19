@@ -15,13 +15,6 @@ module.exports = {
   devtool: CONFIG.isDev ? 'eval-source-map' : false,
 
   entry: {
-    sw: {
-      import: path.resolve(__dirname, 'public/js/workers/sw.js'),
-    },
-    swload: {
-      dependOn: 'sw',
-      import: path.resolve(__dirname, 'public/js/workers/swload.js'),
-    },
     main: {
       import: path.resolve(__dirname, 'public/js/index.js'),
     }
@@ -29,9 +22,8 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: ({ chunk }) => {
-      return chunk.name === 'main' ? '[name].[contenthash].js' : '[name].js';
-    },
+    filename: '[name].[contenthash].js',
+    publicPath: '/',
   },
 
   resolve: {
@@ -48,6 +40,9 @@ module.exports = {
       directory: path.join(__dirname, './'),
       watch: true
     },
+    host: "hunt-n-hire.ru",
+    port: 8085,
+    https: true,
   },
 
   module: {

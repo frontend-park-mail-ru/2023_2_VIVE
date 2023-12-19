@@ -85,7 +85,7 @@ export default class profileView extends mainView {
 
         if (deleteVacancyButton) {
             deleteVacancyButton.addEventListener('click', (e) => {
-                const template = Handlebars.templates['confirm_action'];
+                const template = require('@pages/confirm_action.handlebars');
                 document.querySelector('main').innerHTML += template({'action': 'vacancy-del'});
                 
                 const confirmActionFrame = document.querySelector('.confirm-action__frame');

@@ -184,6 +184,14 @@ class RegAuthStore extends Store {
         return true;
     }
 
+    convertError(mes) {
+        const conv_d = {
+            'The entered email-address is not a real one': 'Домен введенной почты недоступен',
+            'An account with given email already exists': 'Аккаунт с введенной почтой уже существует'
+        }
+        return conv_d[mes];
+    }
+
     async sendForm() {
         const send_form_data = {};
         Object.assign(send_form_data, this.form_data);
@@ -191,16 +199,16 @@ class RegAuthStore extends Store {
         if (this.view.form_type == this.FORM_TYPES.reg) {
             delete send_form_data['repeat_password'];
             console.log(this.form_data);
+            let resp;
             try {
-                const resp = await APIConnector.post(
+                resp = await APIConnector.post(
                     BACKEND_SERVER_URL + '/users',
                     send_form_data,
                 );
                 this.clear();
                 router.goToLink('/');
             } catch (err) {
-                this.error = "Аккаунт с данной почтой уже существует";
-                console.error(err);
+                this.error = this.convertError(JSON.parse(err.message).message);
             }
         } else {
             try {
@@ -212,7 +220,6 @@ class RegAuthStore extends Store {
                 router.goToLink('/');
             } catch (err) {
                 this.error = "Неверный логин или пароль";
-                console.error(err);
             }
         }
         return true;
