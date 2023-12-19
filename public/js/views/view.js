@@ -53,7 +53,7 @@ export default class View {
         links.forEach(link => {
             link.addEventListener('click', async event => {
                 event.preventDefault();
-                if (!event['processed']) {
+                if (!event['processed'] && !event.target.closest('.js-remove-fav-vac') && !event.target.closest('.js-add-fav-vac')) {
                     router.goToLink(getHrefFromLink(link))
                     event['processed'] = true;
                 }
