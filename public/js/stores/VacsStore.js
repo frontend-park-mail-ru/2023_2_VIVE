@@ -120,6 +120,44 @@ class VacsStore extends Store {
             return undefined;
         }
     }
+
+    async removeFavouriteVac(vac_id) {
+        if (User.isLoggedIn()) {
+            if (User.getUser().role == User.ROLES.emp) {
+                return false;
+            }
+        } else {
+            router.goToLink('/app_auth');
+            return false;
+        }
+
+        try {
+            const resp = await APIConnector.delete(BACKEND_SERVER_URL + '/vacancies/favourite/' + vac_id);
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
+
+    async setFavouriteVac(vac_id) {
+        if (User.isLoggedIn()) {
+            if (User.getUser().role == User.ROLES.emp) {
+                return false;
+            }
+        } else {
+            router.goToLink('/app_auth');
+            return false;
+        }
+
+        try {
+            const resp = await APIConnector.post(BACKEND_SERVER_URL + '/vacancies/favourite/' + vac_id);
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
 }
 
 const vacsStore = new VacsStore;

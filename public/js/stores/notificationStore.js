@@ -110,7 +110,7 @@ class NotificationStore extends Store {
                 console.error('Соединение разорвано');
             }
 
-            setTimeout(notificationStore.createSocket(), 60000);
+            // setTimeout(notificationStore.createSocket(), 60000);
         });
     }
 

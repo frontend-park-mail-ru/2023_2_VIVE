@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 
 const CONFIG = {
   isDev: true,
@@ -34,7 +35,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 8085,
+    port: 8084,
     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, './'),
@@ -115,6 +116,10 @@ module.exports = {
           to: './images',
         }
       ]
+    }),
+
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
     }),
 
     new HtmlWebpackPlugin({
