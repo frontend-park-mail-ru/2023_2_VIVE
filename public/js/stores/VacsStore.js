@@ -14,7 +14,6 @@ class VacsStore extends Store {
     }
 
     async getContext() {
-        console.log(this.vacs);
         this.vacs.forEach(vac => {
             vac.salary_view = vacancyStore.processVacanciesSalary(vac);
             vac.employment_view = vacancyStore.processVacanciesEmployment(vac);

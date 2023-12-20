@@ -502,8 +502,6 @@ class ResStore extends Store {
             this.qObj['page_num'] = 1;
             this.qObj['results_per_page'] = 10;
         }
-
-        console.log(this.qObj);
     }
 
     async getResumes() {
@@ -520,7 +518,6 @@ class ResStore extends Store {
     }
 
     async pagToNext() {
-        console.log(this.qObj, this.cvs);
         if (this.qObj.page_num * this.qObj.results_per_page >= this.cvs.count) {
             return false;
         }
@@ -539,8 +536,6 @@ class ResStore extends Store {
     }
 
     async getAllResumes() {
-        console.log(this.qObj);
-
         if (!this.qObj['q']) {
             this.qObj['q'] = '';
         }
@@ -551,7 +546,6 @@ class ResStore extends Store {
                 BACKEND_SERVER_URL + `/cvs/search?` + q_str,
             );
             const data = await resp.json();
-            console.log(data);
             this.filters = data.filters;
             this.cvs = data.cvs;
             return data.cvs.list;

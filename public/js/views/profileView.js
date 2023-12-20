@@ -131,7 +131,6 @@ export default class profileView extends mainView {
   }
 
   async updateInnerData(data) {
-    console.log(data);
     return profileStore.updateInnerData(data);
   }
 }

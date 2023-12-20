@@ -43,7 +43,7 @@ class NotificationStore extends Store {
         this.notificationSocket = new WebSocket(`ws://84.23.53.171:8065/ws`);
 
         this.notificationSocket.addEventListener('open', () => {
-            console.log('WebSocket соединение установлено')
+            
         });
 
         this.notificationSocket.addEventListener('message', async (event) => {
@@ -124,7 +124,6 @@ class NotificationStore extends Store {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + `/notifications/${user.id}`);
             this.notifications = (await resp.json()).notifications;
             this.notifications = this.notifications ? this.notifications : [];
-            console.log(this.notifications);
         } catch(error) {
             console.error(error);
         }
