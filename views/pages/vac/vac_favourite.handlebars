@@ -1,0 +1,13 @@
+<div class="profile">
+    <div class="emp-vacs__frame">
+        {{#if data}}
+        <div class="header-text header-text--first">
+            Избранные вакансии - {{data.length}}
+        </div>
+            {{> vac/vacs_list_mobile
+            vacancies=data}}
+        {{else}}
+            <div class="header-text header-text--first text-dark-title">Вы еще не добавили ни одну вакансию в избранное :(</div>
+        {{/if}}
+    </div>
+</div>

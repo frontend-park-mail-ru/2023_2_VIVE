@@ -14,6 +14,12 @@ class VacsStore extends Store {
     }
 
     async getContext() {
+        console.log(this.vacs);
+        this.vacs.forEach(vac => {
+            vac.salary_view = vacancyStore.processVacanciesSalary(vac);
+            vac.employment_view = vacancyStore.processVacanciesEmployment(vac);
+            vac.expirience_view = vacancyStore.processVacanciesExperience(vac);
+        });
         return {
             user: await User.getUser(),
             sorted: this.sorted,
@@ -117,6 +123,18 @@ class VacsStore extends Store {
         } catch (err) {
             console.error(err);
             return undefined;
+        }
+    }
+
+    async getFavouriteVacs() {
+        try {
+            const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies/favourite');
+            this.vacs = await resp.json();
+            return true;
+        } catch(error) {
+            console.error(error);
+            this.vacs = [];
+            return false;
         }
     }
 
