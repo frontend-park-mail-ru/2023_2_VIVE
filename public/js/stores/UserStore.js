@@ -18,7 +18,7 @@ class UserStore extends Store {
     }
 
     async updateUser() {
-        await this.reqLogin();
+        this.login = await this.reqLogin();
         if (this.login) {
             await this.reqUser();
         } else {
@@ -30,9 +30,9 @@ class UserStore extends Store {
     async reqLogin() {
         try {
             let resp = await APIConnector.get(BACKEND_SERVER_URL + '/session');
-            this.login = resp.ok;
+            return true;
         } catch (err) {
-            this.login = false;
+            return false;
         }
     }
 
@@ -48,7 +48,7 @@ class UserStore extends Store {
     isLoggedIn() {
         return this.login;
     }
-    
+
     getUser() {
         return this.user;
     }
@@ -56,6 +56,9 @@ class UserStore extends Store {
     async logout() {
         try {
             const resp = await APIConnector.delete(BACKEND_SERVER_URL + '/session');
+            if (resp.ok) {
+                this.updateUser();
+            }
             return resp.ok;
         } catch (err) {
             console.error(err);

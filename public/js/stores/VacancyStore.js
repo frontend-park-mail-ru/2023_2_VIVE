@@ -4,6 +4,7 @@ import { validateForm } from '../modules/constraints.js';
 import router from "../modules/router/router.js";
 import { getMetaPlusDataObj, isObjEmpty } from '../utils.js';
 import Store from "./Store.js";
+import User from './UserStore.js';
 
 class VacancyStore extends Store {
     constructor() {
@@ -187,7 +188,7 @@ class VacancyStore extends Store {
         try {
             this.vacancy = (await this.getData(`/vacancies/${data.id}`));
             
-            this.user = await this.getData("/current_user");
+            this.user = User.getUser();
             this.responses = [];
 
             switch(data.url.split('/').slice(1)[2]) {

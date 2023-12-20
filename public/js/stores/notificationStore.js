@@ -13,7 +13,7 @@ class NotificationStore extends Store {
     }
 
     async updateData(user) {
-       //this.updateSocket(user);
+       this.updateSocket(user);
         await this.updateNotifications(user);
     }
 
@@ -40,7 +40,7 @@ class NotificationStore extends Store {
     }
 
     createSocket() {
-        this.notificationSocket = new WebSocket(`ws://84.23.53.171:8065/ws`);
+        this.notificationSocket = new WebSocket(`wss://hunt-n-hire.ru/ws`);
 
         this.notificationSocket.addEventListener('open', () => {
             

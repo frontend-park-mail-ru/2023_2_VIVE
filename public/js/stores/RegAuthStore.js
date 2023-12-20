@@ -6,6 +6,7 @@ import { getMetaPlusDataObj, isObjEmpty } from '../utils.js';
 import regAuthView from '../views/regAuthView.js';
 import UserStore from './UserStore.js'
 import Store from './Store.js';
+import User from './UserStore.js';
 
 
 
@@ -206,6 +207,7 @@ class RegAuthStore extends Store {
                     send_form_data,
                 );
                 this.clear();
+                await User.updateUser();
                 router.goToLink('/');
             } catch (err) {
                 this.error = this.convertError(JSON.parse(err.message).message);
@@ -217,6 +219,7 @@ class RegAuthStore extends Store {
                     send_form_data,
                 );
                 this.clear();
+                await User.updateUser();
                 router.goToLink('/');
             } catch (err) {
                 this.error = "Неверный логин или пароль";

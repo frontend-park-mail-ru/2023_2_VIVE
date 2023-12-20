@@ -98,7 +98,6 @@ class Router {
         path = urlObj.pathname;
 
         this.deleteLastRender();
-        await User.updateUser();
         for (const element of urls) {
             const url = element[UrlParams.URL];
             const routeRegex = new RegExp(`^${url.replace(/:\w+/g, '(\\d+)')}(#)?$`);
