@@ -82,7 +82,7 @@ class NotificationStore extends Store {
                 }
             })
 
-            const notificationText = document.createElement('div');
+            const notificationText = document.createElement('span');
             notificationText.classList.add('secondary-text', 'text-dark-regular');
             if (notification.message === 'New response') {
                 notificationText.textContent = 'На вашу вакансию откликнулся соискатель';
@@ -107,10 +107,8 @@ class NotificationStore extends Store {
             if (event.wasClean) {
                 console.log(`Соединение закрыто чисто, код: ${event.code}, причина: ${event.reason}`);
             } else {
-                console.error('Соединение разорвано');
+                setTimeout(notificationStore.createSocket(), 6000);
             }
-
-            // setTimeout(notificationStore.createSocket(), 60000);
         });
     }
 

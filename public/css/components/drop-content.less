@@ -4,8 +4,19 @@
     right: 100%;
   }
 
+  .navbar-mobile__left {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
   .dropdown__content-search {
     top: calc(100% + 13px);
+  }
+
+  .dropdown__content-motification {
+    width: 95vw;
+    max-height: 200px;
   }
 }
 
@@ -21,6 +32,11 @@
 
   .dropdown__content-search {
     top: calc(100% + 10px);
+  }
+
+  .dropdown__content-motification {
+    width: 450px;
+    max-height: 300px;
   }
 }
 
@@ -125,8 +141,6 @@
   top: calc(100% + 20px);
   right: 15%;
   display: flex;
-  width: 450px;
-  max-height: 300px;
   overflow-y: auto;
   padding: 20px;
   flex-direction: column;
@@ -134,5 +148,6 @@
   gap: 20px;
   border-radius: 12px;
   background: var(--main--eror-white);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 

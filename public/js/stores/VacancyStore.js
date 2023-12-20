@@ -202,16 +202,18 @@ class VacancyStore extends Store {
                 default:
                     break;
             }
-
-            // const cvIds = await this.getData(`/vacancies/${data['id']}/applicants`);
-            // if (cvIds) {
-            //     for (const cv of cvIds) {
-            //         const cvId = cv.cv_id;
-            //         data = await this.getData(`/cv/${cvId}`);
-            //         data.profession_name = data.profession_name.slice(0, 50) + "...";
-            //         this.responses.push(data);
-            //     }
-            // }
+            
+            if (User.getUser().role === User.ROLES.emp && User.getUser().employer_id === this.vacancy.employer_id) {
+                const cvIds = await this.getData(`/vacancies/${data['id']}/applicants`);
+                if (cvIds) {
+                    for (const cv of cvIds) {
+                        const cvId = cv.cv_id;
+                        data = await this.getData(`/cv/${cvId}`);
+                        data.profession_name = data.profession_name.slice(0, 50) + "...";
+                        this.responses.push(data);
+                    }
+                }
+            }
 
             return true;
         } catch (err) {

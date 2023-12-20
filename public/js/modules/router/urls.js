@@ -15,7 +15,7 @@ import appResumes from '../../views/appResumesView.js'
 import favouriteVacs from "../../views/favouriteVacs.js"
 
 const urls = [
-    {url: '/favourite', view: new favouriteVacs()},
+    {url: '/favourite', login_required: true, for_applicant: true, view: new favouriteVacs()},
     {url: '/csat/statistic', login_required: true, view: new csatStatView()},
     {url: '/page404', view: new page404View()},
     {url: '/vacs', view: new vacsView()},

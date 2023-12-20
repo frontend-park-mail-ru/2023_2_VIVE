@@ -11,6 +11,11 @@ export default class favouriteVacs extends mainView {
 
         const template = require('@pages/vac/vac_favourite.handlebars');
         document.querySelector('main').innerHTML = template(await vacsStore.getContext());
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
 
         this.addEventListeners();
     }
@@ -22,21 +27,21 @@ export default class favouriteVacs extends mainView {
     addEventListeners() {
         super.addEventListeners();
 
-        const remFavouriteBtn = document.querySelector('.js-remove-fav-vac');
-        if (remFavouriteBtn) {
-            remFavouriteBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.removeFavVacLogic(remFavouriteBtn);
-            });
-        }
+        const remFavouriteBtns = document.querySelectorAll('.js-remove-fav-vac');
+        remFavouriteBtns.forEach(remFavouriteBtn => {
+          remFavouriteBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.removeFavVacLogic(remFavouriteBtn);
+          });
+        });
 
-        const addFavouriteBtn = document.querySelector('.js-add-fav-vac');
-        if (addFavouriteBtn) {
-            addFavouriteBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.addFavVacLogic(addFavouriteBtn);
-            });
-        }
+        const addFavouriteBtns = document.querySelectorAll('.js-add-fav-vac');
+        addFavouriteBtns.forEach(addFavouriteBtn => {
+          addFavouriteBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.addFavVacLogic(addFavouriteBtn);
+          });
+        });
     }
 
     async removeFavVacLogic(remFavouriteBtn) {
