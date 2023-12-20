@@ -12,8 +12,10 @@ import page404View from '../../views/page404View.js'
 import csatStatView from '../../views/csatStatView.js'
 import csatpollView from '../../views/csatpollView.js'
 import appResumes from '../../views/appResumesView.js'
+import favouriteVacs from "../../views/favouriteVacs.js"
 
 const urls = [
+    {url: '/favourite', view: new favouriteVacs()},
     {url: '/csat/statistic', login_required: true, view: new csatStatView()},
     {url: '/page404', view: new page404View()},
     {url: '/vacs', view: new vacsView()},
