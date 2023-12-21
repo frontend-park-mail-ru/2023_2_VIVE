@@ -13,7 +13,7 @@ export default class appResumes extends mainView {
         await super.render();
 
         const template = require('@pages/appResumes.handlebars');
-        document.querySelector('main').innerHTML = template(appResumesStore.getContext());
+        document.querySelector('main').innerHTML = template(this.getFullContext(appResumesStore.getContext()));
 
         this.addEventListeners();
     }

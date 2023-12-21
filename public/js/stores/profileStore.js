@@ -5,6 +5,7 @@ import Store from "./Store.js";
 import { getFormObject, isObjEmpty } from '../utils.js';
 import { validateForm } from '../modules/constraints.js';
 import vacancyStore from './VacancyStore.js';
+import User from './UserStore.js';
 
 const ROLES = {
     app: 'applicant',
@@ -77,20 +78,9 @@ class ProfileStore extends Store {
             })
     }
 
-    async getContext() {
-        const blob_avatar = await this.getAvatar();
-        const errorsFields = this.errors;
-        const formError = this.form_error;
+    async update() {
         this.form_error = null;
         this.errors = {};
-        return {
-            form_error: formError,
-            errors: errorsFields,
-            state: this.state,
-            user: this.user,
-            data: this.data,
-            avatar: blob_avatar ? URL.createObjectURL(blob_avatar) : undefined,
-        }
     }
 
     getDataObj(meta_obj, data_obj) {
@@ -157,6 +147,8 @@ class ProfileStore extends Store {
                 credentials: 'include',
             });
 
+            User.updateUser();
+
             // const resp = await APIConnector.post(
             //     BACKEND_SERVER_URL + '/upload_avatar', 
             //     form_data);
@@ -185,7 +177,7 @@ class ProfileStore extends Store {
     }
 
     async updateInnerData(data) {
-        this.user = await this.updateData("/current_user");
+        this.user = User.getUser();
 
         const parts = data.url.split('/');
         this.state = parts[2] ? parts[2] : 'settings';

@@ -1,4 +1,4 @@
-import { FRONTEND_POLL_SERVER_PORT, FRONTEND_SERVER_PORT } from '../../../config/config.js';
+import { BACKEND_SERVER_URL, FRONTEND_POLL_SERVER_PORT, FRONTEND_SERVER_PORT } from '../../../config/config.js';
 import router from "../modules/router/router.js";
 import User from '../stores/UserStore.js';
 import csatStore from '../stores/csatStore.js';
@@ -42,6 +42,13 @@ export default class View {
                 }
             }
         })
+    }
+
+    getFullContext(ctx) {
+        Object.assign(ctx, {
+            backend_url: BACKEND_SERVER_URL,
+        });
+        return ctx;
     }
 
     /**

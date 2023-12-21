@@ -1,5 +1,6 @@
 import router from '../modules/router/router.js';
 import resStore from '../stores/ResStore.js';
+import User from '../stores/UserStore.js';
 import mainView from './mainView.js';
 import Handlebars from 'handlebars';
 
@@ -20,14 +21,14 @@ class resumesView extends mainView {
 
     const template = require('@pages/resume/resumes.handlebars');
     document.querySelector('main').innerHTML = template(
-      {
+      this.getFullContext({
         'block_type': this.block_type,
         'resumes': await resStore.getAllResumes(),
         'filters': resStore.getFilters(),
         'qObj': resStore.qObj,
         'cvs': resStore.cvs,
         'checked_checkboxes': this.checked_checkboxes,
-      }
+      })
     );
 
     this.addEventListeners();

@@ -29,7 +29,7 @@ export default class vacsView extends mainView {
     // const template = Handlebars.templates['vacs'];
     const template = require('@pages/vac/vacs.handlebars');
     
-    document.querySelector('main').innerHTML = template(data);
+    document.querySelector('main').innerHTML = template(this.getFullContext(data));
 
     this.addEventListeners();
   }

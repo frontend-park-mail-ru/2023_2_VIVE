@@ -5,8 +5,9 @@
         class="js-nav-link vacs__list__item {{#iff ../block_type '==' 'list'}} vacs__list__item_list {{else}} vacs__list__item_block {{/iff}}">
         <div class="vacs__list__item__desc__main">
             <div class="vacs__list__item__company-logo">
+                
                 {{#if this.logo_url}}
-                <img src="{{this.logo_url}}" alt="">
+                <img src="{{../backend_url}}{{this.logo_url}}" alt="">
                 {{else}}
                 <img src="/images/img/vk-company.png" alt="">
                 {{/if}}

@@ -1,7 +1,13 @@
 <form class="js-edit-form" data-page={{page}}>
-    {{#if page '==' 0}}
+    {{#iff page '==' 0}}
     {{> resume/res_form_0 }}
-    {{/if}}
+    {{else iff page '==' 1}}
+    {{> resume/res_form_1 }}
+    {{else iff page '==' 2}}
+    {{> resume/res_form_2 }}
+    {{else iff page '==' 3}}
+    {{> resume/res_form_3 }}
+    {{/iff}}
     <div class="form__actions">
         {{> components/link-btn
         text="Отменить"

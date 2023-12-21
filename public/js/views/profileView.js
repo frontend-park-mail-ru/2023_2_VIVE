@@ -19,13 +19,22 @@ export default class profileView extends mainView {
     if (screen.width < 768) {
       const footer = document.querySelector("footer");
       if (footer !== null) {
-          footer.remove();
+        footer.remove();
       }
     }
-    
+
     // eslint-disable-next-line no-undef
     const template = require('@pages/profile.handlebars');
-    document.querySelector('main').innerHTML = template(await profileStore.getContext());
+    document.querySelector('main').innerHTML = template(this.getFullContext({
+      form_error: profileStore.form_error,
+      errors: profileStore.errors,
+      state: profileStore.state,
+      user: profileStore.user,
+      data: profileStore.data,
+
+    }));
+
+    profileStore.update();
 
     this.addEventListeners();
   }
@@ -101,7 +110,7 @@ export default class profileView extends mainView {
         let form_data = new FormData(form);
 
         if (!await profileStore.sendAvatar(form_data)) {
-          
+
           this.setError('Ошибка сохранения изображения')
         } else {
           console.log("ok!");

@@ -41,7 +41,7 @@ export default class resView extends mainView {
   async rerender() {
     await super.render();
     const template = require('@pages/resume/res_view.handlebars');
-    document.querySelector('main').innerHTML = template(resStore.getContext());
+    document.querySelector('main').innerHTML = template(this.getFullContext(resStore.getContext()));
 
     this.addEventListeners();
   }

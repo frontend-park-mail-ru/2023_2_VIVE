@@ -49,7 +49,11 @@
             <a href="/vacancies/profile/{{vacancy.employer_id}}" class="js-nav-link view-company" style="flex-direction: column;">
                 <div class="text-dark-regular" style="text-align: center;">Вакансия обновлена {{formatDate vacancy.updated_at}}</div>
                 <div class="view-company" style="background: none; padding: 0;">
+                    {{#if vacancy.logo_url}}
+                    <img class="view-company__img" src="{{backend_url}}{{vacancy.logo_url}}">
+                    {{else}}
                     <img class="view-company__img" src="/images/img/vk-company.png">
+                    {{/if}}
                     <div class="view-company__main-info">
                         <div class="header-text header-text--first text-dark-title">
                             {{vacancy.organization_name}}

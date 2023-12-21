@@ -4,16 +4,13 @@
             <div class="profile__header profile__header--background--default-hh">
                 <div class="push__error push__error_deactive">Hello</div>
                 <form class="js-avatar-form profile__upload" enctype="multipart/form-data">
-                    {{#if avatar}}
+                
+                  
                     <label for="user-avatar">
-                        <img class="js-avatar-image profile__upload__image" src="{{avatar}}" alt="profile-logo">
+                        <img class="js-avatar-image profile__upload__image" 
+                        src="{{#if user.avatar_url }}{{backend_url}}{{user.avatar_url}}{{else}}/images/profile.png{{/if}}" 
+                        alt="profile-logo">
                     </label>
-                    {{else}}
-                    <label for="user-avatar">
-                        <img class="js-avatar-image profile__upload__image" src="/images/profile.png"
-                            alt="profile-logo">
-                    </label>
-                    {{/if}}
                     <input name="avatar" class="js-avatar-input profile__upload__input" type="file" id="user-avatar"
                         accept="image/jpg, image/jpeg, image/gif, image/png">
                 </form>
