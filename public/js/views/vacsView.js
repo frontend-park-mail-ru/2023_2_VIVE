@@ -10,6 +10,7 @@ export default class vacsView extends mainView {
     this.block_type = 'list';
     this.checked_checkboxes = [];
     this.priceFilters = null;
+    this.is_open_filters = false;
   }
 
   async updateInnerData(data) {
@@ -87,6 +88,26 @@ export default class vacsView extends mainView {
   }
 
   filtersListener() {
+    const filters_frame = document.querySelector('.vacs__filters-frame');
+    if (this.is_open_filters) {
+      filters_frame.classList.remove('vacs__filters-frame-mobile');
+    } else {
+      filters_frame.classList.add('vacs__filters-frame-mobile');
+    }
+    const open_filters = document.querySelector('.js-button-open-filters');
+    if (open_filters) {
+      open_filters.addEventListener('click', event => {
+        this.is_open_filters = !this.is_open_filters;
+        if (this.is_open_filters) {
+          filters_frame.classList.remove('vacs__filters-frame-mobile');
+        } else {
+          filters_frame.classList.add('vacs__filters-frame-mobile');
+        }
+      })
+    }
+
+
+
     const filters = document.querySelectorAll('.js_filter__label_input_click');
 
     filters.forEach(element => {

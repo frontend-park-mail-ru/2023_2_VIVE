@@ -8,6 +8,7 @@ class resumesView extends mainView {
     super();
     this.block_type = 'list';
     this.checked_checkboxes = [];
+    this.is_open_filters = false;
   }
 
   async updateInnerData(data) {
@@ -75,6 +76,27 @@ class resumesView extends mainView {
   }
   
   filtersListner() {
+    const filters_frame = document.querySelector('.vacs__filters-frame');
+    if (this.is_open_filters) {
+      filters_frame.classList.remove('vacs__filters-frame-mobile');
+    } else {
+      filters_frame.classList.add('vacs__filters-frame-mobile');
+    }
+    const open_filters = document.querySelector('.js-button-open-filters');
+    if (open_filters) {
+      open_filters.addEventListener('click', event => {
+        this.is_open_filters = !this.is_open_filters;
+        if (this.is_open_filters) {
+          filters_frame.classList.remove('vacs__filters-frame-mobile');
+        } else {
+          filters_frame.classList.add('vacs__filters-frame-mobile');
+        }
+      })
+    }
+
+
+
+
     const filters = document.querySelectorAll('.js_filter__label_input_click');
 
     filters.forEach(element => {

@@ -40,9 +40,7 @@ module.exports = {
       directory: path.join(__dirname, './'),
       watch: true
     },
-    host: "hunt-n-hire.ru",
     port: 8085,
-    https: true,
   },
 
   module: {

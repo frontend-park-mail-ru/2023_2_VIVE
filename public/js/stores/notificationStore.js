@@ -1,4 +1,4 @@
-import { BACKEND_SERVER_URL } from "../../../config/config.js";
+import { BACKEND_SERVER_URL, NOTIF_WS_SERVER_URL } from "../../../config/config.js";
 import APIConnector from "../modules/APIConnector.js";
 import Store from "./Store.js";
 import mp3File from '../../mp3/notification.mp3'
@@ -36,14 +36,14 @@ class NotificationStore extends Store {
             return;
         }
 
-        this.createSocket();
+        // this.createSocket();
     }
 
     createSocket() {
-        this.notificationSocket = new WebSocket(`wss://hunt-n-hire.ru/ws`);
+        this.notificationSocket = new WebSocket(NOTIF_WS_SERVER_URL);
 
         this.notificationSocket.addEventListener('open', () => {
-            
+            console.log('socket open!');
         });
 
         this.notificationSocket.addEventListener('message', async (event) => {
