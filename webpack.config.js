@@ -11,7 +11,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require('webpack');
 
 const CONFIG = {
-  isDev: false,
+  isDev: true,
 }
 
 module.exports = {
@@ -56,7 +56,7 @@ module.exports = {
   },
 
   optimization: {
-    minimize: true,
+    minimize: !CONFIG.isDev,
     minimizer: [
       new TerserPlugin(),
       new CssMinimizerPlugin(),
