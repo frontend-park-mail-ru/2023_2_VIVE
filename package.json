@@ -19,12 +19,17 @@
     "compile:templates": "mkdir -p public/js/templates && npm run compile:pages && npm run compile:partials",
     "compile:pages": "handlebars views/layouts/*.handlebars views/pages/*.handlebars views/pages/vac/*.handlebars views/pages/profile/*.handlebars views/pages/resume/*.handlebars  views/pages/polls/*.handlebars -f public/js/templates/templates.precompiled.js -c handlebars",
     "compile:partials": "handlebars views/partials/components/setting_inputes/*.handlebars views/partials/header/*.handlebars views/partials/resume/*.handlebars views/partials/*.handlebars views/partials/components/*.handlebars views/partials/profile/*.handlebars views/partials/vac/*.handlebars -p -f public/js/templates/partials.precompiled.js -c handlebars",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prod": "webpack"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
+    "babel-loader": "^9.1.3",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
@@ -39,6 +44,7 @@
     "postcss-loader": "^7.3.3",
     "prettier": "3.0.3",
     "style-loader": "^3.3.3",
+    "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
