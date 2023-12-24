@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 // const HandlebarsPlugin = require("handlebars-webpack-plugin");
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -36,11 +37,20 @@ module.exports = {
 
   devServer: {
     historyApiFallback: true,
-    static: {
-      directory: path.join(__dirname, './'),
-      watch: true
-    },
     port: 8085,
+    devMiddleware: {
+      index: true,
+      mimeTypes: { phtml: 'text/html' },
+      publicPath: '/',
+      serverSideRender: true,
+      writeToDisk: true,
+    },
+    // host: 'hunt-n-hire.ru',
+    // server: {
+    //   type: 'https',
+    //   options: {
+    //   },
+    // },
   },
 
   module: {
@@ -111,6 +121,9 @@ module.exports = {
         {
           from: './public/images',
           to: './images',
+        },
+        {
+          from: './public/js/workers/sw.js',
         }
       ]
     }),

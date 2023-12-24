@@ -5,6 +5,7 @@
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
     "file-saver": "^2.0.5",
+    "fs": "^0.0.1-security",
     "handlebars": "^4.7.8",
     "hbs": "^4.2.0",
     "nodemon": "^3.0.1",
@@ -13,7 +14,7 @@
   },
   "scripts": {
     "build:dev": "webpack-dev-server",
-    "webpack": "webpack",
+    "webpack": "nodemon --exec 'webpack'",
     "start": "npm run build:dev",
     "compile:templates": "mkdir -p public/js/templates && npm run compile:pages && npm run compile:partials",
     "compile:pages": "handlebars views/layouts/*.handlebars views/pages/*.handlebars views/pages/vac/*.handlebars views/pages/profile/*.handlebars views/pages/resume/*.handlebars  views/pages/polls/*.handlebars -f public/js/templates/templates.precompiled.js -c handlebars",

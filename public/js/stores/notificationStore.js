@@ -36,7 +36,7 @@ class NotificationStore extends Store {
             return;
         }
 
-        // this.createSocket();
+        this.createSocket();
     }
 
     createSocket() {

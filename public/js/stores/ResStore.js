@@ -112,8 +112,8 @@ class ResStore extends Store {
             },
             "middle_name": {
                 type: "text",
-                required: true,
-                count_words: 1,
+                // required: true,
+                // count_words: 1,
                 no_digits: true,
             },
             "gender": {
