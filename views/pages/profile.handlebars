@@ -8,7 +8,7 @@
                   
                     <label for="user-avatar">
                         <img class="js-avatar-image profile__upload__image" 
-                        src="{{#if user.avatar_url }}{{backend_url}}{{user.avatar_url}}{{else}}/images/profile.png{{/if}}" 
+                        src="{{#if user.avatar_url }}{{backend_url}}{{user.avatar_url}}{{else}}/images/webp/profile.webp{{/if}}" 
                         alt="profile-logo">
                     </label>
                     <input name="avatar" class="js-avatar-input profile__upload__input" type="file" id="user-avatar"
@@ -57,9 +57,9 @@
                         <div class="profile__roles-frame">
                             <div class="tooltip">
                                 {{#iff user.role '==' 'applicant'}}
-                                <img src="/images/img/profile_28-01.png" class="profile__role-img">
+                                <img src="/images/svg/profile_28-01.svg" class="profile__role-img">
                                 {{else iff user.role '==' 'employer'}}
-                                <img src="/images/img/briefcase_outline_28-01.png" class="profile__role-img">
+                                <img src="/images/svg/briefcase_outline_28-01.svg" class="profile__role-img">
                                 {{/iff}}
                                 <span
                                     class="tooltip-text-down tooltip-text-down__profile common-text common-text-medium text-dark-title">{{#iff
