@@ -14,7 +14,7 @@
   block="res__form__field"
   )
   name=this.name
-  error=(lookup ../errors this.name))}}
+  error=(lookup ../form_errors this.name))}}
   {{/each}}
 
   {{!-- ========================= --}}
@@ -34,7 +34,7 @@
         input="res__form__input forms-placeholder"
         )
         name=this.name
-        error=(lookup ../errors this.name))}}
+        error=(lookup ../form_errors this.name))}}
         {{/each}}
       </div>
     </div>
@@ -60,11 +60,11 @@
         value=this.value
         )
         checked=(iffs (lookup ../data "experience") '==' this.value true false)
-        error=(lookup ../errors "experience"))}}
+        error=(lookup ../form_errors "experience"))}}
         {{/each}}
     </div>
-    {{#if (lookup errors "experience")}}
-    <div class="input_error__msg">{{lookup errors "experience"}}</div>
+    {{#if (lookup form_errors "experience")}}
+    <div class="input_error__msg">{{lookup form_errors "experience"}}</div>
     {{/if}}
   </div>
 
@@ -91,11 +91,11 @@
         value=this.value
         )
         checked=(iffs (lookup ../data "employment") '==' this.value true false)
-        error=(lookup ../errors "employment"))}}
+        error=(lookup ../form_errors "employment"))}}
         {{/each}}
     </div>
-    {{#if (lookup errors "employment")}}
-    <div class="input_error__msg">{{lookup errors "employment"}}</div>
+    {{#if (lookup form_errors "employment")}}
+    <div class="input_error__msg">{{lookup form_errors "employment"}}</div>
     {{/if}}
   </div>
 
@@ -126,12 +126,12 @@
     input="js-education-level res__form__input"
     )
     checked=(iffs (lookup ../data "education_type") '==' this.value true false)
-    error=(lookup ../errors "education_type")
+    error=(lookup ../form_errors "education_type")
     )}}
 
     {{/each}}
-    {{#if (lookup errors "education_type")}}
-    <div class="input_error__msg">{{lookup errors "education_type"}}</div>
+    {{#if (lookup form_errors "education_type")}}
+    <div class="input_error__msg">{{lookup form_errors "education_type"}}</div>
     {{/if}}
   </div>
 
@@ -150,7 +150,7 @@
   )
   name=this.name
   value=(lookup ../data this.name)
-  error=(lookup ../errors this.name))}}
+  error=(lookup ../form_errors this.name))}}
 
   {{/each}}
 

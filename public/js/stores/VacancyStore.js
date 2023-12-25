@@ -23,14 +23,17 @@ class VacancyStore extends Store {
                 "name": {
                     type: "text",
                     required: true,
+                    
                 },
                 "salary_lower_bound": {
                     type: "text",
                     only_digits: true,
+                    max_len: 9,
                 },
                 "salary_upper_bound": {
                     type: "text",
                     only_digits: true,
+                    max_len: 9,
                     greater_than: "salary_lower_bound",
                 },
                 "experience": {
@@ -45,7 +48,7 @@ class VacancyStore extends Store {
                 },
                 "location": {
                     type: "text",
-                    required: false,
+                    required: true,
                 }
             }
         } else {
@@ -282,14 +285,11 @@ class VacancyStore extends Store {
 
     checkAndSaveInput(input_node) {
         this.cur_input = input_node;
+        console.log(input_node);
 
         this.form_data[input_node.name] = input_node.value;
 
-        // const validate_obj = {};
-        // validate_obj[input_name] = input_value;
-
         const errors = validateForm(getMetaPlusDataObj(this.pageFormFieldMeta(), this.form_data));
-
         this.form_errors = {};
         if (!isObjEmpty(errors)) {
             Object.assign(this.form_errors, errors);
@@ -298,22 +298,24 @@ class VacancyStore extends Store {
     }
 
 
-    isValidFormData(form_data) {
-        const errors = validateForm(getMetaPlusDataObj(this.pageFormFieldMeta(), form_data));
+    isValidFormData() {
+        this.form_errors = {};
+        const errors = validateForm(getMetaPlusDataObj(this.pageFormFieldMeta(), this.form_data));
         Object.assign(this.form_errors, errors);
         return isObjEmpty(errors);
     }
 
     saveFormAndContinue(form_data) {
-        if (this.isValidFormData(form_data)) {
+        Object.assign(this.form_data, form_data);
+        if (this.isValidFormData()) {
             this.page++;
         }
         return true;
     }
 
     async checkAndSendForm(form_data) {
-        if (this.isValidFormData(form_data)) {
-            Object.assign(this.form_data, form_data);
+        Object.assign(this.form_data, form_data);
+        if (this.isValidFormData()) {
             return await this.sendForm();
         }
         return true;

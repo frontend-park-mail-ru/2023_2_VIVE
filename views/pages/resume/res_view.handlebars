@@ -2,8 +2,8 @@
   <div class="column-wrapper mobile-wrapper">
     <div class="resv">
       <div class="resv__nav">
-        {{> components/link-btn text="К списку резюме" href="/resumes"
-        class="js-nav-link resv__nav__link link-btn_transp"
+        {{> components/link-btn text="Назад"
+        class="js-nav-link-back resv__nav__link link-btn_transp"
         class_text = "text-dodger-blue"
         svg_pos="before"
         svg='<svg class="resv__nav__link__svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -46,7 +46,7 @@
               <a {{#if ../is_my_resume}} href="/profile/resumes" {{else}} href="/resumes/profile/{{data.applicant_id}}"
                 {{/if}} class="js-nav-link">
                 
-                <img class="resv__data__main__avatar" src="{{#if data.avatar_url}}{{../backend_url}}{{data.avatar_url}}{{else}}/images/profile.png{{/if}}" alt="">
+                <img class="resv__data__main__avatar" src="{{#if data.avatar_url}}{{../config.backend_url}}{{data.avatar_url}}{{else}}/images/profile.png{{/if}}" alt="">
               </a>
             </div>
             {{/with}}

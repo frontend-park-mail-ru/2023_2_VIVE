@@ -13,7 +13,7 @@ class AppResumesStore extends Store {
 
   getContext() {
     return {
-      cv: this.cv,
+      // cv: this.cv,
       user: User.getUser(),
     }
   }
@@ -22,7 +22,8 @@ class AppResumesStore extends Store {
     console.log(data);
     try {
       const resp = await APIConnector.get(BACKEND_SERVER_URL + "/cvs/applicant/" + data.id);
-      this.cv = await resp.json();
+      const resp_json = await resp.json();
+      console.log(resp_json);
       return true;
     } catch (error) {
       router.render404();

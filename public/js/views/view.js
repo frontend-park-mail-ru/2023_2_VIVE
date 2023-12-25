@@ -46,7 +46,9 @@ export default class View {
 
     getFullContext(ctx) {
         Object.assign(ctx, {
-            backend_url: BACKEND_SERVER_URL,
+            config: {
+                backend_url: BACKEND_SERVER_URL,
+            }
         });
         return ctx;
     }

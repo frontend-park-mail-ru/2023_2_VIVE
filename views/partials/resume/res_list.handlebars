@@ -7,7 +7,7 @@
 
                 <a href="/resumes/profile/{{this.applicant_id}}" class="js-nav-link vacs__list__item__company-logo">
                     {{#if this.avatar_url}}
-                    <img src="{{../backend_url}}{{this.avatar_url}}" alt="">
+                    <img src="{{../config.backend_url}}{{this.avatar_url}}" alt="">
                     {{else}}
                     <img src="/images/profile.png" alt="">
                     {{/if}}
