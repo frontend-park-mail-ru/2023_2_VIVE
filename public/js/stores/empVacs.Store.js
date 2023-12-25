@@ -24,17 +24,17 @@ class EmpVacsStore extends Store {
         try {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + "/vacancies/employer/" + data.id);
             const resp_json = await resp.json();
-            console.log(resp_json);
+            // // console.log(resp_json);
             this.emp = resp_json;
             this.emp.vacancies.forEach(element => {
                 element.salary_view = vacancyStore.processVacanciesSalary(element);
                 element.employment_view = vacancyStore.processVacanciesEmployment(element);
                 element.expirience_view = vacancyStore.processVacanciesExperience(element);
             });
-            
+
             return true;
-        } catch(error) {
-            console.log(error);
+        } catch (error) {
+            // // console.log(error);
             return false;
         }
     }

@@ -104,7 +104,7 @@ class ProfileStore extends Store {
                     Object.assign(this.errors["data-" + type], { [form[key].name]: form[key].value });
                 }
             }
-            console.log(this.errors);
+            // // console.log(this.errors);
             return false;
         }
     }
@@ -138,7 +138,7 @@ class ProfileStore extends Store {
     }
 
     async sendAvatar(form_data) {
-        
+
         try {
 
             let response = await fetch(BACKEND_SERVER_URL + '/upload_avatar', {
@@ -155,7 +155,7 @@ class ProfileStore extends Store {
 
             return true;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             return false;
         }
     }
@@ -168,10 +168,10 @@ class ProfileStore extends Store {
             // const data = await resp.json();
             const blob = await resp.blob();
 
-            
+
             return blob;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             return undefined;
         }
     }
@@ -195,7 +195,7 @@ class ProfileStore extends Store {
                 element.experience_view = vacancyStore.processVacanciesExperience(element);
                 element.employment_view = vacancyStore.processVacanciesEmployment(element);
             });
-            console.log(this.data);
+            // // console.log(this.data);
         } else if (this.state == 'resumes') {
             this.data = await this.updateData("/current_user/cvs");
         } else if (this.state == 'responses') {

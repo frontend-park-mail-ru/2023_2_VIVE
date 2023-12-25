@@ -149,6 +149,8 @@ class ResStore extends Store {
                 type: "text",
                 required: true,
                 digits: true,
+                min_len: 4,
+                max_len: 4,
             },
         },
         {
@@ -196,7 +198,7 @@ class ResStore extends Store {
             data: this.form_data,
             page_data: this.page_data,
             main_error: this.main_error,
-            
+
 
             //========editing
             is_edit: this.is_edit,
@@ -355,12 +357,12 @@ class ResStore extends Store {
     }
 
     async sendForms() {
-        console.log("sending...");
+        // // console.log("sending...");
         const sending_form = {};
         for (const form_data of this.forms_data) {
             Object.assign(sending_form, form_data);
         }
-        console.log(sending_form);
+        // // console.log(sending_form);
         //TODO
         try {
             const resp = await APIConnector.post(
@@ -368,7 +370,7 @@ class ResStore extends Store {
                 sending_form,
             );
             const data = await resp.json();
-            
+
             this.clear();
             router.goToLink('/resume/' + data.id);
             return true;
@@ -405,7 +407,7 @@ class ResStore extends Store {
 
             const data = await resp.json();
 
-            console.log("received(resume): ", data);
+            // // console.log("received(resume): ", data);
             return data;
         } catch (err) {
             console.error(err);
@@ -465,8 +467,8 @@ class ResStore extends Store {
     }
 
     async sendEdit() {
-        console.log("sending edit...");
-        console.log(this.final_data);
+        // console.log("sending edit...");
+        // console.log(this.final_data);
         try {
             const resp = await APIConnector.put(
                 BACKEND_SERVER_URL + '/current_user/cvs/' + this.resume.id, this.final_data);
@@ -486,7 +488,7 @@ class ResStore extends Store {
             router.goToLink('/profile/resumes');
             return true;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return false;
         }
     }
@@ -515,7 +517,7 @@ class ResStore extends Store {
             router.goToLink('/profile/resumes');
             return true;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return false;
         }
     }
@@ -552,8 +554,8 @@ class ResStore extends Store {
             this.filters = data.filters;
             this.cvs = data.cvs;
             return data.cvs.list;
-        } catch(error) {
-            console.log(error);
+        } catch (error) {
+            // console.log(error);
             return undefined;
         }
     }
@@ -568,8 +570,8 @@ class ResStore extends Store {
             const fileName = match && match[1] ? match[1] : 'filename.pdf';
             const file = await resp.blob();
             saveAs(file, fileName);
-        } catch(error) {
-            console.log(error);
+        } catch (error) {
+            // console.log(error);
             return false;
         }
     }

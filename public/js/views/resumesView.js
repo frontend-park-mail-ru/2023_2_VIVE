@@ -32,7 +32,7 @@ class resumesView extends mainView {
     );
 
     this.addEventListeners();
-  } 
+  }
 
   addEventListeners() {
     super.addEventListeners();
@@ -75,7 +75,7 @@ class resumesView extends mainView {
 
     this.filtersListner();
   }
-  
+
   filtersListner() {
     const filters_frame = document.querySelector('.vacs__filters-frame');
     if (this.is_open_filters) {
@@ -104,7 +104,7 @@ class resumesView extends mainView {
       element.addEventListener('click', (event) => {
         event.stopPropagation();
         this.checked_checkboxes = [];
-        const qParam =  new URLSearchParams(router.currentUrl().searchParams);
+        const qParam = new URLSearchParams(router.currentUrl().searchParams);
         const filterDict = {
           'q': qParam.get('q') ? qParam.get('q') : '',
         };
@@ -113,7 +113,7 @@ class resumesView extends mainView {
             const filterName = filter.name;
             const filterValue = filter.parentNode.nextElementSibling.title;
             this.checked_checkboxes.push(filterValue);
-            
+
             if (!filterDict[filterName]) {
               filterDict[filterName] = [filterValue];
             } else {
@@ -128,12 +128,12 @@ class resumesView extends mainView {
 
     const searchBtnFilters = document.querySelector('.js-search-filters');
     if (searchBtnFilters) {
-      searchBtnFilters.addEventListener('click', (e)=> {
+      searchBtnFilters.addEventListener('click', (e) => {
         e.preventDefault();
         const inputFilter = searchBtnFilters.parentNode.querySelector('.js-input-filter');
         const inputValue = inputFilter.value;
         if (inputValue !== '') {
-          console.log(inputValue);
+          // // console.log(inputValue);
           const labelCheckbox = searchBtnFilters.parentNode.parentNode.querySelector('label');
           const inputCheckbox = labelCheckbox.querySelector('input');
           const spanChecbox = labelCheckbox.querySelector('span');
@@ -151,7 +151,7 @@ class resumesView extends mainView {
       });
     }
   }
-  
+
 }
 
 export default resumesView;

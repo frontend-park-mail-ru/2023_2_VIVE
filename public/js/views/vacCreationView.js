@@ -25,7 +25,7 @@ export default class vacCreationView extends mainView {
     //   if (cur_input) {
     //     cur_input.focus();
     //     const cursor_pos = vacancyStore.cur_input.selectionStart;
-    //     // console.log(cur_input);
+    //     // // // console.log(cur_input);
     //     if (cur_input.type == 'text' || cur_input.type == 'textarea') {
     //       cur_input.setSelectionRange(cursor_pos, cursor_pos);
     //     }

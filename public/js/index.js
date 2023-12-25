@@ -8,7 +8,7 @@ import User from './stores/UserStore.js';
 try {
     router.start();
 } catch (error) {
-    console.log(error);
+    // // console.log(error);
 }
 
 await User.updateUser();

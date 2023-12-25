@@ -173,7 +173,7 @@ export default class mainView extends View {
         notificationsDropdowns.forEach(notificationsDropdown => {
             const notificationsContentDropdown = notificationsDropdown.parentNode.nextElementSibling;
 
-            notificationsDropdown.addEventListener('click', function(event) {
+            notificationsDropdown.addEventListener('click', function (event) {
                 const isContentVisible = !notificationsContentDropdown.classList.contains('d-none');
 
                 if (isContentVisible) {
@@ -189,7 +189,7 @@ export default class mainView extends View {
             document.addEventListener('click', function (event) {
                 notificationsDropdowns.forEach(notificationsDropdown => {
                     const notificationsContentDropdown = notificationsDropdown.parentNode.nextElementSibling;
-    
+
                     if (!notificationsContentDropdown.contains(event.target) && !notificationsDropdown.contains(event.target)) {
                         notificationsContentDropdown.classList.add('d-none');
                     }
@@ -245,14 +245,15 @@ export default class mainView extends View {
                 switchBtn.addEventListener('click', async (e) => {
                     e.preventDefault();
                     try {
+                        const user = User.getUser();
                         await User.logout();
-                        if (User.getUser().role === User.ROLES.app) {
+                        if (user.role === User.ROLES.app) {
                             router.goToLink('/app_auth');
                         } else {
                             router.goToLink('/emp_auth');
                         }
                     } catch (err) {
-                        console.error('logout: ', err);
+                        // console.error('logout: ', err);
                     }
                 });
             });
@@ -266,7 +267,7 @@ export default class mainView extends View {
                         await User.logout();
                         router.goToLink('/');
                     } catch (err) {
-                        console.error('logout: ', err);
+                        // console.error('logout: ', err);
                     }
                 });
             });

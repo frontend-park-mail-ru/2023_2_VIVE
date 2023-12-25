@@ -102,7 +102,7 @@ export default class profileView extends mainView {
 
     avatar_input.addEventListener('change', async (event) => {
       const file = avatar_input.files[0];
-      console.log(`размер изображения: ${file.size / 1024 / 1024} MB`);
+      // // console.log(`размер изображения: ${file.size / 1024 / 1024} MB`);
       if (file.size > max_size) {
         this.setError(`Размер файла не должен превышать ${max_size / 1024 / 1024} MB`);
       } else {
@@ -126,15 +126,15 @@ export default class profileView extends mainView {
 
           const resp = await fetch(webpImage);
           const webp_blob = await resp.blob();
-          const webp_file = new File([webp_blob], file.name + ".webp", {type: webp_blob.type})
-          // console.log(webp_file);
+          const webp_file = new File([webp_blob], file.name + ".webp", { type: webp_blob.type })
+          // // // console.log(webp_file);
           form_data.set('avatar', webp_file);
 
           if (!await profileStore.sendAvatar(form_data)) {
             this.setError('Ошибка сохранения изображения')
           } else {
-            console.log("ok!");
-            avatar_img.src = URL.createObjectURL(file);
+            // // console.log("ok!");
+            avatar_img.src = URL.createObjectURL(webp_blob);
           }
         }
       }

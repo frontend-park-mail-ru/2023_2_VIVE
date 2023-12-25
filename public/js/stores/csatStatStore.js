@@ -11,15 +11,15 @@ class CsatStatStore {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + "/statistics");
             this.data = await resp.json();
             return true;
-        } catch(error) {
+        } catch (error) {
             return false;
         }
     }
 
     getContext() {
-        console.log(this.data);
+        // // console.log(this.data);
         return {
-            data : this.data.statisticsList.map(item => ({
+            data: this.data.statisticsList.map(item => ({
                 name: item.question_text,
                 avg_star: item.avgStars,
                 five_stars_count: item.starsNumList.find(item => item.starsNum === 5)?.count || 0,

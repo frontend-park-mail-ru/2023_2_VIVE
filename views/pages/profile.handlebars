@@ -8,7 +8,7 @@
                   
                     <label for="user-avatar">
                         <img class="js-avatar-image profile__upload__image" 
-                        src="{{#if user.avatar_url }}{{backend_url}}{{user.avatar_url}}{{else}}/images/webp/profile.webp{{/if}}" 
+                        src="{{#if user.avatar_url }}{{config.backend_url}}{{user.avatar_url}}{{else}}/images/webp/profile.webp{{/if}}" 
                         alt="profile-logo">
                     </label>
                     <input name="avatar" class="js-avatar-input profile__upload__input" type="file" id="user-avatar"

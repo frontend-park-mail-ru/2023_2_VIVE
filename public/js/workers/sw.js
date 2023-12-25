@@ -4,12 +4,12 @@ const D_CACHE_NAME = 'd-hh-cache-v1';
 const BACKEND_SERVER_URL = 'https://hunt-n-hire.ru/api/';
 
 self.addEventListener('install', async (event) => {
-    // console.log('sw install!', event);
+    // // // console.log('sw install!', event);
 
 });
 
 self.addEventListener('activate', (event) => {
-    // console.log('sw activate!', event);
+    // // // console.log('sw activate!', event);
     event.waitUntil(
         caches.keys().then((keyList) => {
             return Promise.all(
@@ -26,7 +26,7 @@ self.addEventListener('activate', (event) => {
 });
 
 // self.addEventListener('message', (event) => {
-//     console.log('sw message!', event.data.payload);
+//     // // console.log('sw message!', event.data.payload);
 //     if (event.data.type == 'CACHE_URLS') {
 //         event.waitUntil(
 //             Promise.all([
@@ -51,7 +51,7 @@ self.addEventListener('activate', (event) => {
 // });
 
 self.addEventListener('fetch', function (event) {
-    // console.log('sw fetch!', event.request.url);
+    // // // console.log('sw fetch!', event.request.url);
 
     const { request } = event
     const url = new URL(request.url);
@@ -75,13 +75,9 @@ async function sCacheFirst(request) {
     if (cached) {
         return cached;
     } else {
-        try {
-            const resp = await fetch(request);
-            await cache.put(request, resp.clone());
-            return resp;
-        } catch (err) {
-            throw err;
-        }
+        const resp = await fetch(request);
+        await cache.put(request, resp.clone());
+        return resp;
     }
 }
 

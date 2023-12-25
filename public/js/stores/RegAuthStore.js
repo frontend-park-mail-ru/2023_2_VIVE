@@ -80,7 +80,7 @@ class RegAuthStore extends Store {
         }
         this.forms_errors[this.view.form_type][this.view.role] = value;
     }
-    
+
 
     pageFormFieldsMeta() {
         if (this.view.form_type == this.FORM_TYPES.reg) {
@@ -181,7 +181,7 @@ class RegAuthStore extends Store {
 
         if (isObjEmpty(this.form_errors)) {
             return this.sendForm();
-        } 
+        }
         return true;
     }
 
@@ -199,7 +199,7 @@ class RegAuthStore extends Store {
         send_form_data['role'] = this.view.role;
         if (this.view.form_type == this.FORM_TYPES.reg) {
             delete send_form_data['repeat_password'];
-            console.log(this.form_data);
+            // // console.log(this.form_data);
             let resp;
             try {
                 resp = await APIConnector.post(

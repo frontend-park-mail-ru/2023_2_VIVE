@@ -5,8 +5,8 @@
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="header-text header-text--first text-light-title profile__about-mobile-main-text">{{user.first_name}} {{user.last_name}}</div>
-                    <div class="secondary-text text-light-regular profile__about-mobile-main-text">Соискатель: {{user.email}}</div>
+                    <div class="header-text header-text--first text-light-title profile__about-mobile-main-text">{{app.first_name}} {{app.last_name}}</div>
+                    <div class="secondary-text text-light-regular profile__about-mobile-main-text">Соискатель</div>
                 </div>
             </div>
         </div>
@@ -23,8 +23,10 @@
     </div>
     <div class="emp-vacs__frame">
         <div class="header-text header-text--first">
-            Найдено {{cvs.length}} резюме соискателя
+            Найдено {{app.cvs.length}} резюме соискателя
         </div>
+        {{#with (object cvs=app.cvs config=config)}}
         {{> resume/resumes-list-mobile}}
+        {{/with}}
     </div>
 </div>

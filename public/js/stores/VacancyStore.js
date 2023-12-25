@@ -23,7 +23,7 @@ class VacancyStore extends Store {
                 "name": {
                     type: "text",
                     required: true,
-                    
+
                 },
                 "salary_lower_bound": {
                     type: "text",
@@ -182,7 +182,7 @@ class VacancyStore extends Store {
             router.goToLink("/vacancy/" + newVacancyData["id"]);
             return true;
         } catch (error) {
-            console.log(error);
+            // // console.log(error);
             return false;
         }
     }
@@ -190,11 +190,11 @@ class VacancyStore extends Store {
     async updateInnerData(data) {
         try {
             this.vacancy = (await this.getData(`/vacancies/${data.id}`));
-            
+
             this.user = User.getUser();
             this.responses = [];
 
-            switch(data.url.split('/').slice(1)[2]) {
+            switch (data.url.split('/').slice(1)[2]) {
                 case 'responses':
                     this.setState('responses');
                     break;
@@ -205,7 +205,7 @@ class VacancyStore extends Store {
                 default:
                     break;
             }
-            
+
             if (User.getUser().role === User.ROLES.emp && User.getUser().employer_id === this.vacancy.employer_id) {
                 const cvIds = await this.getData(`/vacancies/${data['id']}/applicants`);
                 if (cvIds) {
@@ -240,7 +240,7 @@ class VacancyStore extends Store {
             const data = await resp.json();
             return data;
         } catch (err) {
-            console.error(err);
+            // console.error(err);
             return undefined;
         }
     }
@@ -327,8 +327,8 @@ class VacancyStore extends Store {
                 BACKEND_SERVER_URL + `/vacancies/${this.vacancy.id}`,
             );
             return true;
-        } catch(error) {
-            console.log(error);
+        } catch (error) {
+            // // console.log(error);
             return false;
         }
     }
@@ -339,8 +339,8 @@ class VacancyStore extends Store {
     }
 
     async sendForm() {
-        console.log("sending...");
-        console.log(this.form_data);
+        // // console.log("sending...");
+        // // console.log(this.form_data);
         this.beforeSending();
         try {
             const resp = await APIConnector.post(
@@ -349,10 +349,10 @@ class VacancyStore extends Store {
             );
             const data = await resp.json();
             this.clear();
-            router.goToLink('/vacancy/' + data.id);  
-            return true;      
-        } catch(error) {
-            console.error(error);
+            router.goToLink('/vacancy/' + data.id);
+            return true;
+        } catch (error) {
+            // console.error(error);
             this.main_error = "Произошла ошибка отправки";
             return false;
         }

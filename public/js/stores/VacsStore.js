@@ -88,7 +88,7 @@ class VacsStore extends Store {
     }
 
     async pagToNext() {
-        console.log(this.qObj, this.vacancies);
+        // // console.log(this.qObj, this.vacancies);
         if (this.qObj.page_num * this.qObj.results_per_page >= this.vacancies.count) {
             return false;
         }
@@ -116,12 +116,12 @@ class VacsStore extends Store {
         try {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies/search' + '?' + q_str);
             const data = await resp.json();
-            console.log(data);
+            // // console.log(data);
             this.vacancies = data['vacancies'];
             this.filters = data['filters'];
             return data['vacancies']['list'];
         } catch (err) {
-            console.error(err);
+            // console.error(err);
             return undefined;
         }
     }
@@ -131,8 +131,8 @@ class VacsStore extends Store {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies/favourite');
             this.vacs = await resp.json();
             return true;
-        } catch(error) {
-            console.error(error);
+        } catch (error) {
+            // console.error(error);
             this.vacs = [];
             return false;
         }
@@ -152,7 +152,7 @@ class VacsStore extends Store {
             const resp = await APIConnector.delete(BACKEND_SERVER_URL + '/vacancies/favourite/' + vac_id);
             return true;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             return false;
         }
     }
@@ -171,7 +171,7 @@ class VacsStore extends Store {
             const resp = await APIConnector.post(BACKEND_SERVER_URL + '/vacancies/favourite/' + vac_id);
             return true;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             return false;
         }
     }

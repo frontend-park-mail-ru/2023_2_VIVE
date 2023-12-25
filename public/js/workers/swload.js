@@ -13,7 +13,7 @@ if ('serviceWorker' in navigator) {
             // };
             // reg.active.postMessage(data);
         } catch (err) {
-            console.error('SW reg failed', err);
+            // console.error('SW reg failed', err);
         }
     });
 

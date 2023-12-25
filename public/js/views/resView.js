@@ -83,7 +83,7 @@ export default class resView extends mainView {
     })
 
     const forms = document.querySelectorAll('.js-edit-form');
-    // console.log(forms[])
+    // // // console.log(forms[])
     forms.forEach(form => {
       form.addEventListener('submit', async event => {
         event.preventDefault();
@@ -211,28 +211,28 @@ export default class resView extends mainView {
     if (deleteResumeButton) {
       deleteResumeButton.addEventListener('click', (e) => {
         const template = require('@pages/confirm_action.handlebars');
-        document.querySelector('main').innerHTML += template({'action': 'resume-del'});
-        
+        document.querySelector('main').innerHTML += template({ 'action': 'resume-del' });
+
         const confirmActionFrame = document.querySelector('.confirm-action__frame');
         const cancelAction = document.querySelectorAll('[data-name="cancel-action"]');
         const confirmAction = document.querySelector('[data-name="confirm-action"]');
 
-        confirmActionFrame.addEventListener('click',(event) => {
-            if (!event.target.matches('.confirm-action__field')) {
-                this.rerender();
-            }
+        confirmActionFrame.addEventListener('click', (event) => {
+          if (!event.target.matches('.confirm-action__field')) {
+            this.rerender();
+          }
         })
 
         cancelAction.forEach(action =>
-            action.addEventListener('click', () => {
-                this.rerender();
-            })
+          action.addEventListener('click', () => {
+            this.rerender();
+          })
         )
 
         confirmAction.addEventListener('click', async () => {
-            if (!await resStore.deleteResume()) {
-              this.rerender();
-            }
+          if (!await resStore.deleteResume()) {
+            this.rerender();
+          }
         })
       });
     }

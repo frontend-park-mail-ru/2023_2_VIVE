@@ -13,21 +13,22 @@ class AppResumesStore extends Store {
 
   getContext() {
     return {
-      cvs: this.cv.cvs,
+      app: this.app,
       user: User.getUser(),
     }
   }
 
   async updateInnerData(data) {
-    console.log(data);
+    // // console.log(data);
     try {
       const resp = await APIConnector.get(BACKEND_SERVER_URL + "/cvs/applicant/" + data.id);
       const resp_json = await resp.json();
+      this.app = resp_json;
       console.log(resp_json);
       return true;
     } catch (error) {
       router.render404();
-      console.log(error);
+      // // console.log(error);
       return false;
     }
   }

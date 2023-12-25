@@ -32,8 +32,8 @@ const REQUEST_HEADERS = {
  * APIConnector
     .get('example.com')
     .then((res) => res.json())
-    .then((json) => console.log(json))
-    .catch((err) => console.error(err));
+    .then((json) => // // console.log(json))
+    .catch((err) => // console.error(err));
  * ```
  */
 export default {

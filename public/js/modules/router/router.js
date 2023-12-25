@@ -34,8 +34,8 @@ class Router {
         try {
             this.processUrl(route);
             Object.assign(urls, route);
-        } catch(error) {
-            console.log(error);
+        } catch (error) {
+            // // console.log(error);
         }
     }
 
@@ -43,8 +43,8 @@ class Router {
         urls.forEach(element => {
             try {
                 this.processUrl(element);
-            } catch(error) {
-                console.log(error);
+            } catch (error) {
+                // // console.log(error);
             }
         });
         this.popStateCheck();
@@ -54,7 +54,7 @@ class Router {
         this.curUrl = url;
         url = (url == '/') ? '/vacs' : url;
         await this.urlWork(url);
-        history.pushState({url: url}, null, url);
+        history.pushState({ url: url }, null, url);
     }
 
     currentUrl() {
@@ -76,7 +76,7 @@ class Router {
         }
 
         const isValid = this.isValidUrlObject(urlObject);
-        
+
         if (!isValid) {
             throw new Error(`Invalid parameters for URL: ${urlObject[UrlParams.URL]}`);
         }
@@ -94,7 +94,7 @@ class Router {
 
     async urlWork(path) {
         const urlObj = new URL(this.getPrefUrl() + path);
-        
+
         path = urlObj.pathname;
 
         this.deleteLastRender();
@@ -128,8 +128,8 @@ class Router {
         this.prevView = urls.find(urlObject => urlObject.url === url).view;
         if (!await this.prevView.updateInnerData(
             {
-                url: facUrl, 
-                'id': id, 
+                url: facUrl,
+                'id': id,
                 urlObj: urlObj,
             })) {
             return false;
@@ -138,7 +138,7 @@ class Router {
     }
 
     statusProccesing(status) {
-        switch(status) {
+        switch (status) {
             case StatusCode.DENY_AUTH:
             case StatusCode.DENY_APPLICANT:
             case StatusCode.DENY_EMPLOYER:
@@ -154,7 +154,7 @@ class Router {
 
     async paramsWork(url) {
         for (const el in url) {
-            switch(el) {
+            switch (el) {
                 case UrlParams.DENY_WITH_AUTH:
                     if (User.isLoggedIn()) {
                         return StatusCode.DENY_AUTH;
@@ -189,7 +189,7 @@ class Router {
 
     deleteLastRender() {
         if (this.prevView) {
-          this.prevView.remove();
+            this.prevView.remove();
         }
     }
 
@@ -208,7 +208,7 @@ class Router {
     render(url) {
         this.prevView.render();
     }
-    
+
     isValidUrlObject(urlObject) {
         for (const key in urlObject) {
             if (!isValidParam(key)) {

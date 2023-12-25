@@ -57,11 +57,11 @@ class UserStore extends Store {
         try {
             const resp = await APIConnector.delete(BACKEND_SERVER_URL + '/session');
             if (resp.ok) {
-                this.updateUser();
+                await this.updateUser();
             }
             return resp.ok;
         } catch (err) {
-            console.error(err);
+            // console.error(err);
             return false;
         }
     }
