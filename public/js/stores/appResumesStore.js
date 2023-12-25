@@ -13,7 +13,7 @@ class AppResumesStore extends Store {
 
   getContext() {
     return {
-      cv: this.cv,
+      cvs: this.cv.cvs,
       user: User.getUser(),
     }
   }

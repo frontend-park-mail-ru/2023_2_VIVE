@@ -3,15 +3,6 @@
         display: none;
     }
 
-    .resume__mobile-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 10px;
-        align-self: stretch;
-    }
-
     .resume__job-name {
         width: 60vw;
         white-space: nowrap;
@@ -48,10 +39,15 @@
         color: var(--labels-orange-main);
         border: 2px solid var(--labels-orange-main);
     }
+}
 
-    .resume__name-age-info-mobile {
-        display: none;
-    }
+.resume__mobile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
 }
 
 .resume {
@@ -67,6 +63,8 @@
 
 .resume__job-type {
     display: flex;
+    width: 100%;
+    justify-content: space-between;
     height: 26px;
     align-items: center;
     gap: 30px;
