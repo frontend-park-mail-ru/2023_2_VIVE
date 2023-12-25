@@ -15,7 +15,7 @@
             <div class="common-text common-text--medium text-dark-title">Сегодня</div>
             {{#each (notTodayArray notifications)}}
             <div class="notification__item">
-                <img class="notification__img" src="/images/img/vk-company.png">
+                <img class="notification__img" src="/images/webp/default-logo.webp">
                 <div class="notification__main-info">
                     {{#iff this.message '==' 'New response'}}
                         <a href="/resume/{{this.cv_id}}" class="js-nav-link link-btn_blue-without-bd common-text common-text--medium">Новый отклик!</a>
@@ -32,7 +32,7 @@
             <div class="common-text common-text--medium text-dark-title">Ранее</div>
             {{#each (notEarlyArray notifications)}}
             <div class="notification__item">
-                <img class="notification__img" src="/images/img/vk-company.png">
+                <img class="notification__img" src="/images/webp/default-logo.webp">
                 <div class="notification__main-info">
                     {{#iff this.message '==' 'New response'}}
                         <a href="/resume/{{this.cv_id}}" class="js-nav-link link-btn_blue-without-bd common-text common-text--medium">Новый отклик!</a>

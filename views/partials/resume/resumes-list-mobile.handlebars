@@ -1,8 +1,9 @@
 <div class="emp-vacs__main-frame">
     <div class="emp-vacs__item">
         {{#each cvs}}
+        {{log this}}
         <div class="resume">
-            <div class="resume__mobile-info">
+            <div class="resume__mobile-info" style="width: 100%;">
             <div class="resume__job-type">
                 <div class="resume__job-name header-text header-text--second text-dark-title">{{this.profession_name}}</div>
                 {{#iff this.status '==' 'searching'}}
@@ -25,7 +26,8 @@
                 {{/iff}}
             </div>
             <div class="resume__name-age-info-mobile common-text common-text--regular text-dark-regular">
-                {{this.first_name}} {{this.last_name}}, {{this.birthday}}
+                {{log this.last_name}}
+                {{this.first_name}} {{this.last_name}}, {{this.birthday}}z
             </div>
             </div>
             <div class="resume__btns">

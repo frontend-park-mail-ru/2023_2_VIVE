@@ -39,7 +39,7 @@ module.exports = {
 
   devServer: {
     historyApiFallback: true,
-    port: 8085,
+    port: 8084,
     devMiddleware: {
       index: true,
       mimeTypes: { phtml: 'text/html' },
