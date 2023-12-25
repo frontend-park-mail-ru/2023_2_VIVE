@@ -195,7 +195,8 @@ class ResStore extends Store {
             errors: this.page_errors,
             data: this.form_data,
             page_data: this.page_data,
-            form_error: this.form_error,
+            main_error: this.main_error,
+            
 
             //========editing
             is_edit: this.is_edit,
@@ -367,12 +368,14 @@ class ResStore extends Store {
                 sending_form,
             );
             const data = await resp.json();
-            console.log("received: ", data);
+            
             this.clear();
             router.goToLink('/resume/' + data.id);
+            return true;
         } catch (err) {
-
+            this.main_error = 'Произошла ошибка отправки';
             console.error(err);
+            return false;
         }
     }
 

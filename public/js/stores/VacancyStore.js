@@ -273,6 +273,7 @@ class VacancyStore extends Store {
             steps: this.formSteps(),
             data: this.form_data,
             form_errors: this.form_errors,
+            main_error: this.main_error,
         }
 
     }
@@ -285,7 +286,6 @@ class VacancyStore extends Store {
 
     checkAndSaveInput(input_node) {
         this.cur_input = input_node;
-        console.log(input_node);
 
         this.form_data[input_node.name] = input_node.value;
 
@@ -316,7 +316,7 @@ class VacancyStore extends Store {
     async checkAndSendForm(form_data) {
         Object.assign(this.form_data, form_data);
         if (this.isValidFormData()) {
-            return await this.sendForm();
+            return !(await this.sendForm());
         }
         return true;
     }
@@ -349,9 +349,11 @@ class VacancyStore extends Store {
             );
             const data = await resp.json();
             this.clear();
-            router.goToLink('/vacancy/' + data.id);        
+            router.goToLink('/vacancy/' + data.id);  
+            return true;      
         } catch(error) {
             console.error(error);
+            this.main_error = "Произошла ошибка отправки";
             return false;
         }
     }
