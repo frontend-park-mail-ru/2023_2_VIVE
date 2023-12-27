@@ -48,6 +48,18 @@
   .navbar-mobile__right {
     gap: 20px;
   }
+
+  .navbar-desktop__center {
+    display: none;
+  }
+
+  .navbar-search__desktop {
+    display: none;
+  }
+
+  .hidden-btn-desk {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -105,7 +117,7 @@
   .navbar__logo {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 40px;
   }
 
   .search__input {
@@ -118,6 +130,43 @@
 
   .navbar-notification-mobile {
     display: none;
+  }
+
+  .navbar-desktop__center {
+    display: flex;
+    gap: 30px;
+  }
+
+  .search__srch-btn-desk {
+    outline: none;
+    border: none;
+
+    display: flex;
+    width: 400px;
+    height: 42px;
+    justify-content: flex-end;
+    align-items: center;
+    align-self: stretch;
+    background: none;
+  }
+
+  .d-none-for-desl-search {
+    display: none !important;
+  }
+
+  .hidden-navbar-for-desktop {
+    justify-content: flex-end;
+  }
+
+  .search-btn-desk-add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    background: var(--main-dodger-blue);
   }
 }
 

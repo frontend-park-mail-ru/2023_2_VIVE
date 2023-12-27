@@ -56,6 +56,7 @@ export default class mainView extends View {
         this.profileDropListener();
         this.searchTypeListener();
         this.notificationListener();
+        this.searchDropListener();
     }
 
     searchTypeListener() {
@@ -301,6 +302,24 @@ export default class mainView extends View {
                 }
             });
         }
+    }
+
+    searchDropListener() {
+        const searchDropBtnDesktop = document.querySelector('[data-name="searchDropBtnDesktop"]');
+        const description = document.querySelector('.navbar-desktop__center');
+        const searchField = document.querySelector('.navbar__search-field');
+        searchDropBtnDesktop.addEventListener('click', () => {
+            searchDropBtnDesktop.parentNode.classList.add('d-none-for-desl-search');
+            description.classList.add('d-none-for-desl-search');
+            searchField.classList.remove('d-none-for-desl-search');
+        });
+
+        const hiddenSeaechFieldBtn = document.querySelector('[data-name="hiddenSeaechFieldBtn"]');
+        hiddenSeaechFieldBtn.addEventListener('click', () => {
+            hiddenSeaechFieldBtn.parentNode.classList.add('d-none-for-desl-search');
+            description.classList.remove('d-none-for-desl-search');
+            searchDropBtnDesktop.parentNode.classList.remove('d-none-for-desl-search');
+        })
     }
 
     clear() {
