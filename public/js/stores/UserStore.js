@@ -50,6 +50,11 @@ class UserStore extends Store {
     }
 
     getUser() {
+        if (this.user) {
+            this.user.config = {
+                roles: this.ROLES,
+            }
+        }
         return this.user;
     }
 

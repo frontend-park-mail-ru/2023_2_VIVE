@@ -36,6 +36,7 @@ class NotificationStore extends Store {
             this.notificationSocket = null;
             return;
         }
+        // console.log(user);
         if (User.getUser().role == User.ROLES.emp) {
             this.createSocket();
         }

@@ -34,6 +34,9 @@ const ruNames = {
     'phd_junior': 'Кандидат наук',
     'phd': 'Доктор наук',
     'doctor': 'Доктор наук',
+    'unfinished_higher' : 'Незаконченное высшее',
+    'candidate': 'Кандидат наук',
+    'special_secondary': 'Среднее специальное',
 };
 
 

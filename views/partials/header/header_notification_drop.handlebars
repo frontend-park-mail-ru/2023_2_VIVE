@@ -1,5 +1,6 @@
 <div class="dropdown">
-    {{!-- <div class="navbar__item">
+    {{#iff user.role '==' user.config.roles.emp}}
+    <div class="navbar__item">
         <div class="navbar__item__btn link-btn_link link-btn_transp link-btn_block link-btn_pd-sm cursor-pointer" name="drop-btn-notifications">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                 <g mask="url(#mask0_2585_19012)">
@@ -8,7 +9,8 @@
                 </g>
             </svg>
         </div>
-    </div> --}}
+    </div>
+    {{/iff}}
     <div class="dropdown__content-motification d-none">
         <div class="header-text header-text--second text-dark-title">Уведомления</div>
         <div class="notification__frame notification__today">

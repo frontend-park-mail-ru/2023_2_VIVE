@@ -38,7 +38,7 @@ export default class mainView extends View {
 
         document.querySelector('header').innerHTML = require('@pages/header.handlebars')(
             {
-                user: await User.getUser(),
+                user: User.getUser(),
                 search_type: searchStore.getType(),
                 qObj: qObj,
                 notifications: notificationStore.getNotifications(),
@@ -308,18 +308,23 @@ export default class mainView extends View {
         const searchDropBtnDesktop = document.querySelector('[data-name="searchDropBtnDesktop"]');
         const description = document.querySelector('.navbar-desktop__center');
         const searchField = document.querySelector('.navbar__search-field');
-        searchDropBtnDesktop.addEventListener('click', () => {
-            searchDropBtnDesktop.parentNode.classList.add('d-none-for-desl-search');
-            description.classList.add('d-none-for-desl-search');
-            searchField.classList.remove('d-none-for-desl-search');
-        });
+
+        if (searchDropBtnDesktop) {
+            searchDropBtnDesktop.addEventListener('click', () => {
+                searchDropBtnDesktop.parentNode.classList.add('d-none-for-desl-search');
+                description.classList.add('d-none-for-desl-search');
+                searchField.classList.remove('d-none-for-desl-search');
+            });
+        }
 
         const hiddenSeaechFieldBtn = document.querySelector('[data-name="hiddenSeaechFieldBtn"]');
-        hiddenSeaechFieldBtn.addEventListener('click', () => {
-            hiddenSeaechFieldBtn.parentNode.classList.add('d-none-for-desl-search');
-            description.classList.remove('d-none-for-desl-search');
-            searchDropBtnDesktop.parentNode.classList.remove('d-none-for-desl-search');
-        })
+        if (hiddenSeaechFieldBtn) {
+            hiddenSeaechFieldBtn.addEventListener('click', () => {
+                hiddenSeaechFieldBtn.parentNode.classList.add('d-none-for-desl-search');
+                description.classList.remove('d-none-for-desl-search');
+                searchDropBtnDesktop.parentNode.classList.remove('d-none-for-desl-search');
+            })
+        }
     }
 
     clear() {

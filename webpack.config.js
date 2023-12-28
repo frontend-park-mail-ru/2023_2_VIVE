@@ -11,7 +11,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require('webpack');
 
 const CONFIG = {
-  isDev: true,
+  isDev: false,
 }
 
 module.exports = {
