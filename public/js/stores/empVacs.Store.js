@@ -15,10 +15,8 @@ class EmpVacsStore extends Store {
 
     getContext() {
         return {
-            full_name: this.full_name,
-            organization: this.organization,
-            vacancies: this.vacancies,
-            user: this.user
+            emp: this.emp,
+            user: User.getUser(),
         }
     }
 
@@ -26,18 +24,17 @@ class EmpVacsStore extends Store {
         try {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + "/vacancies/employer/" + data.id);
             const resp_json = await resp.json();
-            this.organization = resp_json.organization_name;
-            this.full_name = resp_json.last_name + " " + resp_json.first_name;
-            this.vacancies = resp_json.vacancies;
-            this.vacancies.forEach(element => {
+            console.log(resp_json);
+            this.emp = resp_json;
+            this.emp.vacancies.forEach(element => {
                 element.salary_view = vacancyStore.processVacanciesSalary(element);
                 element.employment_view = vacancyStore.processVacanciesEmployment(element);
                 element.expirience_view = vacancyStore.processVacanciesExperience(element);
             });
-            this.user = User.getUser();
+
             return true;
-        } catch(error) {
-            console.log(error);
+        } catch (error) {
+            // // console.log(error);
             return false;
         }
     }

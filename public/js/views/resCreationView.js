@@ -33,7 +33,7 @@ export default class resCreationView extends mainView {
     const template = require('@pages/resume/res_creation.handlebars');
 
     document.querySelector('main').innerHTML = template(resStore.getContext());
-
+    
     this.addEventListeners();
     this.addEventListenersToPage();
   }
@@ -83,7 +83,7 @@ export default class resCreationView extends mainView {
         if (resStore.saveForm(getFormObject(new FormData(this.form)))) {
           this.render();
         } else {
-          if (resStore.sendForms()) {
+          if (!(await resStore.sendForms())) {
             this.render();
           }
         }

@@ -4,6 +4,7 @@ import { validateForm } from '../modules/constraints.js';
 import router from "../modules/router/router.js";
 import { getMetaPlusDataObj, isObjEmpty } from '../utils.js';
 import Store from "./Store.js";
+import User from './UserStore.js';
 
 class VacancyStore extends Store {
     constructor() {
@@ -22,14 +23,17 @@ class VacancyStore extends Store {
                 "name": {
                     type: "text",
                     required: true,
+
                 },
                 "salary_lower_bound": {
                     type: "text",
                     only_digits: true,
+                    max_len: 9,
                 },
                 "salary_upper_bound": {
                     type: "text",
                     only_digits: true,
+                    max_len: 9,
                     greater_than: "salary_lower_bound",
                 },
                 "experience": {
@@ -44,7 +48,7 @@ class VacancyStore extends Store {
                 },
                 "location": {
                     type: "text",
-                    required: false,
+                    required: true,
                 }
             }
         } else {
@@ -178,7 +182,7 @@ class VacancyStore extends Store {
             router.goToLink("/vacancy/" + newVacancyData["id"]);
             return true;
         } catch (error) {
-            console.log(error);
+            // // console.log(error);
             return false;
         }
     }
@@ -186,11 +190,11 @@ class VacancyStore extends Store {
     async updateInnerData(data) {
         try {
             this.vacancy = (await this.getData(`/vacancies/${data.id}`));
-            
-            this.user = await this.getData("/current_user");
+
+            this.user = User.getUser();
             this.responses = [];
 
-            switch(data.url.split('/').slice(1)[2]) {
+            switch (data.url.split('/').slice(1)[2]) {
                 case 'responses':
                     this.setState('responses');
                     break;
@@ -202,15 +206,17 @@ class VacancyStore extends Store {
                     break;
             }
 
-            // const cvIds = await this.getData(`/vacancies/${data['id']}/applicants`);
-            // if (cvIds) {
-            //     for (const cv of cvIds) {
-            //         const cvId = cv.cv_id;
-            //         data = await this.getData(`/cv/${cvId}`);
-            //         data.profession_name = data.profession_name.slice(0, 50) + "...";
-            //         this.responses.push(data);
-            //     }
-            // }
+            if (User.getUser().role === User.ROLES.emp && User.getUser().employer_id === this.vacancy.employer_id) {
+                const cvIds = await this.getData(`/vacancies/${data['id']}/applicants`);
+                if (cvIds) {
+                    for (const cv of cvIds) {
+                        const cvId = cv.cv_id;
+                        data = await this.getData(`/cv/${cvId}`);
+                        data.profession_name = data.profession_name.slice(0, 50) + "...";
+                        this.responses.push(data);
+                    }
+                }
+            }
 
             return true;
         } catch (err) {
@@ -234,7 +240,7 @@ class VacancyStore extends Store {
             const data = await resp.json();
             return data;
         } catch (err) {
-            console.error(err);
+            // console.error(err);
             return undefined;
         }
     }
@@ -267,6 +273,7 @@ class VacancyStore extends Store {
             steps: this.formSteps(),
             data: this.form_data,
             form_errors: this.form_errors,
+            main_error: this.main_error,
         }
 
     }
@@ -282,11 +289,7 @@ class VacancyStore extends Store {
 
         this.form_data[input_node.name] = input_node.value;
 
-        // const validate_obj = {};
-        // validate_obj[input_name] = input_value;
-
         const errors = validateForm(getMetaPlusDataObj(this.pageFormFieldMeta(), this.form_data));
-
         this.form_errors = {};
         if (!isObjEmpty(errors)) {
             Object.assign(this.form_errors, errors);
@@ -295,23 +298,25 @@ class VacancyStore extends Store {
     }
 
 
-    isValidFormData(form_data) {
-        const errors = validateForm(getMetaPlusDataObj(this.pageFormFieldMeta(), form_data));
+    isValidFormData() {
+        this.form_errors = {};
+        const errors = validateForm(getMetaPlusDataObj(this.pageFormFieldMeta(), this.form_data));
         Object.assign(this.form_errors, errors);
         return isObjEmpty(errors);
     }
 
     saveFormAndContinue(form_data) {
-        if (this.isValidFormData(form_data)) {
+        Object.assign(this.form_data, form_data);
+        if (this.isValidFormData()) {
             this.page++;
         }
         return true;
     }
 
     async checkAndSendForm(form_data) {
-        if (this.isValidFormData(form_data)) {
-            Object.assign(this.form_data, form_data);
-            return await this.sendForm();
+        Object.assign(this.form_data, form_data);
+        if (this.isValidFormData()) {
+            return !(await this.sendForm());
         }
         return true;
     }
@@ -322,8 +327,8 @@ class VacancyStore extends Store {
                 BACKEND_SERVER_URL + `/vacancies/${this.vacancy.id}`,
             );
             return true;
-        } catch(error) {
-            console.log(error);
+        } catch (error) {
+            // // console.log(error);
             return false;
         }
     }
@@ -334,8 +339,8 @@ class VacancyStore extends Store {
     }
 
     async sendForm() {
-        console.log("sending...");
-        console.log(this.form_data);
+        // // console.log("sending...");
+        // // console.log(this.form_data);
         this.beforeSending();
         try {
             const resp = await APIConnector.post(
@@ -344,9 +349,11 @@ class VacancyStore extends Store {
             );
             const data = await resp.json();
             this.clear();
-            router.goToLink('/vacancy/' + data.id);        
-        } catch(error) {
-            console.error(error);
+            router.goToLink('/vacancy/' + data.id);
+            return true;
+        } catch (error) {
+            // console.error(error);
+            this.main_error = "Произошла ошибка отправки";
             return false;
         }
     }

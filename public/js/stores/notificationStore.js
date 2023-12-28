@@ -1,9 +1,10 @@
-import { BACKEND_SERVER_URL } from "../../../config/config.js";
+import { BACKEND_SERVER_URL, NOTIF_WS_SERVER_URL } from "../../../config/config.js";
 import APIConnector from "../modules/APIConnector.js";
 import Store from "./Store.js";
 import mp3File from '../../mp3/notification.mp3'
 import router from "../modules/router/router.js";
 import { getHrefFromLink } from "../utils.js";
+import User from './UserStore.js';
 
 class NotificationStore extends Store {
     constructor() {
@@ -13,7 +14,7 @@ class NotificationStore extends Store {
     }
 
     async updateData(user) {
-       //this.updateSocket(user);
+        this.updateSocket(user);
         await this.updateNotifications(user);
     }
 
@@ -35,15 +36,17 @@ class NotificationStore extends Store {
             this.notificationSocket = null;
             return;
         }
-
-        this.createSocket();
+        // console.log(user);
+        if (User.getUser().role == User.ROLES.emp) {
+            this.createSocket();
+        }
     }
 
     createSocket() {
-        this.notificationSocket = new WebSocket(`ws://84.23.53.171:8065/ws`);
+        this.notificationSocket = new WebSocket(NOTIF_WS_SERVER_URL);
 
         this.notificationSocket.addEventListener('open', () => {
-            console.log('WebSocket соединение установлено')
+            // // console.log('socket open!');
         });
 
         this.notificationSocket.addEventListener('message', async (event) => {
@@ -82,7 +85,7 @@ class NotificationStore extends Store {
                 }
             })
 
-            const notificationText = document.createElement('div');
+            const notificationText = document.createElement('span');
             notificationText.classList.add('secondary-text', 'text-dark-regular');
             if (notification.message === 'New response') {
                 notificationText.textContent = 'На вашу вакансию откликнулся соискатель';
@@ -105,12 +108,10 @@ class NotificationStore extends Store {
 
         this.notificationSocket.addEventListener('close', function (event) {
             if (event.wasClean) {
-                console.log(`Соединение закрыто чисто, код: ${event.code}, причина: ${event.reason}`);
+                // // console.log(`Соединение закрыто чисто, код: ${event.code}, причина: ${event.reason}`);
             } else {
-                console.error('Соединение разорвано');
+                setTimeout(notificationStore.createSocket(), 6000);
             }
-
-            setTimeout(notificationStore.createSocket(), 60000);
         });
     }
 
@@ -124,9 +125,8 @@ class NotificationStore extends Store {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + `/notifications/${user.id}`);
             this.notifications = (await resp.json()).notifications;
             this.notifications = this.notifications ? this.notifications : [];
-            console.log(this.notifications);
-        } catch(error) {
-            console.error(error);
+        } catch (error) {
+            // console.error(error);
         }
     }
 }

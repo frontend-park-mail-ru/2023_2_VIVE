@@ -4,7 +4,7 @@
       {{> vac/vacs_filters }}
       <div class="vacs__block">
         <div class="vacs__block__params">
-          <div class="vacs__block__params__sorted">
+          {{!-- <div class="vacs__block__params__sorted">
             <div name="sorting-date-btn" class="link-btn_blue-without-bd common-text common-text--regular">По дате
               создания
               <svg class="{{#if sorted}}vacs__sorted_icon-on{{/if}}" name="sorted-icon" width="12" height="8"
@@ -12,7 +12,7 @@
                 <path d="M6 7.4L0 1.4L1.4 0L6 4.6L10.6 0L12 1.4L6 7.4Z" fill="#0496FF" />
               </svg>
             </div>
-          </div>
+          </div> --}}
           <div class="vacs__block__params__view">
             {{#iff block_type '==' 'list'}}
             {{> components/link-btn (object

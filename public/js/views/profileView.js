@@ -19,13 +19,22 @@ export default class profileView extends mainView {
     if (screen.width < 768) {
       const footer = document.querySelector("footer");
       if (footer !== null) {
-          footer.remove();
+        footer.remove();
       }
     }
-    
+
     // eslint-disable-next-line no-undef
     const template = require('@pages/profile.handlebars');
-    document.querySelector('main').innerHTML = template(await profileStore.getContext());
+    document.querySelector('main').innerHTML = template(this.getFullContext({
+      form_error: profileStore.form_error,
+      errors: profileStore.errors,
+      state: profileStore.state,
+      user: profileStore.user,
+      data: profileStore.data,
+
+    }));
+
+    profileStore.update();
 
     this.addEventListeners();
   }
@@ -93,19 +102,40 @@ export default class profileView extends mainView {
 
     avatar_input.addEventListener('change', async (event) => {
       const file = avatar_input.files[0];
-      console.log(`размер изображения: ${file.size / 1024 / 1024} MB`);
+      // // console.log(`размер изображения: ${file.size / 1024 / 1024} MB`);
       if (file.size > max_size) {
         this.setError(`Размер файла не должен превышать ${max_size / 1024 / 1024} MB`);
       } else {
 
         let form_data = new FormData(form);
+        const file = form_data.get('avatar');
+        const url = URL.createObjectURL(file);
 
-        if (!await profileStore.sendAvatar(form_data)) {
-          
-          this.setError('Ошибка сохранения изображения')
-        } else {
-          console.log("ok!");
-          avatar_img.src = URL.createObjectURL(file);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const image = new Image();
+        image.src = url;
+        image.onload = async (event) => {
+          canvas.width = image.width;
+          canvas.height = image.height;
+
+          ctx.drawImage(image, 0, 0);
+
+          const webpImage = canvas.toDataURL('image/webp');
+
+          const resp = await fetch(webpImage);
+          const webp_blob = await resp.blob();
+          const webp_file = new File([webp_blob], file.name + ".webp", { type: webp_blob.type })
+          // // // console.log(webp_file);
+          form_data.set('avatar', webp_file);
+
+          if (!await profileStore.sendAvatar(form_data)) {
+            this.setError('Ошибка сохранения изображения')
+          } else {
+            // // console.log("ok!");
+            avatar_img.src = URL.createObjectURL(webp_blob);
+          }
         }
       }
     })
@@ -131,7 +161,6 @@ export default class profileView extends mainView {
   }
 
   async updateInnerData(data) {
-    console.log(data);
     return profileStore.updateInnerData(data);
   }
 }

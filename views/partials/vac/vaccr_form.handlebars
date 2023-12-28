@@ -7,8 +7,8 @@
     {{{lookup steps page}}} <span class="rescr__form__step__title--mobile">(шаг {{sum (array page 1)}}/{{steps.length}})</span>
   </p>
 
-  {{#if form_error}}
-  <div class="form__error">{{form_error}}</div>
+  {{#if main_error}}
+  <div class="form__error">{{main_error}}</div>
   {{/if}}
 
   {{#iff page '==' '0'}}

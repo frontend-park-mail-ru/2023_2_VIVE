@@ -32,8 +32,8 @@ const REQUEST_HEADERS = {
  * APIConnector
     .get('example.com')
     .then((res) => res.json())
-    .then((json) => console.log(json))
-    .catch((err) => console.error(err));
+    .then((json) => // // console.log(json))
+    .catch((err) => // console.error(err));
  * ```
  */
 export default {
@@ -149,15 +149,17 @@ export default {
         credentials: credentials,
       });
 
+
       if (!response.ok) {
-        const httpError = new HTTPError('', response.status);
-        httpError.statusCode = response.status;
+        const httpError = new HTTPError(response.status);
+        const body = await response.text();
+        httpError.message = body;
         throw httpError;
       }
 
       return response;
     } catch (error) {
-      const networkError = new Error(`network error: ${error.message}`);
+      const networkError = new Error(error.message);
       networkError.status = error;
       throw networkError;
     }

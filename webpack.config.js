@@ -1,13 +1,17 @@
 const path = require('path');
+const fs = require('fs');
 // const HandlebarsPlugin = require("handlebars-webpack-plugin");
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const webpack = require('webpack');
 
 const CONFIG = {
-  isDev: true,
+  isDev: false,
 }
 
 module.exports = {
@@ -15,13 +19,6 @@ module.exports = {
   devtool: CONFIG.isDev ? 'eval-source-map' : false,
 
   entry: {
-    sw: {
-      import: path.resolve(__dirname, 'public/js/workers/sw.js'),
-    },
-    swload: {
-      dependOn: 'sw',
-      import: path.resolve(__dirname, 'public/js/workers/swload.js'),
-    },
     main: {
       import: path.resolve(__dirname, 'public/js/index.js'),
     }
@@ -29,9 +26,8 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: ({ chunk }) => {
-      return chunk.name === 'main' ? '[name].[contenthash].js' : '[name].js';
-    },
+    filename: '[name].[contenthash].js',
+    publicPath: '/',
   },
 
   resolve: {
@@ -42,16 +38,45 @@ module.exports = {
   },
 
   devServer: {
-    port: 8085,
     historyApiFallback: true,
-    static: {
-      directory: path.join(__dirname, './'),
-      watch: true
+    port: 8085,
+    devMiddleware: {
+      index: true,
+      mimeTypes: { phtml: 'text/html' },
+      publicPath: '/',
+      serverSideRender: true,
+      writeToDisk: true,
     },
+    // host: 'hunt-n-hire.ru',
+    // server: {
+    //   type: 'https',
+    //   options: {
+    //   },
+    // },
+  },
+
+  optimization: {
+    minimize: !CONFIG.isDev,
+    minimizer: [
+      new TerserPlugin(),
+      new CssMinimizerPlugin(),
+    ],
   },
 
   module: {
     rules: [
+      {
+        test: /\.(?:js|mjs|cjs)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: "defaults" }]
+            ]
+          }
+        }
+      },
       {
         test: /\.css$/,
         use: [
@@ -118,8 +143,15 @@ module.exports = {
         {
           from: './public/images',
           to: './images',
+        },
+        {
+          from: './public/js/workers/sw.js',
         }
       ]
+    }),
+
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
     }),
 
     new HtmlWebpackPlugin({

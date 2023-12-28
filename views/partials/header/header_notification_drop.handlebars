@@ -1,4 +1,5 @@
 <div class="dropdown">
+    {{#iff user.role '==' user.config.roles.emp}}
     <div class="navbar__item">
         <div class="navbar__item__btn link-btn_link link-btn_transp link-btn_block link-btn_pd-sm cursor-pointer" name="drop-btn-notifications">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -9,13 +10,14 @@
             </svg>
         </div>
     </div>
+    {{/iff}}
     <div class="dropdown__content-motification d-none">
         <div class="header-text header-text--second text-dark-title">Уведомления</div>
         <div class="notification__frame notification__today">
             <div class="common-text common-text--medium text-dark-title">Сегодня</div>
             {{#each (notTodayArray notifications)}}
             <div class="notification__item">
-                <img class="notification__img" src="/images/img/vk-company.png">
+                <img class="notification__img" src="/images/webp/default-logo.webp">
                 <div class="notification__main-info">
                     {{#iff this.message '==' 'New response'}}
                         <a href="/resume/{{this.cv_id}}" class="js-nav-link link-btn_blue-without-bd common-text common-text--medium">Новый отклик!</a>
@@ -32,7 +34,7 @@
             <div class="common-text common-text--medium text-dark-title">Ранее</div>
             {{#each (notEarlyArray notifications)}}
             <div class="notification__item">
-                <img class="notification__img" src="/images/img/vk-company.png">
+                <img class="notification__img" src="/images/webp/default-logo.webp">
                 <div class="notification__main-info">
                     {{#iff this.message '==' 'New response'}}
                         <a href="/resume/{{this.cv_id}}" class="js-nav-link link-btn_blue-without-bd common-text common-text--medium">Новый отклик!</a>

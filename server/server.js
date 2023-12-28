@@ -36,12 +36,12 @@ poll_app.use(express.static(path.join(__dirname, '..')));
 
 app.get('/*', (req, res) => {
   res.render('pages/main');
-  console.log('render');
+  // // console.log('render');
 });
 
 poll_app.get('/csatpoll', (req, res) => {
   res.render('pages/poll');
-  console.log('render poll!');
+  // // console.log('render poll!');
 })
 
 app.listen(FRONTEND_SERVER_PORT, () => {

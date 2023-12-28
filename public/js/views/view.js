@@ -1,4 +1,4 @@
-import { FRONTEND_POLL_SERVER_PORT, FRONTEND_SERVER_PORT } from '../../../config/config.js';
+import { BACKEND_SERVER_URL, FRONTEND_POLL_SERVER_PORT, FRONTEND_SERVER_PORT } from '../../../config/config.js';
 import router from "../modules/router/router.js";
 import User from '../stores/UserStore.js';
 import csatStore from '../stores/csatStore.js';
@@ -18,9 +18,9 @@ export default class View {
         if (poll_block) { // то есть если мы находимся во внешнем окне, а не в iframe
             if (User.isLoggedIn()) {
                 if (poll_block.innerHTML == '') {
-                    
+
                     // poll_block.innerHTML = '<iframe class="js-csat-poll poll__iframe" src="http://212.233.90.231:' + FRONTEND_POLL_SERVER_PORT + '/csatpoll" frameborder="0"></iframe>';
-                    // console.log(await csatStore.getQuestionsFromMain());
+                    // // // console.log(await csatStore.getQuestionsFromMain());
                 }
             } else {
                 if (poll_block.innerHTML != '') {
@@ -34,7 +34,7 @@ export default class View {
                     poll_block.innerHTML = '';
                 }
                 if (event.data == 'get') {
-                    // console.log(JSON.stringify(await csatStore.getQuestionsFromMain()))
+                    // // // console.log(JSON.stringify(await csatStore.getQuestionsFromMain()))
                     window.frames[0].postMessage("hello", 'http://212.233.90.231:' + FRONTEND_POLL_SERVER_PORT);
                 }
                 if (event.data == 'send') {
@@ -42,6 +42,15 @@ export default class View {
                 }
             }
         })
+    }
+
+    getFullContext(ctx) {
+        Object.assign(ctx, {
+            config: {
+                backend_url: BACKEND_SERVER_URL,
+            }
+        });
+        return ctx;
     }
 
     /**
@@ -53,7 +62,7 @@ export default class View {
         links.forEach(link => {
             link.addEventListener('click', async event => {
                 event.preventDefault();
-                if (!event['processed']) {
+                if (!event['processed'] && !event.target.closest('.js-remove-fav-vac') && !event.target.closest('.js-add-fav-vac')) {
                     router.goToLink(getHrefFromLink(link))
                     event['processed'] = true;
                 }

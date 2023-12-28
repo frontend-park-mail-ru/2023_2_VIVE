@@ -1,11 +1,15 @@
 <div class="profile">
     <div class="profile__header profile__header--background--default-hh">
-        <img class="profile_image" src="/images/profile.png" alt="profile-logo">
+        {{#if app.avatar_url}}
+        <img class="profile_image" src="{{config.backend_url}}{{app.avatar_url}}" alt="profile-logo">
+        {{else}}
+        <img class="profile_image" src="/images/webp/profile.webp" alt="profile-logo">
+        {{/if}}
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="header-text header-text--first text-light-title profile__about-mobile-main-text">{{last_name}} {{first_name}}</div>
-                    <div class="secondary-text text-light-regular profile__about-mobile-main-text">Соискатель</div>
+                    <div class="header-text header-text--first text-light-title profile__about-mobile-main-text">{{app.first_name}} {{app.last_name}}</div>
+                    <div class="secondary-text text-light-regular profile__about-mobile-main-text">Соискатель (электронная почта: {{app.email}})</div>
                 </div>
             </div>
         </div>
@@ -13,8 +17,8 @@
             <div class="profile__role-big-frame">
                 <div class="profile__roles-frame">
                     <div class="tooltip">
-                        <img src="/images/img/briefcase_outline_28-01.png" class="profile__role-img">
-                        <span class="tooltip-text-down tooltip-text-down__profile common-text common-text-medium text-dark-title">Работодатель</span>
+                        <img src="/images/svg/profile_28-01.svg" class="profile__role-img">
+                        <span class="tooltip-text-down tooltip-text-down__profile common-text common-text-medium text-dark-title">Соискатель</span>
                     </div>
                 </div>
             </div>
@@ -22,8 +26,10 @@
     </div>
     <div class="emp-vacs__frame">
         <div class="header-text header-text--first">
-            Найдено {{cv.cvs.length}} резюме соискателя
+            Найдено {{app.cvs.length}} резюме соискателя
         </div>
+        {{#with (object cvs=app.cvs config=config)}}
         {{> resume/resumes-list-mobile}}
+        {{/with}}
     </div>
 </div>

@@ -5,10 +5,10 @@
       <button class="js-button-drop-filters link-btn link-btn_blue-without-bd  common-text common-text--medium">Сбросить фильтры</button>
     {{/if}}
   </div>
-  <div class="vacs__button-open-filters">
+  <div class="js-button-open-filters vacs__button-open-filters">
     <button class="text-light-title link-btn-blue--bg common-text common-text--medium" name="vacs_filters">Фильтры</button>
   </div>
-  <div class="vacs__filters-frame vacs__filters-frame-mobile-hidden">
+  <div class="vacs__filters-frame vacs__filters-frame-mobile">
     {{#each filters}}
     <div class="vacs__filter" name="{{this.name}}">
       <div class="vacs__filter__name">

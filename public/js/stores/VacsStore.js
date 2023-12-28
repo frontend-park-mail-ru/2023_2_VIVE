@@ -14,6 +14,11 @@ class VacsStore extends Store {
     }
 
     async getContext() {
+        this.vacs.forEach(vac => {
+            vac.salary_view = vacancyStore.processVacanciesSalary(vac);
+            vac.employment_view = vacancyStore.processVacanciesEmployment(vac);
+            vac.expirience_view = vacancyStore.processVacanciesExperience(vac);
+        });
         return {
             user: await User.getUser(),
             sorted: this.sorted,
@@ -83,7 +88,7 @@ class VacsStore extends Store {
     }
 
     async pagToNext() {
-        console.log(this.qObj, this.vacancies);
+        // // console.log(this.qObj, this.vacancies);
         if (this.qObj.page_num * this.qObj.results_per_page >= this.vacancies.count) {
             return false;
         }
@@ -111,13 +116,63 @@ class VacsStore extends Store {
         try {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies/search' + '?' + q_str);
             const data = await resp.json();
-            console.log(data);
+            // // console.log(data);
             this.vacancies = data['vacancies'];
             this.filters = data['filters'];
             return data['vacancies']['list'];
         } catch (err) {
-            console.error(err);
+            // console.error(err);
             return undefined;
+        }
+    }
+
+    async getFavouriteVacs() {
+        try {
+            const resp = await APIConnector.get(BACKEND_SERVER_URL + '/vacancies/favourite');
+            this.vacs = await resp.json();
+            return true;
+        } catch (error) {
+            // console.error(error);
+            this.vacs = [];
+            return false;
+        }
+    }
+
+    async removeFavouriteVac(vac_id) {
+        if (User.isLoggedIn()) {
+            if (User.getUser().role == User.ROLES.emp) {
+                return false;
+            }
+        } else {
+            router.goToLink('/app_auth');
+            return false;
+        }
+
+        try {
+            const resp = await APIConnector.delete(BACKEND_SERVER_URL + '/vacancies/favourite/' + vac_id);
+            return true;
+        } catch (error) {
+            // console.error(error);
+            return false;
+        }
+    }
+
+    async setFavouriteVac(vac_id) {
+        if (User.isLoggedIn()) {
+            if (User.getUser().role == User.ROLES.emp) {
+                return false;
+            }
+        } else {
+            router.goToLink('/app_auth');
+            return false;
+        }
+
+        try {
+            const resp = await APIConnector.post(BACKEND_SERVER_URL + '/vacancies/favourite/' + vac_id);
+            return true;
+        } catch (error) {
+            // console.error(error);
+            return false;
         }
     }
 }

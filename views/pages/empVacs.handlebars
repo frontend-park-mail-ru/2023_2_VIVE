@@ -1,11 +1,16 @@
 <div class="profile">
+   
     <div class="profile__header profile__header--background--default-hh">
-        <img class="profile_image" src="/images/profile.png" alt="profile-logo">
+        {{#if emp.logo_url}}
+        <img class="profile_image" src="{{config.backend_url}}{{emp.logo_url}}" alt="profile-logo">
+        {{else}}
+        <img class="profile_image" src="/images/webp/default-logo.webp" alt="profile-logo">
+        {{/if}}
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
-                    <div class="header-text header-text--first text-light-title profile__about-mobile-main-text">{{full_name}}</div>
-                    <div class="secondary-text text-light-regular profile__about-mobile-main-text">Компания: {{organization}}</div>
+                    <div class="header-text header-text--first text-light-title profile__about-mobile-main-text">{{emp.first_name}} {{emp.last_name}}</div>
+                    <div class="secondary-text text-light-regular profile__about-mobile-main-text">Компания: {{emp.organization_name}}</div>
                 </div>
             </div>
         </div>
@@ -13,7 +18,7 @@
             <div class="profile__role-big-frame">
                 <div class="profile__roles-frame">
                     <div class="tooltip">
-                        <img src="/images/img/briefcase_outline_28-01.png" class="profile__role-img">
+                        <img src="/images/svg/briefcase_outline_28-01.svg" class="profile__role-img">
                         <span class="tooltip-text-down tooltip-text-down__profile common-text common-text-medium text-dark-title">Работодатель</span>
                     </div>
                 </div>
@@ -22,8 +27,11 @@
     </div>
     <div class="emp-vacs__frame">
         <div class="header-text header-text--first">
-          Найдено {{vacancies.length}} вакансий(я) работодателя
+          Найдено {{emp.vacancies.length}} вакансий(я) работодателя
         </div>
+        
+        {{#with (object vacancies=emp.vacancies config=config)}}
         {{> vac/vacs_list_mobile}}
+        {{/with}}
     </div>
 </div>

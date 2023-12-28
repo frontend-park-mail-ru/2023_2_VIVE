@@ -112,8 +112,8 @@ class ResStore extends Store {
             },
             "middle_name": {
                 type: "text",
-                required: true,
-                count_words: 1,
+                // required: true,
+                // count_words: 1,
                 no_digits: true,
             },
             "gender": {
@@ -149,6 +149,8 @@ class ResStore extends Store {
                 type: "text",
                 required: true,
                 digits: true,
+                min_len: 4,
+                max_len: 4,
             },
         },
         {
@@ -195,7 +197,8 @@ class ResStore extends Store {
             errors: this.page_errors,
             data: this.form_data,
             page_data: this.page_data,
-            form_error: this.form_error,
+            main_error: this.main_error,
+
 
             //========editing
             is_edit: this.is_edit,
@@ -335,8 +338,10 @@ class ResStore extends Store {
             if (form_data['skills'].length === 0) {
                 form_data['skills'] = [];
             } else {
-                form_data['skills'] = form_data['skills'].split(' ');
+                form_data['skills'] = form_data['skills'].split(';');
             }
+            form_data['skills'] = form_data['skills'].map(entry => entry.trim());
+            form_data['skills'] = form_data['skills'].filter(entry => entry != '');
         }
         for (const key in form_data) {
             if (this.checkAndSaveInput(key, form_data[key])) {
@@ -354,12 +359,12 @@ class ResStore extends Store {
     }
 
     async sendForms() {
-        console.log("sending...");
+        // // console.log("sending...");
         const sending_form = {};
         for (const form_data of this.forms_data) {
             Object.assign(sending_form, form_data);
         }
-        console.log(sending_form);
+        // // console.log(sending_form);
         //TODO
         try {
             const resp = await APIConnector.post(
@@ -367,12 +372,14 @@ class ResStore extends Store {
                 sending_form,
             );
             const data = await resp.json();
-            console.log("received: ", data);
+
             this.clear();
             router.goToLink('/resume/' + data.id);
+            return true;
         } catch (err) {
-
+            this.main_error = 'Произошла ошибка отправки';
             console.error(err);
+            return false;
         }
     }
 
@@ -402,7 +409,7 @@ class ResStore extends Store {
 
             const data = await resp.json();
 
-            console.log("received(resume): ", data);
+            // // console.log("received(resume): ", data);
             return data;
         } catch (err) {
             console.error(err);
@@ -462,8 +469,8 @@ class ResStore extends Store {
     }
 
     async sendEdit() {
-        console.log("sending edit...");
-        console.log(this.final_data);
+        // console.log("sending edit...");
+        // console.log(this.final_data);
         try {
             const resp = await APIConnector.put(
                 BACKEND_SERVER_URL + '/current_user/cvs/' + this.resume.id, this.final_data);
@@ -483,7 +490,7 @@ class ResStore extends Store {
             router.goToLink('/profile/resumes');
             return true;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return false;
         }
     }
@@ -502,8 +509,6 @@ class ResStore extends Store {
             this.qObj['page_num'] = 1;
             this.qObj['results_per_page'] = 10;
         }
-
-        console.log(this.qObj);
     }
 
     async getResumes() {
@@ -514,13 +519,12 @@ class ResStore extends Store {
             router.goToLink('/profile/resumes');
             return true;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return false;
         }
     }
 
     async pagToNext() {
-        console.log(this.qObj, this.cvs);
         if (this.qObj.page_num * this.qObj.results_per_page >= this.cvs.count) {
             return false;
         }
@@ -539,8 +543,6 @@ class ResStore extends Store {
     }
 
     async getAllResumes() {
-        console.log(this.qObj);
-
         if (!this.qObj['q']) {
             this.qObj['q'] = '';
         }
@@ -551,12 +553,11 @@ class ResStore extends Store {
                 BACKEND_SERVER_URL + `/cvs/search?` + q_str,
             );
             const data = await resp.json();
-            console.log(data);
             this.filters = data.filters;
             this.cvs = data.cvs;
             return data.cvs.list;
-        } catch(error) {
-            console.log(error);
+        } catch (error) {
+            // console.log(error);
             return undefined;
         }
     }
@@ -571,8 +572,8 @@ class ResStore extends Store {
             const fileName = match && match[1] ? match[1] : 'filename.pdf';
             const file = await resp.blob();
             saveAs(file, fileName);
-        } catch(error) {
-            console.log(error);
+        } catch (error) {
+            // console.log(error);
             return false;
         }
     }

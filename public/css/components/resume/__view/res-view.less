@@ -28,7 +28,6 @@
   .resv__data__main__avatar {
     width: 50px;
     height: 50px;
-    display: block;
   }
 
   .resv__data__list {
@@ -75,8 +74,12 @@
   .resv__data__main__avatar {
     width: 100px;
     height: 100px;
-    display: block;
-    margin-left: 50px;
+    box-shadow: 0;
+    transition: box-shadow 0.2s;
+  }
+
+  .resv__data__main__avatar:hover {
+    box-shadow: 0px 0px 15px -5px rgb(93, 93, 93);
   }
 
   .resv__data__item {
@@ -174,4 +177,10 @@
 .resv__item-tags {
   display: flex;
   flex-wrap: wrap;
+}
+
+.resv__data__main__avatar {
+  object-fit: cover;
+  border-radius: 20%;
+  overflow: hidden;
 }

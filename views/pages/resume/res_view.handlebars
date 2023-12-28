@@ -2,8 +2,8 @@
   <div class="column-wrapper mobile-wrapper">
     <div class="resv">
       <div class="resv__nav">
-        {{> components/link-btn text="К списку резюме" href="/resumes"
-        class="js-nav-link resv__nav__link link-btn_transp"
+        {{> components/link-btn text="Назад"
+        class="js-nav-link-back resv__nav__link link-btn_transp"
         class_text = "text-dodger-blue"
         svg_pos="before"
         svg='<svg class="resv__nav__link__svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -45,7 +45,8 @@
               
               <a {{#if ../is_my_resume}} href="/profile/resumes" {{else}} href="/resumes/profile/{{data.applicant_id}}"
                 {{/if}} class="js-nav-link">
-                <img class="resv__data__main__avatar" src="/images/profile.png" alt="">
+                
+                <img class="resv__data__main__avatar" src="{{#if data.avatar_url}}{{../config.backend_url}}{{data.avatar_url}}{{else}}/images/webp/profile.webp{{/if}}" alt="">
               </a>
             </div>
             {{/with}}
@@ -125,7 +126,7 @@
                 Компания: {{this.name}}
               </div>
               <div class="resv__text_sm mb-5">
-                <i>Дата начала и окончания работы:</i> {{this.start_date}} - {{#if this.end_date}}{{this.end_date}}{{else}}по настоящее время{{/if}}
+                <i>Дата начала и окончания работы:</i> {{formatDate this.start_date}} - {{#if this.end_date}}{{formatDate this.end_date}}{{else}}по настоящее время{{/if}}
               </div>
               <div class="resv__text_sm mb-5">
                 <i>Должность:</i> {{this.job_position}}
@@ -227,14 +228,6 @@
           </div>
         {{/if}}
       </div>
-
-      {{#iff data.status '==' 'searching'}}
-      {{> components/link-btn text="Доступно для просмотра"
-      class="resv__params__view resume__status resume__status--avaliable"}}
-      {{else}}
-      {{> components/link-btn text="Скрыто для просмотра"
-      class="resv__params__view resume__status resume__status--hidden"}}
-      {{/iff}}
     </div>
   </div>
   </div>

@@ -3,7 +3,7 @@ import APIConnector from '../modules/APIConnector.js';
 
 class CsatStore {
     constructor() {
-        console.log()
+        // // console.log()
         // this.getQuestions();
         this.current_iter = 0;
         this.clearData();
@@ -14,9 +14,9 @@ class CsatStore {
     }
 
     async setQuestions() {
-        // console.log(data);
+        // // // console.log(data);
         this.questions = (await this.getQuestionsFromMain())['questions'];
-        console.log(this.questions);
+        // // console.log(this.questions);
     }
 
     setStars(cnt) {
@@ -29,7 +29,7 @@ class CsatStore {
 
     getContext() {
         if (this.questions) {
-            console.log(this.questions);
+            // // console.log(this.questions);
             return {
                 question: this.questions[this.current_iter],
                 end: (this.current_iter === this.questions.length) ? true : false
@@ -70,10 +70,10 @@ class CsatStore {
         try {
             const resp = await APIConnector.get(BACKEND_SERVER_URL + '/statistics/questions');
             const data = await resp.json();
-            // console.log(data);
+            // // // console.log(data);
             return data;
         } catch (err) {
-            console.error(err);
+            // console.error(err);
             return undefined;
         }
         // return [
@@ -89,12 +89,12 @@ class CsatStore {
             const sending = Object.assign(question, this.questions[this.current_iter]);
             delete sending['name'];
             delete sending['question'];
-            console.log(sending);
+            // // console.log(sending);
             const resp = await APIConnector.post(BACKEND_SERVER_URL + '/statistics/questions', sending);
 
         } catch (err) {
-            console.error(err);
-            
+            // console.error(err);
+
         }
     }
 

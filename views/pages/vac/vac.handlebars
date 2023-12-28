@@ -3,8 +3,8 @@
     <div>
         <div class="link-btn complex-btn link-btn_blue-without-bd">
             <div class="resv__nav">
-                {{> components/link-btn text="К списку вакансий" href="/vacs"
-                class="resv__nav__link js-nav-link link-btn_transp"
+                {{> components/link-btn text="Назад"
+                class="js-nav-link-back resv__nav__link link-btn_transp"
                 class_text = "text-dodger-blue"
                 svg_pos="before"
                 svg='<svg class="resv__nav__link__svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -47,15 +47,19 @@
                 {{/iff}}
             </div>
             <a href="/vacancies/profile/{{vacancy.employer_id}}" class="js-nav-link view-company" style="flex-direction: column;">
-                <div class="text-dark-regular">Вакансия обновлена {{formatDate vacancy.updated_at}}</div>
-                <div class="view-company" style="background: none; padding: 0;">
-                    <img class="view-company__img" src="/images/img/vk-company.png">
+                <div class="text-dark-regular" style="text-align: center;">Вакансия обновлена {{formatDate vacancy.updated_at}}</div>
+                <div class="view-company__inner" style="background: none; padding: 0;">
+                    {{#if vacancy.logo_url}}
+                    <img class="view-company__img" src="{{config.backend_url}}{{vacancy.logo_url}}">
+                    {{else}}
+                    <img class="view-company__img" src="/images/webp/default-logo.webp">
+                    {{/if}}
                     <div class="view-company__main-info">
                         <div class="header-text header-text--first text-dark-title">
-                            {{organization}}
+                            {{vacancy.organization_name}}
                         </div>
                         <div class="view-company__location">
-                            <img class="view-company__location-img" src="/images/img/location_map_outline_20.png">
+                            <img class="view-company__location-img" src="/images/svg/location_map_outline_20.svg">
                             <div class="common-text common-text--medium text-dark-regular">
                                 {{vacancy.location}}
                             </div>

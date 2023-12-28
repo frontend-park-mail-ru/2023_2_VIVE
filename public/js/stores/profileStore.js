@@ -5,6 +5,7 @@ import Store from "./Store.js";
 import { getFormObject, isObjEmpty } from '../utils.js';
 import { validateForm } from '../modules/constraints.js';
 import vacancyStore from './VacancyStore.js';
+import User from './UserStore.js';
 
 const ROLES = {
     app: 'applicant',
@@ -77,20 +78,9 @@ class ProfileStore extends Store {
             })
     }
 
-    async getContext() {
-        const blob_avatar = await this.getAvatar();
-        const errorsFields = this.errors;
-        const formError = this.form_error;
+    async update() {
         this.form_error = null;
         this.errors = {};
-        return {
-            form_error: formError,
-            errors: errorsFields,
-            state: this.state,
-            user: this.user,
-            data: this.data,
-            avatar: blob_avatar ? URL.createObjectURL(blob_avatar) : undefined,
-        }
     }
 
     getDataObj(meta_obj, data_obj) {
@@ -114,7 +104,7 @@ class ProfileStore extends Store {
                     Object.assign(this.errors["data-" + type], { [form[key].name]: form[key].value });
                 }
             }
-            console.log(this.errors);
+            // // console.log(this.errors);
             return false;
         }
     }
@@ -148,7 +138,7 @@ class ProfileStore extends Store {
     }
 
     async sendAvatar(form_data) {
-        
+
         try {
 
             let response = await fetch(BACKEND_SERVER_URL + '/upload_avatar', {
@@ -157,13 +147,15 @@ class ProfileStore extends Store {
                 credentials: 'include',
             });
 
+            User.updateUser();
+
             // const resp = await APIConnector.post(
             //     BACKEND_SERVER_URL + '/upload_avatar', 
             //     form_data);
 
             return true;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             return false;
         }
     }
@@ -176,16 +168,16 @@ class ProfileStore extends Store {
             // const data = await resp.json();
             const blob = await resp.blob();
 
-            
+
             return blob;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             return undefined;
         }
     }
 
     async updateInnerData(data) {
-        this.user = await this.updateData("/current_user");
+        this.user = User.getUser();
 
         const parts = data.url.split('/');
         this.state = parts[2] ? parts[2] : 'settings';
@@ -203,7 +195,7 @@ class ProfileStore extends Store {
                 element.experience_view = vacancyStore.processVacanciesExperience(element);
                 element.employment_view = vacancyStore.processVacanciesEmployment(element);
             });
-            console.log(this.data);
+            // // console.log(this.data);
         } else if (this.state == 'resumes') {
             this.data = await this.updateData("/current_user/cvs");
         } else if (this.state == 'responses') {
