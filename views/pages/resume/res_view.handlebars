@@ -126,7 +126,7 @@
                 Компания: {{this.name}}
               </div>
               <div class="resv__text_sm mb-5">
-                <i>Дата начала и окончания работы:</i> {{this.start_date}} - {{#if this.end_date}}{{this.end_date}}{{else}}по настоящее время{{/if}}
+                <i>Дата начала и окончания работы:</i> {{formatDate this.start_date}} - {{#if this.end_date}}{{formatDate this.end_date}}{{else}}по настоящее время{{/if}}
               </div>
               <div class="resv__text_sm mb-5">
                 <i>Должность:</i> {{this.job_position}}

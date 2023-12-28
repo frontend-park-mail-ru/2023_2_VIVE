@@ -338,8 +338,10 @@ class ResStore extends Store {
             if (form_data['skills'].length === 0) {
                 form_data['skills'] = [];
             } else {
-                form_data['skills'] = form_data['skills'].split(' ');
+                form_data['skills'] = form_data['skills'].split(';');
             }
+            form_data['skills'] = form_data['skills'].map(entry => entry.trim());
+            form_data['skills'] = form_data['skills'].filter(entry => entry != '');
         }
         for (const key in form_data) {
             if (this.checkAndSaveInput(key, form_data[key])) {

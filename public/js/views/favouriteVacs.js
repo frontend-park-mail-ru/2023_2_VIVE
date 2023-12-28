@@ -10,7 +10,7 @@ export default class favouriteVacs extends mainView {
         await super.render();
 
         const template = require('@pages/vac/vac_favourite.handlebars');
-        document.querySelector('main').innerHTML = template(await vacsStore.getContext());
+        document.querySelector('main').innerHTML = template(this.getFullContext(await vacsStore.getContext()));
         window.scrollTo({
           top: 0,
           left: 0,

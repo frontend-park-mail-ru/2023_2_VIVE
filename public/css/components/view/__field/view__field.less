@@ -64,25 +64,29 @@
 .view-company {
     display: flex;
     padding: 35px;
-    justify-content: center;
-    align-items: center;
     gap: 20px;
     border-radius: 30px;
     background: var(--card-back-default);
     text-decoration: none;
 }
 
+.view-company__inner {
+    display: flex;
+    align-items: start;
+    gap: 20px;
+}
+
 .view-company__img {
     display: flex;
     width: 100px;
-    height: 100px;
-    justify-content: center;
-    align-items: center;
+    height: auto;
+    border-radius: 20%;
 }
 
 .view-company__main-info {
     display: flex;
-    height: 100px;
+    max-width: 170px;
+    overflow: hidden;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;

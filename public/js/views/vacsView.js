@@ -39,7 +39,7 @@ export default class vacsView extends mainView {
 
     const buttonListView = document.querySelector('[data-name="list-view"]');
     const buttonBlockView = document.querySelector('[data-name="block-view"]');
-    const sortingDateButton = document.querySelector('[name="sorting-date-btn"]');
+    // const sortingDateButton = document.querySelector('[name="sorting-date-btn"]');
 
     if (buttonListView)  {
       buttonListView.addEventListener('click', () => {
@@ -59,12 +59,12 @@ export default class vacsView extends mainView {
       });
     }
 
-    if (sortingDateButton) {
-      sortingDateButton.addEventListener('click', () => {
-        vacsStore.sortVacancies();
-        this.render();
-      });
-    }
+    // if (sortingDateButton) {
+    //   sortingDateButton.addEventListener('click', () => {
+    //     vacsStore.sortVacancies();
+    //     this.render();
+    //   });
+    // }
 
     const pagPrev = document.querySelector('.js-pag-next');
       if (pagPrev) {

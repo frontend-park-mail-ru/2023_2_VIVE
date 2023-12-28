@@ -25,22 +25,24 @@
       <div class="dropdown__item dropdown-mobile__item cursor-pointer">
         <a href="/vacs" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Вакансии</a>
       </div>
-      <div class="dropdown__item cursor-pointer">
+      <a href="/profile" class="link-btn js-nav-link dropdown__item dropdown__item_profile">
         <img class="dropdown__img" src="/images/svg/profile_28-01.svg">
-        <a href="/profile" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue">Профиль</a>
-      </div>
-      <div class="dropdown__item cursor-pointer">
-        <img class="dropdown__img" src="/images/svg/settings_outline_28-01.svg">
-        <a href="/profile/settings" class="js-nav-link link-btn common-text common-text--medium text-dodger-blue"> Настройки</a>
-      </div>
-      <div class="dropdown__item cursor-pointer" name="switch">
+        <div class="common-text common-text--medium text-dodger-blue">Профиль</div>
+      </a>
+      {{#iff user.role '==' user.config.roles.app }}
+      <a href="/profile/responses" class="link-btn js-nav-link dropdown__item dropdown__item_profile">
+        <img class="dropdown__img" src="/images/svg/briefcase_outline_28-01.svg">
+        <div class="common-text common-text--medium text-dodger-blue"> Отклики </div>
+      </a>
+      {{/iff}}
+      <a class="link-btn dropdown__item dropdown__item_profile" name="switch">
         <img class="dropdown__img" src="/images/svg/refresh_outline_28-01.svg">
         <div class="common-text common-text--medium text-dodger-blue">Сменить роль</div>
-      </div>
-      <div class="dropdown__item cursor-pointer"  name="leave">
+      </a>
+      <a class="link-btn dropdown__item dropdown__item_profile" name="leave">
         <img class="dropdown__img" src="/images/svg/door_arrow_left_outline_28-01.svg">
         <div class="common-text common-text--medium text-dodger-blue">Выход из аккаунта</div>
-      </div>
+      </a>
       {{else}}
         <div class="dropdown__item cursor-pointer">
           <a href="https://github.com/frontend-park-mail-ru/2023_2_VIVE" target="_blank" class="link-btn common-text common-text--medium text-dodger-blue">О нас</a>

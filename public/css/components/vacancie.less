@@ -10,7 +10,6 @@
     .vacancie__additional-info {
         display: flex;
         flex-direction: column;
-
         align-items: flex-start;
         gap: 10px;
     }
@@ -98,9 +97,11 @@
 
     .vacancie__additional-info {
         display: flex;
-        width: 100%;
+        // flex-direction: column;
+        flex-wrap: wrap;
+        // width: 100%;
         justify-content: space-between;
-        // align-items: flex-start;
+        align-items: flex-start;
         gap: 20px;
     }
 
@@ -111,15 +112,12 @@
     }
 
     .vacancy-add-info-text {
-        width: 85%;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
-    .add-info-vacancy-salary {
-        width: 32%;
-    }
+    // .add-info-vacancy-salary {
+    //     width: 32%;
+    // }
 
     .add-info-vacancy {
         width: 20%;
@@ -145,10 +143,10 @@
     }
 
     .up-add-info {
-        display: flex;
-        width: -webkit-fill-available;
-        flex-direction: column;
-        justify-content: space-between;
+        // display: flex;
+        // width: -webkit-fill-available;
+        // flex-direction: column;
+        // justify-content: space-between;
     }
 
     .res-up-add-info {

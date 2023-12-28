@@ -11,7 +11,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require('webpack');
 
 const CONFIG = {
-  isDev: false,
+  isDev: true,
 }
 
 module.exports = {
@@ -39,7 +39,7 @@ module.exports = {
 
   devServer: {
     historyApiFallback: true,
-    port: 8084,
+    port: 8085,
     devMiddleware: {
       index: true,
       mimeTypes: { phtml: 'text/html' },

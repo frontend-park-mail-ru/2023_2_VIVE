@@ -9,6 +9,11 @@
   </div>
   <div class="vacancies__block">
     <div class="vacancies__main-blocks">
+      {{#unless data}} 
+      <p style="margin: auto" class="header-text header-text--second text-dark-title">
+        Вы пока не создали ни одной вакансии</p>
+      {{/unless}}
+      
       {{#each data}}
       <div class="vacancie">
         <div class="vacancy__job-name header-text header-text--first text-dark-title">
