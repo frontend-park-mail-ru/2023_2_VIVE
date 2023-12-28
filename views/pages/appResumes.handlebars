@@ -1,7 +1,10 @@
 <div class="profile">
     <div class="profile__header profile__header--background--default-hh">
-        
+        {{#if app.avatar_url}}
+        <img class="profile_image" src="{{config.backend_url}}{{app.avatar_url}}" alt="profile-logo">
+        {{else}}
         <img class="profile_image" src="/images/webp/profile.webp" alt="profile-logo">
+        {{/if}}
         <div class="profile__info">
             <div class="profile__main-info">
                 <div class="profile__about">
